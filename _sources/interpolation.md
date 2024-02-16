@@ -421,7 +421,7 @@ It is clear that computing all of the divided differences requires $\frac{3n^2}{
 The interpolation polynomial $f_n$ in Newton form is given by 
 
 ```{math}
-:label: EQ-NEWTON
+:label: EQ-NEWTON-FORM
 \begin{aligned}
     f_n(x) =\; &f[x_0] + f[x_0, x_1](x-x_0) + \dots +\\
              & f[x_0, \dots, x_n](x - x_0)(x - x_1)\dots (x - x_{n-1}).
@@ -470,7 +470,7 @@ $$
 ```
 
 ```{prf:remark}
-The Newton form {eq}`EQ-NEWTON` actually does not require distinct nodes. The divided difference can be defined as a limit for repeated nodes:
+The Newton form {eq}`EQ-NEWTON-FORM` actually does not require distinct nodes. The divided difference can be defined as a limit for repeated nodes:
 
 $$
     f[x_0, x_0] = \lim_{x_1 \to x_0} \frac{f[x_1] - f[x_0]}{x_1 - x_0} = f'(x_0).
@@ -522,7 +522,7 @@ Once these polynomials are obtained, the Hermite interpolation is straightforwar
 
 $$H_{N-1}(x) = \sum_{j=0}^n \sum_{k=0}^{m_j} y_j^k L_{jk}(x).$$
 
-Its uniqueness can be concluded from the linearly independence of the basis $L_{jk}$. However, the construction method in {eq}`EQ-HERMITE-CONSTRUCTION` is not the simplest. It is known that the Newton form {eq}`EQ-NEWTON` works for repeated nodes as long as the diagram's diagonal {eq}`EQ-ALG-NEWTON` can be filled. Therefore, we can arrange the nodes
+Its uniqueness can be concluded from the linearly independence of the basis $L_{jk}$. However, the construction method in {eq}`EQ-HERMITE-CONSTRUCTION` is not the simplest. It is known that the Newton form {eq}`EQ-NEWTON-FORM` works for repeated nodes as long as the diagram's diagonal {eq}`EQ-ALG-NEWTON` can be filled. Therefore, we can arrange the nodes
 
 $$
 \underbrace{x_0,\dots, x_0}_{(m_0+1)\,\text{times}}, \quad \underbrace{x_1,\dots, x_1}_{(m_1+1)\,\text{times}}, \quad \dots,\quad  \underbrace{x_n,\dots, x_n}_{(m_n+1)\,\text{times}}

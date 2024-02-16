@@ -675,8 +675,8 @@ f_{k+1}(x) = f_k(x) + c_{k+1} (x - x_0)(x - x_1)\dots (x - x_{k}),
 <span class="eqno">(2)<a class="headerlink" href="#equation-eq-ck" title="Link to this equation">#</a></span>\[c_{k+1} = \frac{y_{k+1} - f_k(x_{k+1})}{\prod_{j=0}^k (x_{k+1} - x_j)}.\]</div>
 <p>Such an inductive procedure produces the Newton form:</p>
 <div class="math notranslate nohighlight" id="equation-eq-newton">
-<span class="eqno">(6)<a class="headerlink" href="#equation-eq-newton" title="Link to this equation">#</a></span>\[f_n(x) = c_0 + c_1 ( x - x_0) + c_2 (x - x_0)(x - x_1)+\dots+c_{n}(x-x_0)\dots (x - x_{n-1}).\]</div>
-<p>where the constant <span class="math notranslate nohighlight">\(c_j\)</span> depends on <span class="math notranslate nohighlight">\(x_0, x_1, \dots, x_{j}\)</span> only. The polynomials <span class="math notranslate nohighlight">\(\prod_{j=0}^k (x - x_j)\)</span> are called <strong>Newton polynomials</strong>. When the coefficients <span class="math notranslate nohighlight">\(c_k\)</span> are known, the Newton form <a class="reference internal" href="#equation-eq-newton">(6)</a> can be evaluated by the famous <strong>Horner’s scheme</strong>, which is</p>
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-newton" title="Link to this equation">#</a></span>\[f_n(x) = c_0 + c_1 ( x - x_0) + c_2 (x - x_0)(x - x_1)+\dots+c_{n}(x-x_0)\dots (x - x_{n-1}).\]</div>
+<p>where the constant <span class="math notranslate nohighlight">\(c_j\)</span> depends on <span class="math notranslate nohighlight">\(x_0, x_1, \dots, x_{j}\)</span> only. The polynomials <span class="math notranslate nohighlight">\(\prod_{j=0}^k (x - x_j)\)</span> are called <strong>Newton polynomials</strong>. When the coefficients <span class="math notranslate nohighlight">\(c_k\)</span> are known, the Newton form <a class="reference internal" href="#equation-eq-newton">(3)</a> can be evaluated by the famous <strong>Horner’s scheme</strong>, which is</p>
 <div class="math notranslate nohighlight" id="equation-eq-horner">
 <span class="eqno">(4)<a class="headerlink" href="#equation-eq-horner" title="Link to this equation">#</a></span>\[    f_n(x) = c_0 + (x-x_0)(c_1 + (x-x_1)(c_2 + (x-x_2)(c_3 + \dots))),\]</div>
 <p>the evaluation order starts from the innermost part <span class="math notranslate nohighlight">\(c_n (x -x_{n-1})\)</span>. This formulation has a complexity of <span class="math notranslate nohighlight">\(3n\)</span> flops.</p>
@@ -716,8 +716,8 @@ f_{k+1}(x) = f_k(x) + c_{k+1} (x - x_0)(x - x_1)\dots (x - x_{k}),
 <p class="admonition-title"><span class="caption-number">Theorem 9 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>The interpolation polynomial <span class="math notranslate nohighlight">\(f_n\)</span> in Newton form is given by</p>
-<div class="math notranslate nohighlight" id="equation-eq-newton">
-<span class="eqno">(6)<a class="headerlink" href="#equation-eq-newton" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<div class="math notranslate nohighlight" id="equation-eq-newton-form">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-newton-form" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     f_n(x) =\; &amp;f[x_0] + f[x_0, x_1](x-x_0) + \dots +\\
              &amp; f[x_0, \dots, x_n](x - x_0)(x - x_1)\dots (x - x_{n-1}).
 \end{aligned}\end{split}\]</div>
@@ -762,7 +762,7 @@ f[x_j, \dots, x_{j+k}] = \frac{1}{k!}f^{(k)}(\xi)
 </div><div class="proof remark admonition" id="remark-18">
 <p class="admonition-title"><span class="caption-number">Remark 6 </span></p>
 <section class="remark-content" id="proof-content">
-<p>The Newton form <a class="reference internal" href="#equation-eq-newton">(6)</a> actually does not require distinct nodes. The divided difference can be defined as a limit for repeated nodes:</p>
+<p>The Newton form <a class="reference internal" href="#equation-eq-newton-form">(6)</a> actually does not require distinct nodes. The divided difference can be defined as a limit for repeated nodes:</p>
 <div class="math notranslate nohighlight">
 \[
     f[x_0, x_0] = \lim_{x_1 \to x_0} \frac{f[x_1] - f[x_0]}{x_1 - x_0} = f'(x_0).
@@ -806,7 +806,7 @@ H_{N-1}^{(k)}(x_j) = y_j^k:= h^{(k)}(x_j),\quad j=0,\dots, n,\quad 0\le k\le m_j
 <p>Once these polynomials are obtained, the Hermite interpolation is straightforward:</p>
 <div class="math notranslate nohighlight">
 \[H_{N-1}(x) = \sum_{j=0}^n \sum_{k=0}^{m_j} y_j^k L_{jk}(x).\]</div>
-<p>Its uniqueness can be concluded from the linearly independence of the basis <span class="math notranslate nohighlight">\(L_{jk}\)</span>. However, the construction method in <a class="reference internal" href="#equation-eq-hermite-construction">(7)</a> is not the simplest. It is known that the Newton form <a class="reference internal" href="#equation-eq-newton">(6)</a> works for repeated nodes as long as the diagram’s diagonal <a class="reference internal" href="#equation-eq-alg-newton">(5)</a> can be filled. Therefore, we can arrange the nodes</p>
+<p>Its uniqueness can be concluded from the linearly independence of the basis <span class="math notranslate nohighlight">\(L_{jk}\)</span>. However, the construction method in <a class="reference internal" href="#equation-eq-hermite-construction">(7)</a> is not the simplest. It is known that the Newton form <a class="reference internal" href="#equation-eq-newton-form">(6)</a> works for repeated nodes as long as the diagram’s diagonal <a class="reference internal" href="#equation-eq-alg-newton">(5)</a> can be filled. Therefore, we can arrange the nodes</p>
 <div class="math notranslate nohighlight">
 \[
 \underbrace{x_0,\dots, x_0}_{(m_0+1)\,\text{times}}, \quad \underbrace{x_1,\dots, x_1}_{(m_1+1)\,\text{times}}, \quad \dots,\quad  \underbrace{x_n,\dots, x_n}_{(m_n+1)\,\text{times}}
