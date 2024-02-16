@@ -4,13 +4,13 @@ In this chapter, we will introduce some basics on the real number system for mod
 
 ## Representation of Real Numbers
 
-Any nonzero real number $x\in \mathbb{R}$ can be accurately represented with an infinite sequence of digits. This can be understood as the consequence that rational numbers are **dense** on any interval. 
+Any nonzero real number $x\in \mathbb{R}$ can be accurately represented with an infinite sequence of digits. This can be understood as the consequence that rational numbers are **dense** on any interval.
 
 ```{sidebar} **What does "dense" mean?**
 **Dense** means that between any two distinct real numbers, there is always a rational number. It is a fundamental property of the real number system.
 ```
 
-Therefore, with the binary representation, we can write 
+Therefore, with the binary representation, we can write
 
 $$
 x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
@@ -32,6 +32,7 @@ then we will take the latter representation.
 ```
 
 ## Floating Point Numbers
+
 The floating point numbers generally refer to a set of real numbers with **finite** mantissa length. More precisely, we consider the set of real numbers $\mathbb{F} = \mathbb{F}(t, e_{\min}, e_{\max})\subset \mathbb{R}$ that
 
 $$\mathbb{F} := \{x\in \mathbb{R} \mid x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t) \times 2^e, d_1 =1,  e_{\min}\le e\le e_{\max}\}\cup \{0\}.$$
@@ -52,7 +53,6 @@ The elements in $\mathbb{F}$ are called normalized. If we  allow $d_1 = 0$ in th
 For any $e_{\min} \le e\le e_{\max}$, the distribution of the floating point number system $\mathbb{F}$ on interval $[2^{e-1}, 2^e]$ is equidistant with distances of length $2^{e-t}$.
 
 ````
-
 
 ````{prf:proof}
 For any  $x \in \mathbb{F}\cap [2^{e-1}, 2^e]$, it can be represented by 
@@ -120,6 +120,7 @@ and $e = \sum_{j=0}^7 2^{j} e_j - 127$.
 ```
 
 ## Rounding
+
 The rounding operation $\textrm{fl}$ is to map any real numbers of $\overline{\mathbb{F}}$ into the floating point number system $\mathbb{F}$ with smallest error. Such rounding operation can be written out explicitly, let $x = \pm (0.d_1 d_2\dots d_t d_{t+1}\dots )\times 2^e$, then
 
 $$
@@ -131,7 +132,7 @@ $$
 
 It is clear that rounding $\textrm{fl}$ is monotone and idempotent, which means
 
-- $x\le y \Rightarrow \textrm{fl}(x) \le \textrm{fl}(y)$. 
+- $x\le y \Rightarrow \textrm{fl}(x) \le \textrm{fl}(y)$.
 - $\textrm{fl}(z) = z$ if $z\in \mathbb{F}$.
 
 ````{prf:theorem}
