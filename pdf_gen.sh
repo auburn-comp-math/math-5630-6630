@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Generate the PDF
-cd .. && jb build math-5650-6650 --builder latex && cd math-5650-6650
+cd .. && jb build math-5630-6630 --builder latex && cd math-5630-6630
 
 # Define the file path
 FILEPATH="./_build/latex/book.tex"

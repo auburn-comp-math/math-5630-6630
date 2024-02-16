@@ -1,0 +1,6 @@
+\selectlanguage *{english}
+\contentsline {chapter}{\numberline {1}Floating Point Arithmetic}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Representation of Real Numbers}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Floating Point Numbers}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Rounding}{6}{section.1.3}%
+\contentsline {chapter}{Proof Index}{7}{section*.3}%
