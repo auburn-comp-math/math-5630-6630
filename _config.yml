@@ -94,6 +94,7 @@ sphinx:
     mathjax3_config:
       tex:
         macros:
+          "fl": ["\\textrm{fl}(#1)", 1]
           "N": "\\mathbb{N}"
           "floor": ["\\lfloor#1\\rfloor", 1]
           "bmat": ["\\left[\\begin{array}"]
