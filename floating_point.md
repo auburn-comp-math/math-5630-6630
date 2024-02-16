@@ -160,7 +160,7 @@ $$
 ```{prf:corollary}
 :label: COR-REL-ERR
 For any $x\in\overline{\mathbb{F}}$, $\textrm{fl}(x) = x(1+\delta)$ with $|\delta|\le \mathrm{u}$.
-```
+``
 
 ## Arithmetic Operations
 
@@ -180,7 +180,7 @@ $$
 \end{aligned}
 $$
 
-When $x$ and $y$ are close in magnitude but with opposite signs, the cancellation error will be significant.
+When $x$ and $y$ are close in magnitude but with opposite signs, the cancellation error will be significant. Similar cancellation error can be derived for multiplication/division.
 ```
 
 ### Error Accumulation: Multiplication
@@ -337,11 +337,29 @@ Please find an upper bound of the rounding error for this scheme.
 
 ### Computational Part
 
-```{admonition} Problem 4 (Pairwise summation)
+```{admonition} Problem 4 (Archimedes' formula for $\pi$)
+Archimedes' formula for $\pi$ is given by calculating the perimeters of regular polygons inscribing and circumscribing a circle of unit diameter. Starting from hexagon, $P_0 = \frac{1}{\sqrt{3}}$. The iterative formula can be written in two equivalent forms:
+
+$$
+P_{n+1} = \dfrac{\sqrt{1 + P_n^2} - 1}{P_n},
+$$
+
+and 
+
+$$
+P_{n+1} = \dfrac{P_n}{\sqrt{1 + P_n^2}},
+$$
+
+where $P_n$ is the length of each side of the regular polygon with $6 \times 2^n$ sides. The approximation of $\pi$ is computed by $\lim_{n\to\infty} 6\times 2^n\times P_n$. 
+
+Implement both iterative formula and compare the results with the exact value of $\pi$ at different $n$. Explain the difference.
+```
+
+```{admonition} Problem 5 (Pairwise summation)
 Based on theoretical part, implement an algorithm for the summation $\sum_{j=1}^n x_j$ which has $\mathcal{O}(\textrm{u}\log_2 n)$ rounding error.
 ```
 
-````{admonition} Problem 5 (Kahan compensated summation)
+````{admonition} Problem 6 (Kahan compensated summation)
 Suppose $a, b\in\mathbb{R}$, the rounding error for the sum $s = \fl{\fl{a}+\fl{b}}$ ($a\ge b$) can be computed using 
 
 
@@ -370,6 +388,13 @@ Based on this property, one can keep tracking of the rounding error.
 Implement the {prf:ref}``AL-KA-CO-SU`` described above and compare the accuracy with naive summation and pairwise summation with test cases.
 ````
 
-```{admonition} Problem 6
+```{admonition} Problem 7
 Suppose the inputs $\{x_j\}_{j=1}^n\subset \mathbb{R}$ are randomly distributed (say $x_j\sim U(0,1)$ i.i.d), what is growth of the expected rounding error with respect to total number of inputs $n$ for the naive summation and pairwise summation? Please provide an explanation of your result. You can use Kahan sum as the accurate result approximately. 
+```
+
+## Extended Reading
+
+See {cite}`higham2019new,higham1993accuracy,muller2006elementary`.
+
+```{bibliography}
 ```
