@@ -99,5 +99,13 @@ are supported, they are often called single precision and double precision, resp
 ```
 
 ```{margin}
-The IEEE754 standard for floating point arithmetic is slightly different from the above. 
+The IEEE754 standard for floating point arithmetic is slightly different from the note. For instance, without **underflow** (all exponent bits are zeros), the standard ``float32`` is represented as
+
+$$\pm 1.d_1 d_2\cdots d_{23} \times 2^e$$
+
+where the sign occupies 1 bit, the mantissa occupies 23 bits, and the exponent occupies 8 bits, ranging from $-126$ to $127$ instead. The floating number is stored as
+
+$$\text{sign bit} \quad e_7 e_6 \cdots e_0 \quad d_1 d_2\cdots d_{23}$$
+
+and $e = \sum_{j=0}^7 2^{j} e_j - 127$.
 ```
