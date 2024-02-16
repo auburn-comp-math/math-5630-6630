@@ -321,6 +321,16 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-real-numbers">Representation of Real Numbers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-numbers">Floating Point Numbers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rounding">Rounding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations">Arithmetic Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-accumulation-multiplication">Error Accumulation: Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-accumulation-addition">Error Accumulation: Addition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-part">Theoretical Part</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -469,6 +479,203 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 <p>For any <span class="math notranslate nohighlight">\(x\in\overline{\mathbb{F}}\)</span>, <span class="math notranslate nohighlight">\(\textrm{fl}(x) = x(1+\delta)\)</span> with <span class="math notranslate nohighlight">\(|\delta|\le \mathrm{u}\)</span>.</p>
 </section>
 </div></section>
+<section id="arithmetic-operations">
+<h2>Arithmetic Operations<a class="headerlink" href="#arithmetic-operations" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\mathbb{F} = \mathbb{F}(t, e_{\min}, e_{\max})\)</span> be a given floating point number system and we consider the basic binary operation <span class="math notranslate nohighlight">\(\circ\in \{ +, -, *, /\}\)</span> on <span class="math notranslate nohighlight">\(\mathbb{F}\)</span>, in order to represent the outcome in <span class="math notranslate nohighlight">\(\mathbb{F}\)</span>, a straightforward realization is to define the binary operation <span class="math notranslate nohighlight">\(\boxed{\circ}\)</span> as the following (for the case of division, we assume <span class="math notranslate nohighlight">\(y\neq 0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[x \,\boxed{\circ}\, y := \textrm{fl}(x\circ y),\]</div>
+<p>then for any <span class="math notranslate nohighlight">\(x, y\in\mathbb{F}\)</span>, if <span class="math notranslate nohighlight">\(x\circ y\in \overline{\mathbb{F}}\)</span>, then <span class="math notranslate nohighlight">\(x \,\boxed{\circ}\, y = (x\circ y)(1 + \delta)\)</span> with <span class="math notranslate nohighlight">\(|\delta| \le \mathrm{u}\)</span> from the <a class="reference internal" href="#COR-REL-ERR">Corollary 1</a>.</p>
+<div class="proof remark admonition" id="remark-4">
+<p class="admonition-title"><span class="caption-number">Remark 1 </span> (Cancellation Error)</p>
+<section class="remark-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(x, y\in\mathbb{R}\)</span>, then the relative error from the following binary operation <span class="math notranslate nohighlight">\(\textrm{fl}(x)\,\boxed{+}\,\textrm{fl}(y)\)</span> can be estimated by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{|\textrm{fl}(x)\,\boxed{+}\,\textrm{fl}(y)- (x +  y) |}{|x + y|} &amp;\le \frac{|\textrm{fl}(x)\,\boxed{+}\,\textrm{fl}(y) - (\textrm{fl}(x) +  \textrm{fl}(y)) |}{|x + y|} + \frac{| (\textrm{fl}(x) +  \textrm{fl}(y)) - (x+y)   |}{|x+y|}\\  
+&amp;\le\mathrm{u} + (\mathrm{u} +\mathrm{u}^2) \frac{|x|+|y|}{|x+y|}.
+\end{aligned}
+\end{split}\]</div>
+<p>When <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are close in magnitude but with opposite signs, the cancellation error will be significant.</p>
+</section>
+</div><section id="error-accumulation-multiplication">
+<h3>Error Accumulation: Multiplication<a class="headerlink" href="#error-accumulation-multiplication" title="Link to this heading">#</a></h3>
+<p>For complicated computations on modern computers, the errors from arithmetic operations will accumulate towards the final result (we do not consider techniques such as fused multiply-add (FMA) here). To quantify the accumulation effect, we will need the following lemma.</p>
+<div class="proof lemma admonition" id="LEM-ACC">
+<p class="admonition-title"><span class="caption-number">Lemma 1 </span></p>
+<section class="lemma-content" id="proof-content">
+<p>For real numbers <span class="math notranslate nohighlight">\(a_1, a_2, \dots, a_n\)</span> with <span class="math notranslate nohighlight">\(|a_k|\le \delta\)</span> for <span class="math notranslate nohighlight">\(k=1,\dots, n\)</span>, then for <span class="math notranslate nohighlight">\(n\delta &lt; 1\)</span>, the following holds</p>
+<div class="math notranslate nohighlight">
+\[\prod_{k=1}^n (1 + a_k) = 1 + b_n,\]</div>
+<p>where <span class="math notranslate nohighlight">\(|b_n| \le \frac{n\delta}{1 - n\delta}\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The proof is quite easy with induction. When <span class="math notranslate nohighlight">\(n=1\)</span>, <span class="math notranslate nohighlight">\(|b_1| = |a_1|\le \delta \le \frac{\delta}{1 - \delta}\)</span>. Suppose the claim holds for <span class="math notranslate nohighlight">\(n = m\)</span>, then for <span class="math notranslate nohighlight">\(n = m +1\)</span>, we could see that</p>
+<div class="math notranslate nohighlight">
+\[
+    \prod_{k=1}^{m+1} (1 + a_k) = (1 + b_m) (1 + a_{m+1}) = 1 + b_{m+1}, 
+\]</div>
+<p>which implies that <span class="math notranslate nohighlight">\(b_{m+1} = b_m + a_{m+1} + a_{m+1}b_m\)</span>, with the given bounds on <span class="math notranslate nohighlight">\(a_{m+1}\)</span> and <span class="math notranslate nohighlight">\(b_m\)</span>, we can estimate</p>
+<div class="math notranslate nohighlight">
+\[
+    |b_{m+1}| = | b_m + a_{m+1} + a_{m+1}b_m | \le \frac{(m+1)\delta}{1 - m\delta} \le \frac{(m+1)\delta}{1 - (m+1)\delta}.
+\]</div>
+</div>
+<p>In the following, we consider the naive floating point product <span class="math notranslate nohighlight">\(P_n\)</span> of <span class="math notranslate nohighlight">\(n\)</span> real numbers <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^n \subset \mathbb{R}\)</span> with assumption that <span class="math notranslate nohighlight">\((2n-1)\textrm{u} &lt; 1\)</span> by the following iteration</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{cases}
+        P_k =\fl{x_1} &amp; k=1,\\
+        P_k = P_{k-1}~\boxed{\ast}~ \fl{x_k} &amp; k\ge 2.
+    \end{cases}
+\end{split}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\fl{x_k} = x_k(1 + \tau_k)\)</span>, then <span class="math notranslate nohighlight">\(|\tau_k|\le \textrm{u}\)</span>. From the <span class="math notranslate nohighlight">\(n\)</span>-th iteration step</p>
+<div class="math notranslate nohighlight">
+\[
+P_n = P_{n-1}~\boxed{\ast}~ \fl{x_n} = \fl{\fl{P_{n-1}}\fl{x_n}} = \fl{P_{n-1}}\fl{x_n}(1 + \delta_n)
+\]</div>
+<p>such that <span class="math notranslate nohighlight">\(|\delta_n|\le \textrm{u}\)</span>. Since <span class="math notranslate nohighlight">\(P_{n-1}\in \mathbb{F}\)</span>, <span class="math notranslate nohighlight">\(\fl{P_{n-1}} = P_{n-1}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    P_n &amp;= P_{n-1} \fl{x_n}(1 + \delta_n) = P_{n-2} \fl{x_{n-1}}(1 + \delta_{n-1}) (1 + \delta_n) = \cdots \\
+    &amp;=  \fl{x_1} \fl{x_2}\cdots \fl{x_n} \prod_{j=2}^n (1 + \delta_j) \\
+    &amp;= \prod_{j=1}^n x_j (1 + \tau_j)  \prod_{j=2}^n (1 + \delta_j) \\
+    &amp;\le \left(\prod_{j=1}^n x_j \right) (1 + \eta_n),
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(|\eta_n|\le \frac{(2n-1)\textrm{u}}{1 - (2n-1)\textrm{u}}\)</span>.</p>
+</section>
+<section id="error-accumulation-addition">
+<h3>Error Accumulation: Addition<a class="headerlink" href="#error-accumulation-addition" title="Link to this heading">#</a></h3>
+<p>For the naive floating point summation <span class="math notranslate nohighlight">\(S_n\)</span> of <span class="math notranslate nohighlight">\(n\)</span> real numbers <span class="math notranslate nohighlight">\(\{x_j \}_{j=1}^n\)</span> by the iteration</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+    S_k = 0 &amp; k=0,\\
+    S_k = S_{k-1}~\boxed{+}~ \fl{x_k} &amp; k\ge 1,
+\end{cases}
+\end{split}\]</div>
+<p>we can carry out a similar analysis. Let <span class="math notranslate nohighlight">\(S^{\ast}_j = \sum_{k=1}^j x_k\)</span> and  <span class="math notranslate nohighlight">\(\fl{x_k} = x_k ( 1 + \tau_k)\)</span> for <span class="math notranslate nohighlight">\(|\tau_k|\le \textrm{u}\)</span>, denote <span class="math notranslate nohighlight">\(\Delta S_j =     S_j^{\ast} - S_j\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    \Delta S_j &amp;= S_j^{\ast} - S_j \\&amp;= S_{j}^{\ast} - ( S_{j-1}~\boxed{+}~ \fl{x_j}) \\
+    &amp;=  S_{j}^{\ast}  - ( S_{j}^{\ast} - \Delta S_{j-1} + x_j\tau_j)(1 + \delta_j) \\
+    &amp;= \Delta S_{j-1}(1 + \delta_j) - \delta_j S_{j}^{\ast} - x_j(\tau_j)(1+\delta_j),
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(|\delta_j|\le \textrm{u}\)</span>. Therefore</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    |\Delta S_j|&amp;\le |\Delta S_{j-1}|(1 + \textrm{u}) + (\sum_{k=1}^j |x_k|)\textrm{u} + |x_j| \textrm{u}(1 + \textrm{u}) \\
+    &amp;\le |\Delta S_{j-2}|(1 + \textrm{u})^2 + (\sum_{k=1}^j |x_k|)\textrm{u}(1+\textrm{u}) + |x_j| \textrm{u}(1 + \textrm{u})^2 \\
+    &amp;\quad\quad +  (\sum_{k=1}^{j-1} |x_k|)\textrm{u} + |x_{j-1}| \textrm{u}(1 + \textrm{u})\\
+    &amp;\le |\Delta S_{j-3}|(1 + \textrm{u})^3 + (\sum_{k=1}^j |x_k|)\textrm{u}(1+\textrm{u})^2 + |x_j| \textrm{u}(1 + \textrm{u})^3 \\
+    &amp;\quad\quad +  (\sum_{k=1}^{j-1} |x_k|)\textrm{u}(1 + \textrm{u}) + |x_{j-1}| \textrm{u}(1 + \textrm{u})^2 \\
+    &amp;\quad\quad +  (\sum_{k=1}^{j-2} |x_k|)\textrm{u}+ |x_{j-2}| \textrm{u}(1 + \textrm{u})\\
+    &amp;\le  \cdots \\
+    &amp;\le  \sum_{l=1}^{j} \left( (\sum_{k=1}^l |x_k|) \textrm{u}(1 + \textrm{u})^{l-1} + |x_{l}|\text{u}(1 + \textrm{u})^{l-1} \right) \\
+    &amp; \le \sum_{l=1}^{j} \left( (\sum_{k=1}^j |x_k|) \textrm{u}(1 + \textrm{u})^{l-1} \right) + \left(\sum_{l=1}^j |x_{l}|\right)\text{u}(1 + \textrm{u})^{j-1}\\
+    &amp;= \left(\sum_{l=1}^j |x_{l}|\right) ((1 + \textrm{u})^j - 1)
+\end{aligned}
+\end{split}\]</div>
+<p>Using the previous lemma will provide an estimate of <span class="math notranslate nohighlight">\( ((1 + \textrm{u})^j - 1)\)</span> as long as <span class="math notranslate nohighlight">\(j\textrm{u} &lt; 1\)</span>.</p>
+</section>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>Assume <span class="math notranslate nohighlight">\(n\in \mathbb{N}\)</span> and <span class="math notranslate nohighlight">\(n\textrm{u} &lt; 1\)</span>, let <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^n\)</span> be a sequence of real numbers, <span class="math notranslate nohighlight">\(\textrm{fl}:\overline{\mathbb{F}}\mapsto \mathbb{F}\)</span> is the rounding operation, <span class="math notranslate nohighlight">\(\textrm{u}\)</span> is the machine epsilon. In the following, we briefly discuss the rounding error for floating point summation (sum reduction).</p>
+<div class="proof definition admonition" id="definition-6">
+<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
+<section class="definition-content" id="proof-content">
+<p>A reduction <span class="math notranslate nohighlight">\(\Pi\)</span> of the floating point summation</p>
+<div class="math notranslate nohighlight">
+\[
+\fl{x_1} ~\boxed{+}~ \fl{x_2} ~\boxed{+}~\cdots ~\boxed{+}~ \fl{x_n}
+\]</div>
+<p>is an evaluation order for the <span class="math notranslate nohighlight">\(~\boxed{+}~\)</span> operations. For example, <span class="math notranslate nohighlight">\(n = 4\)</span>, then the reduction <span class="math notranslate nohighlight">\(\Pi = (3,1,2)\)</span> is corresponding to the following calculation</p>
+<div class="math notranslate nohighlight">
+\[
+\fl{x_1} ~\boxed{+}~ \fl{x_2} + \underbrace{(\fl{x_3} ~\boxed{+}~ \fl{x_4})}_{=y_1}\to \underbrace{(\fl{x_1} ~\boxed{+}~ \fl{x_2})}_{=y_2} ~\boxed{+}~ y_1 \to \underbrace{(y_2 ~\boxed{+}~ y_1)}_{=y_3},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(y_i\)</span> denotes the result of <span class="math notranslate nohighlight">\(i\)</span>-th <span class="math notranslate nohighlight">\(\boxed{+}\)</span> operation in the reduction. Obviously the final summation will be <span class="math notranslate nohighlight">\(y_{n-1}\)</span>. We denote <span class="math notranslate nohighlight">\(T_n(\Pi)\)</span> be the result of floating point summation with reduction order <span class="math notranslate nohighlight">\(\Pi\)</span>.</p>
+</section>
+</div><section id="theoretical-part">
+<h3>Theoretical Part<a class="headerlink" href="#theoretical-part" title="Link to this heading">#</a></h3>
+<div class="admonition-problem-1 admonition">
+<p class="admonition-title">Problem 1</p>
+<p>Prove that the native summation has following error bound</p>
+<div class="math notranslate nohighlight">
+\[
+|T_n(\Pi) - S_n|\le \left( \frac{\textrm{u} n }{1 - \textrm{u} n } \right)\sum_{j=1}^n |x_j|,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(S_n = \sum_{j=1}^n x_j\)</span> and <span class="math notranslate nohighlight">\(\Pi = (1,2,\dots, (n-1))\)</span>.</p>
+</div>
+<div class="admonition-problem-2 admonition">
+<p class="admonition-title">Problem 2</p>
+<p>Prove that</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\Pi}|T_n(\Pi) - S_n| \le \left(\frac{ \textup{u} H }{1 - \textup{u} H  }\right)\sum_{j=1}^n |x_j|,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(H = \lceil\log_2 n \rceil\)</span> and <span class="math notranslate nohighlight">\(T_n(\Pi)\)</span> is the floating point summation with reduction order <span class="math notranslate nohighlight">\(\Pi\)</span>.</p>
+</div>
+<div class="admonition-problem-3-horner-s-scheme admonition">
+<p class="admonition-title">Problem 3 (Horner’s scheme)</p>
+<p>The evaluation of polynomial</p>
+<div class="math notranslate nohighlight">
+\[
+p(x) = a_0 + a_1 x + \dots + a_n x^n
+\]</div>
+<p>is mostly using Horner’s scheme, which writes the polynomial in ‘nested’ form:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x) = a_0 + x (a_1 + x(a_2 + \dots x(a_{n-1} + x(a_n)))).
+\]</div>
+<p>Please find an upper bound of the rounding error for this scheme.</p>
+</div>
+</section>
+<section id="computational-part">
+<h3>Computational Part<a class="headerlink" href="#computational-part" title="Link to this heading">#</a></h3>
+<div class="admonition-problem-4-pairwise-summation admonition">
+<p class="admonition-title">Problem 4 (Pairwise summation)</p>
+<p>Based on theoretical part, implement an algorithm for the summation <span class="math notranslate nohighlight">\(\sum_{j=1}^n x_j\)</span> which has <span class="math notranslate nohighlight">\(\mathcal{O}(\textrm{u}\log_2 n)\)</span> rounding error.</p>
+</div>
+<div class="admonition-problem-5-kahan-compensated-summation admonition">
+<p class="admonition-title">Problem 5 (Kahan compensated summation)</p>
+<p>Suppose <span class="math notranslate nohighlight">\(a, b\in\mathbb{R}\)</span>, the rounding error for the sum <span class="math notranslate nohighlight">\(s = \fl{\fl{a}+\fl{b}}\)</span> (<span class="math notranslate nohighlight">\(a\ge b\)</span>) can be computed using</p>
+<div class="math notranslate nohighlight">
+\[
+\fl{\fl{s - \fl{a}}-\fl{b}}
+\]</div>
+<p>Based on this property, one can keep tracking of the rounding error.</p>
+<div class="proof algorithm admonition" id="AL-KA-CO-SU">
+<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Kahan Compensated Summation)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Inputs</strong> <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^n\subset \mathbb{R}\)</span></p>
+<p><strong>Outputs</strong> <span class="math notranslate nohighlight">\(s_n = \sum_{j=1}^n x_j\)</span></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(j\gets 1\)</span>, <span class="math notranslate nohighlight">\(e_j \gets 0\)</span>, <span class="math notranslate nohighlight">\(s_j \gets x_j\)</span> //    initialization;</p></li>
+<li><p>While <span class="math notranslate nohighlight">\(j &lt; n\)</span>:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(j\gets j + 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y_j = x_j - e_{j-1}\)</span> //remove compensated error;</p></li>
+<li><p><span class="math notranslate nohighlight">\(s_j = s_{j-1} + y_j\)</span> //perform summation;</p></li>
+<li><p><span class="math notranslate nohighlight">\(e_j = (s_j - s_{j-1}) - y_j\)</span> //restore the rounding error;</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div><p>Implement the <a class="reference internal" href="#AL-KA-CO-SU">Algorithm 1</a> described above and compare the accuracy with naive summation and pairwise summation with test cases.</p>
+</div>
+<div class="admonition-problem-6 admonition">
+<p class="admonition-title">Problem 6</p>
+<p>Suppose the inputs <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^n\subset \mathbb{R}\)</span> are randomly distributed (say <span class="math notranslate nohighlight">\(x_j\sim U(0,1)\)</span> i.i.d), what is growth of the expected rounding error with respect to total number of inputs <span class="math notranslate nohighlight">\(n\)</span> for the naive summation and pairwise summation? Please provide an explanation of your result. You can use Kahan sum as the accurate result approximately.</p>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -529,6 +736,16 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-real-numbers">Representation of Real Numbers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-numbers">Floating Point Numbers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rounding">Rounding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations">Arithmetic Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-accumulation-multiplication">Error Accumulation: Multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-accumulation-addition">Error Accumulation: Addition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-part">Theoretical Part</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
