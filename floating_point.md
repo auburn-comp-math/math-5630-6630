@@ -4,9 +4,13 @@ In this chapter, we will introduce some basics on the real number system for mod
 
 ## Representation of Real Numbers
 
-Any nonzero real number $x\in \mathbb{R}$ can be accurately represented with an infinite sequence of digits. This can be understood as the consequence that rational numbers are dense on any interval. ```{margin}
+Any nonzero real number $x\in \mathbb{R}$ can be accurately represented with an infinite sequence of digits. This can be understood as the consequence that rational numbers are dense on any interval. 
+
+```{margin}
 **Dense** means that between any two distinct real numbers, there is a rational number.
-```Therefore, with the binary representation, we can write 
+```
+
+Therefore, with the binary representation, we can write 
 
 $$
 x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
