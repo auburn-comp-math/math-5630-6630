@@ -26,7 +26,7 @@ $$
 Note the representation is not unique. The IEEE754 standard uses a different representation:
 
 $$
-x = \pm (1.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
+\pm (1.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 $$
 
 which shifts the mantissa to the left by one bit. There are no essential differences between the two representations, and the latter is more common in practice.
