@@ -9,3 +9,4 @@ parts:
   - caption: Lecture notes
     chapters:
     - file: floating_point
+    - file: interpolation

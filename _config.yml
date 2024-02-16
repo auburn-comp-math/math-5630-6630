@@ -82,6 +82,8 @@ sphinx:
     language: en
     latex_elements:
         preamble: |
+          \newcommand{\eps}{\varepsilon}
+          \newcommand{\cO}{\mathcal{O}}
           \newcommand{\fl}[1]{\textrm{fl}(#1)}
           \newcommand\N{\mathbb{N}}
           \newcommand\floor[1]{\lfloor#1\rfloor}
@@ -94,6 +96,7 @@ sphinx:
     mathjax3_config:
       tex:
         macros:
+          "cO": "\\mathcal{O}"
           "fl": ["\\textrm{fl}(#1)", 1]
           "N": "\\mathbb{N}"
           "floor": ["\\lfloor#1\\rfloor", 1]
