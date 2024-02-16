@@ -8,4 +8,4 @@ root: index
 parts:
   - caption: Lecture notes
     chapters:
-    - file: Intro
+    - file: Floating
