@@ -90,13 +90,13 @@ therefore
 $$\frac{|z^{\ast}- x|}{|x|}\le \frac{1}{2} 2^{e-t} \frac{1}{2^{e-1}} = 2^{-t}.$$
 ````
 
-```{note}
+````{note}
 On modern computers, the following two floating point number systems 
 
 $$\mathbb{F}_{32} := \mathbb{F}(24, -125, 128),\quad\mathbb{F}_{64} := \mathbb{F}(53, -1021, 1024)$$ 
 
 are supported, they are often called single precision and double precision, respectively.  
-```
+
 
 ```{sidebar} **IEEE754 Standard**
 The IEEE754 standard for floating point arithmetic is slightly different from the note. For instance, without **underflow** (all exponent bits are zeros), the standard ``float32`` is represented as
@@ -109,3 +109,4 @@ $$\text{sign} \mid e_7 e_6 \cdots e_0 \mid d_1 d_2\cdots d_{23}$$
 
 and $e = \sum_{j=0}^7 2^{j} e_j - 127$.
 ```
+````
