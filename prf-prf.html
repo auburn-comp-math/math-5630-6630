@@ -175,6 +175,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="floating_point.html">Floating Point Arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation.html">Interpolation</a></li>
 </ul>
 
     </div>
@@ -282,13 +283,41 @@ document.write(`
 
    <div class="modindex-jumpbox">
    <a href="#cap-AL-KA-CO-SU"><strong>AL-KA-CO-SU</strong></a> | 
+   <a href="#cap-COR-CHEBY"><strong>COR-CHEBY</strong></a> | 
    <a href="#cap-COR-REL-ERR"><strong>COR-REL-ERR</strong></a> | 
+   <a href="#cap-DEF-LA-PO"><strong>DEF-LA-PO</strong></a> | 
    <a href="#cap-LEM-ACC"><strong>LEM-ACC</strong></a> | 
    <a href="#cap-THM-Di-Fl-Nu"><strong>THM-Di-Fl-Nu</strong></a> | 
+   <a href="#cap-THM-INTER-UNIQ"><strong>THM-INTER-UNIQ</strong></a> | 
+   <a href="#cap-THM-INTERP-ERROR"><strong>THM-INTERP-ERROR</strong></a> | 
    <a href="#cap-THM-Ma-Pr"><strong>THM-Ma-Pr</strong></a> | 
    <a href="#cap-THM-REL-ERR"><strong>THM-REL-ERR</strong></a> | 
+   <a href="#cap-THM-TRIG"><strong>THM-TRIG</strong></a> | 
+   <a href="#cap-THM-UNIQ-LAG-INTER"><strong>THM-UNIQ-LAG-INTER</strong></a> | 
+   <a href="#cap-corollary-24"><strong>corollary-24</strong></a> | 
+   <a href="#cap-corollary-5"><strong>corollary-5</strong></a> | 
+   <a href="#cap-definition-11"><strong>definition-11</strong></a> | 
+   <a href="#cap-definition-14"><strong>definition-14</strong></a> | 
+   <a href="#cap-definition-21"><strong>definition-21</strong></a> | 
    <a href="#cap-definition-6"><strong>definition-6</strong></a> | 
-   <a href="#cap-remark-4"><strong>remark-4</strong></a>
+   <a href="#cap-definition-8"><strong>definition-8</strong></a> | 
+   <a href="#cap-example-6"><strong>example-6</strong></a> | 
+   <a href="#cap-example-7"><strong>example-7</strong></a> | 
+   <a href="#cap-lemma-22"><strong>lemma-22</strong></a> | 
+   <a href="#cap-remark-13"><strong>remark-13</strong></a> | 
+   <a href="#cap-remark-16"><strong>remark-16</strong></a> | 
+   <a href="#cap-remark-17"><strong>remark-17</strong></a> | 
+   <a href="#cap-remark-18"><strong>remark-18</strong></a> | 
+   <a href="#cap-remark-19"><strong>remark-19</strong></a> | 
+   <a href="#cap-remark-20"><strong>remark-20</strong></a> | 
+   <a href="#cap-remark-23"><strong>remark-23</strong></a> | 
+   <a href="#cap-remark-25"><strong>remark-25</strong></a> | 
+   <a href="#cap-remark-3"><strong>remark-3</strong></a> | 
+   <a href="#cap-remark-4"><strong>remark-4</strong></a> | 
+   <a href="#cap-theorem-10"><strong>theorem-10</strong></a> | 
+   <a href="#cap-theorem-15"><strong>theorem-15</strong></a> | 
+   <a href="#cap-theorem-27"><strong>theorem-27</strong></a> | 
+   <a href="#cap-theorem-9"><strong>theorem-9</strong></a>
    </div>
 
    <table class="indextable modindextable">
@@ -301,6 +330,14 @@ document.write(`
        <a href="floating_point.html#AL-KA-CO-SU"><code class="xref">AL-KA-CO-SU</code></a> <em>(floating_point)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-COR-CHEBY"><td></td><td>
+       <strong>COR-CHEBY</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#COR-CHEBY"><code class="xref">COR-CHEBY</code></a> <em>(interpolation)</em></td><td>
+       <em>corollary</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-COR-REL-ERR"><td></td><td>
        <strong>COR-REL-ERR</strong></td><td></td></tr>
      <tr>
@@ -308,6 +345,14 @@ document.write(`
        <td>
        <a href="floating_point.html#COR-REL-ERR"><code class="xref">COR-REL-ERR</code></a> <em>(floating_point)</em></td><td>
        <em>corollary</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-DEF-LA-PO"><td></td><td>
+       <strong>DEF-LA-PO</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#DEF-LA-PO"><code class="xref">DEF-LA-PO</code></a> <em>(interpolation)</em></td><td>
+       <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-LEM-ACC"><td></td><td>
        <strong>LEM-ACC</strong></td><td></td></tr>
@@ -323,6 +368,22 @@ document.write(`
        <td></td>
        <td>
        <a href="floating_point.html#THM-Di-Fl-Nu"><code class="xref">THM-Di-Fl-Nu</code></a> <em>(floating_point)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-THM-INTER-UNIQ"><td></td><td>
+       <strong>THM-INTER-UNIQ</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#THM-INTER-UNIQ"><code class="xref">THM-INTER-UNIQ</code></a> <em>(interpolation)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-THM-INTERP-ERROR"><td></td><td>
+       <strong>THM-INTERP-ERROR</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#THM-INTERP-ERROR"><code class="xref">THM-INTERP-ERROR</code></a> <em>(interpolation)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-THM-Ma-Pr"><td></td><td>
@@ -341,6 +402,62 @@ document.write(`
        <a href="floating_point.html#THM-REL-ERR"><code class="xref">THM-REL-ERR</code></a> <em>(floating_point)</em></td><td>
        <em>theorem</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-THM-TRIG"><td></td><td>
+       <strong>THM-TRIG</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#THM-TRIG"><code class="xref">THM-TRIG</code></a> <em>(interpolation)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-THM-UNIQ-LAG-INTER"><td></td><td>
+       <strong>THM-UNIQ-LAG-INTER</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#THM-UNIQ-LAG-INTER"><code class="xref">THM-UNIQ-LAG-INTER</code></a> <em>(interpolation)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-corollary-24"><td></td><td>
+       <strong>corollary-24</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#corollary-24"><code class="xref">corollary-24</code></a> <em>(interpolation)</em></td><td>
+       <em>corollary</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-corollary-5"><td></td><td>
+       <strong>corollary-5</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#corollary-5"><code class="xref">corollary-5</code></a> <em>(interpolation)</em></td><td>
+       <em>corollary</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-11"><td></td><td>
+       <strong>definition-11</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#definition-11"><code class="xref">definition-11</code></a> <em>(interpolation)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-14"><td></td><td>
+       <strong>definition-14</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#definition-14"><code class="xref">definition-14</code></a> <em>(interpolation)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-21"><td></td><td>
+       <strong>definition-21</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#definition-21"><code class="xref">definition-21</code></a> <em>(interpolation)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-definition-6"><td></td><td>
        <strong>definition-6</strong></td><td></td></tr>
      <tr>
@@ -349,6 +466,110 @@ document.write(`
        <a href="floating_point.html#definition-6"><code class="xref">definition-6</code></a> <em>(floating_point)</em></td><td>
        <em>definition</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-definition-8"><td></td><td>
+       <strong>definition-8</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#definition-8"><code class="xref">definition-8</code></a> <em>(interpolation)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-6"><td></td><td>
+       <strong>example-6</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#example-6"><code class="xref">example-6</code></a> <em>(interpolation)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-example-7"><td></td><td>
+       <strong>example-7</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#example-7"><code class="xref">example-7</code></a> <em>(interpolation)</em></td><td>
+       <em>example</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-lemma-22"><td></td><td>
+       <strong>lemma-22</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#lemma-22"><code class="xref">lemma-22</code></a> <em>(interpolation)</em></td><td>
+       <em>lemma</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-13"><td></td><td>
+       <strong>remark-13</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#remark-13"><code class="xref">remark-13</code></a> <em>(interpolation)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-16"><td></td><td>
+       <strong>remark-16</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#remark-16"><code class="xref">remark-16</code></a> <em>(interpolation)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-17"><td></td><td>
+       <strong>remark-17</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#remark-17"><code class="xref">remark-17</code></a> <em>(interpolation)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-18"><td></td><td>
+       <strong>remark-18</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#remark-18"><code class="xref">remark-18</code></a> <em>(interpolation)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-19"><td></td><td>
+       <strong>remark-19</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#remark-19"><code class="xref">remark-19</code></a> <em>(interpolation)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-20"><td></td><td>
+       <strong>remark-20</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#remark-20"><code class="xref">remark-20</code></a> <em>(interpolation)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-23"><td></td><td>
+       <strong>remark-23</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#remark-23"><code class="xref">remark-23</code></a> <em>(interpolation)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-25"><td></td><td>
+       <strong>remark-25</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#remark-25"><code class="xref">remark-25</code></a> <em>(interpolation)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-remark-3"><td></td><td>
+       <strong>remark-3</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#remark-3"><code class="xref">remark-3</code></a> <em>(interpolation)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-remark-4"><td></td><td>
        <strong>remark-4</strong></td><td></td></tr>
      <tr>
@@ -356,6 +577,38 @@ document.write(`
        <td>
        <a href="floating_point.html#remark-4"><code class="xref">remark-4</code></a> <em>(floating_point)</em></td><td>
        <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-10"><td></td><td>
+       <strong>theorem-10</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#theorem-10"><code class="xref">theorem-10</code></a> <em>(interpolation)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-15"><td></td><td>
+       <strong>theorem-15</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#theorem-15"><code class="xref">theorem-15</code></a> <em>(interpolation)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-27"><td></td><td>
+       <strong>theorem-27</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#theorem-27"><code class="xref">theorem-27</code></a> <em>(interpolation)</em></td><td>
+       <em>theorem</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-theorem-9"><td></td><td>
+       <strong>theorem-9</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="interpolation.html#theorem-9"><code class="xref">theorem-9</code></a> <em>(interpolation)</em></td><td>
+       <em>theorem</em></td></tr>
    </table>
 
 
