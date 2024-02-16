@@ -8,7 +8,7 @@
 title                       : Introduction to Numerical Analysis I  # The title of the book. Will be placed in the left navbar.
 author                      : Yimin Zhong  # The author of the book
 copyright                   : "2024"  # Copyright year to be placed in the footer
-logo                        : logo.png  # A path to the book logo
+# logo                        : logo.png  # A path to the book logo
 
 
 # Force re-execution of notebooks on each build.
@@ -82,10 +82,12 @@ sphinx:
     language: en
     latex_elements:
         preamble: |
+          \newcommand{\fl}[1]{\textrm{fl}(#1)}
           \newcommand\N{\mathbb{N}}
           \newcommand\floor[1]{\lfloor#1\rfloor}
           \newcommand{\bmat}{\left[\begin{array}}
           \newcommand{\emat}{\end{array}\right]}
+          \setlength\fboxsep{2pt}
     # TODO: #917 this path will be the default in sphinx v4
     # mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     # However, it is incompatible with the mathjax config below for macros
