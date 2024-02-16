@@ -212,7 +212,7 @@ Such an estimate is useful to derive uniform convergence.
 Consider $h(x) = 1/x$ on $[\frac{1}{2}, \frac{3}{2}]$. Then $h^{(n+1)}(x) = \frac{(n+1)!(-1)^{n+1}}{x^{n+2}}$, hence 
 
 $$
-    \frac{| h^{(n+1)}(x) |}{4(n+1)}  \frac{(b-a)^{n+1}}{n^{n+1}} \le \frac{1}{4n^{n+1}}\max_{x\in[\sfrac{1}{2}, \sfrac{3}{2}]} \left| \frac{1}{x^{n+2}} \right| = \frac{1}{2} \left(\frac{2}{n}\right)^{n+1},
+    \frac{| h^{(n+1)}(x) |}{4(n+1)}  \frac{(b-a)^{n+1}}{n^{n+1}} \le \frac{1}{4n^{n+1}}\max_{x\in[\frac{1}{2}, \frac{3}{2}]} \left| \frac{1}{x^{n+2}} \right| = \frac{1}{2} \left(\frac{2}{n}\right)^{n+1},
 $$
 
 therefore, the interpolation error converges to zero exponentially. It is important to notice that the above method only works for intervals away from the origin. 
