@@ -1,0 +1,3 @@
+# Root Finding
+
+## Bisection Method
