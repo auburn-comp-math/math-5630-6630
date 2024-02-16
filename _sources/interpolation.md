@@ -774,3 +774,59 @@ The above result can be extended to the case of Hölder continuous function, see
 ## Spline Interpolation
 
 It has been seen that increasing the number of interpolation nodes will not always help to improve the approximation. The spline interpolation is to conquer this issue by using the piecewise low-degree polynomials.
+
+```{prf:definition}
+Let $x_0, \dots, x_n$ be the distinct nodes on $[a, b]$ such that $a = x_0 <\dots < x_n = b$. The piecewise defined function $s_k(x)$ on the interval $[a, b]$ is a spline of degree $k$ to the nodes if  
+
+$$
+    s_k|_{[x_j, x_{j+1}]} \in \Pi_k, \quad s_k\in C^{k-1}([a, b]).
+$$
+
+The spline function $s_k$ is $(k-1)$-times continuously differentiable and piecewise polynomial of degree $k$.
+```
+
+Then the space of splines $s_k$ will be $(n + k)$ dimension: each interval has $(k+1)$ dimensions, each interface imposes $k$ constraints, therefore $n (k+ 1) - (n-1) k = n + k$ dimensions. This shows that to determine a spline on the nodes uniquely, we will require $n+1$ interpolation values and $k-1$ additional constraints. Usual choices are
+
+- periodic splines. $s_k^{(m)}(a) = s_k^{(m)}(b)$ for $m = 0, 1, \dots, k-1$.
+- natural splines. $s_k^{(l+j)}(a) = s_k^{(l+j)}(b) = 0$, $j = 0, 1,\dots, l-2$ and $k = 2l-1$ with $l\ge 2$.
+
+In the following, we discuss some useful examples of spline.
+
+### Linear Spline
+
+The linear splines are a special case of splines. It uses piecewise linear polynomials on each subinterval and does not impose any derivative continuity. Let $y_j$ be the interpolation values at nodes $x_j$, respectively. The interpolation has an explicit form:
+
+$$
+    s_1(x) = y_{j-1} + \frac{x - x_{j-1}}{x_j - x_{j-1}} y_j
+$$
+
+on the interval $[x_{j-1}, x_j]$. It can be represented as a linear combination of the ``hat'' basis function $\theta_j(x)$, defined by
+
+$$
+    \theta_j(x) = \begin{cases}
+        \frac{x - x_{{j-1}}}{x_j - x_{j-1}}, & x\in [x_{j-1}, x_{j}],\quad 1\le j\le n\\
+         \frac{x - x_{j+1}}{x_j - x_{j+1}}, & x\in [x_j, x_{j+1}],\quad 0\le j\le n-1\\
+         0, & \text{otherwise}
+    \end{cases}
+$$
+
+then $s_1(x)$ can be written as
+
+$$s_1(x) = \sum_{j=0}^n \theta_j(x) y_j.$$
+
+The interpolation error can be derived directly from the previous theory for two interpolation nodes. Let $f\in C^2([a, b])$, then on $[x_{j-1}, x_j]$, the interpolation error is
+
+$$
+    \frac{1}{2!}f''(\xi) (x - x_{j-1})(x - x_j) \le \frac{1}{8} \|f''\|_{\infty} |x_j - x_{j-1}|^2.
+$$
+
+Therefore, the interpolation error on $[a, b]$ is $\frac{1}{8} \|f''\|_{\infty} h^2$, where $h = \max|x_j - x_{j-1}|$. Once $f''$ is not uniformly bounded or even $f'$ is not well-defined somewhere, e.g., $f\in C^{0,\alpha}[a, b]$, the interpolation error will be replaced by the modulus of continuity. On $x\in [x_j, x_{j+1}]$, we have
+
+$$
+\begin{aligned}
+    |s_1(x) - f(x)| &= \left| \frac{ (x_{j+1} - x) y_j+ (x - x_j) y_{j+1}}{x_{j+1} - x_j} - f(x) \right| \\
+    &=  \left| \frac{ (x_{j+1} - x) (y_j - f(x)) + (x - x_j) (y_{j+1}-f(x))}{x_{j+1} - x_j}  \right| \\ &\le \omega(f; |x_{j+1} - x_j|),
+\end{aligned}
+$$
+
+where $\omega(f;\tau)$ is the modulus of continuity of $f$.

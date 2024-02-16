@@ -335,7 +335,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolation-error-of-trigonometric-polynomial">Interpolation Error of Trigonometric Polynomial</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-interpolation">Spline Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-interpolation">Spline Interpolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-spline">Linear Spline</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1022,6 +1025,56 @@ f(x) = \sum_{s = -\infty}^{\infty} \gamma_s e^{is x},\quad g(x) = \sum_{s = -n}^
 <section id="spline-interpolation">
 <h2>Spline Interpolation<a class="headerlink" href="#spline-interpolation" title="Link to this heading">#</a></h2>
 <p>It has been seen that increasing the number of interpolation nodes will not always help to improve the approximation. The spline interpolation is to conquer this issue by using the piecewise low-degree polynomials.</p>
+<div class="proof definition admonition" id="definition-28">
+<p class="admonition-title"><span class="caption-number">Definition 7 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(x_0, \dots, x_n\)</span> be the distinct nodes on <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(a = x_0 &lt;\dots &lt; x_n = b\)</span>. The piecewise defined function <span class="math notranslate nohighlight">\(s_k(x)\)</span> on the interval <span class="math notranslate nohighlight">\([a, b]\)</span> is a spline of degree <span class="math notranslate nohighlight">\(k\)</span> to the nodes if</p>
+<div class="math notranslate nohighlight">
+\[
+    s_k|_{[x_j, x_{j+1}]} \in \Pi_k, \quad s_k\in C^{k-1}([a, b]).
+\]</div>
+<p>The spline function <span class="math notranslate nohighlight">\(s_k\)</span> is <span class="math notranslate nohighlight">\((k-1)\)</span>-times continuously differentiable and piecewise polynomial of degree <span class="math notranslate nohighlight">\(k\)</span>.</p>
+</section>
+</div><p>Then the space of splines <span class="math notranslate nohighlight">\(s_k\)</span> will be <span class="math notranslate nohighlight">\((n + k)\)</span> dimension: each interval has <span class="math notranslate nohighlight">\((k+1)\)</span> dimensions, each interface imposes <span class="math notranslate nohighlight">\(k\)</span> constraints, therefore <span class="math notranslate nohighlight">\(n (k+ 1) - (n-1) k = n + k\)</span> dimensions. This shows that to determine a spline on the nodes uniquely, we will require <span class="math notranslate nohighlight">\(n+1\)</span> interpolation values and <span class="math notranslate nohighlight">\(k-1\)</span> additional constraints. Usual choices are</p>
+<ul class="simple">
+<li><p>periodic splines. <span class="math notranslate nohighlight">\(s_k^{(m)}(a) = s_k^{(m)}(b)\)</span> for <span class="math notranslate nohighlight">\(m = 0, 1, \dots, k-1\)</span>.</p></li>
+<li><p>natural splines. <span class="math notranslate nohighlight">\(s_k^{(l+j)}(a) = s_k^{(l+j)}(b) = 0\)</span>, <span class="math notranslate nohighlight">\(j = 0, 1,\dots, l-2\)</span> and <span class="math notranslate nohighlight">\(k = 2l-1\)</span> with <span class="math notranslate nohighlight">\(l\ge 2\)</span>.</p></li>
+</ul>
+<p>In the following, we discuss some useful examples of spline.</p>
+<section id="linear-spline">
+<h3>Linear Spline<a class="headerlink" href="#linear-spline" title="Link to this heading">#</a></h3>
+<p>The linear splines are a special case of splines. It uses piecewise linear polynomials on each subinterval and does not impose any derivative continuity. Let <span class="math notranslate nohighlight">\(y_j\)</span> be the interpolation values at nodes <span class="math notranslate nohighlight">\(x_j\)</span>, respectively. The interpolation has an explicit form:</p>
+<div class="math notranslate nohighlight">
+\[
+    s_1(x) = y_{j-1} + \frac{x - x_{j-1}}{x_j - x_{j-1}} y_j
+\]</div>
+<p>on the interval <span class="math notranslate nohighlight">\([x_{j-1}, x_j]\)</span>. It can be represented as a linear combination of the ``hat’’ basis function <span class="math notranslate nohighlight">\(\theta_j(x)\)</span>, defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \theta_j(x) = \begin{cases}
+        \frac{x - x_{{j-1}}}{x_j - x_{j-1}}, &amp; x\in [x_{j-1}, x_{j}],\quad 1\le j\le n\\
+         \frac{x - x_{j+1}}{x_j - x_{j+1}}, &amp; x\in [x_j, x_{j+1}],\quad 0\le j\le n-1\\
+         0, &amp; \text{otherwise}
+    \end{cases}
+\end{split}\]</div>
+<p>then <span class="math notranslate nohighlight">\(s_1(x)\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[s_1(x) = \sum_{j=0}^n \theta_j(x) y_j.\]</div>
+<p>The interpolation error can be derived directly from the previous theory for two interpolation nodes. Let <span class="math notranslate nohighlight">\(f\in C^2([a, b])\)</span>, then on <span class="math notranslate nohighlight">\([x_{j-1}, x_j]\)</span>, the interpolation error is</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{1}{2!}f''(\xi) (x - x_{j-1})(x - x_j) \le \frac{1}{8} \|f''\|_{\infty} |x_j - x_{j-1}|^2.
+\]</div>
+<p>Therefore, the interpolation error on <span class="math notranslate nohighlight">\([a, b]\)</span> is <span class="math notranslate nohighlight">\(\frac{1}{8} \|f''\|_{\infty} h^2\)</span>, where <span class="math notranslate nohighlight">\(h = \max|x_j - x_{j-1}|\)</span>. Once <span class="math notranslate nohighlight">\(f''\)</span> is not uniformly bounded or even <span class="math notranslate nohighlight">\(f'\)</span> is not well-defined somewhere, e.g., <span class="math notranslate nohighlight">\(f\in C^{0,\alpha}[a, b]\)</span>, the interpolation error will be replaced by the modulus of continuity. On <span class="math notranslate nohighlight">\(x\in [x_j, x_{j+1}]\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    |s_1(x) - f(x)| &amp;= \left| \frac{ (x_{j+1} - x) y_j+ (x - x_j) y_{j+1}}{x_{j+1} - x_j} - f(x) \right| \\
+    &amp;=  \left| \frac{ (x_{j+1} - x) (y_j - f(x)) + (x - x_j) (y_{j+1}-f(x))}{x_{j+1} - x_j}  \right| \\ &amp;\le \omega(f; |x_{j+1} - x_j|),
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega(f;\tau)\)</span> is the modulus of continuity of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</section>
 </section>
 </section>
 
@@ -1096,7 +1149,10 @@ f(x) = \sum_{s = -\infty}^{\infty} \gamma_s e^{is x},\quad g(x) = \sum_{s = -n}^
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolation-error-of-trigonometric-polynomial">Interpolation Error of Trigonometric Polynomial</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-interpolation">Spline Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-interpolation">Spline Interpolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-spline">Linear Spline</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
