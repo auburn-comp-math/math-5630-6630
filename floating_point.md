@@ -18,10 +18,6 @@ $$
 
 where $e$ is an integer exponent and $d_1=1$, the other binary digits $d_i\in \{0, 1\}$. The mantissa part
 
-$$
-0.d_1 d_2 d_3\dots =  \frac{d_1}{2} + \frac{d_2}{2^2} + \frac{d_3}{2^3} + \cdots.
-$$
-
 ```{margin}
 Note the representation is not unique. The IEEE754 standard uses a different representation:
 
@@ -32,12 +28,9 @@ $$
 which shifts the mantissa to the left by one bit. There are no essential differences between the two representations, and the latter is more common in practice.
 ```
 
-```{note}
-```
-
-```{note}
-
-```
+$$
+0.d_1 d_2 d_3\dots =  \frac{d_1}{2} + \frac{d_2}{2^2} + \frac{d_3}{2^3} + \cdots.
+$$
 
 ```{note}
 
