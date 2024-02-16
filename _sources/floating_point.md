@@ -170,7 +170,7 @@ $$
 ```{prf:corollary}
 :label: COR-REL-ERR
 For any $x\in\overline{\mathbb{F}}$, $\textrm{fl}(x) = x(1+\delta)$ with $|\delta|\le \mathrm{u}$.
-``
+```
 
 ## Arithmetic Operations
 
