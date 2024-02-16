@@ -361,10 +361,6 @@ document.write(`
 x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(e\)</span> is an integer exponent and <span class="math notranslate nohighlight">\(d_1=1\)</span>, the other binary digits <span class="math notranslate nohighlight">\(d_i\in \{0, 1\}\)</span>. The mantissa part</p>
-<div class="math notranslate nohighlight">
-\[
-0.d_1 d_2 d_3\dots =  \frac{d_1}{2} + \frac{d_2}{2^2} + \frac{d_3}{2^3} + \cdots.
-\]</div>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Note the representation is not unique. The IEEE754 standard uses a different representation:</p>
@@ -374,6 +370,10 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 \]</div>
 <p>which shifts the mantissa to the left by one bit. There are no essential differences between the two representations, and the latter is more common in practice.</p>
 </aside>
+<div class="math notranslate nohighlight">
+\[
+0.d_1 d_2 d_3\dots =  \frac{d_1}{2} + \frac{d_2}{2^2} + \frac{d_3}{2^3} + \cdots.
+\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In order to guarantee the uniqueness of the above representation, we need further assumption that there exists an infinite subset <span class="math notranslate nohighlight">\(S\subset \mathbb{N}\)</span> that <span class="math notranslate nohighlight">\(d_j\neq 1\)</span> for <span class="math notranslate nohighlight">\(j\in S\)</span>. For example, under binary representation</p>
