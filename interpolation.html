@@ -520,33 +520,28 @@ h^{(n+1)}(x) = \frac{(-1)^{n+1}}{2^{n+1}} (2n+1)!! x^{-(2n+3)/2}.
 <li><p>The function <span class="math notranslate nohighlight">\(\omega(x) = \prod_{j=0}^n (x - x_j)\)</span>, such product could be large if <span class="math notranslate nohighlight">\(x\)</span> and the nodes <span class="math notranslate nohighlight">\(x_j\)</span> are not so close.</p></li>
 <li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{(n+1)!}\)</span>, which decays fast.</p></li>
 </ul>
-<p>We can see that for the function <span class="math notranslate nohighlight">\(h(x) = 1/\sqrt{x}\)</span> on <span class="math notranslate nohighlight">\([\frac{1}{2}, \frac{3}{2}]\)</span>, it is not trivial to show the interpolating polynomial could converge to <span class="math notranslate nohighlight">\(h\)</span> anymore (it is still true for certain choices of <span class="math notranslate nohighlight">\(x_j\)</span>). In the following, we try to provide a better estimate of <span class="math notranslate nohighlight">\(\omega\)</span> for the special choice: equally spaced nodes.</p>
-<p>Let the nodes <span class="math notranslate nohighlight">\(x_j = a + j\Delta\)</span>, where <span class="math notranslate nohighlight">\(\Delta = \frac{b-a}{n}\)</span>. It is not difficult (prove it) to see <span class="math notranslate nohighlight">\(\omega(x)\)</span> will be the worst if <span class="math notranslate nohighlight">\(x\)</span> is located on the end sub-intervals, <span class="math notranslate nohighlight">\([x_0, x_1]\)</span> and <span class="math notranslate nohighlight">\([x_{n-1}, x_n]\)</span>. Without loss of generality, we assume <span class="math notranslate nohighlight">\(x\)</span> is located on <span class="math notranslate nohighlight">\([x_0, x_1]\)</span>, then</p>
+<p>We can see that for the function <span class="math notranslate nohighlight">\(h(x) = 1/\sqrt{x}\)</span> on <span class="math notranslate nohighlight">\([\frac{1}{2}, \frac{3}{2}]\)</span>, it is not trivial to show the interpolating polynomial could converge to <span class="math notranslate nohighlight">\(h\)</span> anymore (it is still true for certain choices of <span class="math notranslate nohighlight">\(x_j\)</span>).</p>
+<p>Next, we try to provide a better estimate of <span class="math notranslate nohighlight">\(\omega\)</span> for the special choice: equally spaced nodes.  Let the nodes <span class="math notranslate nohighlight">\(x_j = a + j\Delta\)</span>, where <span class="math notranslate nohighlight">\(\Delta = \frac{b-a}{n}\)</span>. It is not difficult (prove it) to see <span class="math notranslate nohighlight">\(\omega(x)\)</span> will be the worst if <span class="math notranslate nohighlight">\(x\)</span> is located on the end sub-intervals, <span class="math notranslate nohighlight">\([x_0, x_1]\)</span> and <span class="math notranslate nohighlight">\([x_{n-1}, x_n]\)</span>. Without loss of generality, we assume <span class="math notranslate nohighlight">\(x\)</span> is located on <span class="math notranslate nohighlight">\([x_0, x_1]\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[|x - x_j|\le j \Delta\]</div>
+<p>for <span class="math notranslate nohighlight">\(j = 2, \dots, n\)</span>, which implies</p>
 <div class="math notranslate nohighlight">
 \[
-|x - x_j|\le (j+1)\Delta
+    |\omega(x)|\le \prod_{j=0}^n |x - x_j|\le n! \Delta^{n-1} \sup_{x\in [x_0, x_1]} |(x - x_0)(x-x_1)|= \frac{n!}{4} \frac{(b-a)^{n+1}}{n^{n+1}}.
 \]</div>
-<p>for <span class="math notranslate nohighlight">\(j = 0, 1, \dots, n\)</span>, which implies</p>
+<p>Thus the interpolation error is bounded by</p>
 <div class="math notranslate nohighlight">
-\[
-|\omega(x)|\le \prod_{j=0}^n |x - x_j|\le (n+1)! \Delta^{n+1} = (n+1)! \frac{(b-a)^{n+1}}{n^{n+1}},
-\]</div>
-<p>use the Stirling approximation, <span class="math notranslate nohighlight">\(n!\sim \sqrt{2\pi n} \left( \frac{n}{e}\right)^n \)</span>, thus</p>
-<div class="math notranslate nohighlight">
-\[
-(n+1)! \frac{(b-a)^{n+1}}{n^{n+1}} \sim \sqrt{2\pi n} \left(\frac{b-a}{e} \right)^{n+1}.
-\]</div>
-<p>One should note that if the interval <span class="math notranslate nohighlight">\([a, b]\)</span> is shorter than <span class="math notranslate nohighlight">\(e\)</span>, then the above estimate is exponentially small (times <span class="math notranslate nohighlight">\(\sqrt{n}\)</span>), while it grows exponentially if <span class="math notranslate nohighlight">\(|b-a| &gt; e\)</span>. Such an estimate is useful to derive uniform convergence.</p>
+\[  \|h  - f\|_{\infty} \le  \frac{\sup_{x\in[a,b]}|h^{(n+1)}(x)|}{4(n+1)} \frac{(b-a)^{n+1}}{n^{n+1}}.\]</div>
+<p>Such an estimate is useful to derive uniform convergence.</p>
 <div class="proof example admonition" id="example-6">
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider <span class="math notranslate nohighlight">\(h(x) = 1/x\)</span> on <span class="math notranslate nohighlight">\([\frac{1}{2}, \frac{3}{2}]\)</span>. Then <span class="math notranslate nohighlight">\(h^{(n+1)}(x) = \frac{(n+1)!(-1)^{n+1}}{x^{n+2}}\)</span>, hence</p>
 <div class="math notranslate nohighlight">
 \[
-    \frac{| h^{(n+1)}(x) |}{(n+1)!} \le \max_{x\in[1/2, 3/2]} \left| \frac{1}{x^{n+2}} \right| = 2^{n+2}
+    \frac{| h^{(n+1)}(x) |}{4(n+1)}  \frac{(b-a)^{n+1}}{n^{n+1}} \le \frac{1}{4n^{n+1}}\max_{x\in[\sfrac{1}{2}, \sfrac{3}{2}]} \left| \frac{1}{x^{n+2}} \right| = \frac{1}{2} \left(\frac{2}{n}\right)^{n+1},
 \]</div>
-<p>and the upper bound of <span class="math notranslate nohighlight">\(|\omega|\)</span> is <span class="math notranslate nohighlight">\(\cO\left(\sqrt{n}\frac{1}{e^{n+1}}\right)\)</span>, therefore the interpolation error is <span class="math notranslate nohighlight">\(\cO\left( \sqrt{n} \left(\frac{2}{e}\right)^{n+1}\right)\)</span> converges to zero exponentially.</p>
-<p>It is important to notice that the above method only works for short intervals, if <span class="math notranslate nohighlight">\(b-a &gt; \frac{e}{2}\)</span>, then we require more sophisticated estimates.</p>
+<p>therefore, the interpolation error converges to zero exponentially. It is important to notice that the above method only works for intervals away from the origin.</p>
 </section>
 </div></section>
 <section id="runge-s-phenomenon">
@@ -673,7 +668,7 @@ T_k(x) = \cos (k\arccos x),\quad x\in[-1,1].
 <p>The Newton form is useful when we dynamically add interpolation nodes. Consider the following scenario: we already have found an interpolation polynomial <span class="math notranslate nohighlight">\(f_k\)</span> through <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>, <span class="math notranslate nohighlight">\((x_1, y_1)\)</span>,<span class="math notranslate nohighlight">\(\dots, (x_k, y_k)\)</span>, then we are provided an addition pair <span class="math notranslate nohighlight">\((x_{k+1}, y_{k+1})\)</span>, how to effectively transform <span class="math notranslate nohighlight">\(f_k\)</span> to <span class="math notranslate nohighlight">\(f_{k+1}\)</span>? If we write</p>
 <div class="math notranslate nohighlight">
 \[
-f_{k+1}(x) = f_k(x) + c_{k+1} (x - x_0)(x - x_1)\dots (x - x_{k}), 
+f_{k+1}(x) = f_k(x) + c_{k+1} (x - x_0)(x - x_1)\dots (x - x_{k}),
 \]</div>
 <p>then <span class="math notranslate nohighlight">\(f_{k+1}(x_j) = f_k(x_j)\)</span>, <span class="math notranslate nohighlight">\(j = 0, 1,\dots, k\)</span>, automatically. Therefore we only need to take care of <span class="math notranslate nohighlight">\(f_{k+1}(x_{k+1}) = y_{k+1}\)</span>, which means</p>
 <div class="math notranslate nohighlight" id="equation-eq-ck">
@@ -873,7 +868,7 @@ H_{N-1}^{(k)}(x_j) = y_j^k:= h^{(k)}(x_j),\quad j=0,\dots, n,\quad 0\le k\le m_j
 l_k(x_j) = \begin{cases}
     1, &amp;j = k,\\
     0,&amp;\text{otherwise}.
-\end{cases} 
+\end{cases}
 \end{split}\]</div>
 <div class="proof remark admonition" id="remark-25">
 <p class="admonition-title"><span class="caption-number">Remark 10 </span></p>
@@ -909,7 +904,7 @@ f_n(x) = \sum_{k=0}^{2n} y_k l_k(x).
 <p>Computationally, we can reuse the previously known barycentric form but there exist better methods. For simplicity, we consider the equal space nodes in the following (non-uniform nodes could achieve the same complexity though).</p>
 <div class="math notranslate nohighlight">
 \[
-    x_j = \frac{2\pi j}{2n + 1}, \quad j = 0, \dots, 2n. 
+    x_j = \frac{2\pi j}{2n + 1}, \quad j = 0, \dots, 2n.
 \]</div>
 <p>We will try to locate the coefficients <span class="math notranslate nohighlight">\(\gamma_k\)</span> in the complex form (see <a class="reference internal" href="#equation-eq-complex">(8)</a>) from the interpolation conditions.</p>
 <div class="math notranslate nohighlight">
@@ -965,7 +960,7 @@ The fast Fourier transform exploits the symmetry in <span class="math notranslat
 \[\begin{split}
     \begin{aligned}
         f(n)&amp; = 2f(\frac{n}{2}) + 2n \\
-&amp;= 4f(\frac{n}{4}) + 2 n + 2n \\ 
+&amp;= 4f(\frac{n}{4}) + 2 n + 2n \\
 &amp;=\dots \\
 &amp;= n f(1) + \underbrace{2n + \dots + 2n}_{\log_2 n \text{ times}} = 2n \log_2 n.
     \end{aligned}
