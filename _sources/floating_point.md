@@ -97,8 +97,9 @@ $$\mathbb{F}_{32} := \mathbb{F}(24, -125, 128),\quad\mathbb{F}_{64} := \mathbb{F
 
 are supported, they are often called single precision and double precision, respectively.  
 
+````
 
-```{sidebar} **IEEE754 Standard**
+```{margin} **IEEE754 Standard**
 The IEEE754 standard for floating point arithmetic is slightly different from the note. For instance, without **underflow** (all exponent bits are zeros), the standard ``float32`` is represented as
 
 $$\pm 1.d_1 d_2\cdots d_{23} \times 2^e$$
@@ -109,4 +110,45 @@ $$\text{sign} \mid e_7 e_6 \cdots e_0 \mid d_1 d_2\cdots d_{23}$$
 
 and $e = \sum_{j=0}^7 2^{j} e_j - 127$.
 ```
+
+## Rounding
+The rounding operation $\textrm{fl}$ is to map any real numbers of $\overline{\mathbb{F}}$ into the floating point number system $\mathbb{F}$ with smallest error. Such rounding operation can be written out explicitly, let $x = \pm (0.d_1 d_2\dots d_t d_{t+1}\dots )\times 2^e$, then
+
+$$
+    \textrm{fl}(x) =\begin{cases}
+        \pm (0.d_1 d_2\dots d_t) \times 2^e & \text{if } d_{t+1} = 0,\\
+        \pm (0.d_1 d_2\dots d_t  + 2^{-t}) \times 2^e & \text{if } d_{t+1} = 1.
+    \end{cases}
+$$
+
+It is clear that rounding $\textrm{fl}$ is monotone and idempotent, which means
+
+- $x\le y \Rightarrow \textrm{fl}(x) \le \textrm{fl}(y)$. 
+- $\textrm{fl}(z) = z$ if $z\in \mathbb{F}$.
+
+````{prf:theorem}
+:label: THM-REL-ERR
+For any $x\in \overline{\mathbb{F}}$, $|\textrm{fl}(x) - x| = \min_{z\in \mathbb{F}} |z - x|$. If $x\neq 0$, then
+
+$$\frac{|\textrm{fl}(x) - x|}{|x|}\le \mathrm{u} = 2^{-t}.$$
+
 ````
+
+````{prf:proof}
+The special case that $x = 0$ is trivial, we only consider $x\in [x_{\min}, x_{\max}]$, it can be seen that 
+
+$$
+    |\textrm{fl}(x) - x| = | (0.d_1d_2\dots \tilde{d}_t) - (0.d_1d_2\dots d_t d_{t+1} \dots )|\times 2^e \le 2^{-(t+1)} \times 2^e,
+$$
+
+where $\tilde{d}_t$ is the rounding bit, therefore 
+
+$$
+    \frac{|\textrm{fl}(x) - x|}{|x|} \le \frac{2^{e-(t+1)}}{2^{e-1}} = 2^{-t}.
+$$
+````
+
+```{prf:corollary}
+:label: COR-REL-ERR
+For any $x\in\overline{\mathbb{F}}$, $\textrm{fl}(x) = x(1+\delta)$ with $|\delta|\le \mathrm{u}$.
+```

@@ -320,6 +320,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-real-numbers">Representation of Real Numbers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-numbers">Floating Point Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rounding">Rounding</a></li>
 </ul>
             </nav>
         </div>
@@ -410,7 +411,8 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 <div class="math notranslate nohighlight">
 \[\mathbb{F}_{32} := \mathbb{F}(24, -125, 128),\quad\mathbb{F}_{64} := \mathbb{F}(53, -1021, 1024)\]</div>
 <p>are supported, they are often called single precision and double precision, respectively.</p>
-<aside class="sidebar">
+</div>
+<aside class="margin sidebar">
 <p class="sidebar-title"><strong>IEEE754 Standard</strong></p>
 <p>The IEEE754 standard for floating point arithmetic is slightly different from the note. For instance, without <strong>underflow</strong> (all exponent bits are zeros), the standard <code class="docutils literal notranslate"><span class="pre">float32</span></code> is represented as</p>
 <div class="math notranslate nohighlight">
@@ -420,8 +422,47 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 \[\text{sign} \mid e_7 e_6 \cdots e_0 \mid d_1 d_2\cdots d_{23}\]</div>
 <p>and <span class="math notranslate nohighlight">\(e = \sum_{j=0}^7 2^{j} e_j - 127\)</span>.</p>
 </aside>
-</div>
 </section>
+<section id="rounding">
+<h2>Rounding<a class="headerlink" href="#rounding" title="Link to this heading">#</a></h2>
+<p>The rounding operation <span class="math notranslate nohighlight">\(\textrm{fl}\)</span> is to map any real numbers of <span class="math notranslate nohighlight">\(\overline{\mathbb{F}}\)</span> into the floating point number system <span class="math notranslate nohighlight">\(\mathbb{F}\)</span> with smallest error. Such rounding operation can be written out explicitly, let <span class="math notranslate nohighlight">\(x = \pm (0.d_1 d_2\dots d_t d_{t+1}\dots )\times 2^e\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \textrm{fl}(x) =\begin{cases}
+        \pm (0.d_1 d_2\dots d_t) \times 2^e &amp; \text{if } d_{t+1} = 0,\\
+        \pm (0.d_1 d_2\dots d_t  + 2^{-t}) \times 2^e &amp; \text{if } d_{t+1} = 1.
+    \end{cases}
+\end{split}\]</div>
+<p>It is clear that rounding <span class="math notranslate nohighlight">\(\textrm{fl}\)</span> is monotone and idempotent, which means</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\le y \Rightarrow \textrm{fl}(x) \le \textrm{fl}(y)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\textrm{fl}(z) = z\)</span> if <span class="math notranslate nohighlight">\(z\in \mathbb{F}\)</span>.</p></li>
+</ul>
+<div class="proof theorem admonition" id="THM-REL-ERR">
+<p class="admonition-title"><span class="caption-number">Theorem 3 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>For any <span class="math notranslate nohighlight">\(x\in \overline{\mathbb{F}}\)</span>, <span class="math notranslate nohighlight">\(|\textrm{fl}(x) - x| = \min_{z\in \mathbb{F}} |z - x|\)</span>. If <span class="math notranslate nohighlight">\(x\neq 0\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\frac{|\textrm{fl}(x) - x|}{|x|}\le \mathrm{u} = 2^{-t}.\]</div>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. The special case that <span class="math notranslate nohighlight">\(x = 0\)</span> is trivial, we only consider <span class="math notranslate nohighlight">\(x\in [x_{\min}, x_{\max}]\)</span>, it can be seen that</p>
+<div class="math notranslate nohighlight">
+\[
+    |\textrm{fl}(x) - x| = | (0.d_1d_2\dots \tilde{d}_t) - (0.d_1d_2\dots d_t d_{t+1} \dots )|\times 2^e \le 2^{-(t+1)} \times 2^e,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{d}_t\)</span> is the rounding bit, therefore</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{|\textrm{fl}(x) - x|}{|x|} \le \frac{2^{e-(t+1)}}{2^{e-1}} = 2^{-t}.
+\]</div>
+</div>
+<div class="proof corollary admonition" id="COR-REL-ERR">
+<p class="admonition-title"><span class="caption-number">Corollary 1 </span></p>
+<section class="corollary-content" id="proof-content">
+<p>For any <span class="math notranslate nohighlight">\(x\in\overline{\mathbb{F}}\)</span>, <span class="math notranslate nohighlight">\(\textrm{fl}(x) = x(1+\delta)\)</span> with <span class="math notranslate nohighlight">\(|\delta|\le \mathrm{u}\)</span>.</p>
+</section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -481,6 +522,7 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-real-numbers">Representation of Real Numbers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-numbers">Floating Point Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rounding">Rounding</a></li>
 </ul>
   </nav></div>
 
