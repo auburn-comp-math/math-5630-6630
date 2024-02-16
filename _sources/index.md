@@ -10,7 +10,7 @@ The course will cover the following topics:
 - Numerical differentiation and integration
 - Numerical solutions of ordinary differential equations
 
-This course involves both theory and programming. The prerequisites for the theory part are
+This course is an introduction to numerical analysis. It is designed to provide a solid foundation in numerical methods and their applications.   Both fundamental theory and programming are required throughout the course. The prerequisites for the theory part are
 
 - Linear Differential Equations (2650)
 - Topics in Linear Algebra (2660)
