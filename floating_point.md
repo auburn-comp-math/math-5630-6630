@@ -22,3 +22,11 @@ $$
 0.d_1 d_2 d_3\dots =  \frac{d_1}{2} + \frac{d_2}{2^2} + \frac{d_3}{2^3} + \cdots.
 $$
 
+```{note}
+
+In order to guarantee the uniqueness of the above representation, we need further assumption that there exists an infinite subset $S\subset \mathbb{N}$ that $d_j\neq 1$ for $j\in S$. For example, under binary representation
+
+$$0.111\dots = (0.1)\times 2^1,$$
+
+then we will take the latter representation.
+```
