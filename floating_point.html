@@ -331,6 +331,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
             </nav>
         </div>
@@ -476,7 +477,8 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 <div class="proof corollary admonition" id="COR-REL-ERR">
 <p class="admonition-title"><span class="caption-number">Corollary 1 </span></p>
 <section class="corollary-content" id="proof-content">
-<p>For any <span class="math notranslate nohighlight">\(x\in\overline{\mathbb{F}}\)</span>, <span class="math notranslate nohighlight">\(\textrm{fl}(x) = x(1+\delta)\)</span> with <span class="math notranslate nohighlight">\(|\delta|\le \mathrm{u}\)</span>.</p>
+<p>For any <span class="math notranslate nohighlight">\(x\in\overline{\mathbb{F}}\)</span>, <span class="math notranslate nohighlight">\(\textrm{fl}(x) = x(1+\delta)\)</span> with <span class="math notranslate nohighlight">\(|\delta|\le \mathrm{u}\)</span>.
+``</p>
 </section>
 </div></section>
 <section id="arithmetic-operations">
@@ -496,7 +498,7 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 &amp;\le\mathrm{u} + (\mathrm{u} +\mathrm{u}^2) \frac{|x|+|y|}{|x+y|}.
 \end{aligned}
 \end{split}\]</div>
-<p>When <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are close in magnitude but with opposite signs, the cancellation error will be significant.</p>
+<p>When <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are close in magnitude but with opposite signs, the cancellation error will be significant. Similar cancellation error can be derived for multiplication/division.</p>
 </section>
 </div><section id="error-accumulation-multiplication">
 <h3>Error Accumulation: Multiplication<a class="headerlink" href="#error-accumulation-multiplication" title="Link to this heading">#</a></h3>
@@ -639,12 +641,27 @@ p(x) = a_0 + x (a_1 + x(a_2 + \dots x(a_{n-1} + x(a_n)))).
 </section>
 <section id="computational-part">
 <h3>Computational Part<a class="headerlink" href="#computational-part" title="Link to this heading">#</a></h3>
-<div class="admonition-problem-4-pairwise-summation admonition">
-<p class="admonition-title">Problem 4 (Pairwise summation)</p>
+<div class="admonition-problem-4-archimedes-formula-for-pi admonition">
+<p class="admonition-title">Problem 4 (Archimedes’ formula for <span class="math notranslate nohighlight">\(\pi\)</span>)</p>
+<p>Archimedes’ formula for <span class="math notranslate nohighlight">\(\pi\)</span> is given by calculating the perimeters of regular polygons inscribing and circumscribing a circle of unit diameter. Starting from hexagon, <span class="math notranslate nohighlight">\(P_0 = \frac{1}{\sqrt{3}}\)</span>. The iterative formula can be written in two equivalent forms:</p>
+<div class="math notranslate nohighlight">
+\[
+P_{n+1} = \dfrac{\sqrt{1 + P_n^2} - 1}{P_n},
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+P_{n+1} = \dfrac{P_n}{\sqrt{1 + P_n^2}},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_n\)</span> is the length of each side of the regular polygon with <span class="math notranslate nohighlight">\(6 \times 2^n\)</span> sides. The approximation of <span class="math notranslate nohighlight">\(\pi\)</span> is computed by <span class="math notranslate nohighlight">\(\lim_{n\to\infty} 6\times 2^n\times P_n\)</span>.</p>
+<p>Implement both iterative formula and compare the results with the exact value of <span class="math notranslate nohighlight">\(\pi\)</span> at different <span class="math notranslate nohighlight">\(n\)</span>. Explain the difference.</p>
+</div>
+<div class="admonition-problem-5-pairwise-summation admonition">
+<p class="admonition-title">Problem 5 (Pairwise summation)</p>
 <p>Based on theoretical part, implement an algorithm for the summation <span class="math notranslate nohighlight">\(\sum_{j=1}^n x_j\)</span> which has <span class="math notranslate nohighlight">\(\mathcal{O}(\textrm{u}\log_2 n)\)</span> rounding error.</p>
 </div>
-<div class="admonition-problem-5-kahan-compensated-summation admonition">
-<p class="admonition-title">Problem 5 (Kahan compensated summation)</p>
+<div class="admonition-problem-6-kahan-compensated-summation admonition">
+<p class="admonition-title">Problem 6 (Kahan compensated summation)</p>
 <p>Suppose <span class="math notranslate nohighlight">\(a, b\in\mathbb{R}\)</span>, the rounding error for the sum <span class="math notranslate nohighlight">\(s = \fl{\fl{a}+\fl{b}}\)</span> (<span class="math notranslate nohighlight">\(a\ge b\)</span>) can be computed using</p>
 <div class="math notranslate nohighlight">
 \[
@@ -670,11 +687,31 @@ p(x) = a_0 + x (a_1 + x(a_2 + \dots x(a_{n-1} + x(a_n)))).
 </section>
 </div><p>Implement the <a class="reference internal" href="#AL-KA-CO-SU">Algorithm 1</a> described above and compare the accuracy with naive summation and pairwise summation with test cases.</p>
 </div>
-<div class="admonition-problem-6 admonition">
-<p class="admonition-title">Problem 6</p>
+<div class="admonition-problem-7 admonition">
+<p class="admonition-title">Problem 7</p>
 <p>Suppose the inputs <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^n\subset \mathbb{R}\)</span> are randomly distributed (say <span class="math notranslate nohighlight">\(x_j\sim U(0,1)\)</span> i.i.d), what is growth of the expected rounding error with respect to total number of inputs <span class="math notranslate nohighlight">\(n\)</span> for the naive summation and pairwise summation? Please provide an explanation of your result. You can use Kahan sum as the accurate result approximately.</p>
 </div>
 </section>
+</section>
+<section id="extended-reading">
+<h2>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h2>
+<p>See <span id="id1">[<a class="reference internal" href="#id4" title="Nicholas J Higham. The accuracy of floating point summation. SIAM Journal on Scientific Computing, 14(4):783–799, 1993.">Higham, 1993</a>, <a class="reference internal" href="#id3" title="Nicholas J Higham and Theo Mary. A new approach to probabilistic rounding error analysis. SIAM Journal on Scientific Computing, 41(5):A2815–A2835, 2019.">Higham and Mary, 2019</a>, <a class="reference internal" href="#id5" title="Jean-Michel Muller. Elementary functions. Springer, 2006.">Muller, 2006</a>]</span>.</p>
+<div class="docutils container" id="id2">
+<div role="list" class="citation-list">
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Hig93</a><span class="fn-bracket">]</span></span>
+<p>Nicholas J Higham. The accuracy of floating point summation. <em>SIAM Journal on Scientific Computing</em>, 14(4):783–799, 1993.</p>
+</div>
+<div class="citation" id="id3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">HM19</a><span class="fn-bracket">]</span></span>
+<p>Nicholas J Higham and Theo Mary. A new approach to probabilistic rounding error analysis. <em>SIAM Journal on Scientific Computing</em>, 41(5):A2815–A2835, 2019.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Mul06</a><span class="fn-bracket">]</span></span>
+<p>Jean-Michel Muller. <em>Elementary functions</em>. Springer, 2006.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -746,6 +783,7 @@ p(x) = a_0 + x (a_1 + x(a_2 + \dots x(a_{n-1} + x(a_n)))).
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
   </nav></div>
 
