@@ -76,6 +76,14 @@ $$\max_{x\in \overline{\mathbb{F}}, x\neq 0}\min_{z\in\mathbb{F}} \frac{|z - x|}
 The number $\mathrm{u} := 2^{-t}$ is also called rounding unit or machine precision.
 ````
 
+```{margin}
+The definition of machine precision has two versions. The formal definition $2^{-t}$ appears mostly in research literature and numerical packages (LAPACK). In modern programming languages like ``Python``, ``MATLAB``, ``C++``, the machine precision is defined by $2^{t-1}$ instead. The meaning is the **difference** between one and the next floating point number. 
+
+In other words, two versions of machine precision are corresponding to different rounding strategies. For the former, the rounding strategy is to round to the nearest floating point number, while for the latter, the rounding strategy is to round-by-chop.
+
+In practice, it is not necessary to distinguish the two versions of machine precision, since the difference is only a factor of 2.
+```
+
 ````{prf:proof}
 Without loss of generality, we only need to consider the positive numbers in $\overline{\mathbb{F}}$, then one can represent any nonzero $x\in [x_{\min}, x_{\max}]$ by
 

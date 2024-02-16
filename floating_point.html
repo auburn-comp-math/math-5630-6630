@@ -394,7 +394,13 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 \[\max_{x\in \overline{\mathbb{F}}, x\neq 0}\min_{z\in\mathbb{F}} \frac{|z - x|}{|x|}\le  2^{-t}.\]</div>
 <p>The number <span class="math notranslate nohighlight">\(\mathrm{u} := 2^{-t}\)</span> is also called rounding unit or machine precision.</p>
 </section>
-</div><div class="proof admonition" id="proof">
+</div><aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The definition of machine precision has two versions. The formal definition <span class="math notranslate nohighlight">\(2^{-t}\)</span> appears mostly in research literature and numerical packages (LAPACK). In modern programming languages like <code class="docutils literal notranslate"><span class="pre">Python</span></code>, <code class="docutils literal notranslate"><span class="pre">MATLAB</span></code>, <code class="docutils literal notranslate"><span class="pre">C++</span></code>, the machine precision is defined by <span class="math notranslate nohighlight">\(2^{t-1}\)</span> instead. The meaning is the <strong>difference</strong> between one and the next floating point number.</p>
+<p>In other words, two versions of machine precision are corresponding to different rounding strategies. For the former, the rounding strategy is to round to the nearest floating point number, while for the latter, the rounding strategy is to round-by-chop.</p>
+<p>In practice, it is not necessary to distinguish the two versions of machine precision, since the difference is only a factor of 2.</p>
+</aside>
+<div class="proof admonition" id="proof">
 <p>Proof. Without loss of generality, we only need to consider the positive numbers in <span class="math notranslate nohighlight">\(\overline{\mathbb{F}}\)</span>, then one can represent any nonzero <span class="math notranslate nohighlight">\(x\in [x_{\min}, x_{\max}]\)</span> by</p>
 <div class="math notranslate nohighlight">
 \[x = (0.d_1 d_2 \dots d_t\dots)\times 2^e\in [2^{e-1}, 2^e].\]</div>
