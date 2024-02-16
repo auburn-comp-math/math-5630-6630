@@ -77,7 +77,7 @@ The number $\mathrm{u} := 2^{-t}$ is also called rounding unit or machine precis
 ````
 
 ```{margin}
-The definition of machine precision has two versions. The formal definition $2^{-t}$ appears mostly in research literature and numerical packages (LAPACK). In modern programming languages like ``Python``, ``MATLAB``, ``C++``, the machine precision is defined by $2^{t-1}$ instead. The meaning is the **difference** between one and the next floating point number. 
+The definition of machine precision has two versions. The formal definition $2^{-t}$ appears mostly in research literature and numerical packages (LAPACK). In modern programming languages like ``Python``, ``MATLAB``, ``C++``, the machine precision is defined by $2^{1-t}$ instead. The meaning is the **difference** between one and the next floating point number. 
 
 In other words, two versions of machine precision are corresponding to different rounding strategies. For the former, the rounding strategy is to round to the nearest floating point number, while for the latter, the rounding strategy is to round-by-chop.
 
