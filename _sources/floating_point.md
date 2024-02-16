@@ -98,7 +98,7 @@ $$\mathbb{F}_{32} := \mathbb{F}(24, -125, 128),\quad\mathbb{F}_{64} := \mathbb{F
 are supported, they are often called single precision and double precision, respectively.  
 ```
 
-```{margin}
+```{sidebar} **IEEE754 Standard**
 The IEEE754 standard for floating point arithmetic is slightly different from the note. For instance, without **underflow** (all exponent bits are zeros), the standard ``float32`` is represented as
 
 $$\pm 1.d_1 d_2\cdots d_{23} \times 2^e$$
