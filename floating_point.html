@@ -62,7 +62,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Floating';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'floating_point';</script>
     <link rel="icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -224,7 +224,7 @@
       
       
       
-      <li><a href="_sources/Floating.md" target="_blank"
+      <li><a href="_sources/floating_point.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -335,21 +335,21 @@ document.write(`
 <p>In this chapter, we will introduce some basics on the real number system for modern computers and discuss the arithmetic operations of the number system.</p>
 <section id="representation-of-real-numbers">
 <h2>Representation of Real Numbers<a class="headerlink" href="#representation-of-real-numbers" title="Link to this heading">#</a></h2>
-<p>Any nonzero real number <span class="math notranslate nohighlight">\(x\in \mathbb{R}\)</span> can be accurately represented with an infinite sequence of digits. This can be understood as the consequence that rational numbers are dense on any interval. ```{margin}
-<strong>Dense</strong> means that between any two distinct real numbers, there is a rational number.</p>
-<div class="highlight-Therefore, notranslate"><div class="highlight"><pre><span></span>
-$$
+<p>Any nonzero real number <span class="math notranslate nohighlight">\(x\in \mathbb{R}\)</span> can be accurately represented with an infinite sequence of digits. This can be understood as the consequence that rational numbers are dense on any interval.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><strong>Dense</strong> means that between any two distinct real numbers, there is a rational number.</p>
+</aside>
+<p>Therefore, with the binary representation, we can write</p>
+<div class="math notranslate nohighlight">
+\[
 x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
-$$
-
-where $e$ is an integer exponent and $d_1=1$, the other binary digits $d_i\in \{0, 1\}$. The mantissa part
-
-$$
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(e\)</span> is an integer exponent and <span class="math notranslate nohighlight">\(d_1=1\)</span>, the other binary digits <span class="math notranslate nohighlight">\(d_i\in \{0, 1\}\)</span>. The mantissa part</p>
+<div class="math notranslate nohighlight">
+\[
 0.d_1 d_2 d_3\dots =  \frac{d_1}{2} + \frac{d_2}{2^2} + \frac{d_3}{2^3} + \cdots.
-$$
-
-</pre></div>
-</div>
+\]</div>
 </section>
 </section>
 
