@@ -97,3 +97,7 @@ $$\mathbb{F}_{32} := \mathbb{F}(24, -125, 128),\quad\mathbb{F}_{64} := \mathbb{F
 
 are supported, they are often called single precision and double precision, respectively.  
 ```
+
+```margin
+The IEEE754 standard for floating point arithmetic is slightly different from the above. 
+```
