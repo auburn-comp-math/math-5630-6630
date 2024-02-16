@@ -22,6 +22,23 @@ $$
 0.d_1 d_2 d_3\dots =  \frac{d_1}{2} + \frac{d_2}{2^2} + \frac{d_3}{2^3} + \cdots.
 $$
 
+```{margin}
+Note the representation is not unique. The IEEE754 standard uses a different representation:
+
+$$
+x = \pm (1.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
+$$
+
+which shifts the mantissa to the left by one bit. There are no essential differences between the two representations, and the latter is more common in practice.
+```
+
+```{note}
+```
+
+```{note}
+
+```
+
 ```{note}
 
 In order to guarantee the uniqueness of the above representation, we need further assumption that there exists an infinite subset $S\subset \mathbb{N}$ that $d_j\neq 1$ for $j\in S$. For example, under binary representation
