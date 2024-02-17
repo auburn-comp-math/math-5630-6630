@@ -19,7 +19,7 @@ $$
 where $e$ is an integer exponent and $d_1=1$, the other binary digits $d_i\in \{0, 1\}$. The mantissa part
 
 ```{margin}
-Note the representation is not unique. The IEEE754 standard uses a different representation:
+Note that the IEEE754 standard uses a different representation:
 
 $$
 \pm (1.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,

@@ -1,6 +1,6 @@
 # Before you start
 
-This repository hosts the course material for Math 5630/6630: **Introduction to Numerical Analysis I** at Auburn University. The course will use the textbook written by *A First Course in Numerical Methods* by U. M. Ascher and C. Greif, 2011.
+This repository hosts the course material for Math 5630/6630: **Introduction to Numerical Analysis I** at Auburn University. The course will use the textbook **A First Course in Numerical Methods** by U. M. Ascher and C. Greif, 2011.
 
 The following books are also recommended for this course:
 
