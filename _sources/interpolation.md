@@ -289,7 +289,7 @@ overlay_plot_fit(runge,runge_fit, x, y, -5,5)
 
 It can be shown that the interpolation will diverge at around $3.6$ as $n\to \infty$ and the maximum error $\max_{x\in[-5, 5]} |f_n(x) - h(x) |$ grows exponentially, where $f_n$ is the interpolating polynomial with $n+1$ equally spaced nodes.
 
-There are better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next section.
+There are better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in a later section.
 
 ### Interpolation Remainder Theory
 
