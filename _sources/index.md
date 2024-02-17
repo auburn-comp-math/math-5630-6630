@@ -4,11 +4,11 @@ This repository hosts the course material for Math 5630/6630: **Introduction to 
 
 The following books are also recommended for this course:
 
-- A. Quarteroni, R. Saaco, and F. Saleri, *Numerical Mathematics*, Second Edition, Springer, New York, 2007.
-- Approximation Theory and Approximation Practice by Lloyd N. Trefethen, 2019
-- Numerical Methods for Ordinary Differential Equations: Initial Value Problems by D Griffith, D. Higham, 2010
-- Concise Numerical Mathematics by R. Plato, 2003
-- Numerical computing with IEEE floating point arithmetic by M. Overturn, 2001
+- *Numerical Mathematics* by A. Quarteroni, R. Saaco, and F. Saleri, 2007.
+- *Approximation Theory and Approximation Practice* by Lloyd N. Trefethen, 2019
+- *Numerical Methods for Ordinary Differential Equations: Initial Value Problems* by D Griffith, D. Higham, 2010
+- *Concise Numerical Mathematics* by R. Plato, 2003
+- *Numerical computing with IEEE floating point arithmetic* by M. Overturn, 2001
 
 The course will cover the following topics:
 
