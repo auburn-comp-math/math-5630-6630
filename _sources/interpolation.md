@@ -239,6 +239,47 @@ $$
 h(x) = \frac{1}{1+x^2},\quad x\in [-5, 5].
 $$
 
+```{code-cell} ipython3
+:tags: [hide-input]
+import numpy as np
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+def runge(x):
+  return 1 / (1 + x ** 2)
+
+def polyfit(x, y):
+  return np.poly1d(np.polyfit(x, y, x.size -1))
+
+def overlay_plot_fit(f, f_fit, x, y, x0=-1, x1=1):
+    _x = np.linspace(x0, x1, 500)
+    plt.plot(_x, f_fit(_x), label='fitted function')
+    plt.plot(_x, f(_x), label='actual function')
+    plt.plot(x, y, 'k.')
+    plt.title('Polynomial fitting for Runge function')
+    plt.legend(loc='upper center', fontsize=9)
+
+x = np.linspace(-5, 5, 11)
+y = runge(x)
+runge_fit = polyfit(x, y)
+
+plt.figure(figsize=(6, 4))
+
+SMALL_SIZE = 8
+MEDIUM_SIZE = 10
+BIGGER_SIZE = 12
+
+plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
+plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
+plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
+
+overlay_plot_fit(runge,runge_fit, x, y, -5,5)
+```
+
 It can be shown that the interpolation will diverge at around $3.6$ as $n\to \infty$ and the maximum error $\max_{x\in[-5, 5]} |f_n(x) - h(x) |$ grows exponentially, where $f_n$ is the interpolating polynomial with $n+1$ equally spaced nodes.
 
 There are better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next Section.

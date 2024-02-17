@@ -555,6 +555,58 @@ h^{(n+1)}(x) = \frac{(-1)^{n+1}}{2^{n+1}} (2n+1)!! x^{-(2n+3)/2}.
 \[
 h(x) = \frac{1}{1+x^2},\quad x\in [-5, 5].
 \]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="k">def</span> <span class="nf">runge</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">overlay_plot_fit</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f_fit</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x0</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">f_fit</span><span class="p">(</span><span class="n">_x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fitted function&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">_x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;actual function&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Polynomial fitting for Runge function&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">runge</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">runge_fit</span> <span class="o">=</span> <span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">SMALL_SIZE</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">MEDIUM_SIZE</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">BIGGER_SIZE</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>          <span class="c1"># controls default text sizes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>     <span class="c1"># fontsize of the axes title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">MEDIUM_SIZE</span><span class="p">)</span>    <span class="c1"># fontsize of the x and y labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>    <span class="c1"># fontsize of the tick labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>    <span class="c1"># fontsize of the tick labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>    <span class="c1"># legend fontsize</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">BIGGER_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the figure title</span>
+
+<span class="n">overlay_plot_fit</span><span class="p">(</span><span class="n">runge</span><span class="p">,</span><span class="n">runge_fit</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/8d9677343a31f26cdf17f8e11b63a6512dc5eadfbb0313387f79fbe1dac40767.png" src="_images/8d9677343a31f26cdf17f8e11b63a6512dc5eadfbb0313387f79fbe1dac40767.png" />
+</div>
+</div>
 <p>It can be shown that the interpolation will diverge at around <span class="math notranslate nohighlight">\(3.6\)</span> as <span class="math notranslate nohighlight">\(n\to \infty\)</span> and the maximum error <span class="math notranslate nohighlight">\(\max_{x\in[-5, 5]} |f_n(x) - h(x) |\)</span> grows exponentially, where <span class="math notranslate nohighlight">\(f_n\)</span> is the interpolating polynomial with <span class="math notranslate nohighlight">\(n+1\)</span> equally spaced nodes.</p>
 <p>There are better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next Section.</p>
 </section>
