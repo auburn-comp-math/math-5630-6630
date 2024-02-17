@@ -235,12 +235,19 @@ therefore, the interpolation error converges to zero exponentially. It is import
 
 From the above discussion, we can see there is a possibility that $\max_{x\in[a,b]}|h^{n+1}(x)|\omega(x)$ grows faster than $(n+1)!$, which would lead to divergence. Hence increasing the number of interpolation nodes (at least for equally spaced nodes) is not guaranteed for better approximation. The most famous example is the one made by Carl Runge.
 
-$$
+```{math}
+:label: EQ-RUNGE-EXAMPLE
 h(x) = \frac{1}{1+x^2},\quad x\in [-5, 5].
-$$
+```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+:mystnb:
+:   image:
+:       align: "center"
+:   figure:
+:       caption: Runge phenomenon with 11 equally spaced nodes
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -256,21 +263,21 @@ def overlay_plot_fit(f, f_fit, x, y, x0=-1, x1=1):
     plt.plot(_x, f_fit(_x), label='fitted function')
     plt.plot(_x, f(_x), label='actual function')
     plt.plot(x, y, 'k.')
-    plt.title('Polynomial fitting for Runge function')
+    plt.title('Runge phenomenon')
     plt.legend(loc='upper center', fontsize=9)
 
 x = np.linspace(-5, 5, 11)
 y = runge(x)
 runge_fit = polyfit(x, y)
 
-plt.figure(figsize=(6, 4))
+plt.figure(figsize=(5, 3))
 
 SMALL_SIZE = 8
 MEDIUM_SIZE = 10
 BIGGER_SIZE = 12
 
 plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
-plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc('axes', titlesize=MEDIUM_SIZE)     # fontsize of the axes title
 plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
 plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
@@ -282,7 +289,105 @@ overlay_plot_fit(runge,runge_fit, x, y, -5,5)
 
 It can be shown that the interpolation will diverge at around $3.6$ as $n\to \infty$ and the maximum error $\max_{x\in[-5, 5]} |f_n(x) - h(x) |$ grows exponentially, where $f_n$ is the interpolating polynomial with $n+1$ equally spaced nodes.
 
-There are better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next Section.
+There are better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next section.
+
+### Interpolation Remainder Theory
+
+Let $f_n$ be the degree-$n$ polynomial interpolates $h$ at nodes $\{x_j\}_{j=0}^n$. If $h$ is analytic in a domain $T$ (possibly contains holes),  then the interpolation (Lagrange interpolant) can be written as 
+
+$$
+    f_n(z) = \sum_{j=0}^n \frac{\omega(z) h(x_j)}{(z - x_j) \omega'(x_j)}
+$$
+
+Let $\psi(\xi; z) = \frac{(\omega(\xi) - \omega(z)) h(\xi)}{(\xi - z) \omega(\xi)}$, then by the Residue theorem for simple poles, if $z \neq x_j$,  
+
+$$
+    \frac{1}{2\pi i}\int_{\partial T} \psi(\xi; z) d\xi = \sum_{j=0}^n \mathrm{Res}(\psi, x_j) = \sum_{j=0}^n \frac{(\omega(x_j) - \omega(z)) h(x_j)}{(x_j - z)\omega'(x_j)} = f_n(z),
+$$
+
+which implies that 
+
+$$
+    h(z) - f_n(z) = \frac{1}{2\pi i}\int_{\partial T} \frac{\omega(z) h(\xi)}{(\xi - z)\omega(\xi)} d\xi.
+$$
+
+The error analysis focuses on studying the behavior of $|\omega(z)|$ as $n\to \infty$.
+
+````{prf:lemma}
+:label: Lem-2-Ome-Lim
+If $\{x_j\}_{j=0}^n$ are equispaced nodes over $[a, b]$, then 
+
+$$
+\lim_{n\to\infty} |\omega(z)|^{\frac{1}{n+1}} = \exp\left(\frac{1}{b - a}\int_a^b \log|z-\xi| d\xi \right).
+$$
+````
+
+````{prf:proof}
+Taking $\log$ on $|\omega|^{\frac{1}{n+1}}$, then 
+
+$$
+\log |\omega|^{\frac{1}{n+1}} = \frac{1}{n+1}\sum_{j=0}^n \log |z - x_j|\to \frac{1}{b-a}\int_a^b \log|z - \xi| d\xi. 
+$$
+````
+
+Let $\sigma_n(z):= |\omega(z)|^{\frac{1}{n+1}}$ and define the contour $C_{\rho} = \{z\in \mathbb{C}\mid \sigma_n(z) = \rho\}$. These level sets are concentric closed curves about the midpoint of $[a,b]$.
+    
+````{prf:lemma}
+:label: Lem-2-Ana-Uni-Con
+Suppose the interpolation nodes $\{x_j\}_{j=0}^n$ are enclosed by $C_{\rho}$ and $h$ is analytic inside $C_{\rho}$. Let $z\in C_{\rho'}$ be such that $\rho'<\rho$, then $f_n\to h$ uniformly as $n\to\infty$. 
+````
+
+````{prf:proof}
+Using the maximum modulus principle, the analytic function $h - f_n$ must attain its maximum modulus at the boundary $C_{\rho}$, thus 
+
+$$
+|h(z) - f_n(z)| = \frac{1}{2\pi}\sup_{z\in C_{\rho'}} \left|\int_{C_{\rho}} \frac{\omega(z)}{\omega(\xi)} \frac{h(\xi)}{(\xi - z)} d\xi\right| \le C(\rho, \rho') \sup_{\xi\in C_{\rho}} \frac{|\omega(z)|}{|\omega(\xi)|},
+$$
+
+where $C(\rho, \rho')$ is a positive constant independent of $n$. For $n$ sufficiently large, we can find $0 < \delta < \frac{1}{3}(\rho - \rho')$ sufficiently small such that 
+
+$$
+\sup_{\xi\in C_{\rho}} \frac{|\omega(z)|}{|\omega(\xi)|} \le \left|\frac{\rho' + \delta}{\rho - \delta}\right|^{n+1} \to 0\; \text{ as }n\to \infty. 
+$$
+````
+
+When $h$ is not analytic inside $C_{\rho}$, let us consider a generic situation in which there exist isolated simple poles $z_k\in C_{\rho_k}$, $k\in [m]$ with $\rho_k < \rho$, then we select a contour $C_{\rho'}$ that $\rho_k <\rho'<\rho$ for all $k$. For $z\in C_{\rho'}$, we have
+
+$$
+\begin{aligned}
+    h(z) - f_n(z) &= \frac{1}{2\pi i} \int_{C_{\rho} - \bigcup_{k=1}^m \Gamma_k} \frac{\omega(z)h(\xi)}{(\xi - z) \omega(\xi)} d\xi \\
+    &= \frac{1}{2\pi i} \int_{C_{\rho}} \frac{\omega(z)h(\xi)}{(\xi - z) \omega(\xi)} d\xi - \frac{1}{2\pi i}\sum_{k=1}^m \int_{\Gamma_k}  \frac{\omega(z)h(\xi)}{(\xi - z) \omega(\xi)} d\xi, 
+\end{aligned}
+$$
+
+where $\Gamma_k$ is a small path surrounding $z_k$. The first term can be estimated using the lemma~\ref{Lem: 2-Ana-Uni-Con} whose limit goes to zero as $n\to \infty$. The second term is the summation
+
+$$
+\sum_{k=1}^m \frac{\omega(z)}{\omega(z_k)}\frac{\mathrm{Res}(h, z_k)}{z_k - z}.
+$$
+Since for sufficiently large $n$, we can find $0<\delta<\min_{k\in[m]}\frac{1}{3}(\rho'-\rho_k)$, 
+
+$$
+\left|\frac{\omega(z)}{\omega(z_k)}\right|^{\frac{1}{n+1}} = \frac{\sigma_n(z)}{\sigma_n(z_k)} > \min_{k\in [m]}\frac{\rho'-\delta}{\rho_k + \delta} > 1.
+$$
+
+Define the unique set $\mathcal{U} = \{u_1, u_2,\cdots, u_l\}$ that $u_1 < u_2<\cdots < u_l$ which consists of all distinct values from $\{ \rho_1, \rho_2, \cdots,  \rho_m\}$, then the summation can be decomposed into $l$ groups:
+
+$$
+\sum_{k=1}^m \frac{\omega(z)}{\omega(z_k)}\frac{\mathrm{Res}(h, z_k)}{z_k - z} = \sum_{s=1}^l \sum_{\substack{k\in [m] \\ \rho_k = u_s}} \frac{\omega(z)}{\omega(z_k)}\frac{\mathrm{Res}(h, z_k)}{z_k - z}.
+$$
+
+As $n\to\infty$, if any of the groups does not vanish, then the whole summation must blow up as $n\to\infty$ (why?). Otherwise, the limiting summation should vanish, which violates the maximum modulus principle. 
+
+In Runge's example {eq}``EQ-RUNGE-EXAMPLE``, the simple poles $\pm i$ are on the contour $C_{\rho}$ which intersects the real line at $x_c\approx 3.6334$. Therefore, for $|x| < x_c$, the interpolation $f_n$ uniformly converges to $h$ and diverges once $|x| > x_c$. 
+<!-- See Figure~\ref{fig:contour-curve}. -->
+<!-- \begin{figure}[!htb]
+    \centering
+    \includegraphics[scale=0.65]{Figures/contour-curve.png}
+    \caption{Contour $C_{\rho}$ with $\rho \approx 2.46879$, which passes through the simple pole $i$.}
+    \label{fig:contour-curve}
+\end{figure} -->
+There exist better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next Section. 
 
 ### Chebyshev Interpolation
 
