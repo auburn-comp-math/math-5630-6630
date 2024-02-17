@@ -16,7 +16,11 @@ Root finding is a fundamental problem in numerical analysis and has many applica
 
 ## Bracket Methods
 
+If $f$ is a continuous function, and $f(a)$ and $f(b)$ have opposite signs, then by the Intermediate Value Theorem, there exists a root of $f$ on the interval $[a, b]$. The bracket method is based on this fact and iteratively locates the pair of points $a$ and $b$ such that $f(a)$ and $f(b)$ have opposite signs. The most common bracket methods are the bisection method and the false position method.
+
 ### Bisection Method
+
+The simplest bracket method is the **bisection method**.
 
 ### False Position Method
 
