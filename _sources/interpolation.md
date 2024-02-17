@@ -241,7 +241,7 @@ h(x) = \frac{1}{1+x^2},\quad x\in [-5, 5].
 ```
 
 ```{code-cell} ipython3
-:tags: [hide-input]
+:tags: [remove-input]
 :mystnb:
 :   image:
 :       align: "center"
