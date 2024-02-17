@@ -644,13 +644,16 @@ h^{(n+1)}(x) = \frac{(-1)^{n+1}}{2^{n+1}} (2n+1)!! x^{-(2n+3)/2}.
 \end{split}\]</div>
 <p>As <span class="math notranslate nohighlight">\(n\to\infty\)</span>, if any of the groups does not vanish, then the whole summation must blow up as <span class="math notranslate nohighlight">\(n\to\infty\)</span> (why?). Otherwise, the limiting summation should vanish, which violates the maximum modulus principle.</p>
 <p>In Runge’s example <a class="reference internal" href="#equation-eq-runge-example">(1)</a>, the simple poles <span class="math notranslate nohighlight">\(\pm i\)</span> are on the contour <span class="math notranslate nohighlight">\(C_{\rho}\)</span> which intersects the real line at <span class="math notranslate nohighlight">\(x_c\approx 3.6334\)</span>. Therefore, for <span class="math notranslate nohighlight">\(|x| &lt; x_c\)</span>, the interpolation <span class="math notranslate nohighlight">\(f_n\)</span> uniformly converges to <span class="math notranslate nohighlight">\(h\)</span> and diverges once <span class="math notranslate nohighlight">\(|x| &gt; x_c\)</span>.</p>
-<!-- See Figure~\ref{fig:contour-curve}. -->
-<!-- \begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=0.65]{Figures/contour-curve.png}
-    \caption{Contour $C_{\rho}$ with $\rho \approx 2.46879$, which passes through the simple pole $i$.}
-    \label{fig:contour-curve}
-\end{figure} -->
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<figure class="align-default" id="id2">
+<img alt="_images/322d862b17b1e0738f72ccbdeedb1e20ac4d5153be8cc0c98d2fdb57530ec243.png" class="align-center" src="_images/322d862b17b1e0738f72ccbdeedb1e20ac4d5153be8cc0c98d2fdb57530ec243.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Contour curve passing through the poles at <span class="math notranslate nohighlight">\(\pm i\)</span>.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
 <p>There exist better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next Section.</p>
 </section>
 <section id="chebyshev-interpolation">

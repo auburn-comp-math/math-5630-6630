@@ -380,13 +380,89 @@ $$
 As $n\to\infty$, if any of the groups does not vanish, then the whole summation must blow up as $n\to\infty$ (why?). Otherwise, the limiting summation should vanish, which violates the maximum modulus principle. 
 
 In Runge's example {eq}``EQ-RUNGE-EXAMPLE``, the simple poles $\pm i$ are on the contour $C_{\rho}$ which intersects the real line at $x_c\approx 3.6334$. Therefore, for $|x| < x_c$, the interpolation $f_n$ uniformly converges to $h$ and diverges once $|x| > x_c$. 
-<!-- See Figure~\ref{fig:contour-curve}. -->
-<!-- \begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=0.65]{Figures/contour-curve.png}
-    \caption{Contour $C_{\rho}$ with $\rho \approx 2.46879$, which passes through the simple pole $i$.}
-    \label{fig:contour-curve}
-\end{figure} -->
+
+```{code-cell} ipython3
+:tags: [remove-input]
+:mystnb:
+:   image:
+:       align: "center"
+:   figure:
+:       caption: Contour curve passing through the poles at $\pm i$.
+
+from pylab import *
+from scipy.special import p_roots
+import numpy as np
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+
+N = 300
+
+def gauss1(f,n):
+    [x,w] = p_roots(n+1)
+    G=sum(w*f(x))
+    return G
+
+def gauss(f,n,a,b):
+    [x,w] = p_roots(n+1)
+    G=0.5*(b-a)*sum(w*f(0.5*(b-a)*x+0.5*(b+a)))
+    return G
+
+def my_f(x):
+    return log(x**2+1)/20
+
+v = gauss(my_f,N,-5,5)
+
+def target_f(x, a, b):
+    return log((x - a)**2 + b**2) / 20
+
+def d_target_f(x, a, b):
+    return 2 * b / ((x - a)**2 + b**2) / 20
+
+a = np.linspace(0, 3.63334, N)
+y = np.zeros(len(a))
+for j in range(len(a)):
+    b0 = 0.1
+    while True:
+        def target_f2(x):
+            return target_f(x, a[j], b0)
+        def d_target_f2(x):
+            return d_target_f(x, a[j], b0)
+
+        u = gauss(target_f2, N, -5, 5)
+        w = gauss(d_target_f2, N, -5, 5)
+
+        delta = (u - v)/w
+
+        if np.abs(delta) > 1e-12:
+            b0 = b0 - (u - v)/w
+        else:
+            break
+
+    y[j] = b0
+
+plt.figure(figsize=(5, 3))
+
+SMALL_SIZE = 8
+MEDIUM_SIZE = 10
+BIGGER_SIZE = 12
+
+plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
+plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
+plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
+
+plt.axhline(y = 0., color = 'r', linestyle = '--') 
+plt.axvline(x = 3.63334, color = 'b', linestyle = '--')
+plt.plot(a, y,  label='contour curve')
+plt.title('Contour curve passing through (0, 1)')
+plt.legend(loc='center left', fontsize=9)
+plt.show()
+```
+
 There exist better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next Section. 
 
 ### Chebyshev Interpolation
