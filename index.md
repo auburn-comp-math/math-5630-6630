@@ -1,6 +1,14 @@
 # Before you start
 
-This repository hosts the course material for Math 5630/6630: **Introduction to Numerical Analysis I** at Auburn University. The course will use the textbook written by A. Quarteroni, R. Saaco, and F. Saleri, *Numerical Mathematics*, Second Edition, Springer, New York, 2007.
+This repository hosts the course material for Math 5630/6630: **Introduction to Numerical Analysis I** at Auburn University. The course will use the textbook written by *A First Course in Numerical Methods* by U. M. Ascher and C. Greif, 2011.
+
+The following books are also recommended for this course:
+
+- A. Quarteroni, R. Saaco, and F. Saleri, *Numerical Mathematics*, Second Edition, Springer, New York, 2007.
+- Approximation Theory and Approximation Practice by Lloyd N. Trefethen, 2019
+- Numerical Methods for Ordinary Differential Equations: Initial Value Problems by D Griffith, D. Higham, 2010
+- Concise Numerical Mathematics by R. Plato, 2003
+- Numerical computing with IEEE floating point arithmetic by M. Overturn, 2001
 
 The course will cover the following topics:
 
