@@ -1,3 +1,15 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
 # Floating Point Arithmetic
 
 In this chapter, we will introduce some basics on the real number system for modern computers and discuss the arithmetic operations of the number system.
