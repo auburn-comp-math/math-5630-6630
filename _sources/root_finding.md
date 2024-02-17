@@ -16,7 +16,17 @@ Root finding is a fundamental problem in numerical analysis and has many applica
 
 ## Bracket Methods
 
+### Bisection Method
+
+### False Position Method
+
 ## Iterative Methods
+
+### Newton-Raphson Method
+
+### Secant Method
+
+### Fixed-Point Iteration
 
 ## Applications in Optimization
 
