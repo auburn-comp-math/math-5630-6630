@@ -48,6 +48,10 @@ The false position method is also guaranteed to converge to a root if $f(a)f(b) 
 Let $f(x) = x^3 - 2x^2 - 4$ in the interval $[1, 3]$. Using the bisection method, we obtain the sequence of midpoints $c_n$ and the corresponding function values $f(c_n)$.
 ```
 
+```{margin}
+The bracket methods need to first locate an interval $[a, b]$ such that $f(a)f(b) < 0$. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.
+```
+
 ## Iterative Methods
 
 ### Newton-Raphson Method
