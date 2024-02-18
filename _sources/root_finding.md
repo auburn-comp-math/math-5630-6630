@@ -44,15 +44,17 @@ $$c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.$$
 
 The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$, and it usually converges faster than the bisection method. The implementation is quite similar to the bisection method. 
 
+```{margin}
+The bracket methods need to first locate an interval $[a, b]$ such that $f(a)f(b) < 0$. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.
+```
+
 ```{prf:example}
 Let us try the aforementioned methods to find the root of $f(x) = x^3 - 2x^2 - 4$ on the interval $[1, 3]$. 
 
 Using the bisection method, we obtain the sequence of midpoints $c_n$ and the corresponding function values $f(c_n)$.
 ```
 
-```{margin}
-The bracket methods need to first locate an interval $[a, b]$ such that $f(a)f(b) < 0$. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.
-```
+
 
 ## Iterative Methods
 
