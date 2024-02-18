@@ -45,7 +45,9 @@ $$c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.$$
 The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$, and it usually converges faster than the bisection method. The implementation is quite similar to the bisection method. 
 
 ```{prf:example}
-Let $f(x) = x^3 - 2x^2 - 4$ in the interval $[1, 3]$. Using the bisection method, we obtain the sequence of midpoints $c_n$ and the corresponding function values $f(c_n)$.
+Let us try the aforementioned methods to find the root of $f(x) = x^3 - 2x^2 - 4$ on the interval $[1, 3]$. 
+
+Using the bisection method, we obtain the sequence of midpoints $c_n$ and the corresponding function values $f(c_n)$.
 ```
 
 ```{margin}
