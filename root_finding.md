@@ -20,7 +20,13 @@ If $f$ is a continuous function, and $f(a)$ and $f(b)$ have opposite signs, then
 
 ### Bisection Method
 
-The simplest bracket method is the **bisection method**.
+The simplest bracket method is the **bisection method**. Once $f(a)f(b) < 0$, one can select the midpoint $c = \frac{a + b}{2}$ and check the sign of $f(a) f(c)$.
+
+- If $f(a)f(c) < 0$, then the root is in the interval $[a, c]$.
+- If $f(a)f(c) > 0$, then the root is in the interval $[c, b]$.
+- If $f(a)f(c) = 0$, then $c$ is the root.
+
+For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is $\log_2\left(\frac{b - a}{\epsilon}\right)$, where $\epsilon$ is the desired tolerance.
 
 ### False Position Method
 
