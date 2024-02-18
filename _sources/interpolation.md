@@ -291,7 +291,7 @@ It can be shown that the interpolation will diverge at around $3.6$ as $n\to \in
 
 ### Interpolation Remainder Theory
 
-Let $f_n$ be the degree-$n$ polynomial interpolates $h$ at nodes $\{x_j\}_{j=0}^n$. If $h$ is analytic in a domain $T$ (possibly contains holes),  then the interpolation (Lagrange interpolant) can be written as 
+Let $f_n$ be the degree-$n$ polynomial interpolates $h$ at nodes $\{x_j\}_{j=0}^n$. If $h$ is analytic in a domain $T$ (possibly contains holes),  then the interpolation (Lagrange interpolant) can be written as
 
 $$
     f_n(z) = \sum_{j=0}^n \frac{\omega(z) h(x_j)}{(z - x_j) \omega'(x_j)}
@@ -303,7 +303,7 @@ $$
     \frac{1}{2\pi i}\int_{\partial T} \psi(\xi; z) d\xi = \sum_{j=0}^n \mathrm{Res}(\psi, x_j) = \sum_{j=0}^n \frac{(\omega(x_j) - \omega(z)) h(x_j)}{(x_j - z)\omega'(x_j)} = f_n(z),
 $$
 
-which implies that 
+which implies that
 
 $$
     h(z) - f_n(z) = \frac{1}{2\pi i}\int_{\partial T} \frac{\omega(z) h(\xi)}{(\xi - z)\omega(\xi)} d\xi.
@@ -329,7 +329,7 @@ $$
 ````
 
 Let $\sigma_n(z):= |\omega(z)|^{\frac{1}{n+1}}$ and define the contour $C_{\rho} = \{z\in \mathbb{C}\mid \sigma_n(z) = \rho\}$. These level sets are concentric closed curves about the midpoint of $[a,b]$.
-    
+
 ````{prf:lemma}
 :label: Lem-2-Ana-Uni-Con
 Suppose the interpolation nodes $\{x_j\}_{j=0}^n$ are enclosed by $C_{\rho}$ and $h$ is analytic inside $C_{\rho}$. Let $z\in C_{\rho'}$ be such that $\rho'<\rho$, then $f_n\to h$ uniformly as $n\to\infty$. 
@@ -354,7 +354,7 @@ When $h$ is not analytic inside $C_{\rho}$, let us consider a generic situation 
 $$
 \begin{aligned}
     h(z) - f_n(z) &= \frac{1}{2\pi i} \int_{C_{\rho} - \bigcup_{k=1}^m \Gamma_k} \frac{\omega(z)h(\xi)}{(\xi - z) \omega(\xi)} d\xi \\
-    &= \frac{1}{2\pi i} \int_{C_{\rho}} \frac{\omega(z)h(\xi)}{(\xi - z) \omega(\xi)} d\xi - \frac{1}{2\pi i}\sum_{k=1}^m \int_{\Gamma_k}  \frac{\omega(z)h(\xi)}{(\xi - z) \omega(\xi)} d\xi, 
+    &= \frac{1}{2\pi i} \int_{C_{\rho}} \frac{\omega(z)h(\xi)}{(\xi - z) \omega(\xi)} d\xi - \frac{1}{2\pi i}\sum_{k=1}^m \int_{\Gamma_k}  \frac{\omega(z)h(\xi)}{(\xi - z) \omega(\xi)} d\xi,
 \end{aligned}
 $$
 
@@ -363,7 +363,7 @@ where $\Gamma_k$ is a small path surrounding $z_k$. The first term can be estima
 $$
 \sum_{k=1}^m \frac{\omega(z)}{\omega(z_k)}\frac{\mathrm{Res}(h, z_k)}{z_k - z}.
 $$
-Since for sufficiently large $n$, we can find $0<\delta<\min_{k\in[m]}\frac{1}{3}(\rho'-\rho_k)$, 
+Since for sufficiently large $n$, we can find $0<\delta<\min_{k\in[m]}\frac{1}{3}(\rho'-\rho_k)$,
 
 $$
 \left|\frac{\omega(z)}{\omega(z_k)}\right|^{\frac{1}{n+1}} = \frac{\sigma_n(z)}{\sigma_n(z_k)} > \min_{k\in [m]}\frac{\rho'-\delta}{\rho_k + \delta} > 1.
@@ -375,9 +375,9 @@ $$
 \sum_{k=1}^m \frac{\omega(z)}{\omega(z_k)}\frac{\mathrm{Res}(h, z_k)}{z_k - z} = \sum_{s=1}^l \sum_{\substack{k\in [m] \\ \rho_k = u_s}} \frac{\omega(z)}{\omega(z_k)}\frac{\mathrm{Res}(h, z_k)}{z_k - z}.
 $$
 
-As $n\to\infty$, if any of the groups does not vanish, then the whole summation must blow up as $n\to\infty$ (why?). Otherwise, the limiting summation should vanish, which violates the maximum modulus principle. 
+As $n\to\infty$, if any of the groups does not vanish, then the whole summation must blow up as $n\to\infty$ (why?). Otherwise, the limiting summation should vanish, which violates the maximum modulus principle.
 
-In Runge's example {eq}``EQ-RUNGE-EXAMPLE``, the simple poles $\pm i$ are on the contour $C_{\rho}$ which intersects the real line at $x_c\approx 3.6334$. Therefore, for $|x| < x_c$, the interpolation $f_n$ uniformly converges to $h$ and diverges once $|x| > x_c$. 
+In Runge's example {eq}``EQ-RUNGE-EXAMPLE``, the simple poles $\pm i$ are on the contour $C_{\rho}$ which intersects the real line at $x_c\approx 3.6334$. Therefore, for $|x| < x_c$, the interpolation $f_n$ uniformly converges to $h$ and diverges once $|x| > x_c$.
 
 ```{code-cell} ipython3
 :tags: [remove-input]
@@ -461,7 +461,7 @@ plt.legend(loc='center left', fontsize=9)
 plt.show()
 ```
 
-There exist better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next Section. 
+There exist better choices of interpolation nodes to prevent such a phenomenon. We will discuss this topic in the next Section.
 
 ### Chebyshev Interpolation
 
