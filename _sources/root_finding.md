@@ -36,8 +36,6 @@ For the first two cases, we can repeat the process with the new interval until c
 
 ### Secant Method
 
-### Fixed-Point Iteration
-
 ## Applications in Optimization
 
 ## Exercises
