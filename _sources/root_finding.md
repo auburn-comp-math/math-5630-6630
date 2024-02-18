@@ -42,7 +42,7 @@ The bisection method only uses $\text{sgn}(f(a))$ and $\text{sgn}(f(b))$ instead
 
 $$c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.$$
 
-The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$, and it usually converges faster than the bisection method. The implementation is quite similar to the bisection method.
+The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$, and it usually converges faster than the bisection method, but sometimes exceptions occur. The implementation is quite similar to the bisection method.
 
 ``````{prf:example}
 Let us try the aforementioned methods to find the root of $f(x) = x^3 - 2x^2 - 4$ on the interval $[1, 3]$. 
@@ -124,6 +124,10 @@ iter 24 | 2.5943130163548486777358448 | 0.00e+00
 ```
 ````
 `````
+``````
+
+```{prf:remark}
+```
 
 ```{prf:remark}
 The bracket methods need to first locate an interval $[a, b]$ such that $f(a)f(b) < 0$. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.

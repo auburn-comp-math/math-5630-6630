@@ -375,7 +375,7 @@ document.write(`
 <p>The bisection method only uses <span class="math notranslate nohighlight">\(\text{sgn}(f(a))\)</span> and <span class="math notranslate nohighlight">\(\text{sgn}(f(b))\)</span> instead of the function values. The <strong>false position method</strong> improves the bisection method by taking the function values into account. Instead of selecting the midpoint <span class="math notranslate nohighlight">\(c = \frac{a + b}{2}\)</span>, the false position method selects the point <span class="math notranslate nohighlight">\(c\in[a, b]\)</span> that lies on the line connecting <span class="math notranslate nohighlight">\((a, f(a))\)</span> and <span class="math notranslate nohighlight">\((b, f(b))\)</span>, that is</p>
 <div class="math notranslate nohighlight">
 \[c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.\]</div>
-<p>The false position method is also guaranteed to converge to a root if <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>, and it usually converges faster than the bisection method. The implementation is quite similar to the bisection method.</p>
+<p>The false position method is also guaranteed to converge to a root if <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>, and it usually converges faster than the bisection method, but sometimes exceptions occur. The implementation is quite similar to the bisection method.</p>
 <div class="proof example admonition" id="example-0">
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
 <section class="example-content" id="proof-content">
@@ -459,12 +459,16 @@ False Position Method</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<div class="proof remark admonition" id="remark-1">
+</section>
+</div><div class="proof remark admonition" id="remark-1">
 <p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
+<section class="remark-content" id="proof-content">
+</section>
+</div><div class="proof remark admonition" id="remark-2">
+<p class="admonition-title"><span class="caption-number">Remark 3 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The bracket methods need to first locate an interval <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.</p>
 </section>
-</div></section>
 </div></section>
 </section>
 <section id="iterative-methods">
