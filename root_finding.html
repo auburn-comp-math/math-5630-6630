@@ -376,15 +376,16 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.\]</div>
 <p>The false position method is also guaranteed to converge to a root if <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>, and it usually converges faster than the bisection method. The implementation is quite similar to the bisection method.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>The bracket methods need to first locate an interval <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.</p>
-</aside>
 <div class="proof example admonition" id="example-0">
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
 <section class="example-content" id="proof-content">
 <p>Let us try the aforementioned methods to find the root of <span class="math notranslate nohighlight">\(f(x) = x^3 - 2x^2 - 4\)</span> on the interval <span class="math notranslate nohighlight">\([1, 3]\)</span>.</p>
 <p>Using the bisection method, we obtain the sequence of midpoints <span class="math notranslate nohighlight">\(c_n\)</span> and the corresponding function values <span class="math notranslate nohighlight">\(f(c_n)\)</span>.</p>
+</section>
+</div><div class="proof remark admonition" id="remark-1">
+<p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
+<section class="remark-content" id="proof-content">
+<p>The bracket methods need to first locate an interval <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.</p>
 </section>
 </div></section>
 </section>
