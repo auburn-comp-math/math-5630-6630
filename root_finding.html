@@ -381,7 +381,11 @@ document.write(`
 <section class="example-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(f(x) = x^3 - 2x^2 - 4\)</span> in the interval <span class="math notranslate nohighlight">\([1, 3]\)</span>. Using the bisection method, we obtain the sequence of midpoints <span class="math notranslate nohighlight">\(c_n\)</span> and the corresponding function values <span class="math notranslate nohighlight">\(f(c_n)\)</span>.</p>
 </section>
-</div></section>
+</div><aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The bracket methods need to first locate an interval <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.</p>
+</aside>
+</section>
 </section>
 <section id="iterative-methods">
 <h2>Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
