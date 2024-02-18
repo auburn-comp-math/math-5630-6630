@@ -362,6 +362,10 @@ document.write(`
 <li><p>If <span class="math notranslate nohighlight">\(f(a)f(c) &gt; 0\)</span>, then the root is in the interval <span class="math notranslate nohighlight">\([c, b]\)</span>.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(f(a)f(c) = 0\)</span>, then <span class="math notranslate nohighlight">\(c\)</span> is the root.</p></li>
 </ul>
+<aside class="margin sidebar">
+<p class="sidebar-title">Implementation</p>
+<p>The bisection method can be implemented either iteratively or a recursively. The recursive program usually is more compact, but may suffer from inefficiency (more instructions) and the risk of stack overflow.</p>
+</aside>
 <p>For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is <span class="math notranslate nohighlight">\(\log_2\left(\frac{b - a}{\epsilon}\right)\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the desired tolerance.</p>
 </section>
 <section id="false-position-method">
