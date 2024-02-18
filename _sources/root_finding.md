@@ -27,7 +27,7 @@ The simplest bracket method is the **bisection method**. Once $f(a)f(b) < 0$, on
 - If $f(a)f(c) = 0$, then $c$ is the root.
 
 ```{margin} Iterative vs Recursive
-The bisection method can be implemented either iteratively or a recursively. The recursive program usually is more compact, but may suffer from inefficiency (more instructions) and the risk of stack overflow.
+The bisection method can be implemented either iteratively or recursively. The recursive program usually is more compact, but may suffer from inefficiency (more instructions) and the risk of stack overflow.
 
 For a variety of programming languages, recursive implementation can be made more efficient by using the so called **tail recusion optimization**. This is a compiler feature that allows the recursive program to be executed with the same efficiency as the iterative one. However, ``Python`` does **not** support tail recursion optimization.
 ```
