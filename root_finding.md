@@ -34,7 +34,19 @@ For a variety of programming languages, recursive implementation can be made mor
 
 For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is $\log_2\left(\frac{b - a}{\epsilon}\right)$, where $\epsilon$ is the desired tolerance.
 
+Once the function $f$ has a sign change over the bracket $[a, b]$, the bisection method is guaranteed to converge to a root, but it is not very efficient. It is usually used to obtain a rough estimate of the root, which is then taken as an initial guess for a more efficient method.
+
 ### False Position Method
+
+The bisection method only uses $\text{sgn}(f(a))$ and $\text{sgn}(f(b))$ instead of the function values. The **false position method** improves the bisection method by taking the function values into account. Instead of selecting the midpoint $c = \frac{a + b}{2}$, the false position method selects the point $c\in[a, b]$ that lies on the line connecting $(a, f(a))$ and $(b, f(b))$, that is 
+
+$$c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.$$ 
+
+The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$, and it usually converges faster than the bisection method. The implementation is quite similar to the bisection method. 
+
+```{prf:example}
+Let $f(x) = x^3 - 2x^2 - 4$ in the interval $[1, 3]$. Using the bisection method, we obtain the sequence of midpoints $c_n$ and the corresponding function values $f(c_n)$.
+```
 
 ## Iterative Methods
 
