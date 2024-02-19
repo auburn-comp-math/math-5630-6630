@@ -139,6 +139,14 @@ where the sign occupies 1 bit, the mantissa occupies 23 bits, and the exponent o
 $$\text{sign} \mid e_7 e_6 \cdots e_0 \mid d_1 d_2\cdots d_{23}$$
 
 and $e = \sum_{j=0}^7 2^{j} e_j - 127$.
+
+Notice that 8 bits actually can have $2^8 = 256$ different values, but the IEEE754 standard reserves two special values (all zeros and all ones): $e = -127$ and $e = 128$.
+
+- ``Inf`` is the representation of $\pm\infty$, the exponent bits are all ones and the mantissa bits are all zeros.
+- ``NaN`` is the representation of **Not a Number**, the exponent bits are all ones and the mantissa bits are not all zeros. Whether or not the leading bit in mantissa equals to zero leads to **quiet** ``NaN`` or **signaling** ``NaN``.
+- ``subnormal`` numbers occur when the exponent bits are all zeros and the leading mantissa bit is also zero. 
+
+The double precision ``float64`` under IEEE754 is represented in a similar way, with 11 bits for the exponent and 52 bits for the mantissa.
 ```
 
 ## Rounding
