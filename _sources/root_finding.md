@@ -32,7 +32,7 @@ The bisection method can be implemented either iteratively or recursively. The r
 For a variety of programming languages, recursive implementation can be made more efficient by using the so called **tail recusion optimization**. This is a compiler feature that allows the recursive program to be executed with the same efficiency as the iterative one. However, neither ``Python`` nor ``MATLAB`` natively supports tail recursion optimization. : )
 ```
 
-For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is $\log_2\left(\frac{b - a}{\epsilon}\right)$, where $\epsilon$ is the desired tolerance.
+For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is $\lceil\log_2\left(\frac{b - a}{\epsilon}\right)\rceil$, where $\epsilon$ is the desired tolerance.
 
 Once the function $f$ has a sign change over the bracket $[a, b]$, the bisection method is guaranteed to converge to a root, but it is not very efficient. It is usually used to obtain a rough estimate of the root, which is then taken as an initial guess for a more efficient method.
 
@@ -40,7 +40,7 @@ Once the function $f$ has a sign change over the bracket $[a, b]$, the bisection
 
 The bisection method only uses $\text{sgn}(f(a))$ and $\text{sgn}(f(b))$ instead of the function values. The **false position method** (*Regula falsi* in Latin) improves the bisection method by taking the function values into account. Instead of selecting the midpoint $c = \frac{a + b}{2}$, the false position method selects the point $c\in[a, b]$ that lies on the line connecting $(a, f(a))$ and $(b, f(b))$, that is
 
-$$c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.$$
+$$c = \frac{f(b)}{f(b) - f(a)} a + \frac{-f(a)}{f(b) - f(a)} b = \frac{f(b) a -  f(a) b}{f(b) - f(a)}.$$
 
 The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$ and the implementation is quite similar to the bisection method. It usually converges faster than the bisection method, but sometimes exceptions occur.
 
@@ -55,15 +55,36 @@ When $f''$ keeps the same sign over $[a, b]$, it is not hard to show that only o
 ```
 ````
 
-It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the **Illinois method**. Once the same side is updated in two consecutive iterations, the Illinois method will use a slightly different formula for $c$.
+It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the **Illinois method**. Once the same side is to update in two consecutive iterations, the Illinois method will adjust $c$ using a slightly different formula.
 
 $$
-{c} = \frac{\lambda_b a f(b) - \lambda_a b f(a)}{\lambda_b f(b) - \lambda_a f(a)}.
+{c} = \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}.
 $$
 
-- Initially, $\lambda_a = \lambda_b = 1$.
-- If the previous and current iteration update the left endpoint, then $\lambda_b = \frac{\lambda_b}{2}$, otherwise reset $\lambda_a = 1$.
-- If the previous and current iteration update the right endpoint, then $\lambda_a = \frac{\lambda_a}{2}$, otherwise reset $\lambda_b = 1$.
+where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are initially set to $1$.
+
+```{prf:algorithm} Illinois Method
+:label: AL-ILLINOIS
+
+**Inputs** $f$, $a, b$, $\epsilon$ 
+
+**Outputs** $c$ 
+
+1. $\lambda_a \gets 1$, $\lambda_b \gets 1$ and $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$.  $s \gets 0$. //    initialization; 
+2. While True do:
+    1. If $f(a)f(c) < 0$, then $b \gets c$; 
+        - If $s \le 0$, $\lambda_a \gets 
+    \lambda_a/2$; //update $\lambda_a$;
+        - Else $s\gets -1$, $\lambda_b \gets 1$. //update $a$ and $\lambda_a$;// side changes, reset;
+    2. Else If $f(a)f(c) > 0$, then $a \gets c$; 
+        - If $s \ge 0$, $\lambda_b \gets \lambda_b/2$; //update $\lambda_b$;
+        - Else $s\gets 1$, $\lambda_a\gets 1$. // side changes, reset;
+
+    3. $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$; //compute $c$;
+    4. If $ |f(c)| < \epsilon$, then return $c$; //check stopping criteria;
+
+```
+
 
 
 
@@ -144,9 +165,7 @@ iter  6 | 2.5943130084597889606357057 | 7.90e-09
 ``````
 
 ```{prf:remark}
-```
-
-```{prf:remark}
+:label: rmk:bracket_methods
 The bracket methods need to first locate an interval $[a, b]$ such that $f(a)f(b) < 0$. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.
 ```
 
