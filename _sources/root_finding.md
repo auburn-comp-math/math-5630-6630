@@ -61,7 +61,7 @@ $$
 {c} = \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}.
 $$
 
-where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are initially set to $1$.
+where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are initially set to $1$. If the same side is to update, the weight of the other side will be halved. If the side changes, the weight on the new bracket point will be reset to $1$. See {prf:ref}``AL-ILLINOIS``.
 
 ```{prf:algorithm} Illinois Method
 :label: AL-ILLINOIS
