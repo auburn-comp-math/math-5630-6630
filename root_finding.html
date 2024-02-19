@@ -375,7 +375,11 @@ document.write(`
 <p>The bisection method only uses <span class="math notranslate nohighlight">\(\text{sgn}(f(a))\)</span> and <span class="math notranslate nohighlight">\(\text{sgn}(f(b))\)</span> instead of the function values. The <strong>false position method</strong> (<em>Regula falsi</em> in Latin) improves the bisection method by taking the function values into account. Instead of selecting the midpoint <span class="math notranslate nohighlight">\(c = \frac{a + b}{2}\)</span>, the false position method selects the point <span class="math notranslate nohighlight">\(c\in[a, b]\)</span> that lies on the line connecting <span class="math notranslate nohighlight">\((a, f(a))\)</span> and <span class="math notranslate nohighlight">\((b, f(b))\)</span>, that is</p>
 <div class="math notranslate nohighlight">
 \[c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.\]</div>
-<p>The false position method is also guaranteed to converge to a root if <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>, and it usually converges faster than the bisection method, but sometimes exceptions occur. The implementation is quite similar to the bisection method.</p>
+<p>The false position method is also guaranteed to converge to a root if <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span> and the implementation is quite similar to the bisection method. It usually converges faster than the bisection method, but sometimes exceptions occur.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Let’s consider a convex function <span class="math notranslate nohighlight">\(f(x)\)</span>,</p>
+</div>
 <div class="proof example admonition" id="example-0">
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
 <section class="example-content" id="proof-content">
