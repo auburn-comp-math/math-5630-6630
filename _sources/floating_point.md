@@ -18,7 +18,7 @@ In this chapter, we will introduce some basics on the real number system for mod
 
 Any nonzero real number $x\in \mathbb{R}$ can be accurately represented with an infinite sequence of digits. This can be understood as the consequence that rational numbers are **dense** on any interval.
 
-```{sidebar} **What does "dense" mean?**
+```{margin} **What does "dense" mean?**
 **Dense** means that between any two distinct real numbers, there is always a rational number. It is a fundamental property of the real number system.
 ```
 
