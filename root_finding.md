@@ -42,7 +42,11 @@ The bisection method only uses $\text{sgn}(f(a))$ and $\text{sgn}(f(b))$ instead
 
 $$c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.$$
 
-The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$, and it usually converges faster than the bisection method, but sometimes exceptions occur. The implementation is quite similar to the bisection method.
+The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$ and the implementation is quite similar to the bisection method. It usually converges faster than the bisection method, but sometimes exceptions occur.
+
+```{note}
+Let's consider a convex function $f(x)$, 
+```
 
 ``````{prf:example}
 Let us try the aforementioned methods to find the root of $f(x) = x^3 - 2x^2 - 4$ on the interval $[1, 3]$. The root $x^{\ast}$ can be computed analytically through cubic root formula, which is roughly ``2.5943130163548496``.
