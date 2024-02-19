@@ -83,9 +83,6 @@ Let us try the aforementioned methods to find the root of $f(x) = x^3 - 2x^2 - 4
 
 Using the previous methods, we obtain the sequence of selection $c_n$ and the error $|c_n - x^{\ast}|$. The tolerance is set to $|f(c)| < 10^{-6}$. The results are shown in the following table.
 
-````{tabbed} Bisection Method
-```{code-block}
-
 `````{tab-set}
 ````{tab-item} Bisection Method
 ```{code-block}
