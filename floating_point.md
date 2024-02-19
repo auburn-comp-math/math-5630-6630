@@ -30,7 +30,7 @@ $$
 
 where $e$ is an integer exponent and $d_1=1$, the other binary digits $d_i\in \{0, 1\}$. The mantissa part
 
-```{margin}
+```{margin} **IEEE754 Standard**
 Note that the IEEE754 standard uses a different representation:
 
 $$
@@ -129,7 +129,7 @@ are supported, they are often called single precision and double precision, resp
 
 ````
 
-```{margin} **IEEE754 Standard**
+```{margin} **More About IEEE754 Standard**
 The IEEE754 standard for floating point arithmetic is slightly different from the note. For instance, without **underflow** (all exponent bits are zeros), the standard ``float32`` is represented as
 
 $$\pm 1.d_1 d_2\cdots d_{23} \times 2^e$$
