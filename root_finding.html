@@ -400,60 +400,10 @@ document.write(`
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
 <section class="example-content" id="proof-content">
 <p>Let us try the aforementioned methods to find the root of <span class="math notranslate nohighlight">\(f(x) = x^3 - 2x^2 - 4\)</span> on the interval <span class="math notranslate nohighlight">\([1, 3]\)</span>. The root <span class="math notranslate nohighlight">\(x^{\ast}\)</span> can be computed analytically through cubic root formula, which is roughly <code class="docutils literal notranslate"><span class="pre">2.5943130163548496</span></code>.</p>
-<p>Using the previous methods, we obtain the sequence of selection <span class="math notranslate nohighlight">\(c_n\)</span> and the error <span class="math notranslate nohighlight">\(|c_n - x^{\ast}|\)</span>.</p>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-0">
-Bisection Method</label><div class="sd-tab-content docutils">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">iter</span>  <span class="mi">1</span> <span class="o">|</span> <span class="mf">2.0000000000000000000000000</span> <span class="o">|</span> <span class="mf">5.94e-01</span> 
-<span class="nb">iter</span>  <span class="mi">2</span> <span class="o">|</span> <span class="mf">2.5000000000000000000000000</span> <span class="o">|</span> <span class="mf">9.43e-02</span> 
-<span class="nb">iter</span>  <span class="mi">3</span> <span class="o">|</span> <span class="mf">2.7500000000000000000000000</span> <span class="o">|</span> <span class="mf">1.56e-01</span> 
-<span class="nb">iter</span>  <span class="mi">4</span> <span class="o">|</span> <span class="mf">2.6250000000000000000000000</span> <span class="o">|</span> <span class="mf">3.07e-02</span> 
-<span class="nb">iter</span>  <span class="mi">5</span> <span class="o">|</span> <span class="mf">2.5625000000000000000000000</span> <span class="o">|</span> <span class="mf">3.18e-02</span> 
-<span class="nb">iter</span>  <span class="mi">6</span> <span class="o">|</span> <span class="mf">2.5937500000000000000000000</span> <span class="o">|</span> <span class="mf">5.63e-04</span> 
-<span class="nb">iter</span>  <span class="mi">7</span> <span class="o">|</span> <span class="mf">2.6093750000000000000000000</span> <span class="o">|</span> <span class="mf">1.51e-02</span> 
-<span class="nb">iter</span>  <span class="mi">8</span> <span class="o">|</span> <span class="mf">2.6015625000000000000000000</span> <span class="o">|</span> <span class="mf">7.25e-03</span> 
-<span class="nb">iter</span>  <span class="mi">9</span> <span class="o">|</span> <span class="mf">2.5976562500000000000000000</span> <span class="o">|</span> <span class="mf">3.34e-03</span> 
-<span class="nb">iter</span> <span class="mi">10</span> <span class="o">|</span> <span class="mf">2.5957031250000000000000000</span> <span class="o">|</span> <span class="mf">1.39e-03</span> 
-<span class="nb">iter</span> <span class="mi">11</span> <span class="o">|</span> <span class="mf">2.5947265625000000000000000</span> <span class="o">|</span> <span class="mf">4.14e-04</span> 
-<span class="nb">iter</span> <span class="mi">12</span> <span class="o">|</span> <span class="mf">2.5942382812500000000000000</span> <span class="o">|</span> <span class="mf">7.47e-05</span> 
-<span class="nb">iter</span> <span class="mi">13</span> <span class="o">|</span> <span class="mf">2.5944824218750000000000000</span> <span class="o">|</span> <span class="mf">1.69e-04</span> 
-<span class="nb">iter</span> <span class="mi">14</span> <span class="o">|</span> <span class="mf">2.5943603515625000000000000</span> <span class="o">|</span> <span class="mf">4.73e-05</span> 
-<span class="nb">iter</span> <span class="mi">15</span> <span class="o">|</span> <span class="mf">2.5942993164062500000000000</span> <span class="o">|</span> <span class="mf">1.37e-05</span> 
-<span class="nb">iter</span> <span class="mi">16</span> <span class="o">|</span> <span class="mf">2.5943298339843750000000000</span> <span class="o">|</span> <span class="mf">1.68e-05</span> 
-<span class="nb">iter</span> <span class="mi">17</span> <span class="o">|</span> <span class="mf">2.5943145751953125000000000</span> <span class="o">|</span> <span class="mf">1.56e-06</span> 
-<span class="nb">iter</span> <span class="mi">18</span> <span class="o">|</span> <span class="mf">2.5943069458007812500000000</span> <span class="o">|</span> <span class="mf">6.07e-06</span> 
-<span class="nb">iter</span> <span class="mi">19</span> <span class="o">|</span> <span class="mf">2.5943107604980468750000000</span> <span class="o">|</span> <span class="mf">2.26e-06</span> 
-<span class="nb">iter</span> <span class="mi">20</span> <span class="o">|</span> <span class="mf">2.5943126678466796875000000</span> <span class="o">|</span> <span class="mf">3.49e-07</span> 
-<span class="nb">iter</span> <span class="mi">21</span> <span class="o">|</span> <span class="mf">2.5943136215209960937500000</span> <span class="o">|</span> <span class="mf">6.05e-07</span> 
-<span class="nb">iter</span> <span class="mi">22</span> <span class="o">|</span> <span class="mf">2.5943131446838378906250000</span> <span class="o">|</span> <span class="mf">1.28e-07</span> 
-<span class="nb">iter</span> <span class="mi">23</span> <span class="o">|</span> <span class="mf">2.5943129062652587890625000</span> <span class="o">|</span> <span class="mf">1.10e-07</span> 
-<span class="nb">iter</span> <span class="mi">24</span> <span class="o">|</span> <span class="mf">2.5943130254745483398437500</span> <span class="o">|</span> <span class="mf">9.12e-09</span> 
-<span class="nb">iter</span> <span class="mi">25</span> <span class="o">|</span> <span class="mf">2.5943129658699035644531250</span> <span class="o">|</span> <span class="mf">5.05e-08</span> 
-<span class="nb">iter</span> <span class="mi">26</span> <span class="o">|</span> <span class="mf">2.5943129956722259521484375</span> <span class="o">|</span> <span class="mf">2.07e-08</span> 
-<span class="nb">iter</span> <span class="mi">27</span> <span class="o">|</span> <span class="mf">2.5943130105733871459960938</span> <span class="o">|</span> <span class="mf">5.78e-09</span> 
-<span class="nb">iter</span> <span class="mi">28</span> <span class="o">|</span> <span class="mf">2.5943130180239677429199219</span> <span class="o">|</span> <span class="mf">1.67e-09</span> 
-<span class="nb">iter</span> <span class="mi">29</span> <span class="o">|</span> <span class="mf">2.5943130142986774444580078</span> <span class="o">|</span> <span class="mf">2.06e-09</span> 
-<span class="nb">iter</span> <span class="mi">30</span> <span class="o">|</span> <span class="mf">2.5943130161613225936889648</span> <span class="o">|</span> <span class="mf">1.94e-10</span> 
-<span class="nb">iter</span> <span class="mi">31</span> <span class="o">|</span> <span class="mf">2.5943130170926451683044434</span> <span class="o">|</span> <span class="mf">7.38e-10</span> 
-<span class="nb">iter</span> <span class="mi">32</span> <span class="o">|</span> <span class="mf">2.5943130166269838809967041</span> <span class="o">|</span> <span class="mf">2.72e-10</span> 
-<span class="nb">iter</span> <span class="mi">33</span> <span class="o">|</span> <span class="mf">2.5943130163941532373428345</span> <span class="o">|</span> <span class="mf">3.93e-11</span> 
-<span class="nb">iter</span> <span class="mi">34</span> <span class="o">|</span> <span class="mf">2.5943130162777379155158997</span> <span class="o">|</span> <span class="mf">7.71e-11</span> 
-<span class="nb">iter</span> <span class="mi">35</span> <span class="o">|</span> <span class="mf">2.5943130163359455764293671</span> <span class="o">|</span> <span class="mf">1.89e-11</span> 
-<span class="nb">iter</span> <span class="mi">36</span> <span class="o">|</span> <span class="mf">2.5943130163650494068861008</span> <span class="o">|</span> <span class="mf">1.02e-11</span> 
-<span class="nb">iter</span> <span class="mi">37</span> <span class="o">|</span> <span class="mf">2.5943130163504974916577339</span> <span class="o">|</span> <span class="mf">4.35e-12</span> 
-<span class="nb">iter</span> <span class="mi">38</span> <span class="o">|</span> <span class="mf">2.5943130163577734492719173</span> <span class="o">|</span> <span class="mf">2.92e-12</span> 
-<span class="nb">iter</span> <span class="mi">39</span> <span class="o">|</span> <span class="mf">2.5943130163541354704648256</span> <span class="o">|</span> <span class="mf">7.14e-13</span> 
-<span class="nb">iter</span> <span class="mi">40</span> <span class="o">|</span> <span class="mf">2.5943130163559544598683715</span> <span class="o">|</span> <span class="mf">1.10e-12</span> 
-<span class="nb">iter</span> <span class="mi">41</span> <span class="o">|</span> <span class="mf">2.5943130163550449651665986</span> <span class="o">|</span> <span class="mf">1.95e-13</span> 
-<span class="nb">iter</span> <span class="mi">42</span> <span class="o">|</span> <span class="mf">2.5943130163545902178157121</span> <span class="o">|</span> <span class="mf">2.59e-13</span> 
-<span class="nb">iter</span> <span class="mi">43</span> <span class="o">|</span> <span class="mf">2.5943130163548175914911553</span> <span class="o">|</span> <span class="mf">3.20e-14</span> 
-</pre></div>
-</div>
-</div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-1">
-False Position Method</label><div class="sd-tab-content docutils">
+<p>Using the previous methods, we obtain the sequence of selection <span class="math notranslate nohighlight">\(c_n\)</span> and the error <span class="math notranslate nohighlight">\(|c_n - x^{\ast}|\)</span>. The tolerance is set to <span class="math notranslate nohighlight">\(|f(c)| &lt; 10^{-6}\)</span>. The results are shown in the following table.</p>
+<div class="sd-tab-item docutils">
+<p class="sd-tab-label rubric">False Position Method</p>
+<div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">iter</span>  <span class="mi">1</span> <span class="o">|</span> <span class="mf">2.0000000000000000000000000</span> <span class="o">|</span> <span class="mf">5.94e-01</span> 
 <span class="nb">iter</span>  <span class="mi">2</span> <span class="o">|</span> <span class="mf">2.4444444444444446418174266</span> <span class="o">|</span> <span class="mf">1.50e-01</span> 
 <span class="nb">iter</span>  <span class="mi">3</span> <span class="o">|</span> <span class="mf">2.5621621621621617492792211</span> <span class="o">|</span> <span class="mf">3.22e-02</span> 
@@ -465,33 +415,25 @@ False Position Method</label><div class="sd-tab-content docutils">
 <span class="nb">iter</span>  <span class="mi">9</span> <span class="o">|</span> <span class="mf">2.5943106870264029950590157</span> <span class="o">|</span> <span class="mf">2.33e-06</span> 
 <span class="nb">iter</span> <span class="mi">10</span> <span class="o">|</span> <span class="mf">2.5943125418534931370118102</span> <span class="o">|</span> <span class="mf">4.75e-07</span> 
 <span class="nb">iter</span> <span class="mi">11</span> <span class="o">|</span> <span class="mf">2.5943129196954899384763849</span> <span class="o">|</span> <span class="mf">9.67e-08</span> 
-<span class="nb">iter</span> <span class="mi">12</span> <span class="o">|</span> <span class="mf">2.5943129966646405470953596</span> <span class="o">|</span> <span class="mf">1.97e-08</span> 
-<span class="nb">iter</span> <span class="mi">13</span> <span class="o">|</span> <span class="mf">2.5943130123438118417311671</span> <span class="o">|</span> <span class="mf">4.01e-09</span> 
-<span class="nb">iter</span> <span class="mi">14</span> <span class="o">|</span> <span class="mf">2.5943130155377716050679737</span> <span class="o">|</span> <span class="mf">8.17e-10</span> 
-<span class="nb">iter</span> <span class="mi">15</span> <span class="o">|</span> <span class="mf">2.5943130161884040418840414</span> <span class="o">|</span> <span class="mf">1.66e-10</span> 
-<span class="nb">iter</span> <span class="mi">16</span> <span class="o">|</span> <span class="mf">2.5943130163209429106530024</span> <span class="o">|</span> <span class="mf">3.39e-11</span> 
-<span class="nb">iter</span> <span class="mi">17</span> <span class="o">|</span> <span class="mf">2.5943130163479417582550468</span> <span class="o">|</span> <span class="mf">6.91e-12</span> 
-<span class="nb">iter</span> <span class="mi">18</span> <span class="o">|</span> <span class="mf">2.5943130163534418031190398</span> <span class="o">|</span> <span class="mf">1.41e-12</span> 
-<span class="nb">iter</span> <span class="mi">19</span> <span class="o">|</span> <span class="mf">2.5943130163545622401954915</span> <span class="o">|</span> <span class="mf">2.87e-13</span> 
-<span class="nb">iter</span> <span class="mi">20</span> <span class="o">|</span> <span class="mf">2.5943130163547900579601446</span> <span class="o">|</span> <span class="mf">5.95e-14</span>
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-2">
-Illinois Method</label><div class="sd-tab-content docutils">
+</div>
+<div class="sd-tab-item docutils">
+<p class="sd-tab-label rubric">Illinois Method</p>
+<div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">iter</span>  <span class="mi">1</span> <span class="o">|</span> <span class="mf">2.0000000000000000000000000</span> <span class="o">|</span> <span class="mf">5.94e-01</span> 
 <span class="nb">iter</span>  <span class="mi">2</span> <span class="o">|</span> <span class="mf">2.6153846153846154187760931</span> <span class="o">|</span> <span class="mf">2.11e-02</span> 
 <span class="nb">iter</span>  <span class="mi">3</span> <span class="o">|</span> <span class="mf">2.5847750865051901669744439</span> <span class="o">|</span> <span class="mf">9.54e-03</span> 
 <span class="nb">iter</span>  <span class="mi">4</span> <span class="o">|</span> <span class="mf">2.5941951587569969106539247</span> <span class="o">|</span> <span class="mf">1.18e-04</span> 
 <span class="nb">iter</span>  <span class="mi">5</span> <span class="o">|</span> <span class="mf">2.5944267005726100450146987</span> <span class="o">|</span> <span class="mf">1.14e-04</span> 
 <span class="nb">iter</span>  <span class="mi">6</span> <span class="o">|</span> <span class="mf">2.5943130084597889606357057</span> <span class="o">|</span> <span class="mf">7.90e-09</span> 
-<span class="nb">iter</span>  <span class="mi">7</span> <span class="o">|</span> <span class="mf">2.5943130163543197674869134</span> <span class="o">|</span> <span class="mf">5.30e-13</span> 
-<span class="nb">iter</span>  <span class="mi">8</span> <span class="o">|</span> <span class="mf">2.5943130163553771438955664</span> <span class="o">|</span> <span class="mf">5.28e-13</span> 
-<span class="nb">iter</span>  <span class="mi">9</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">8.88e-16</span> 
 </pre></div>
 </div>
 </div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 </section>
 </div><div class="proof remark admonition" id="remark-1">
