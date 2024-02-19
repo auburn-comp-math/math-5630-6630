@@ -372,15 +372,15 @@ document.write(`
 </section>
 <section id="false-position-method">
 <h3>False Position Method<a class="headerlink" href="#false-position-method" title="Link to this heading">#</a></h3>
-<p>The bisection method only uses <span class="math notranslate nohighlight">\(\text{sgn}(f(a))\)</span> and <span class="math notranslate nohighlight">\(\text{sgn}(f(b))\)</span> instead of the function values. The <strong>false position method</strong> improves the bisection method by taking the function values into account. Instead of selecting the midpoint <span class="math notranslate nohighlight">\(c = \frac{a + b}{2}\)</span>, the false position method selects the point <span class="math notranslate nohighlight">\(c\in[a, b]\)</span> that lies on the line connecting <span class="math notranslate nohighlight">\((a, f(a))\)</span> and <span class="math notranslate nohighlight">\((b, f(b))\)</span>, that is</p>
+<p>The bisection method only uses <span class="math notranslate nohighlight">\(\text{sgn}(f(a))\)</span> and <span class="math notranslate nohighlight">\(\text{sgn}(f(b))\)</span> instead of the function values. The <strong>false position method</strong> (<em>Regula falsi</em> in Latin) improves the bisection method by taking the function values into account. Instead of selecting the midpoint <span class="math notranslate nohighlight">\(c = \frac{a + b}{2}\)</span>, the false position method selects the point <span class="math notranslate nohighlight">\(c\in[a, b]\)</span> that lies on the line connecting <span class="math notranslate nohighlight">\((a, f(a))\)</span> and <span class="math notranslate nohighlight">\((b, f(b))\)</span>, that is</p>
 <div class="math notranslate nohighlight">
 \[c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.\]</div>
 <p>The false position method is also guaranteed to converge to a root if <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>, and it usually converges faster than the bisection method, but sometimes exceptions occur. The implementation is quite similar to the bisection method.</p>
 <div class="proof example admonition" id="example-0">
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
 <section class="example-content" id="proof-content">
-<p>Let us try the aforementioned methods to find the root of <span class="math notranslate nohighlight">\(f(x) = x^3 - 2x^2 - 4\)</span> on the interval <span class="math notranslate nohighlight">\([1, 3]\)</span>.</p>
-<p>Using the bisection method, we obtain the sequence of midpoints <span class="math notranslate nohighlight">\(c_n\)</span> and the corresponding <span class="math notranslate nohighlight">\(|f(c_n)|\)</span>.</p>
+<p>Let us try the aforementioned methods to find the root of <span class="math notranslate nohighlight">\(f(x) = x^3 - 2x^2 - 4\)</span> on the interval <span class="math notranslate nohighlight">\([1, 3]\)</span>. The root <span class="math notranslate nohighlight">\(x^{\ast}\)</span> can be computed analytically through cubic root formula, which is roughly <code class="docutils literal notranslate"><span class="pre">2.5943130163548496</span></code>.</p>
+<p>Using the previous methods, we obtain the sequence of selection <span class="math notranslate nohighlight">\(c_n\)</span> and the error <span class="math notranslate nohighlight">\(|c_n - x^{\ast}|\)</span>.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-0">
