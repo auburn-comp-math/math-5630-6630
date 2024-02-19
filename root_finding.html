@@ -393,24 +393,24 @@ document.write(`
 <p><strong>Inputs</strong> <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a, b\)</span>, <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
 <p><strong>Outputs</strong> <span class="math notranslate nohighlight">\(c\)</span></p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\lambda_a \gets 1\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span> and <span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>.  <span class="math notranslate nohighlight">\(s \gets 0\)</span>. //    initialization;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_a \gets 1\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span> and <span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>.  <span class="math notranslate nohighlight">\(s \gets 0\)</span>. <strong>initialization</strong></p></li>
 <li><p>While True do:</p>
 <ol class="arabic simple">
 <li><p>If <span class="math notranslate nohighlight">\(f(a)f(c) &lt; 0\)</span>, then <span class="math notranslate nohighlight">\(b \gets c\)</span>;</p>
 <ul class="simple">
 <li><p>If <span class="math notranslate nohighlight">\(s \le 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_a \gets 
-\lambda_a/2\)</span>; //update <span class="math notranslate nohighlight">\(\lambda_a\)</span>;</p></li>
-<li><p>Else <span class="math notranslate nohighlight">\(s\gets -1\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span>. //update <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(\lambda_a\)</span>;// side changes, reset;</p></li>
+\lambda_a/2\)</span>; <strong>update <span class="math notranslate nohighlight">\(\lambda_a\)</span></strong></p></li>
+<li><p>Else <span class="math notranslate nohighlight">\(s\gets -1\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span>. //update <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(\lambda_a\)</span>; <strong>side changes, reset</strong></p></li>
 </ul>
 </li>
 <li><p>Else If <span class="math notranslate nohighlight">\(f(a)f(c) &gt; 0\)</span>, then <span class="math notranslate nohighlight">\(a \gets c\)</span>;</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(s \ge 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span>; //update <span class="math notranslate nohighlight">\(\lambda_b\)</span>;</p></li>
-<li><p>Else <span class="math notranslate nohighlight">\(s\gets 1\)</span>, <span class="math notranslate nohighlight">\(\lambda_a\gets 1\)</span>. // side changes, reset;</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(s \ge 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span>; <strong>update <span class="math notranslate nohighlight">\(\lambda_b\)</span></strong></p></li>
+<li><p>Else <span class="math notranslate nohighlight">\(s\gets 1\)</span>, <span class="math notranslate nohighlight">\(\lambda_a\gets 1\)</span>. <strong>side changes, reset</strong></p></li>
 </ul>
 </li>
-<li><p><span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>; //compute <span class="math notranslate nohighlight">\(c\)</span>;</p></li>
-<li><p>If <span class="math notranslate nohighlight">\( |f(c)| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(c\)</span>; //check stopping criteria;</p></li>
+<li><p><span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>; <strong>compute <span class="math notranslate nohighlight">\(c\)</span></strong></p></li>
+<li><p>If <span class="math notranslate nohighlight">\( |f(c)| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(c\)</span>; <strong>check stopping criteria</strong></p></li>
 </ol>
 </li>
 </ol>
