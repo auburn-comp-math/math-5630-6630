@@ -70,18 +70,18 @@ where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are i
 
 **Outputs** $c$ 
 
-1. $\lambda_a \gets 1$, $\lambda_b \gets 1$ and $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$.  $s \gets 0$. **initialization** 
+1. $\lambda_a \gets 1$, $\lambda_b \gets 1$ and $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$.  $s \gets 0$. //initialization
 2. While True do:
     1. If $f(a)f(c) < 0$, then $b \gets c$; 
         - If $s \le 0$, $\lambda_a \gets 
-    \lambda_a/2$; **update $\lambda_a$**
-        - Else $s\gets -1$, $\lambda_b \gets 1$. //update $a$ and $\lambda_a$; **side changes, reset**
+    \lambda_a/2$;  //update $\lambda_a$
+        - Else $s\gets -1$, $\lambda_b \gets 1$. //update $a$ and $\lambda_a$; //side changes, reset
     2. Else If $f(a)f(c) > 0$, then $a \gets c$; 
-        - If $s \ge 0$, $\lambda_b \gets \lambda_b/2$; **update $\lambda_b$**
-        - Else $s\gets 1$, $\lambda_a\gets 1$. **side changes, reset**
+        - If $s \ge 0$, $\lambda_b \gets \lambda_b/2$; //update $\lambda_b$
+        - Else $s\gets 1$, $\lambda_a\gets 1$. //side changes, reset
 
-    3. $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$; **compute $c$**
-    4. If $ |f(c)| < \epsilon$, then return $c$; **check stopping criteria**
+    3. $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$; //compute $c$
+    4. If $ |f(c)| < \epsilon$, then return $c$; //check stopping criteria
 
 ```
 
