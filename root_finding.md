@@ -198,10 +198,33 @@ The order of convergence quantifies how fast the sequence approximates the limit
 The order of convergence of a sequence $\{x_n\}$ is $p > 0$ if 
 
 $$
-\lim_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} = C,
+\lim_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} = \rho,
 $$
 
-The constant $C$ is the rate of convergence. If $p = 1$, the sequence is said to have linear convergence. If $p = 2$, the sequence is said to have quadratic convergence.
+The constant $\rho$ is the rate of convergence. If $p = 1$, the sequence is said to have linear convergence. If $p = 2$, the sequence is said to have quadratic convergence. 
+
+If the limit does not exist while the upper bound exists for sufficiently large $n$:
+
+$$
+\limsup_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} \le \rho,
+$$
+
+then the order of convergence is **at least** $p$ and the rate of convergence is **at most** $\rho$.
+```
+
+```{margin} More About Convergence
+```
+
+```{margin} More About Convergence
+In practice, the limit or even upper bound may not exist for $\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p}$, it is possible to consider the convergence rate in weaker sense. For instance, for sufficiently large $n$ that the inequality 
+
+$$
+\lim_{k\to\infty}\sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|^{p^k}}}= \rho
+$$
+
+holds for certain $p > 0$ and $\rho > 0$, then the sequence has a mean order of convergence is $p$ and a mean convergence rate $\rho$. 
+
+On averaged, each iteration contributes an order of $p$ and a rate of $\rho$.
 ```
 
 ````{prf:theorem}
@@ -214,8 +237,26 @@ The bisection method has a linear convergence rate.
 ````{prf:proof}
 :label: prf-bisection_convergence
 
-TBA
+Without loss of generality, we may assume the initial bracket is on $[0, 1]$. Let the root $x^{\ast} = 0.b_1 b_2\cdots$ be the binary representation, then the sequence of bisection method can be written as 
 
+$$
+x_n = 0.b_1 b_2\cdots b_{n-1} 1,
+$$
+
+where $b_i$ is the $i$-th bit of the binary representation. The error at the $n$-th iteration is
+
+$$|x_n - x^{\ast}| = |2^{-n} - \sum_{j\ge n} 2^{-j} b_j|=\begin{cases}\sum_{j>n} 2^{-j}b_j & \text{if } b_n=1\\\sum_{j>n} 2^{-j}(1-b_j) &\text{if }b_n=0\end{cases}$$
+
+For each $n$ such that $b_n = 1$, we can find $s\in\N$ such that $b_{s+n} = 1$, otherwise we arrive at the exact solution. 
+
+$$
+\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|} = \frac{\sum_{j>n+k} 2^{-j} b_j }{\sum_{j>n} 2^{-j}b_j} \le \frac{2^{-(n+k)}}{2^{-(n+s)}} =2^{s - k} $$
+
+Therefore, the geometric mean of the convergence rate is bounded by $\frac{1}{2}$.
+
+$$
+\rho =\lim_{k\to\infty} \sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|}} \le \lim_{k\to\infty}2^{s/k}\frac{1}{2} =\frac{1}{2}.
+$$
 ````
 
 ## Iterative Methods
