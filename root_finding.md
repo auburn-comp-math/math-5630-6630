@@ -232,8 +232,6 @@ The bisection method has a linear convergence rate.
 ````
 
 ````{prf:proof}
-:label: prf-bisection-convergence
-
 Without loss of generality, we may assume the initial bracket is on $[0, 1]$. Let the root $x^{\ast} = 0.b_1 b_2\cdots$ be the binary representation, then the sequence of bisection method can be written as 
 
 $$
