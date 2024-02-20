@@ -218,7 +218,7 @@ The constant $\rho$ is the rate of convergence. If $p = 1$, the sequence is said
 If the limit does not exist while the upper bound exists for sufficiently large $n$:
 
 $$
-\limsup_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} \le \rho,
+\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} \le \rho,
 $$
 
 then the order of convergence is **at least** $p$ and the rate of convergence is **at most** $\rho$.
