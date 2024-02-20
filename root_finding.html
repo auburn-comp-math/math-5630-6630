@@ -324,7 +324,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bracket-methods">Bracket Methods</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bisection-method">Bisection Method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#false-position-method">False Position Method</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-convergence">Order of Convergence</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">Iterative Methods</a><ul class="nav section-nav flex-column">
@@ -368,83 +367,36 @@ document.write(`
 <p>The bisection method can be implemented either iteratively or recursively. The recursive program usually is more compact, but may suffer from inefficiency (more instructions) and the risk of stack overflow.</p>
 <p>For a variety of programming languages, recursive implementation can be made more efficient by using the so called <strong>tail recusion optimization</strong>. This is a compiler feature that allows the recursive program to be executed with the same efficiency as the iterative one. However, neither <code class="docutils literal notranslate"><span class="pre">Python</span></code> nor <code class="docutils literal notranslate"><span class="pre">MATLAB</span></code> natively supports tail recursion optimization. : )</p>
 </aside>
-<p>For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is <span class="math notranslate nohighlight">\(\lceil\log_2\left(\frac{b - a}{\epsilon}\right)\rceil\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the desired tolerance.</p>
+<p>For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is <span class="math notranslate nohighlight">\(\log_2\left(\frac{b - a}{\epsilon}\right)\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the desired tolerance.</p>
 <p>Once the function <span class="math notranslate nohighlight">\(f\)</span> has a sign change over the bracket <span class="math notranslate nohighlight">\([a, b]\)</span>, the bisection method is guaranteed to converge to a root, but it is not very efficient. It is usually used to obtain a rough estimate of the root, which is then taken as an initial guess for a more efficient method.</p>
 </section>
 <section id="false-position-method">
 <h3>False Position Method<a class="headerlink" href="#false-position-method" title="Link to this heading">#</a></h3>
 <p>The bisection method only uses <span class="math notranslate nohighlight">\(\text{sgn}(f(a))\)</span> and <span class="math notranslate nohighlight">\(\text{sgn}(f(b))\)</span> instead of the function values. The <strong>false position method</strong> (<em>Regula falsi</em> in Latin) improves the bisection method by taking the function values into account. Instead of selecting the midpoint <span class="math notranslate nohighlight">\(c = \frac{a + b}{2}\)</span>, the false position method selects the point <span class="math notranslate nohighlight">\(c\in[a, b]\)</span> that lies on the line connecting <span class="math notranslate nohighlight">\((a, f(a))\)</span> and <span class="math notranslate nohighlight">\((b, f(b))\)</span>, that is</p>
 <div class="math notranslate nohighlight">
-\[c = \frac{f(b)}{f(b) - f(a)} a + \frac{-f(a)}{f(b) - f(a)} b = \frac{f(b) a -  f(a) b}{f(b) - f(a)}.\]</div>
+\[c = \frac{a f(b) - b f(a)}{f(b) - f(a)}.\]</div>
 <p>The false position method is also guaranteed to converge to a root if <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span> and the implementation is quite similar to the bisection method. It usually converges faster than the bisection method, but sometimes exceptions occur.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When <span class="math notranslate nohighlight">\(f''\)</span> keeps the same sign over <span class="math notranslate nohighlight">\([a, b]\)</span>, it is not hard to show that only one side of the bracket is updating. The bracket size will never decrease to zero, which is different from the bisection method. In the following, we use an example to illustrate this. The function <span class="math notranslate nohighlight">\(f(x) = x^2 - 1\)</span> over the initial bracket <span class="math notranslate nohighlight">\([0, 2]\)</span>. The left endpoint is updating to the root while the right endpoint is fixed at <span class="math notranslate nohighlight">\(2\)</span>.</p>
 <a class="bg-primary reference internal image-reference" href="_images/root_finding_img_0.png"><img alt="false position method" class="bg-primary align-center" src="_images/root_finding_img_0.png" style="width: 600px;" /></a>
 </div>
-<p>It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the <strong>Illinois method</strong>. Once the same side is to update in two consecutive iterations, the Illinois method will adjust <span class="math notranslate nohighlight">\(c\)</span> using a slightly different formula.</p>
+<p>It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the <strong>Illinois method</strong>. Once the same side is updated in two consecutive iterations, the Illinois method will use a slightly different formula for <span class="math notranslate nohighlight">\(c\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
-{c} = \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}.
+{c} = \frac{\lambda_b a f(b) - \lambda_a b f(a)}{\lambda_b f(b) - \lambda_a f(a)}.
 \]</div>
-<p>where the weights <span class="math notranslate nohighlight">\(\lambda_a\)</span> and <span class="math notranslate nohighlight">\(\lambda_b\)</span> are the weights. The weights are initially set to <span class="math notranslate nohighlight">\(1\)</span>. If the same side is to update, the weight of the other side will be halved. If the side changes, the weight on the new bracket point will be reset to <span class="math notranslate nohighlight">\(1\)</span>. See <a class="reference internal" href="#AL-ILLINOIS">Algorithm 2</a>.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>The choice of decay factor <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> is optimal if it has to be a constant. The factor can be replaced with other variable values. Two usual replacements are <strong>Pegasus</strong> method and <strong>Anderson-Bjorck</strong> method.</p>
-<p>The essential changes in the algorithm are:</p>
 <ul class="simple">
-<li><p><strong>Pegasus</strong>: replace <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}\)</span> and replace <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}\)</span>.</p></li>
-<li><p><strong>Anderson-Bjorck</strong>: replace <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b m_b\)</span> and replace <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a m_a\)</span>, where</p></li>
+<li><p>Initially, <span class="math notranslate nohighlight">\(\lambda_a = \lambda_b = 1\)</span>.</p></li>
+<li><p>If the previous and current iteration update the left endpoint, then <span class="math notranslate nohighlight">\(\lambda_b = \frac{\lambda_b}{2}\)</span>, otherwise reset <span class="math notranslate nohighlight">\(\lambda_a = 1\)</span>.</p></li>
+<li><p>If the previous and current iteration update the right endpoint, then <span class="math notranslate nohighlight">\(\lambda_a = \frac{\lambda_a}{2}\)</span>, otherwise reset <span class="math notranslate nohighlight">\(\lambda_b = 1\)</span>.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &amp;\text{if positive}\\ \frac{1}{2} &amp;\text{otherwise}\end{cases}\end{split}\]</div>
-<p>and</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &amp;\text{if positive}\\ \frac{1}{2} &amp;\text{otherwise}\end{cases}\end{split}\]</div>
-</aside>
-<div class="proof algorithm admonition" id="AL-ILLINOIS">
-<p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Illinois Method)</p>
-<section class="algorithm-content" id="proof-content">
-<p><strong>Inputs</strong> <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a, b\)</span>, <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
-<p><strong>Outputs</strong> <span class="math notranslate nohighlight">\(c\)</span></p>
-<ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\lambda_a \gets 1\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span> and <span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>.  <span class="math notranslate nohighlight">\(s \gets 0\)</span>. //initialization</p></li>
-<li><p>While True do:</p>
-<ol class="arabic simple">
-<li><p>If <span class="math notranslate nohighlight">\(f(a)f(c) &lt; 0\)</span>, then</p>
-<ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(s \le 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_a \gets 
-\lambda_a/2\)</span>; Else <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(b \gets c\)</span>, <span class="math notranslate nohighlight">\(s\gets -1\)</span>.</p></li>
-</ul>
-</li>
-<li><p>Else If <span class="math notranslate nohighlight">\(f(a)f(c) &gt; 0\)</span>, then</p>
-<ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(s \ge 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span>; Else <span class="math notranslate nohighlight">\(\lambda_a\gets 1\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(a \gets c\)</span>, <span class="math notranslate nohighlight">\(s\gets 1\)</span>.</p></li>
-</ul>
-</li>
-<li><p><span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>; //compute <span class="math notranslate nohighlight">\(c\)</span></p></li>
-<li><p>If <span class="math notranslate nohighlight">\( |f(c)| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(c\)</span>; //check stopping criteria</p></li>
-</ol>
-</li>
-</ol>
-</section>
-</div><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint <span class="math notranslate nohighlight">\(f(b)\)</span> into <span class="math notranslate nohighlight">\(\frac{1}{2} f(b)\)</span> to compute the new <span class="math notranslate nohighlight">\(c\)</span>, which makes the selected point <span class="math notranslate nohighlight">\({c}\)</span> closer to the right endpoint than the false position method.</p>
 <a class="bg-primary reference internal image-reference" href="_images/root_finding_img_1.png"><img alt="Illinois method" class="bg-primary align-center" src="_images/root_finding_img_1.png" style="width: 600px;" /></a>
 </div>
-<aside class="margin sidebar">
-<p class="sidebar-title">Stopping Criteria</p>
-<p>There are several types of stopping criteria to terminate the iteration. Common ones include:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(|f(c)| &lt; \texttt{ftol}\)</span>, tolerance on the function value.</p></li>
-<li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{atol}\)</span>, absolute tolerance.</p></li>
-<li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{rtol} |c_n|\)</span>, relative tolerance.</p></li>
-</ul>
-</aside>
-<div class="proof example admonition" id="example-1">
+<div class="proof example admonition" id="example-0">
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
 <section class="example-content" id="proof-content">
 <p>Let us try the aforementioned methods to find the root of <span class="math notranslate nohighlight">\(f(x) = x^3 - 2x^2 - 4\)</span> on the interval <span class="math notranslate nohighlight">\([1, 3]\)</span>. The root <span class="math notranslate nohighlight">\(x^{\ast}\)</span> can be computed analytically through cubic root formula, which is roughly <code class="docutils literal notranslate"><span class="pre">2.5943130163548496</span></code>.</p>
@@ -511,66 +463,16 @@ Illinois Method</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </section>
-</div><div class="proof remark admonition" id="rmk:bracket_methods">
+</div><div class="proof remark admonition" id="remark-1">
 <p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
+<section class="remark-content" id="proof-content">
+</section>
+</div><div class="proof remark admonition" id="remark-2">
+<p class="admonition-title"><span class="caption-number">Remark 3 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The bracket methods need to first locate an interval <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.</p>
 </section>
 </div></section>
-<section id="order-of-convergence">
-<h3>Order of Convergence<a class="headerlink" href="#order-of-convergence" title="Link to this heading">#</a></h3>
-<p>The order of convergence quantifies how fast the sequence approximates the limiting value.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title">More About Convergence</p>
-<p>In practice, the limit or even upper bound may not exist for <span class="math notranslate nohighlight">\(\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p}\)</span>, it is possible to consider the convergence rate in weaker sense. For instance, for sufficiently large <span class="math notranslate nohighlight">\(n\)</span> that the inequality</p>
-<div class="math notranslate nohighlight">
-\[
-\lim_{k\to\infty}\sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|^{p^k}}}= \rho
-\]</div>
-<p>holds for certain <span class="math notranslate nohighlight">\(p &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\rho &gt; 0\)</span>, then the sequence has a mean order of convergence is <span class="math notranslate nohighlight">\(p\)</span> and a mean convergence rate <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
-<p>On averaged, each iteration contributes an order of <span class="math notranslate nohighlight">\(p\)</span> and a rate of <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
-</aside>
-<div class="proof definition admonition" id="dfn-order_of_convergence">
-<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
-<section class="definition-content" id="proof-content">
-<p>The order of convergence of a sequence <span class="math notranslate nohighlight">\(\{x_n\}\)</span> is <span class="math notranslate nohighlight">\(p &gt; 0\)</span> if</p>
-<div class="math notranslate nohighlight">
-\[
-\lim_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} = \rho,
-\]</div>
-<p>The constant <span class="math notranslate nohighlight">\(\rho\)</span> is the rate of convergence. If <span class="math notranslate nohighlight">\(p = 1\)</span>, the sequence is said to have linear convergence. If <span class="math notranslate nohighlight">\(p = 2\)</span>, the sequence is said to have quadratic convergence.</p>
-<p>If the limit does not exist while the upper bound exists for sufficiently large <span class="math notranslate nohighlight">\(n\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} \le \rho,
-\]</div>
-<p>then the order of convergence is <strong>at least</strong> <span class="math notranslate nohighlight">\(p\)</span> and the rate of convergence is <strong>at most</strong> <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
-</section>
-</div><div class="proof theorem admonition" id="thm-bisection_convergence">
-<p class="admonition-title"><span class="caption-number">Theorem 4 </span></p>
-<section class="theorem-content" id="proof-content">
-<p>The bisection method has a linear convergence rate.</p>
-</section>
-</div><div class="proof admonition" id="proof">
-<p>Proof. Without loss of generality, we may assume the initial bracket is on <span class="math notranslate nohighlight">\([0, 1]\)</span>. Let the root <span class="math notranslate nohighlight">\(x^{\ast} = 0.b_1 b_2\cdots\)</span> be the binary representation, then the sequence of bisection method can be written as</p>
-<div class="math notranslate nohighlight">
-\[
-x_n = 0.b_1 b_2\cdots b_{n-1} 1,
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(b_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>-th bit of the binary representation. The error at the <span class="math notranslate nohighlight">\(n\)</span>-th iteration is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}|x_n - x^{\ast}| = |2^{-n} - \sum_{j\ge n} 2^{-j} b_j|=\begin{cases}\sum_{j&gt;n} 2^{-j}b_j &amp; \text{if } b_n=1\\\sum_{j&gt;n} 2^{-j}(1-b_j) &amp;\text{if }b_n=0\end{cases}\end{split}\]</div>
-<p>For each <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(b_n = 1\)</span> (similar argument holds for <span class="math notranslate nohighlight">\(b_n=0\)</span>), we can find <span class="math notranslate nohighlight">\(s\in\N\)</span> such that <span class="math notranslate nohighlight">\(b_{s+n} = 1\)</span>, otherwise we arrive at the exact solution.</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|} = \frac{\sum_{j&gt;n+k} 2^{-j} b_j }{\sum_{j&gt;n} 2^{-j}b_j} \le \frac{2^{-(n+k)}}{2^{-(n+s)}} =2^{s - k} \]</div>
-<p>Therefore, the geometric mean of the convergence rate is bounded by <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>.</p>
-<div class="math notranslate nohighlight">
-\[
-\rho =\lim_{k\to\infty} \sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|}} \le \lim_{k\to\infty}2^{s/k}\frac{1}{2} =\frac{1}{2}.
-\]</div>
-</div>
-</section>
 </section>
 <section id="iterative-methods">
 <h2>Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
@@ -588,10 +490,6 @@ x_n = 0.b_1 b_2\cdots b_{n-1} 1,
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="theoretical-part">
 <h3>Theoretical Part<a class="headerlink" href="#theoretical-part" title="Link to this heading">#</a></h3>
-<div class="admonition-problem-1 admonition">
-<p class="admonition-title">Problem 1</p>
-<p>Derive the convergence rate for the Pegasus method.</p>
-</div>
 </section>
 <section id="computational-part">
 <h3>Computational Part<a class="headerlink" href="#computational-part" title="Link to this heading">#</a></h3>
@@ -666,7 +564,6 @@ x_n = 0.b_1 b_2\cdots b_{n-1} 1,
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bracket-methods">Bracket Methods</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bisection-method">Bisection Method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#false-position-method">False Position Method</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-convergence">Order of Convergence</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">Iterative Methods</a><ul class="nav section-nav flex-column">

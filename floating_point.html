@@ -352,7 +352,7 @@ document.write(`
 <section id="representation-of-real-numbers">
 <h2>Representation of Real Numbers<a class="headerlink" href="#representation-of-real-numbers" title="Link to this heading">#</a></h2>
 <p>Any nonzero real number <span class="math notranslate nohighlight">\(x\in \mathbb{R}\)</span> can be accurately represented with an infinite sequence of digits. This can be understood as the consequence that rational numbers are <strong>dense</strong> on any interval.</p>
-<aside class="margin sidebar">
+<aside class="sidebar">
 <p class="sidebar-title"><strong>What does “dense” mean?</strong></p>
 <p><strong>Dense</strong> means that between any two distinct real numbers, there is always a rational number. It is a fundamental property of the real number system.</p>
 </aside>
@@ -363,7 +363,7 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(e\)</span> is an integer exponent and <span class="math notranslate nohighlight">\(d_1=1\)</span>, the other binary digits <span class="math notranslate nohighlight">\(d_i\in \{0, 1\}\)</span>. The mantissa part</p>
 <aside class="margin sidebar">
-<p class="sidebar-title"><strong>IEEE754 Standard</strong></p>
+<p class="sidebar-title"></p>
 <p>Note that the IEEE754 standard uses a different representation:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -442,7 +442,7 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 <p>are supported, they are often called single precision and double precision, respectively.</p>
 </div>
 <aside class="margin sidebar">
-<p class="sidebar-title"><strong>More About IEEE754 Standard</strong></p>
+<p class="sidebar-title"><strong>IEEE754 Standard</strong></p>
 <p>The IEEE754 standard for floating point arithmetic is slightly different from the note. For instance, without <strong>underflow</strong> (all exponent bits are zeros), the standard <code class="docutils literal notranslate"><span class="pre">float32</span></code> is represented as</p>
 <div class="math notranslate nohighlight">
 \[\pm 1.d_1 d_2\cdots d_{23} \times 2^e\]</div>
