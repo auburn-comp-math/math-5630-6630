@@ -247,7 +247,7 @@ where $b_i$ is the $i$-th bit of the binary representation. The error at the $n$
 
 $$|x_n - x^{\ast}| = |2^{-n} - \sum_{j\ge n} 2^{-j} b_j|=\begin{cases}\sum_{j>n} 2^{-j}b_j & \text{if } b_n=1\\\sum_{j>n} 2^{-j}(1-b_j) &\text{if }b_n=0\end{cases}$$
 
-For each $n$ such that $b_n = 1$, we can find $s\in\N$ such that $b_{s+n} = 1$, otherwise we arrive at the exact solution. 
+For each $n$ such that $b_n = 1$ (similar argument holds for $b_n=0$), we can find $s\in\N$ such that $b_{s+n} = 1$, otherwise we arrive at the exact solution. 
 
 $$
 \frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|} = \frac{\sum_{j>n+k} 2^{-j} b_j }{\sum_{j>n} 2^{-j}b_j} \le \frac{2^{-(n+k)}}{2^{-(n+s)}} =2^{s - k} $$

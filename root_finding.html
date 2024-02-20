@@ -560,7 +560,7 @@ x_n = 0.b_1 b_2\cdots b_{n-1} 1,
 <p>where <span class="math notranslate nohighlight">\(b_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>-th bit of the binary representation. The error at the <span class="math notranslate nohighlight">\(n\)</span>-th iteration is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}|x_n - x^{\ast}| = |2^{-n} - \sum_{j\ge n} 2^{-j} b_j|=\begin{cases}\sum_{j&gt;n} 2^{-j}b_j &amp; \text{if } b_n=1\\\sum_{j&gt;n} 2^{-j}(1-b_j) &amp;\text{if }b_n=0\end{cases}\end{split}\]</div>
-<p>For each <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(b_n = 1\)</span>, we can find <span class="math notranslate nohighlight">\(s\in\N\)</span> such that <span class="math notranslate nohighlight">\(b_{s+n} = 1\)</span>, otherwise we arrive at the exact solution.</p>
+<p>For each <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(b_n = 1\)</span> (similar argument holds for <span class="math notranslate nohighlight">\(b_n=0\)</span>), we can find <span class="math notranslate nohighlight">\(s\in\N\)</span> such that <span class="math notranslate nohighlight">\(b_{s+n} = 1\)</span>, otherwise we arrive at the exact solution.</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|} = \frac{\sum_{j&gt;n+k} 2^{-j} b_j }{\sum_{j&gt;n} 2^{-j}b_j} \le \frac{2^{-(n+k)}}{2^{-(n+s)}} =2^{s - k} \]</div>
