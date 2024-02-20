@@ -520,6 +520,16 @@ Illinois Method</label><div class="sd-tab-content docutils">
 <section id="order-of-convergence">
 <h3>Order of Convergence<a class="headerlink" href="#order-of-convergence" title="Link to this heading">#</a></h3>
 <p>The order of convergence quantifies how fast the sequence approximates the limiting value.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">More About Convergence</p>
+<p>In practice, the limit or even upper bound may not exist for <span class="math notranslate nohighlight">\(\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p}\)</span>, it is possible to consider the convergence rate in weaker sense. For instance, for sufficiently large <span class="math notranslate nohighlight">\(n\)</span> that the inequality</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k\to\infty}\sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|^{p^k}}}= \rho
+\]</div>
+<p>holds for certain <span class="math notranslate nohighlight">\(p &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\rho &gt; 0\)</span>, then the sequence has a mean order of convergence is <span class="math notranslate nohighlight">\(p\)</span> and a mean convergence rate <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+<p>On averaged, each iteration contributes an order of <span class="math notranslate nohighlight">\(p\)</span> and a rate of <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+</aside>
 <div class="proof definition admonition" id="dfn-order_of_convergence">
 <p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
 <section class="definition-content" id="proof-content">
@@ -536,17 +546,7 @@ Illinois Method</label><div class="sd-tab-content docutils">
 \]</div>
 <p>then the order of convergence is <strong>at least</strong> <span class="math notranslate nohighlight">\(p\)</span> and the rate of convergence is <strong>at most</strong> <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
 </section>
-</div><aside class="margin sidebar">
-<p class="sidebar-title">More About Convergence</p>
-<p>In practice, the limit or even upper bound may not exist for <span class="math notranslate nohighlight">\(\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p}\)</span>, it is possible to consider the convergence rate in weaker sense. For instance, for sufficiently large <span class="math notranslate nohighlight">\(n\)</span> that the inequality</p>
-<div class="math notranslate nohighlight">
-\[
-\lim_{k\to\infty}\sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|^{p^k}}}= \rho
-\]</div>
-<p>holds for certain <span class="math notranslate nohighlight">\(p &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\rho &gt; 0\)</span>, then the sequence has a mean order of convergence is <span class="math notranslate nohighlight">\(p\)</span> and a mean convergence rate <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
-<p>On averaged, each iteration contributes an order of <span class="math notranslate nohighlight">\(p\)</span> and a rate of <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
-</aside>
-<div class="proof theorem admonition" id="thm-bisection_convergence">
+</div><div class="proof theorem admonition" id="thm-bisection_convergence">
 <p class="admonition-title"><span class="caption-number">Theorem 4 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>The bisection method has a linear convergence rate.</p>
