@@ -111,6 +111,15 @@ We use the previous example to illustrate the difference between the false posit
 ```
 ````
 
+
+```{margin} Stopping Criteria
+There are several types of stopping criteria to terminate the iteration. Common ones include:
+
+- $|f(c)| < \texttt{ftol}$, tolerance on the function value.
+- $|c_n - c_{n-1}| < \texttt{atol}$, absolute tolerance.
+- $|c_n - c_{n-1}| < \texttt{rtol} |c_n|$, relative tolerance.
+```
+
 ``````{prf:example}
 Let us try the aforementioned methods to find the root of $f(x) = x^3 - 2x^2 - 4$ on the interval $[1, 3]$. The root $x^{\ast}$ can be computed analytically through cubic root formula, which is roughly ``2.5943130163548496``.
 
@@ -176,13 +185,6 @@ iter  6 | 2.5943130084597889606357057 | 7.90e-09
 `````
 ``````
 
-```{margin} Stopping Criteria
-There are several types of stopping criteria to terminate the iteration. Common ones include:
-
-- $|f(c)| < \texttt{ftol}$, tolerance on the function value.
-- $|c_n - c_{n-1}| < \texttt{atol}$, absolute tolerance.
-- $|c_n - c_{n-1}| < \texttt{rtol} |c_n|$, relative tolerance.
-```
 
 ```{prf:remark}
 :label: rmk:bracket_methods

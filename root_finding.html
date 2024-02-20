@@ -435,6 +435,15 @@ document.write(`
 <p>We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint <span class="math notranslate nohighlight">\(f(b)\)</span> into <span class="math notranslate nohighlight">\(\frac{1}{2} f(b)\)</span> to compute the new <span class="math notranslate nohighlight">\(c\)</span>, which makes the selected point <span class="math notranslate nohighlight">\({c}\)</span> closer to the right endpoint than the false position method.</p>
 <a class="bg-primary reference internal image-reference" href="_images/root_finding_img_1.png"><img alt="Illinois method" class="bg-primary align-center" src="_images/root_finding_img_1.png" style="width: 600px;" /></a>
 </div>
+<aside class="margin sidebar">
+<p class="sidebar-title">Stopping Criteria</p>
+<p>There are several types of stopping criteria to terminate the iteration. Common ones include:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(|f(c)| &lt; \texttt{ftol}\)</span>, tolerance on the function value.</p></li>
+<li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{atol}\)</span>, absolute tolerance.</p></li>
+<li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{rtol} |c_n|\)</span>, relative tolerance.</p></li>
+</ul>
+</aside>
 <div class="proof example admonition" id="example-1">
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
 <section class="example-content" id="proof-content">
@@ -502,16 +511,7 @@ Illinois Method</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </section>
-</div><aside class="margin sidebar">
-<p class="sidebar-title">Stopping Criteria</p>
-<p>There are several types of stopping criteria to terminate the iteration. Common ones include:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(|f(c)| &lt; \texttt{ftol}\)</span>, tolerance on the function value.</p></li>
-<li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{atol}\)</span>, absolute tolerance.</p></li>
-<li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{rtol} |c_n|\)</span>, relative tolerance.</p></li>
-</ul>
-</aside>
-<div class="proof remark admonition" id="rmk:bracket_methods">
+</div><div class="proof remark admonition" id="rmk:bracket_methods">
 <p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The bracket methods need to first locate an interval <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.</p>
