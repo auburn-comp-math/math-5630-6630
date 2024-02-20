@@ -116,14 +116,6 @@ Let us try the aforementioned methods to find the root of $f(x) = x^3 - 2x^2 - 4
 
 Using the previous methods, we obtain the sequence of selection $c_n$ and the error $|c_n - x^{\ast}|$. The tolerance is set to $|f(c)| < 10^{-6}$. The results are shown in the following table.
 
-```{margin} Stopping Criteria
-There are several types of stopping criteria to terminate the iteration. Common ones include:
-
-- $|f(c)| < \texttt{ftol}$, tolerance on the function value.
-- $|c_n - c_{n-1}| < \texttt{atol}$, absolute tolerance.
-- $|c_n - c_{n-1}| < \texttt{rtol} |c_n|$, relative tolerance.
-```
-
 `````{tab-set}
 ````{tab-item} Bisection Method
 ```{code-block}
@@ -183,6 +175,14 @@ iter  6 | 2.5943130084597889606357057 | 7.90e-09
 
 `````
 ``````
+
+```{margin} Stopping Criteria
+There are several types of stopping criteria to terminate the iteration. Common ones include:
+
+- $|f(c)| < \texttt{ftol}$, tolerance on the function value.
+- $|c_n - c_{n-1}| < \texttt{atol}$, absolute tolerance.
+- $|c_n - c_{n-1}| < \texttt{rtol} |c_n|$, relative tolerance.
+```
 
 ```{prf:remark}
 :label: rmk:bracket_methods
