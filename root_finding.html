@@ -511,7 +511,28 @@ Illinois Method</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </section>
-</div><div class="proof remark admonition" id="rmk:bracket-methods">
+</div><aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">bigfloat</span></code> package, it is possible to extract more digits to observe the dynamics of the convergence. For instance, by setting the precision to 900 bits, the Illinois method’s convergence is shown in the following table.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">iter</span>  <span class="mi">1</span> <span class="o">|</span> <span class="mf">2.0000000000000000000000000</span> <span class="o">|</span> <span class="mf">5.94e-01</span> 
+<span class="nb">iter</span>  <span class="mi">2</span> <span class="o">|</span> <span class="mf">2.6153846153846154187760931</span> <span class="o">|</span> <span class="mf">2.11e-02</span> 
+<span class="nb">iter</span>  <span class="mi">3</span> <span class="o">|</span> <span class="mf">2.5847750865051901669744439</span> <span class="o">|</span> <span class="mf">9.54e-03</span> 
+<span class="nb">iter</span>  <span class="mi">4</span> <span class="o">|</span> <span class="mf">2.5941951587569973547431346</span> <span class="o">|</span> <span class="mf">1.18e-04</span> 
+<span class="nb">iter</span>  <span class="mi">5</span> <span class="o">|</span> <span class="mf">2.5944267005726091568362790</span> <span class="o">|</span> <span class="mf">1.14e-04</span> 
+<span class="nb">iter</span>  <span class="mi">6</span> <span class="o">|</span> <span class="mf">2.5943130084597889606357057</span> <span class="o">|</span> <span class="mf">7.90e-09</span> 
+<span class="nb">iter</span>  <span class="mi">7</span> <span class="o">|</span> <span class="mf">2.5943130163543197674869134</span> <span class="o">|</span> <span class="mf">5.29e-13</span> 
+<span class="nb">iter</span>  <span class="mi">8</span> <span class="o">|</span> <span class="mf">2.5943130163553775879847763</span> <span class="o">|</span> <span class="mf">5.29e-13</span> 
+<span class="nb">iter</span>  <span class="mi">9</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">1.65e-25</span> 
+<span class="nb">iter</span> <span class="mi">10</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">5.13e-38</span> 
+<span class="nb">iter</span> <span class="mi">11</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">5.13e-38</span> 
+<span class="nb">iter</span> <span class="mi">12</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">1.55e-75</span> 
+<span class="nb">iter</span> <span class="mi">13</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">4.70e-113</span> 
+<span class="nb">iter</span> <span class="mi">14</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">4.70e-113</span> 
+<span class="nb">iter</span> <span class="mi">15</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">1.30e-225</span> 
+</pre></div>
+</div>
+</aside>
+<div class="proof remark admonition" id="rmk:bracket-methods">
 <p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The bracket methods need to first locate an interval <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.</p>
