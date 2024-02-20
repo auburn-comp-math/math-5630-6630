@@ -324,6 +324,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bracket-methods">Bracket Methods</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bisection-method">Bisection Method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#false-position-method">False Position Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-convergence">Order of Convergence</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">Iterative Methods</a><ul class="nav section-nav flex-column">
@@ -396,17 +397,17 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(\lambda_a \gets 1\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span> and <span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>.  <span class="math notranslate nohighlight">\(s \gets 0\)</span>. //initialization</p></li>
 <li><p>While True do:</p>
 <ol class="arabic simple">
-<li><p>If <span class="math notranslate nohighlight">\(f(a)f(c) &lt; 0\)</span>, then <span class="math notranslate nohighlight">\(b \gets c\)</span>;</p>
+<li><p>If <span class="math notranslate nohighlight">\(f(a)f(c) &lt; 0\)</span>, then</p>
 <ul class="simple">
 <li><p>If <span class="math notranslate nohighlight">\(s \le 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_a \gets 
-\lambda_a/2\)</span>;  //update <span class="math notranslate nohighlight">\(\lambda_a\)</span></p></li>
-<li><p>Else <span class="math notranslate nohighlight">\(s\gets -1\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span>. //update <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(\lambda_a\)</span>; //side changes, reset</p></li>
+\lambda_a/2\)</span>; Else <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(b \gets c\)</span>, <span class="math notranslate nohighlight">\(s\gets -1\)</span>.</p></li>
 </ul>
 </li>
-<li><p>Else If <span class="math notranslate nohighlight">\(f(a)f(c) &gt; 0\)</span>, then <span class="math notranslate nohighlight">\(a \gets c\)</span>;</p>
+<li><p>Else If <span class="math notranslate nohighlight">\(f(a)f(c) &gt; 0\)</span>, then</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(s \ge 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span>; //update <span class="math notranslate nohighlight">\(\lambda_b\)</span></p></li>
-<li><p>Else <span class="math notranslate nohighlight">\(s\gets 1\)</span>, <span class="math notranslate nohighlight">\(\lambda_a\gets 1\)</span>. //side changes, reset</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(s \ge 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span>; Else <span class="math notranslate nohighlight">\(\lambda_a\gets 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(a \gets c\)</span>, <span class="math notranslate nohighlight">\(s\gets 1\)</span>.</p></li>
 </ul>
 </li>
 <li><p><span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>; //compute <span class="math notranslate nohighlight">\(c\)</span></p></li>
@@ -415,7 +416,21 @@ document.write(`
 </li>
 </ol>
 </section>
-</div><div class="admonition note">
+</div><aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The choice of decay factor <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> is optimal if it has to be a constant. The factor can be replaced with other variable values. Two usual replacements are <strong>Pegasus</strong> method and <strong>Anderson-Bjorck</strong> method.</p>
+<p>The essential changes in the algorithm are:</p>
+<ul class="simple">
+<li><p><strong>Pegasus</strong>: replace <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}\)</span> and replace <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}\)</span>.</p></li>
+<li><p><strong>Anderson-Bjorck</strong>: replace <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b m_b\)</span> and replace <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a m_a\)</span>, where</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &amp;\text{if positive}\\ \frac{1}{2} &amp;\text{otherwise}\end{cases}\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &amp;\text{if positive}\\ \frac{1}{2} &amp;\text{otherwise}\end{cases}\end{split}\]</div>
+</aside>
+<div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint <span class="math notranslate nohighlight">\(f(b)\)</span> into <span class="math notranslate nohighlight">\(\frac{1}{2} f(b)\)</span> to compute the new <span class="math notranslate nohighlight">\(c\)</span>, which makes the selected point <span class="math notranslate nohighlight">\({c}\)</span> closer to the right endpoint than the false position method.</p>
 <a class="bg-primary reference internal image-reference" href="_images/root_finding_img_1.png"><img alt="Illinois method" class="bg-primary align-center" src="_images/root_finding_img_1.png" style="width: 600px;" /></a>
@@ -425,6 +440,15 @@ document.write(`
 <section class="example-content" id="proof-content">
 <p>Let us try the aforementioned methods to find the root of <span class="math notranslate nohighlight">\(f(x) = x^3 - 2x^2 - 4\)</span> on the interval <span class="math notranslate nohighlight">\([1, 3]\)</span>. The root <span class="math notranslate nohighlight">\(x^{\ast}\)</span> can be computed analytically through cubic root formula, which is roughly <code class="docutils literal notranslate"><span class="pre">2.5943130163548496</span></code>.</p>
 <p>Using the previous methods, we obtain the sequence of selection <span class="math notranslate nohighlight">\(c_n\)</span> and the error <span class="math notranslate nohighlight">\(|c_n - x^{\ast}|\)</span>. The tolerance is set to <span class="math notranslate nohighlight">\(|f(c)| &lt; 10^{-6}\)</span>. The results are shown in the following table.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title">Stopping Criteria</p>
+<p>There are several types of stopping criteria to terminate the iteration. Common ones include:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(|f(c)| &lt; \texttt{ftol}\)</span>, tolerance on the function value.</p></li>
+<li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{atol}\)</span>, absolute tolerance.</p></li>
+<li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{rtol} |c_n|\)</span>, relative tolerance.</p></li>
+</ul>
+</aside>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-0">
@@ -493,6 +517,28 @@ Illinois Method</label><div class="sd-tab-content docutils">
 <p>The bracket methods need to first locate an interval <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span>. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.</p>
 </section>
 </div></section>
+<section id="order-of-convergence">
+<h3>Order of Convergence<a class="headerlink" href="#order-of-convergence" title="Link to this heading">#</a></h3>
+<p>The order of convergence quantifies how fast the sequence approximates the limiting value.</p>
+<div class="proof definition admonition" id="dfn-order_of_convergence">
+<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
+<section class="definition-content" id="proof-content">
+<p>The order of convergence of a sequence <span class="math notranslate nohighlight">\(\{x_n\}\)</span> is <span class="math notranslate nohighlight">\(p &gt; 0\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} = C,
+\]</div>
+<p>The constant <span class="math notranslate nohighlight">\(C\)</span> is the rate of convergence. If <span class="math notranslate nohighlight">\(p = 1\)</span>, the sequence is said to have linear convergence. If <span class="math notranslate nohighlight">\(p = 2\)</span>, the sequence is said to have quadratic convergence.</p>
+</section>
+</div><div class="proof theorem admonition" id="thm-bisection_convergence">
+<p class="admonition-title"><span class="caption-number">Theorem 4 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>The bisection method has a linear convergence rate.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. TBA</p>
+</div>
+</section>
 </section>
 <section id="iterative-methods">
 <h2>Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
@@ -510,6 +556,10 @@ Illinois Method</label><div class="sd-tab-content docutils">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="theoretical-part">
 <h3>Theoretical Part<a class="headerlink" href="#theoretical-part" title="Link to this heading">#</a></h3>
+<div class="admonition-problem-1 admonition">
+<p class="admonition-title">Problem 1</p>
+<p>Derive the convergence rate for the Illinois method.</p>
+</div>
 </section>
 <section id="computational-part">
 <h3>Computational Part<a class="headerlink" href="#computational-part" title="Link to this heading">#</a></h3>
@@ -584,6 +634,7 @@ Illinois Method</label><div class="sd-tab-content docutils">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bracket-methods">Bracket Methods</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bisection-method">Bisection Method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#false-position-method">False Position Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-convergence">Order of Convergence</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">Iterative Methods</a><ul class="nav section-nav flex-column">
