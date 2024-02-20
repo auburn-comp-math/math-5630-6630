@@ -269,7 +269,7 @@ $$
 ### Theoretical Part
 
 ```{admonition} Problem 1
-Derive the convergence rate for the Illinois method.
+Derive the convergence rate for the Pegasus method.
 ```
 
 ### Computational Part
