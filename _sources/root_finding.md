@@ -185,7 +185,7 @@ iter  6 | 2.5943130084597889606357057 | 7.90e-09
 ``````
 
 ```{prf:remark}
-:label: rmk:bracket_methods
+:label: rmk:bracket-methods
 The bracket methods need to first locate an interval $[a, b]$ such that $f(a)f(b) < 0$. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.
 ```
 
