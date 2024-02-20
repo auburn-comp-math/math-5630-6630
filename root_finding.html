@@ -526,17 +526,49 @@ Illinois Method</label><div class="sd-tab-content docutils">
 <p>The order of convergence of a sequence <span class="math notranslate nohighlight">\(\{x_n\}\)</span> is <span class="math notranslate nohighlight">\(p &gt; 0\)</span> if</p>
 <div class="math notranslate nohighlight">
 \[
-\lim_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} = C,
+\lim_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} = \rho,
 \]</div>
-<p>The constant <span class="math notranslate nohighlight">\(C\)</span> is the rate of convergence. If <span class="math notranslate nohighlight">\(p = 1\)</span>, the sequence is said to have linear convergence. If <span class="math notranslate nohighlight">\(p = 2\)</span>, the sequence is said to have quadratic convergence.</p>
+<p>The constant <span class="math notranslate nohighlight">\(\rho\)</span> is the rate of convergence. If <span class="math notranslate nohighlight">\(p = 1\)</span>, the sequence is said to have linear convergence. If <span class="math notranslate nohighlight">\(p = 2\)</span>, the sequence is said to have quadratic convergence.</p>
+<p>If the limit does not exist while the upper bound exists for sufficiently large <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\limsup_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} \le \rho,
+\]</div>
+<p>then the order of convergence is <strong>at least</strong> <span class="math notranslate nohighlight">\(p\)</span> and the rate of convergence is <strong>at most</strong> <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
 </section>
-</div><div class="proof theorem admonition" id="thm-bisection_convergence">
+</div><aside class="margin sidebar">
+<p class="sidebar-title">More About Convergence</p>
+<p>In practice, the limit or even upper bound may not exist for <span class="math notranslate nohighlight">\(\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p}\)</span>, it is possible to consider the convergence rate in weaker sense. For instance, for sufficiently large <span class="math notranslate nohighlight">\(n\)</span> that the inequality</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k\to\infty}\sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|^{p^k}}}= \rho
+\]</div>
+<p>holds for certain <span class="math notranslate nohighlight">\(p &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\rho &gt; 0\)</span>, then the sequence has a mean order of convergence is <span class="math notranslate nohighlight">\(p\)</span> and a mean convergence rate <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+<p>On averaged, each iteration contributes an order of <span class="math notranslate nohighlight">\(p\)</span> and a rate of <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+</aside>
+<div class="proof theorem admonition" id="thm-bisection_convergence">
 <p class="admonition-title"><span class="caption-number">Theorem 4 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>The bisection method has a linear convergence rate.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof. TBA</p>
+<p>Proof. Without loss of generality, we may assume the initial bracket is on <span class="math notranslate nohighlight">\([0, 1]\)</span>. Let the root <span class="math notranslate nohighlight">\(x^{\ast} = 0.b_1 b_2\cdots\)</span> be the binary representation, then the sequence of bisection method can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+x_n = 0.b_1 b_2\cdots b_{n-1} 1,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(b_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>-th bit of the binary representation. The error at the <span class="math notranslate nohighlight">\(n\)</span>-th iteration is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}|x_n - x^{\ast}| = |2^{-n} - \sum_{j\ge n} 2^{-j} b_j|=\begin{cases}\sum_{j&gt;n} 2^{-j}b_j &amp; \text{if } b_n=1\\\sum_{j&gt;n} 2^{-j}(1-b_j) &amp;\text{if }b_n=0\end{cases}\end{split}\]</div>
+<p>For each <span class="math notranslate nohighlight">\(n\)</span> such that <span class="math notranslate nohighlight">\(b_n = 1\)</span>, we can find <span class="math notranslate nohighlight">\(s\in\N\)</span> such that <span class="math notranslate nohighlight">\(b_{s+n} = 1\)</span>, otherwise we arrive at the exact solution.</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|} = \frac{\sum_{j&gt;n+k} 2^{-j} b_j }{\sum_{j&gt;n} 2^{-j}b_j} \le \frac{2^{-(n+k)}}{2^{-(n+s)}} =2^{s - k} \]</div>
+<p>Therefore, the geometric mean of the convergence rate is bounded by <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\rho =\lim_{k\to\infty} \sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|}} \le \lim_{k\to\infty}2^{s/k}\frac{1}{2} =\frac{1}{2}.
+\]</div>
 </div>
 </section>
 </section>
