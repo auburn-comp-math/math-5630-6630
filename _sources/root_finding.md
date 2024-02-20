@@ -63,6 +63,21 @@ $$
 
 where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are initially set to $1$. If the same side is to update, the weight of the other side will be halved. If the side changes, the weight on the new bracket point will be reset to $1$. See {prf:ref}``AL-ILLINOIS``.
 
+```{margin}
+The choice of decay factor $\frac{1}{2}$ is optimal if it has to be a constant. The factor can be replaced with other variable values. Two usual replacements are **Pegasus** method and **Anderson-Bjorck** method.
+
+The essential changes in the algorithm are:
+
+- **Pegasus**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}$.
+- **Anderson-Bjorck**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b m_b$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a m_a$, where 
+
+$$m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
+
+and 
+
+$$m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
+```
+
 ```{prf:algorithm} Illinois Method
 :label: AL-ILLINOIS
 
@@ -85,21 +100,6 @@ where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are i
 
 ```
 
-```{margin}
-The choice of decay factor $\frac{1}{2}$ is optimal if it has to be a constant. The factor can be replaced with other variable values. Two usual replacements are **Pegasus** method and **Anderson-Bjorck** method.
-
-The essential changes in the algorithm are:
-
-- **Pegasus**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}$.
-- **Anderson-Bjorck**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b m_b$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a m_a$, where 
-
-$$m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
-
-and 
-
-$$m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
-```
-
 ````{note}
 We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint $f(b)$ into $\frac{1}{2} f(b)$ to compute the new $c$, which makes the selected point ${c}$ closer to the right endpoint than the false position method.
 
@@ -110,7 +110,6 @@ We use the previous example to illustrate the difference between the false posit
 :align: center
 ```
 ````
-
 
 ```{margin} Stopping Criteria
 There are several types of stopping criteria to terminate the iteration. Common ones include:
@@ -184,7 +183,6 @@ iter  6 | 2.5943130084597889606357057 | 7.90e-09
 
 `````
 ``````
-
 
 ```{prf:remark}
 :label: rmk:bracket_methods
