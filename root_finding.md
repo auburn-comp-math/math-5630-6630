@@ -193,6 +193,18 @@ The bracket methods need to first locate an interval $[a, b]$ such that $f(a)f(b
 
 The order of convergence quantifies how fast the sequence approximates the limiting value.
 
+```{margin} More About Convergence
+In practice, the limit or even upper bound may not exist for $\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p}$, it is possible to consider the convergence rate in weaker sense. For instance, for sufficiently large $n$ that the inequality 
+
+$$
+\lim_{k\to\infty}\sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|^{p^k}}}= \rho
+$$
+
+holds for certain $p > 0$ and $\rho > 0$, then the sequence has a mean order of convergence is $p$ and a mean convergence rate $\rho$. 
+
+On averaged, each iteration contributes an order of $p$ and a rate of $\rho$.
+```
+
 ```{prf:definition}
 :label: dfn-order_of_convergence
 The order of convergence of a sequence $\{x_n\}$ is $p > 0$ if 
@@ -210,21 +222,6 @@ $$
 $$
 
 then the order of convergence is **at least** $p$ and the rate of convergence is **at most** $\rho$.
-```
-
-```{margin} More About Convergence
-```
-
-```{margin} More About Convergence
-In practice, the limit or even upper bound may not exist for $\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p}$, it is possible to consider the convergence rate in weaker sense. For instance, for sufficiently large $n$ that the inequality 
-
-$$
-\lim_{k\to\infty}\sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|^{p^k}}}= \rho
-$$
-
-holds for certain $p > 0$ and $\rho > 0$, then the sequence has a mean order of convergence is $p$ and a mean convergence rate $\rho$. 
-
-On averaged, each iteration contributes an order of $p$ and a rate of $\rho$.
 ```
 
 ````{prf:theorem}
