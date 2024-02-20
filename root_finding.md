@@ -72,21 +72,33 @@ where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are i
 
 1. $\lambda_a \gets 1$, $\lambda_b \gets 1$ and $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$.  $s \gets 0$. //initialization
 2. While True do:
-    1. If $f(a)f(c) < 0$, then $b \gets c$; 
+    1. If $f(a)f(c) < 0$, then 
         - If $s \le 0$, $\lambda_a \gets 
-    \lambda_a/2$;  //update $\lambda_a$
-        - Else $s\gets -1$, $\lambda_b \gets 1$. //update $a$ and $\lambda_a$; //side changes, reset
-    2. Else If $f(a)f(c) > 0$, then $a \gets c$; 
-        - If $s \ge 0$, $\lambda_b \gets \lambda_b/2$; //update $\lambda_b$
-        - Else $s\gets 1$, $\lambda_a\gets 1$. //side changes, reset
+    \lambda_a/2$; Else $\lambda_b \gets 1$.
+        -  $b \gets c$, $s\gets -1$.
+    2. Else If $f(a)f(c) > 0$, then 
+        - If $s \ge 0$, $\lambda_b \gets \lambda_b/2$; Else $\lambda_a\gets 1$. 
+        - $a \gets c$, $s\gets 1$.
 
     3. $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$; //compute $c$
     4. If $ |f(c)| < \epsilon$, then return $c$; //check stopping criteria
 
 ```
 
+```{margin}
+The choice of decay factor $\frac{1}{2}$ is optimal if it has to be a constant. The factor can be replaced with other variable values. Two usual replacements are **Pegasus** method and **Anderson-Bjorck** method.
 
+The essential changes in the algorithm are:
 
+- **Pegasus**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}$.
+- **Anderson-Bjorck**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b m_b$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a m_a$, where 
+
+$$m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
+
+and 
+
+$$m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
+```
 
 ````{note}
 We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint $f(b)$ into $\frac{1}{2} f(b)$ to compute the new $c$, which makes the selected point ${c}$ closer to the right endpoint than the false position method.
@@ -103,6 +115,14 @@ We use the previous example to illustrate the difference between the false posit
 Let us try the aforementioned methods to find the root of $f(x) = x^3 - 2x^2 - 4$ on the interval $[1, 3]$. The root $x^{\ast}$ can be computed analytically through cubic root formula, which is roughly ``2.5943130163548496``.
 
 Using the previous methods, we obtain the sequence of selection $c_n$ and the error $|c_n - x^{\ast}|$. The tolerance is set to $|f(c)| < 10^{-6}$. The results are shown in the following table.
+
+```{margin} Stopping Criteria
+There are several types of stopping criteria to terminate the iteration. Common ones include:
+
+- $|f(c)| < \texttt{ftol}$, tolerance on the function value.
+- $|c_n - c_{n-1}| < \texttt{atol}$, absolute tolerance.
+- $|c_n - c_{n-1}| < \texttt{rtol} |c_n|$, relative tolerance.
+```
 
 `````{tab-set}
 ````{tab-item} Bisection Method
@@ -169,6 +189,35 @@ iter  6 | 2.5943130084597889606357057 | 7.90e-09
 The bracket methods need to first locate an interval $[a, b]$ such that $f(a)f(b) < 0$. A common approach is to sample a few equidistant points in a large interval and then use the sign of the function values to identify the bracket. This is a simple and robust approach, but it may require a large number of function evaluations.
 ```
 
+### Order of Convergence
+
+The order of convergence quantifies how fast the sequence approximates the limiting value.
+
+```{prf:definition}
+:label: dfn-order_of_convergence
+The order of convergence of a sequence $\{x_n\}$ is $p > 0$ if 
+
+$$
+\lim_{n\to\infty}\frac{|x_{n+1} - x^{\ast}|}{|x_n - x^{\ast}|^p} = C,
+$$
+
+The constant $C$ is the rate of convergence. If $p = 1$, the sequence is said to have linear convergence. If $p = 2$, the sequence is said to have quadratic convergence.
+```
+
+````{prf:theorem}
+:label: thm-bisection_convergence
+
+The bisection method has a linear convergence rate. 
+
+````
+
+````{prf:proof}
+:label: prf-bisection_convergence
+
+TBA
+
+````
+
 ## Iterative Methods
 
 ### Newton-Raphson Method
@@ -180,5 +229,9 @@ The bracket methods need to first locate an interval $[a, b]$ such that $f(a)f(b
 ## Exercises
 
 ### Theoretical Part
+
+```{admonition} Problem 1
+Derive the convergence rate for the Illinois method.
+```
 
 ### Computational Part
