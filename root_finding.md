@@ -205,8 +205,8 @@ holds for certain $p > 0$ and $\rho > 0$, then the sequence has a mean order of 
 On averaged, each iteration contributes an order of $p$ and a rate of $\rho$.
 ```
 
-```{prf:definition}
-:label: dfn-order_of_convergence
+````{prf:definition}
+:label: dfn-order-of-convergence
 The order of convergence of a sequence $\{x_n\}$ is $p > 0$ if 
 
 $$
@@ -222,17 +222,17 @@ $$
 $$
 
 then the order of convergence is **at least** $p$ and the rate of convergence is **at most** $\rho$.
-```
+````
 
 ````{prf:theorem}
-:label: thm-bisection_convergence
+:label: thm-bisection-convergence
 
 The bisection method has a linear convergence rate. 
 
 ````
 
 ````{prf:proof}
-:label: prf-bisection_convergence
+:label: prf-bisection-convergence
 
 Without loss of generality, we may assume the initial bracket is on $[0, 1]$. Let the root $x^{\ast} = 0.b_1 b_2\cdots$ be the binary representation, then the sequence of bisection method can be written as 
 
