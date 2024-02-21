@@ -280,7 +280,20 @@ The order of convergence of the Illinois method is at least $\sqrt[3]{3}$.
 ````
 
 ```{prf:proof}
-TBA
+Let $f(x)\in C^2[a, b]$ and $x^{\ast}$ be the root. For simplicity, we assume the root is simple. Let $\ell(x)$ be the linear interpolation of $f$ at the bracket $[a, b]$, the slope is $f'(\zeta)=\frac{f(b) - f(a)}{b -a}$, then 
+
+$$
+f(x) - \ell(x) = \frac{f''(\xi)}{2}(x - a)(x - b),
+$$
+therefore, the root satisfies $-\ell(x^{\ast}) = \frac{f''(\xi)}{2}(x^{\ast} - a)(x^{\ast} - b)$. Let $c$ be the next iteration, then 
+
+$$
+-\ell(x^{\ast}) + \ell(c) = -(x^{\ast} - c) f'(\zeta) =  \frac{f''(\xi)}{2}(x^{\ast} - a)(x^{\ast} - b),
+$$
+
+which imples $(x^{\ast} - c) = -\frac{f''(\xi)}{2 f'(\zeta)} (x^{\ast} - a)(x^{\ast} - b)$. When $a$ and $b$ are already near the root, the right-hand side has a fixed sign, which imples that using the unadjusted false position method, the new point $c$ will always fall into a fixed side of the root.
+
+Now, we consider the adjustment of the Illinois method. Without loss of generality, we assume that $c$ falls into the left side of the root.
 ```
 
 ## Iterative Methods

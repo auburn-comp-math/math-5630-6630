@@ -599,7 +599,18 @@ x_n = 0.b_1 b_2\cdots b_{n-1} 1,
 <p>The order of convergence of the Illinois method is at least <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof. TBA</p>
+<p>Proof. Let <span class="math notranslate nohighlight">\(f(x)\in C^2[a, b]\)</span> and <span class="math notranslate nohighlight">\(x^{\ast}\)</span> be the root. For simplicity, we assume the root is simple. Let <span class="math notranslate nohighlight">\(\ell(x)\)</span> be the linear interpolation of <span class="math notranslate nohighlight">\(f\)</span> at the bracket <span class="math notranslate nohighlight">\([a, b]\)</span>, the slope is <span class="math notranslate nohighlight">\(f'(\zeta)=\frac{f(b) - f(a)}{b -a}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) - \ell(x) = \frac{f''(\xi)}{2}(x - a)(x - b),
+\]</div>
+<p>therefore, the root satisfies <span class="math notranslate nohighlight">\(-\ell(x^{\ast}) = \frac{f''(\xi)}{2}(x^{\ast} - a)(x^{\ast} - b)\)</span>. Let <span class="math notranslate nohighlight">\(c\)</span> be the next iteration, then</p>
+<div class="math notranslate nohighlight">
+\[
+-\ell(x^{\ast}) + \ell(c) = -(x^{\ast} - c) f'(\zeta) =  \frac{f''(\xi)}{2}(x^{\ast} - a)(x^{\ast} - b),
+\]</div>
+<p>which imples <span class="math notranslate nohighlight">\((x^{\ast} - c) = -\frac{f''(\xi)}{2 f'(\zeta)} (x^{\ast} - a)(x^{\ast} - b)\)</span>. When <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are already near the root, the right-hand side has a fixed sign, which imples that using the unadjusted false position method, the new point <span class="math notranslate nohighlight">\(c\)</span> will always fall into a fixed side of the root.</p>
+<p>Now, we consider the adjustment of the Illinois method. Without loss of generality, we assume that <span class="math notranslate nohighlight">\(c\)</span> falls into the left side of the root.</p>
 </div>
 </section>
 </section>
