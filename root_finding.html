@@ -380,7 +380,7 @@ document.write(`
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When <span class="math notranslate nohighlight">\(f''\)</span> keeps the same sign over <span class="math notranslate nohighlight">\([a, b]\)</span>, it is not hard to show that only one side of the bracket is updating. The bracket size will never decrease to zero, which is different from the bisection method. In the following, we use an example to illustrate this. The function <span class="math notranslate nohighlight">\(f(x) = x^2 - 1\)</span> over the initial bracket <span class="math notranslate nohighlight">\([0, 2]\)</span>. The left endpoint is updating to the root while the right endpoint is fixed at <span class="math notranslate nohighlight">\(2\)</span>.</p>
-<a class="bg-primary reference internal image-reference" href="_images/root_finding_img_0.png"><img alt="false position method" class="bg-primary align-center" src="_images/root_finding_img_0.png" style="width: 600px;" /></a>
+<img alt="false position method" class="align-center" id="root-finding-false-img" src="_images/root_finding_img_0.png" />
 </div>
 <p>It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the <strong>Illinois method</strong>. Once the same side is to update in two consecutive iterations, the Illinois method will adjust <span class="math notranslate nohighlight">\(c\)</span> using a slightly different formula.</p>
 <div class="math notranslate nohighlight">
@@ -392,15 +392,15 @@ document.write(`
 <p class="sidebar-title"></p>
 <p>The choice of decay factor <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> is optimal if it has to be a constant. The factor can be replaced with other variable values. Two usual replacements are <strong>Pegasus</strong> method and <strong>Anderson-Bjorck</strong> method.</p>
 <p>The essential changes in the algorithm are:</p>
-<ul class="simple">
+<ul>
 <li><p><strong>Pegasus</strong>: replace <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}\)</span> and replace <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}\)</span>.</p></li>
-<li><p><strong>Anderson-Bjorck</strong>: replace <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b m_b\)</span> and replace <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a m_a\)</span>, where</p></li>
-</ul>
+<li><p><strong>Anderson-Bjorck</strong>: replace <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b m_b\)</span> and replace <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a m_a\)</span>, where</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &amp;\text{if positive}\\ \frac{1}{2} &amp;\text{otherwise}\end{cases}\end{split}\]</div>
-<p>and</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &amp;\text{if positive}\\ \frac{1}{2} &amp;\text{otherwise}\end{cases}\end{split}\]</div>
+</li>
+</ul>
 </aside>
 <div class="proof algorithm admonition" id="AL-ILLINOIS">
 <p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Illinois Method)</p>
@@ -433,7 +433,7 @@ document.write(`
 </div><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint <span class="math notranslate nohighlight">\(f(b)\)</span> into <span class="math notranslate nohighlight">\(\frac{1}{2} f(b)\)</span> to compute the new <span class="math notranslate nohighlight">\(c\)</span>, which makes the selected point <span class="math notranslate nohighlight">\({c}\)</span> closer to the right endpoint than the false position method.</p>
-<a class="bg-primary reference internal image-reference" href="_images/root_finding_img_1.png"><img alt="Illinois method" class="bg-primary align-center" src="_images/root_finding_img_1.png" style="width: 600px;" /></a>
+<img alt="Illinois method" class="align-center" id="root-finding-illinois-img" src="_images/root_finding_img_1.png" />
 </div>
 <aside class="margin sidebar">
 <p class="sidebar-title">Stopping Criteria</p>
@@ -443,27 +443,6 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{atol}\)</span>, absolute tolerance.</p></li>
 <li><p><span class="math notranslate nohighlight">\(|c_n - c_{n-1}| &lt; \texttt{rtol} |c_n|\)</span>, relative tolerance.</p></li>
 </ul>
-</aside>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>Using <code class="docutils literal notranslate"><span class="pre">bigfloat</span></code> package, it is possible to extract more digits to observe the dynamics of the convergence. For instance, by setting the precision to 900 bits, the Illinois method’s convergence is shown in the following table.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">iter</span>  <span class="mi">1</span> <span class="o">|</span> <span class="mf">2.0000000000000000000000000</span> <span class="o">|</span> <span class="mf">5.94e-01</span> 
-<span class="nb">iter</span>  <span class="mi">2</span> <span class="o">|</span> <span class="mf">2.6153846153846154187760931</span> <span class="o">|</span> <span class="mf">2.11e-02</span> 
-<span class="nb">iter</span>  <span class="mi">3</span> <span class="o">|</span> <span class="mf">2.5847750865051901669744439</span> <span class="o">|</span> <span class="mf">9.54e-03</span> 
-<span class="nb">iter</span>  <span class="mi">4</span> <span class="o">|</span> <span class="mf">2.5941951587569973547431346</span> <span class="o">|</span> <span class="mf">1.18e-04</span> 
-<span class="nb">iter</span>  <span class="mi">5</span> <span class="o">|</span> <span class="mf">2.5944267005726091568362790</span> <span class="o">|</span> <span class="mf">1.14e-04</span> 
-<span class="nb">iter</span>  <span class="mi">6</span> <span class="o">|</span> <span class="mf">2.5943130084597889606357057</span> <span class="o">|</span> <span class="mf">7.90e-09</span> 
-<span class="nb">iter</span>  <span class="mi">7</span> <span class="o">|</span> <span class="mf">2.5943130163543197674869134</span> <span class="o">|</span> <span class="mf">5.29e-13</span> 
-<span class="nb">iter</span>  <span class="mi">8</span> <span class="o">|</span> <span class="mf">2.5943130163553775879847763</span> <span class="o">|</span> <span class="mf">5.29e-13</span> 
-<span class="nb">iter</span>  <span class="mi">9</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">1.65e-25</span> 
-<span class="nb">iter</span> <span class="mi">10</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">5.13e-38</span> 
-<span class="nb">iter</span> <span class="mi">11</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">5.13e-38</span> 
-<span class="nb">iter</span> <span class="mi">12</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">1.55e-75</span> 
-<span class="nb">iter</span> <span class="mi">13</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">4.70e-113</span> 
-<span class="nb">iter</span> <span class="mi">14</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">4.70e-113</span> 
-<span class="nb">iter</span> <span class="mi">15</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">1.30e-225</span> 
-</pre></div>
-</div>
 </aside>
 <div class="proof example admonition" id="example-1">
 <p class="admonition-title"><span class="caption-number">Example 1 </span></p>
@@ -530,6 +509,28 @@ Illinois Method</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
+<input id="sd-tab-item-3" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-3">
+More Digits</label><div class="sd-tab-content docutils">
+<p>Using <code class="docutils literal notranslate"><span class="pre">bigfloat</span></code> package, it is possible to extract more digits to observe the dynamics of the convergence. For instance, by setting the precision to 900 bits, the Illinois method’s convergence is shown in the following table.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">iter</span>  <span class="mi">1</span> <span class="o">|</span> <span class="mf">2.0000000000000000000000000</span> <span class="o">|</span> <span class="mf">5.94e-01</span> 
+<span class="nb">iter</span>  <span class="mi">2</span> <span class="o">|</span> <span class="mf">2.6153846153846154187760931</span> <span class="o">|</span> <span class="mf">2.11e-02</span> 
+<span class="nb">iter</span>  <span class="mi">3</span> <span class="o">|</span> <span class="mf">2.5847750865051901669744439</span> <span class="o">|</span> <span class="mf">9.54e-03</span> 
+<span class="nb">iter</span>  <span class="mi">4</span> <span class="o">|</span> <span class="mf">2.5941951587569973547431346</span> <span class="o">|</span> <span class="mf">1.18e-04</span> 
+<span class="nb">iter</span>  <span class="mi">5</span> <span class="o">|</span> <span class="mf">2.5944267005726091568362790</span> <span class="o">|</span> <span class="mf">1.14e-04</span> 
+<span class="nb">iter</span>  <span class="mi">6</span> <span class="o">|</span> <span class="mf">2.5943130084597889606357057</span> <span class="o">|</span> <span class="mf">7.90e-09</span> 
+<span class="nb">iter</span>  <span class="mi">7</span> <span class="o">|</span> <span class="mf">2.5943130163543197674869134</span> <span class="o">|</span> <span class="mf">5.29e-13</span> 
+<span class="nb">iter</span>  <span class="mi">8</span> <span class="o">|</span> <span class="mf">2.5943130163553775879847763</span> <span class="o">|</span> <span class="mf">5.29e-13</span> 
+<span class="nb">iter</span>  <span class="mi">9</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">1.65e-25</span> 
+<span class="nb">iter</span> <span class="mi">10</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">5.13e-38</span> 
+<span class="nb">iter</span> <span class="mi">11</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">5.13e-38</span> 
+<span class="nb">iter</span> <span class="mi">12</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">1.55e-75</span> 
+<span class="nb">iter</span> <span class="mi">13</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">4.70e-113</span> 
+<span class="nb">iter</span> <span class="mi">14</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">4.70e-113</span> 
+<span class="nb">iter</span> <span class="mi">15</span> <span class="o">|</span> <span class="mf">2.5943130163548486777358448</span> <span class="o">|</span> <span class="mf">1.30e-225</span> 
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </div><div class="proof remark admonition" id="rmk:bracket-methods">
@@ -590,6 +591,15 @@ x_n = 0.b_1 b_2\cdots b_{n-1} 1,
 \[
 \rho =\lim_{k\to\infty} \sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|}} \le \lim_{k\to\infty}2^{s/k}\frac{1}{2} =\frac{1}{2}.
 \]</div>
+</div>
+<p>A common technique to study the order of convergence is to use the Taylor expansion. Let us use the Illinois method as an example.</p>
+<div class="proof theorem admonition" id="thm-illinois-convergence">
+<p class="admonition-title"><span class="caption-number">Theorem 5 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>The order of convergence of the Illinois method is at least <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. TBA</p>
 </div>
 </section>
 </section>
