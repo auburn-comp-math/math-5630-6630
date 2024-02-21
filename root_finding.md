@@ -48,9 +48,8 @@ The false position method is also guaranteed to converge to a root if $f(a)f(b) 
 When $f''$ keeps the same sign over $[a, b]$, it is not hard to show that only one side of the bracket is updating. The bracket size will never decrease to zero, which is different from the bisection method. In the following, we use an example to illustrate this. The function $f(x) = x^2 - 1$ over the initial bracket $[0, 2]$. The left endpoint is updating to the root while the right endpoint is fixed at $2$.
 
 ```{image} images/doc/root_finding_img_0.png
+:name: root-finding-false-img
 :alt: false position method
-:class: bg-primary 
-:width: 600px
 :align: center
 ```
 ````
@@ -71,11 +70,9 @@ The essential changes in the algorithm are:
 - **Pegasus**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}$.
 - **Anderson-Bjorck**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b m_b$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a m_a$, where 
 
-$$m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
+    $$m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
 
-and 
-
-$$m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
+    $$m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
 ```
 
 ```{prf:algorithm} Illinois Method
@@ -104,9 +101,8 @@ $$m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &\text{if positive}\\ \frac{1}{2} &\t
 We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint $f(b)$ into $\frac{1}{2} f(b)$ to compute the new $c$, which makes the selected point ${c}$ closer to the right endpoint than the false position method.
 
 ```{image} images/doc/root_finding_img_1.png
+:name: root-finding-illinois-img
 :alt: Illinois method
-:class: bg-primary 
-:width: 600px
 :align: center
 ```
 ````
@@ -118,29 +114,6 @@ There are several types of stopping criteria to terminate the iteration. Common 
 - $|c_n - c_{n-1}| < \texttt{atol}$, absolute tolerance.
 - $|c_n - c_{n-1}| < \texttt{rtol} |c_n|$, relative tolerance.
 ```
-
-
-````{margin}
-Using ``bigfloat`` package, it is possible to extract more digits to observe the dynamics of the convergence. For instance, by setting the precision to 900 bits, the Illinois method's convergence is shown in the following table.
-  
-```{code-block}
-iter  1 | 2.0000000000000000000000000 | 5.94e-01 
-iter  2 | 2.6153846153846154187760931 | 2.11e-02 
-iter  3 | 2.5847750865051901669744439 | 9.54e-03 
-iter  4 | 2.5941951587569973547431346 | 1.18e-04 
-iter  5 | 2.5944267005726091568362790 | 1.14e-04 
-iter  6 | 2.5943130084597889606357057 | 7.90e-09 
-iter  7 | 2.5943130163543197674869134 | 5.29e-13 
-iter  8 | 2.5943130163553775879847763 | 5.29e-13 
-iter  9 | 2.5943130163548486777358448 | 1.65e-25 
-iter 10 | 2.5943130163548486777358448 | 5.13e-38 
-iter 11 | 2.5943130163548486777358448 | 5.13e-38 
-iter 12 | 2.5943130163548486777358448 | 1.55e-75 
-iter 13 | 2.5943130163548486777358448 | 4.70e-113 
-iter 14 | 2.5943130163548486777358448 | 4.70e-113 
-iter 15 | 2.5943130163548486777358448 | 1.30e-225 
-```
-````
 
 ``````{prf:example}
 Let us try the aforementioned methods to find the root of $f(x) = x^3 - 2x^2 - 4$ on the interval $[1, 3]$. The root $x^{\ast}$ can be computed analytically through cubic root formula, which is roughly ``2.5943130163548496``.
@@ -204,9 +177,30 @@ iter  6 | 2.5943130084597889606357057 | 7.90e-09
 ```
 ````
 
+````{tab-item} More Digits
+Using ``bigfloat`` package, it is possible to extract more digits to observe the dynamics of the convergence. For instance, by setting the precision to 900 bits, the Illinois method's convergence is shown in the following table.
+  
+```{code-block}
+iter  1 | 2.0000000000000000000000000 | 5.94e-01 
+iter  2 | 2.6153846153846154187760931 | 2.11e-02 
+iter  3 | 2.5847750865051901669744439 | 9.54e-03 
+iter  4 | 2.5941951587569973547431346 | 1.18e-04 
+iter  5 | 2.5944267005726091568362790 | 1.14e-04 
+iter  6 | 2.5943130084597889606357057 | 7.90e-09 
+iter  7 | 2.5943130163543197674869134 | 5.29e-13 
+iter  8 | 2.5943130163553775879847763 | 5.29e-13 
+iter  9 | 2.5943130163548486777358448 | 1.65e-25 
+iter 10 | 2.5943130163548486777358448 | 5.13e-38 
+iter 11 | 2.5943130163548486777358448 | 5.13e-38 
+iter 12 | 2.5943130163548486777358448 | 1.55e-75 
+iter 13 | 2.5943130163548486777358448 | 4.70e-113 
+iter 14 | 2.5943130163548486777358448 | 4.70e-113 
+iter 15 | 2.5943130163548486777358448 | 1.30e-225 
+```
+````
+
 `````
 ``````
-
 
 ```{prf:remark}
 :label: rmk:bracket-methods
@@ -277,6 +271,17 @@ $$
 \rho =\lim_{k\to\infty} \sqrt[k]{\frac{|x_{n+k} - x^{\ast}|}{|x_n - x^{\ast}|}} \le \lim_{k\to\infty}2^{s/k}\frac{1}{2} =\frac{1}{2}.
 $$
 ````
+
+A common technique to study the order of convergence is to use the Taylor expansion. Let us use the Illinois method as an example.
+
+````{prf:theorem}
+:label: thm-illinois-convergence
+The order of convergence of the Illinois method is at least $\sqrt[3]{3}$.
+````
+
+```{prf:proof}
+TBA
+```
 
 ## Iterative Methods
 
