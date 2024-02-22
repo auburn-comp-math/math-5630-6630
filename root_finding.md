@@ -286,6 +286,11 @@ The big $O$ notation is used to describe the upper bound of a function. For inst
 Another notation is the big $\Theta$ notation, which is used to describe the upper and lower bounds of a function. For instance, $f(x) = \Theta(g(x))$ means that there exists constants $C_1$ and $C_2$ such that $C_1|g(x)| \le |f(x)| \le C_2|g(x)|$ for sufficiently large $x$.
 ```
 
+```{margin} Selection of Decay Factor
+In theory, any decay factor smaller than one would produce the same order of convergence. The decay factor $\frac{1}{2}$ is optimal in the sense that any smaller factor will make the adjustment iteration move away from the root. While having a larger factor will not be efficient to reduce the bracket size.
+
+```
+
 ```{prf:proof}
 Let $f(x)\in C^2[a, b]$ and $x^{\ast}$ be the root. For simplicity, we assume the root is simple. Let $\ell(x)$ be the linear interpolation of $f$ at the bracket $[a, b]$, the slope is $f'(\zeta)=\frac{f(b) - f(a)}{b -a}$, then 
 
@@ -341,6 +346,48 @@ A quick way of proof uses the asymptotic analysis. If we denote $\epsilon_{n} =x
 ```
 
 Let us finish this section with a brief discussion about the Pegasus method, which is a variant of the Illinois method. It is interesting that the Pegasus method was initially discovered in a subroutine for the **Ferranti Pegasus** computer, but no author information is included. The convergence analysis was given after {cite}`dowell1972pegasus`.
+
+```{prf:theorem} Pegasus Method
+:label: thm-pegasus-convergence
+In Pegasus method, the decay factor's updating scheme is replaced by $\lambda_b\gets \lambda_b\frac{f(a)}{f(a)+f(c)}$ (resp. $\lambda_a\gets \lambda_a \frac{f(b)}{f(b)+f(c)}$). Then the order of convergence is $\sqrt[4]{\frac{7+\sqrt{57}}{2}}$.
+```
+
+```{prf:proof}
+Similar to the previous {prf:ref}`rmk-illinois-convergence`, we assume $\epsilon_{i-1} < 0$ and $\epsilon_{i} > 0$ such that $|\epsilon_i|\ll |\epsilon_{i-1}|$, the constant $C > 0$.
+Similar to the previous analysis, we have 
+
+$$
+\epsilon_{i+1}\simeq C \epsilon_{i}\epsilon_{i-1} < 0
+$$
+
+Then due to a different sign for $\epsilon_{i}$ and $\epsilon_{i+1}$, we can derive $\epsilon_{i+2}\simeq C \epsilon_{i+1}\epsilon_{i} < 0$.
+
+Now use the adjustment step, we obtain (needs some calculation)
+
+$$
+\begin{aligned}
+\epsilon_{i+3} &= \frac{\epsilon_{i+2}\lambda f(x_i) - \epsilon_i f(x_{i+2})}{\lambda f(x_{i}) - f(x_{i+2})},\quad \lambda = \frac{f(x_{i+1})}{f(x_{i+2}) + f(x_{i+1})}\\
+&\approx C^2 \epsilon_{i}^2\epsilon_{i+2}, 
+\end{aligned}
+$$
+it implies $\epsilon_{i+3} < 0$ as well. Therefore, another adjustment step is needed and 
+
+$$
+\begin{aligned}
+\epsilon_{i+4} &=  \frac{\epsilon_{i+3}\lambda f(x_i) - \epsilon_i f(x_{i+3})}{\lambda f(x_{i}) - f(x_{i+3})},\quad \lambda = \frac{f(x_{i+2})}{f(x_{i+3}) + f(x_{i+2})}\frac{f(x_{i+1})}{f(x_{i+2}) + f(x_{i+1})}\\
+&\approx C^5 \epsilon_{i}^4\epsilon_{i+1}^2 + C^7 \epsilon_{i}^7 \epsilon_{i+1} \\
+&= C^7 \epsilon_i^6 \epsilon_{i-1} (\epsilon_{i-1} + C \epsilon_i) > 0.
+\end{aligned}
+$$
+
+Therefore, $\epsilon_{i+4}\approx C \epsilon_{i+3} \epsilon_{i+2}$. A full cycle consists of 4 iterations and 
+
+$$
+\epsilon_{i+8} \simeq C^7 \epsilon_{i+4}^6 \epsilon_{i+3}^2 \simeq C^{8}\epsilon_{i+4}^7 \epsilon_i^2.
+$$
+
+The order of convergence $p$ solves $p^2 - 7p - 2 = 0$, which gives $p = \sqrt[4]{\frac{7+\sqrt{57}}{2}}$.
+```
 
 ## Iterative Methods
 
