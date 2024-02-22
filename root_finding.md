@@ -357,7 +357,15 @@ Let us finish this section with a brief discussion about the Pegasus method, whi
 
 ```{prf:theorem} Pegasus Method
 :label: thm-pegasus-convergence
-In Pegasus method, the decay factor's updating scheme is replaced by $\lambda_b\gets \lambda_b\frac{f(a)}{f(a)+f(c)}$ (resp. $\lambda_a\gets \lambda_a \frac{f(b)}{f(b)+f(c)}$). Then the order of convergence is $\sqrt[4]{\frac{7+\sqrt{57}}{2}}$.
+The Pegasus method is a variant of Illinois method, whose updating scheme for the decay factors is replaced by 
+
+$$\lambda_b\gets \lambda_b\frac{f(a)}{f(a)+f(c)}$$ 
+
+and
+
+$$\lambda_a\gets \lambda_a \frac{f(b)}{f(b)+f(c)}.$$ 
+
+Then the order of convergence is $\sqrt[4]{\frac{7+\sqrt{57}}{2}}$.
 ```
 
 ```{prf:proof}
@@ -380,7 +388,7 @@ $$
 &\approx C^2 \epsilon_{i}^2\epsilon_{i+2} + D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
 \end{aligned}
 $$
-it implies $\epsilon_{i+3} < 0$ as well. Therefore, another adjustment step is needed and 
+it implies $\epsilon_{i+3} < 0$ as well. Therefore, another adjustment step is needed and (after some more calculations)
 
 $$
 \begin{aligned}
