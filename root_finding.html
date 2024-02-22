@@ -665,7 +665,13 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 <div class="proof theorem admonition" id="thm-pegasus-convergence">
 <p class="admonition-title"><span class="caption-number">Theorem 6 </span> (Pegasus Method)</p>
 <section class="theorem-content" id="proof-content">
-<p>In Pegasus method, the decay factor’s updating scheme is replaced by <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b\frac{f(a)}{f(a)+f(c)}\)</span> (resp. <span class="math notranslate nohighlight">\(\lambda_a\gets \lambda_a \frac{f(b)}{f(b)+f(c)}\)</span>). Then the order of convergence is <span class="math notranslate nohighlight">\(\sqrt[4]{\frac{7+\sqrt{57}}{2}}\)</span>.</p>
+<p>The Pegasus method is a variant of Illinois method, whose updating scheme for the decay factors is replaced by</p>
+<div class="math notranslate nohighlight">
+\[\lambda_b\gets \lambda_b\frac{f(a)}{f(a)+f(c)}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\lambda_a\gets \lambda_a \frac{f(b)}{f(b)+f(c)}.\]</div>
+<p>Then the order of convergence is <span class="math notranslate nohighlight">\(\sqrt[4]{\frac{7+\sqrt{57}}{2}}\)</span>.</p>
 </section>
 </div><div class="proof admonition" id="proof">
 <p>Proof. Similar to the previous <a class="reference internal" href="#rmk-illinois-convergence">Remark 3</a>, we assume <span class="math notranslate nohighlight">\(\epsilon_{i-1} &lt; 0\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i} &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(|\epsilon_i|\ll |\epsilon_{i-1}|\)</span>, the constant <span class="math notranslate nohighlight">\(C = \frac{f''}{2f'}|_{x=x^{\ast}} &gt; 0\)</span>.
@@ -685,7 +691,7 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 &amp;\approx C^2 \epsilon_{i}^2\epsilon_{i+2} + D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
 \end{aligned}
 \end{split}\]</div>
-<p>it implies <span class="math notranslate nohighlight">\(\epsilon_{i+3} &lt; 0\)</span> as well. Therefore, another adjustment step is needed and</p>
+<p>it implies <span class="math notranslate nohighlight">\(\epsilon_{i+3} &lt; 0\)</span> as well. Therefore, another adjustment step is needed and (after some more calculations)</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
