@@ -668,19 +668,21 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 <p>In Pegasus method, the decay factor’s updating scheme is replaced by <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b\frac{f(a)}{f(a)+f(c)}\)</span> (resp. <span class="math notranslate nohighlight">\(\lambda_a\gets \lambda_a \frac{f(b)}{f(b)+f(c)}\)</span>). Then the order of convergence is <span class="math notranslate nohighlight">\(\sqrt[4]{\frac{7+\sqrt{57}}{2}}\)</span>.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof. Similar to the previous <a class="reference internal" href="#rmk-illinois-convergence">Remark 3</a>, we assume <span class="math notranslate nohighlight">\(\epsilon_{i-1} &lt; 0\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i} &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(|\epsilon_i|\ll |\epsilon_{i-1}|\)</span>, the constant <span class="math notranslate nohighlight">\(C &gt; 0\)</span>.
-Similar to the previous analysis, we have</p>
+<p>Proof. Similar to the previous <a class="reference internal" href="#rmk-illinois-convergence">Remark 3</a>, we assume <span class="math notranslate nohighlight">\(\epsilon_{i-1} &lt; 0\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i} &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(|\epsilon_i|\ll |\epsilon_{i-1}|\)</span>, the constant <span class="math notranslate nohighlight">\(C = \frac{f''}{2f'}|_{x=x^{\ast}} &gt; 0\)</span>.
+Similar to the previous analysis, we can derive more terms in the asymptotic form</p>
 <div class="math notranslate nohighlight">
 \[
-\epsilon_{i+1}\simeq C \epsilon_{i}\epsilon_{i-1} &lt; 0
+\epsilon_{i+1}\simeq C \epsilon_{i}\epsilon_{i-1} + D \epsilon_{i} \epsilon_{i-1}(\epsilon_{i} + \epsilon_{i-1})&lt; 0
 \]</div>
-<p>Then due to a different sign for <span class="math notranslate nohighlight">\(\epsilon_{i}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i+1}\)</span>, we can derive <span class="math notranslate nohighlight">\(\epsilon_{i+2}\simeq C \epsilon_{i+1}\epsilon_{i} &lt; 0\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(D = -C^2 + \frac{f'''}{6f'}|_{x=x^{\ast}}\)</span>. Then due to a different sign for <span class="math notranslate nohighlight">\(\epsilon_{i}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i+1}\)</span>, we can derive</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{i+2}\simeq C \epsilon_{i+1}\epsilon_{i} + + D \epsilon_{i+1} \epsilon_{i}(\epsilon_{i+1} + \epsilon_{i}) &lt; 0.\]</div>
 <p>Now use the adjustment step, we obtain (needs some calculation)</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
 \epsilon_{i+3} &amp;= \frac{\epsilon_{i+2}\lambda f(x_i) - \epsilon_i f(x_{i+2})}{\lambda f(x_{i}) - f(x_{i+2})},\quad \lambda = \frac{f(x_{i+1})}{f(x_{i+2}) + f(x_{i+1})}\\
-&amp;\approx C^2 \epsilon_{i}^2\epsilon_{i+2}, 
+&amp;\approx C^2 \epsilon_{i}^2\epsilon_{i+2} + D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
 \end{aligned}
 \end{split}\]</div>
 <p>it implies <span class="math notranslate nohighlight">\(\epsilon_{i+3} &lt; 0\)</span> as well. Therefore, another adjustment step is needed and</p>
@@ -688,8 +690,7 @@ Similar to the previous analysis, we have</p>
 \[\begin{split}
 \begin{aligned}
 \epsilon_{i+4} &amp;=  \frac{\epsilon_{i+3}\lambda f(x_i) - \epsilon_i f(x_{i+3})}{\lambda f(x_{i}) - f(x_{i+3})},\quad \lambda = \frac{f(x_{i+2})}{f(x_{i+3}) + f(x_{i+2})}\frac{f(x_{i+1})}{f(x_{i+2}) + f(x_{i+1})}\\
-&amp;\approx C^5 \epsilon_{i}^4\epsilon_{i+1}^2 + C^7 \epsilon_{i}^7 \epsilon_{i+1} \\
-&amp;= C^7 \epsilon_i^6 \epsilon_{i-1} (\epsilon_{i-1} + C \epsilon_i) &gt; 0.
+&amp;\approx C^5 \epsilon_{i}^4\epsilon_{i+1}^2 &gt; 0.
 \end{aligned}
 \end{split}\]</div>
 <p>Therefore, <span class="math notranslate nohighlight">\(\epsilon_{i+4}\approx C \epsilon_{i+3} \epsilon_{i+2}\)</span>. A full cycle consists of 4 iterations and</p>

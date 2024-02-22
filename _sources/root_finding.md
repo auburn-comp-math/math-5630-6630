@@ -361,21 +361,23 @@ In Pegasus method, the decay factor's updating scheme is replaced by $\lambda_b\
 ```
 
 ```{prf:proof}
-Similar to the previous {prf:ref}`rmk-illinois-convergence`, we assume $\epsilon_{i-1} < 0$ and $\epsilon_{i} > 0$ such that $|\epsilon_i|\ll |\epsilon_{i-1}|$, the constant $C > 0$.
-Similar to the previous analysis, we have 
+Similar to the previous {prf:ref}`rmk-illinois-convergence`, we assume $\epsilon_{i-1} < 0$ and $\epsilon_{i} > 0$ such that $|\epsilon_i|\ll |\epsilon_{i-1}|$, the constant $C = \frac{f''}{2f'}|_{x=x^{\ast}} > 0$.
+Similar to the previous analysis, we can derive more terms in the asymptotic form
 
 $$
-\epsilon_{i+1}\simeq C \epsilon_{i}\epsilon_{i-1} < 0
+\epsilon_{i+1}\simeq C \epsilon_{i}\epsilon_{i-1} + D \epsilon_{i} \epsilon_{i-1}(\epsilon_{i} + \epsilon_{i-1})< 0
 $$
 
-Then due to a different sign for $\epsilon_{i}$ and $\epsilon_{i+1}$, we can derive $\epsilon_{i+2}\simeq C \epsilon_{i+1}\epsilon_{i} < 0$.
+where $D = -C^2 + \frac{f'''}{6f'}|_{x=x^{\ast}}$. Then due to a different sign for $\epsilon_{i}$ and $\epsilon_{i+1}$, we can derive 
+
+$$\epsilon_{i+2}\simeq C \epsilon_{i+1}\epsilon_{i} + + D \epsilon_{i+1} \epsilon_{i}(\epsilon_{i+1} + \epsilon_{i}) < 0.$$
 
 Now use the adjustment step, we obtain (needs some calculation)
 
 $$
 \begin{aligned}
 \epsilon_{i+3} &= \frac{\epsilon_{i+2}\lambda f(x_i) - \epsilon_i f(x_{i+2})}{\lambda f(x_{i}) - f(x_{i+2})},\quad \lambda = \frac{f(x_{i+1})}{f(x_{i+2}) + f(x_{i+1})}\\
-&\approx C^2 \epsilon_{i}^2\epsilon_{i+2}, 
+&\approx C^2 \epsilon_{i}^2\epsilon_{i+2} + D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
 \end{aligned}
 $$
 it implies $\epsilon_{i+3} < 0$ as well. Therefore, another adjustment step is needed and 
@@ -383,8 +385,7 @@ it implies $\epsilon_{i+3} < 0$ as well. Therefore, another adjustment step is n
 $$
 \begin{aligned}
 \epsilon_{i+4} &=  \frac{\epsilon_{i+3}\lambda f(x_i) - \epsilon_i f(x_{i+3})}{\lambda f(x_{i}) - f(x_{i+3})},\quad \lambda = \frac{f(x_{i+2})}{f(x_{i+3}) + f(x_{i+2})}\frac{f(x_{i+1})}{f(x_{i+2}) + f(x_{i+1})}\\
-&\approx C^5 \epsilon_{i}^4\epsilon_{i+1}^2 + C^7 \epsilon_{i}^7 \epsilon_{i+1} \\
-&= C^7 \epsilon_i^6 \epsilon_{i-1} (\epsilon_{i-1} + C \epsilon_i) > 0.
+&\approx C^5 \epsilon_{i}^4\epsilon_{i+1}^2 > 0.
 \end{aligned}
 $$
 
