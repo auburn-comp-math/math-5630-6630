@@ -335,6 +335,13 @@ which moves the new point to the other side of the root by almost reflection. Th
 By the previous definition of order of convergence, the Illinois method has an order of convergence $\sqrt[3]{3}$.
 ```
 
+```{prf:remark}
+:label: rmk-illinois-convergence
+A quick way of proof uses the asymptotic analysis. If we denote $\epsilon_{n} =x_n - x^{\ast}$, then if $\epsilon_{i} > 0$ and $\epsilon_{i-1} < 0$, then $\epsilon_{i+1} \simeq C \epsilon_{i}\epsilon_{i-1}$, where $C\approx \frac{f''(x^{\ast})}{2f'(x^{\ast})}$, here we may assume $C > 0$, then $\epsilon_{i+1} < 0$. The next iteration applies the same rule, which is $\epsilon_{i+2} \simeq C \epsilon_{i+1}\epsilon_{i} = C^2 \epsilon_i^2 \epsilon_{i-1} < 0$. Now, we need an adjustment step, which gives $\epsilon_{i+3} = -C^2 \epsilon_i^2 \epsilon_{i-1} > 0$, which completes a cycle. Every three iterations make a cycle, to derive the order of convergence, we continue to derive $\epsilon_{i+6}$, which equals to $-C^8\epsilon_{i}^6\epsilon_{i-1}^3 = C^2\epsilon_{i+3}^3$. Therefore, the order of convergence is $\sqrt[3]{3}$.
+```
+
+Let us finish this section with a brief discussion about the Pegasus method, which is a variant of the Illinois method. It is interesting that the Pegasus method was initially discovered in a subroutine for the **Ferranti Pegasus** computer, but no author information is included. The convergence analysis was given after {cite}`dowell1972pegasus`.
+
 ## Iterative Methods
 
 ### Newton-Raphson Method
@@ -347,8 +354,10 @@ By the previous definition of order of convergence, the Illinois method has an o
 
 ### Theoretical Part
 
-```{admonition} Problem 1
-Derive the convergence rate for the Pegasus method.
-```
-
 ### Computational Part
+
+## Extended Reading
+
+```{bibliography}
+:filter: docname in docnames
+```
