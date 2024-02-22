@@ -286,10 +286,6 @@ The big $O$ notation is used to describe the upper bound of a function. For inst
 Another notation is the big $\Theta$ notation, which is used to describe the upper and lower bounds of a function. For instance, $f(x) = \Theta(g(x))$ means that there exists constants $C_1$ and $C_2$ such that $C_1|g(x)| \le |f(x)| \le C_2|g(x)|$ for sufficiently large $x$.
 ```
 
-````{prf:proof}
-
-```
-
 ```{prf:proof}
 Let $f(x)\in C^2[a, b]$ and $x^{\ast}$ be the root. For simplicity, we assume the root is simple. Let $\ell(x)$ be the linear interpolation of $f$ at the bracket $[a, b]$, the slope is $f'(\zeta)=\frac{f(b) - f(a)}{b -a}$, then 
 

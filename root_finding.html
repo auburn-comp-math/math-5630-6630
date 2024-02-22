@@ -327,6 +327,17 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-convergence">Order of Convergence</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">Iterative Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-raphson-method">Newton-Raphson Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#secant-method">Secant Method</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-optimization">Applications in Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-part">Theoretical Part</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -593,8 +604,6 @@ x_n = 0.b_1 b_2\cdots b_{n-1} 1,
 <p>Another notation is the big <span class="math notranslate nohighlight">\(\Theta\)</span> notation, which is used to describe the upper and lower bounds of a function. For instance, <span class="math notranslate nohighlight">\(f(x) = \Theta(g(x))\)</span> means that there exists constants <span class="math notranslate nohighlight">\(C_1\)</span> and <span class="math notranslate nohighlight">\(C_2\)</span> such that <span class="math notranslate nohighlight">\(C_1|g(x)| \le |f(x)| \le C_2|g(x)|\)</span> for sufficiently large <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </aside>
 <div class="proof admonition" id="proof">
-<p>Proof. ```</p>
-<div class="proof admonition" id="proof">
 <p>Proof. Let <span class="math notranslate nohighlight">\(f(x)\in C^2[a, b]\)</span> and <span class="math notranslate nohighlight">\(x^{\ast}\)</span> be the root. For simplicity, we assume the root is simple. Let <span class="math notranslate nohighlight">\(\ell(x)\)</span> be the linear interpolation of <span class="math notranslate nohighlight">\(f\)</span> at the bracket <span class="math notranslate nohighlight">\([a, b]\)</span>, the slope is <span class="math notranslate nohighlight">\(f'(\zeta)=\frac{f(b) - f(a)}{b -a}\)</span>, then</p>
 <div class="math notranslate nohighlight">
 \[
@@ -638,18 +647,31 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 </ul>
 <p>By the previous definition of order of convergence, the Illinois method has an order of convergence <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>.</p>
 </div>
-<h2 class="rubric" id="iterative-methods">Iterative Methods</h2>
-<h3 class="rubric" id="newton-raphson-method">Newton-Raphson Method</h3>
-<h3 class="rubric" id="secant-method">Secant Method</h3>
-<h2 class="rubric" id="applications-in-optimization">Applications in Optimization</h2>
-<h2 class="rubric" id="exercises">Exercises</h2>
-<h3 class="rubric" id="theoretical-part">Theoretical Part</h3>
+</section>
+</section>
+<section id="iterative-methods">
+<h2>Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
+<section id="newton-raphson-method">
+<h3>Newton-Raphson Method<a class="headerlink" href="#newton-raphson-method" title="Link to this heading">#</a></h3>
+</section>
+<section id="secant-method">
+<h3>Secant Method<a class="headerlink" href="#secant-method" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="applications-in-optimization">
+<h2>Applications in Optimization<a class="headerlink" href="#applications-in-optimization" title="Link to this heading">#</a></h2>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<section id="theoretical-part">
+<h3>Theoretical Part<a class="headerlink" href="#theoretical-part" title="Link to this heading">#</a></h3>
 <div class="admonition-problem-1 admonition">
 <p class="admonition-title">Problem 1</p>
 <p>Derive the convergence rate for the Pegasus method.</p>
 </div>
-<h3 class="rubric" id="computational-part">Computational Part</h3>
-</div>
+</section>
+<section id="computational-part">
+<h3>Computational Part<a class="headerlink" href="#computational-part" title="Link to this heading">#</a></h3>
 </section>
 </section>
 </section>
@@ -722,6 +744,17 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bisection-method">Bisection Method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#false-position-method">False Position Method</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-convergence">Order of Convergence</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-methods">Iterative Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-raphson-method">Newton-Raphson Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#secant-method">Secant Method</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-optimization">Applications in Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-part">Theoretical Part</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
 </ul>
 </li>
 </ul>
