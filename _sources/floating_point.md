@@ -427,4 +427,5 @@ Suppose the inputs $\{x_j\}_{j=1}^n\subset \mathbb{R}$ are randomly distributed 
 See {cite}`higham2019new,higham1993accuracy,muller2006elementary`.
 
 ```{bibliography}
+:filter: docname in docnames
 ```

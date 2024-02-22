@@ -338,6 +338,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
             </nav>
         </div>
@@ -647,6 +648,12 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 </ul>
 <p>By the previous definition of order of convergence, the Illinois method has an order of convergence <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>.</p>
 </div>
+<div class="proof remark admonition" id="rmk-illinois-convergence">
+<p class="admonition-title"><span class="caption-number">Remark 3 </span></p>
+<section class="remark-content" id="proof-content">
+<p>A quick way of proof uses the asymptotic analysis. If we denote <span class="math notranslate nohighlight">\(\epsilon_{n} =x_n - x^{\ast}\)</span>, then if <span class="math notranslate nohighlight">\(\epsilon_{i} &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i-1} &lt; 0\)</span>, then <span class="math notranslate nohighlight">\(\epsilon_{i+1} \simeq C \epsilon_{i}\epsilon_{i-1}\)</span>, where <span class="math notranslate nohighlight">\(C\approx \frac{f''(x^{\ast})}{2f'(x^{\ast})}\)</span>, here we may assume <span class="math notranslate nohighlight">\(C &gt; 0\)</span>, then <span class="math notranslate nohighlight">\(\epsilon_{i+1} &lt; 0\)</span>. The next iteration applies the same rule, which is <span class="math notranslate nohighlight">\(\epsilon_{i+2} \simeq C \epsilon_{i+1}\epsilon_{i} = C^2 \epsilon_i^2 \epsilon_{i-1} &lt; 0\)</span>. Now, we need an adjustment step, which gives <span class="math notranslate nohighlight">\(\epsilon_{i+3} = -C^2 \epsilon_i^2 \epsilon_{i-1} &gt; 0\)</span>, which completes a cycle. Every three iterations make a cycle, to derive the order of convergence, we continue to derive <span class="math notranslate nohighlight">\(\epsilon_{i+6}\)</span>, which equals to <span class="math notranslate nohighlight">\(-C^8\epsilon_{i}^6\epsilon_{i-1}^3 = C^2\epsilon_{i+3}^3\)</span>. Therefore, the order of convergence is <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>.</p>
+</section>
+</div><p>Let us finish this section with a brief discussion about the Pegasus method, which is a variant of the Illinois method. It is interesting that the Pegasus method was initially discovered in a subroutine for the <strong>Ferranti Pegasus</strong> computer, but no author information is included. The convergence analysis was given after <span id="id1">[<a class="reference internal" href="#id6" title="M Dowell and P Jarratt. The “pegasus” method for computing the root of an equation. BIT Numerical Mathematics, 12:503–508, 1972.">Dowell and Jarratt, 1972</a>]</span>.</p>
 </section>
 </section>
 <section id="iterative-methods">
@@ -665,14 +672,21 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="theoretical-part">
 <h3>Theoretical Part<a class="headerlink" href="#theoretical-part" title="Link to this heading">#</a></h3>
-<div class="admonition-problem-1 admonition">
-<p class="admonition-title">Problem 1</p>
-<p>Derive the convergence rate for the Pegasus method.</p>
-</div>
 </section>
 <section id="computational-part">
 <h3>Computational Part<a class="headerlink" href="#computational-part" title="Link to this heading">#</a></h3>
 </section>
+</section>
+<section id="extended-reading">
+<h2>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id2">
+<div role="list" class="citation-list">
+<div class="citation" id="id6" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">DJ72</a><span class="fn-bracket">]</span></span>
+<p>M Dowell and P Jarratt. The “pegasus” method for computing the root of an equation. <em>BIT Numerical Mathematics</em>, 12:503–508, 1972.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -757,6 +771,7 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
   </nav></div>
 
