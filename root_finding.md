@@ -276,8 +276,19 @@ A common technique to study the order of convergence is to use the Taylor expans
 
 ````{prf:theorem}
 :label: thm-illinois-convergence
-The order of convergence of the Illinois method is at least $\sqrt[3]{3}$.
+The order of convergence of the Illinois method is $\sqrt[3]{3}$.
 ````
+
+```{margin} Big $O$ Notation
+
+The big $O$ notation is used to describe the upper bound of a function. For instance, $f(x) = O(g(x))$ means that there exists a constant $C$ such that $|f(x)| \le C|g(x)|$ for sufficiently large $x$. 
+
+Another notation is the big $\Theta$ notation, which is used to describe the upper and lower bounds of a function. For instance, $f(x) = \Theta(g(x))$ means that there exists constants $C_1$ and $C_2$ such that $C_1|g(x)| \le |f(x)| \le C_2|g(x)|$ for sufficiently large $x$.
+```
+
+````{prf:proof}
+
+```
 
 ```{prf:proof}
 Let $f(x)\in C^2[a, b]$ and $x^{\ast}$ be the root. For simplicity, we assume the root is simple. Let $\ell(x)$ be the linear interpolation of $f$ at the bracket $[a, b]$, the slope is $f'(\zeta)=\frac{f(b) - f(a)}{b -a}$, then 
@@ -321,13 +332,12 @@ c' - x^{\ast} &= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\righ
 $$
 which moves the new point to the other side of the root by almost reflection. The next bracket becomes $[c, c']$ such that $|c - x^{\ast}|\approx |c' - x^{\ast}|$. Therefore, if denote the last two points as $c = x_{n}$ and $c'=x_{n+1}$, then $|x_{n} - x^{\ast}|\approx |x_{n+1} - x^{\ast}|$, currently $c'$ is on the right side of the root. The next three iterations satisfy
 
--  $|x_{n+2} - x^{\ast}| = O(|x_n - x^{\ast}| |x_{n+1} - x^{\ast}|) = O(|x_{n+1} - x^{\ast}|^2) $, the iteration $x_{n+2}$ is on left side. 
--  $|x_{n+3} - x^{\ast}| = O(|x_{n+2} - x^{\ast}||x_{n+1} - x^{\ast}|) = O(|x_{n+1} - x^{\ast}|^3)$, the iteration $x_{n+3}$ is on left side, now two consecutive iterations on left side
-- $|x_{n+4} - x^{\ast}| = O(|x_{n+3} - x^{\ast}|) = O(|x_{n+1} - x^{\ast}|^3)$, adjusted by Illinois method, the iteration $x_{n+4}$ is on right side, which completes a cycle.
+-  $|x_{n+2} - x^{\ast}| = \Theta(|x_n - x^{\ast}| |x_{n+1} - x^{\ast}|) = \Theta(|x_{n+1} - x^{\ast}|^2) $, the iteration $x_{n+2}$ is on left side. 
+-  $|x_{n+3} - x^{\ast}| = \Theta(|x_{n+2} - x^{\ast}||x_{n+1} - x^{\ast}|) = \Theta(|x_{n+1} - x^{\ast}|^3)$, the iteration $x_{n+3}$ is on left side, now two consecutive iterations on left side
+- $|x_{n+4} - x^{\ast}| = \Theta(|x_{n+3} - x^{\ast}|) = \Theta(|x_{n+1} - x^{\ast}|^3)$, adjusted by Illinois method, the iteration $x_{n+4}$ is on right side, which completes a cycle.
 
-By the previous definition of order of convergence, the Illinois method has an order of convergence at least $\sqrt[3]{3}$.
+By the previous definition of order of convergence, the Illinois method has an order of convergence $\sqrt[3]{3}$.
 ```
-
 
 ## Iterative Methods
 
