@@ -388,7 +388,7 @@ $$
 &\approx C^2 \epsilon_{i}^2\epsilon_{i+2} - D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
 \end{aligned}
 $$
-it implies $\epsilon_{i+3} < 0$ as well. Therefore, another adjustment step is needed and (after some more calculations)
+it implies $\epsilon_{i+3} < 0$ as well. Therefore, another adjustment step is needed and (after some more calculations, see {prf:ref}`rmk-pegasus-asymptotic`)
 
 $$
 \begin{aligned}
@@ -404,6 +404,23 @@ $$
 $$
 
 The order of convergence $p$ solves $p^2 - 7p - 2 = 0$, which gives $p = \sqrt[4]{\frac{7+\sqrt{57}}{2}}$.
+```
+
+```{prf:remark}
+:label: rmk-pegasus-asymptotic
+Actually, the asymptotic expansion of $\epsilon_{i+4}$ is (expanded in $\epsilon_{i+1}$ first )
+
+$$
+\epsilon_{i+4} = C^5 \epsilon_{i}^4\epsilon_{i+1}^2 + C^7 \epsilon_i^7\epsilon_{i+1}
++ O(\epsilon_{i}^8 \epsilon_{i+1} + \epsilon_{i}^5 \epsilon_{i+1}^2 + \epsilon_{i}^3 \epsilon_{i+1}^3)$$
+
+It is at first not clear why we can retain the first term and drop the rest, because it requires the following inequalities to hold
+
+$$\epsilon_{i}^3 \ll \epsilon_{i+1}\ll \epsilon_i.$$
+
+The latter one is correct because of the relation $\epsilon_{i+1} \simeq C \epsilon_{i}\epsilon_{i-1} \ll \epsilon_i$ once the iterations are close to the root. The former one is equivalent to $\epsilon_{i}^2 \ll \epsilon_{i-1}$. This can be made into an assumption because $\epsilon_{i-1}$ and $\epsilon_{i}$ are the last two iterations in the previous cycle, which correspond to $\epsilon_{i+3}$ and $\epsilon_{i+4}$ in the current cycle, we can use the above asymptotic estimate to find $\epsilon_{i+3}^3 \approx C^6 \epsilon_{i}^9 \epsilon_{i+1}^3 \ll \epsilon_{i+4}$. 
+
+Therefore, if the inequality does not hold, one can use the current cycle as the starting point to perform the same analysis.
 ```
 
 ## Iterative Methods

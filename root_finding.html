@@ -691,7 +691,7 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 &amp;\approx C^2 \epsilon_{i}^2\epsilon_{i+2} - D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
 \end{aligned}
 \end{split}\]</div>
-<p>it implies <span class="math notranslate nohighlight">\(\epsilon_{i+3} &lt; 0\)</span> as well. Therefore, another adjustment step is needed and (after some more calculations)</p>
+<p>it implies <span class="math notranslate nohighlight">\(\epsilon_{i+3} &lt; 0\)</span> as well. Therefore, another adjustment step is needed and (after some more calculations, see <a class="reference internal" href="#rmk-pegasus-asymptotic">Remark 4</a>)</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -706,7 +706,21 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 \]</div>
 <p>The order of convergence <span class="math notranslate nohighlight">\(p\)</span> solves <span class="math notranslate nohighlight">\(p^2 - 7p - 2 = 0\)</span>, which gives <span class="math notranslate nohighlight">\(p = \sqrt[4]{\frac{7+\sqrt{57}}{2}}\)</span>.</p>
 </div>
+<div class="proof remark admonition" id="rmk-pegasus-asymptotic">
+<p class="admonition-title"><span class="caption-number">Remark 4 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Actually, the asymptotic expansion of <span class="math notranslate nohighlight">\(\epsilon_{i+4}\)</span> is (expanded in <span class="math notranslate nohighlight">\(\epsilon_{i+1}\)</span> first )</p>
+<div class="math notranslate nohighlight">
+\[
+\epsilon_{i+4} = C^5 \epsilon_{i}^4\epsilon_{i+1}^2 + C^7 \epsilon_i^7\epsilon_{i+1}
++ O(\epsilon_{i}^8 \epsilon_{i+1} + \epsilon_{i}^5 \epsilon_{i+1}^2 + \epsilon_{i}^3 \epsilon_{i+1}^3)\]</div>
+<p>It is at first not clear why we can retain the first term and drop the rest, because it requires the following inequalities to hold</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{i}^3 \ll \epsilon_{i+1}\ll \epsilon_i.\]</div>
+<p>The latter one is correct because of the relation <span class="math notranslate nohighlight">\(\epsilon_{i+1} \simeq C \epsilon_{i}\epsilon_{i-1} \ll \epsilon_i\)</span> once the iterations are close to the root. The former one is equivalent to <span class="math notranslate nohighlight">\(\epsilon_{i}^2 \ll \epsilon_{i-1}\)</span>. This can be made into an assumption because <span class="math notranslate nohighlight">\(\epsilon_{i-1}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i}\)</span> are the last two iterations in the previous cycle, which correspond to <span class="math notranslate nohighlight">\(\epsilon_{i+3}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i+4}\)</span> in the current cycle, we can use the above asymptotic estimate to find <span class="math notranslate nohighlight">\(\epsilon_{i+3}^3 \approx C^6 \epsilon_{i}^9 \epsilon_{i+1}^3 \ll \epsilon_{i+4}\)</span>.</p>
+<p>Therefore, if the inequality does not hold, one can use the current cycle as the starting point to perform the same analysis.</p>
 </section>
+</div></section>
 </section>
 <section id="iterative-methods">
 <h2>Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
