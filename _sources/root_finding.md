@@ -378,14 +378,14 @@ $$
 
 where $D = -C^2 + \frac{f'''}{6f'}|_{x=x^{\ast}}$. Then due to a different sign for $\epsilon_{i}$ and $\epsilon_{i+1}$, we can derive 
 
-$$\epsilon_{i+2}\simeq C \epsilon_{i+1}\epsilon_{i} + + D \epsilon_{i+1} \epsilon_{i}(\epsilon_{i+1} + \epsilon_{i}) < 0.$$
+$$\epsilon_{i+2}\simeq C \epsilon_{i+1}\epsilon_{i} + D \epsilon_{i+1} \epsilon_{i}(\epsilon_{i+1} + \epsilon_{i}) < 0.$$
 
 Now use the adjustment step, we obtain (needs some calculation)
 
 $$
 \begin{aligned}
 \epsilon_{i+3} &= \frac{\epsilon_{i+2}\lambda f(x_i) - \epsilon_i f(x_{i+2})}{\lambda f(x_{i}) - f(x_{i+2})},\quad \lambda = \frac{f(x_{i+1})}{f(x_{i+2}) + f(x_{i+1})}\\
-&\approx C^2 \epsilon_{i}^2\epsilon_{i+2} + D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
+&\approx C^2 \epsilon_{i}^2\epsilon_{i+2} - D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
 \end{aligned}
 $$
 it implies $\epsilon_{i+3} < 0$ as well. Therefore, another adjustment step is needed and (after some more calculations)

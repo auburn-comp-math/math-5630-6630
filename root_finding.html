@@ -682,13 +682,13 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(D = -C^2 + \frac{f'''}{6f'}|_{x=x^{\ast}}\)</span>. Then due to a different sign for <span class="math notranslate nohighlight">\(\epsilon_{i}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i+1}\)</span>, we can derive</p>
 <div class="math notranslate nohighlight">
-\[\epsilon_{i+2}\simeq C \epsilon_{i+1}\epsilon_{i} + + D \epsilon_{i+1} \epsilon_{i}(\epsilon_{i+1} + \epsilon_{i}) &lt; 0.\]</div>
+\[\epsilon_{i+2}\simeq C \epsilon_{i+1}\epsilon_{i} + D \epsilon_{i+1} \epsilon_{i}(\epsilon_{i+1} + \epsilon_{i}) &lt; 0.\]</div>
 <p>Now use the adjustment step, we obtain (needs some calculation)</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
 \epsilon_{i+3} &amp;= \frac{\epsilon_{i+2}\lambda f(x_i) - \epsilon_i f(x_{i+2})}{\lambda f(x_{i}) - f(x_{i+2})},\quad \lambda = \frac{f(x_{i+1})}{f(x_{i+2}) + f(x_{i+1})}\\
-&amp;\approx C^2 \epsilon_{i}^2\epsilon_{i+2} + D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
+&amp;\approx C^2 \epsilon_{i}^2\epsilon_{i+2} - D \epsilon_{i} \epsilon_{i+1} \epsilon_{i+2}, 
 \end{aligned}
 \end{split}\]</div>
 <p>it implies <span class="math notranslate nohighlight">\(\epsilon_{i+3} &lt; 0\)</span> as well. Therefore, another adjustment step is needed and (after some more calculations)</p>
