@@ -60,19 +60,19 @@ $$
 {c} = \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}.
 $$
 
-where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are initially set to $1$. If the same side updates twice, the weight of the other side will be halved. If the side changes, the weight on the new bracket point will be reset to $1$. See {prf:ref}``AL-ILLINOIS``.
+where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are initially set to $1$. If the same side is about to update twice, the weight of the other side will be halved. If not, the weight on the new bracket point will be reset to $1$. See {prf:ref}``AL-ILLINOIS``.
 
 ```{margin}
-The choice of decay factor $\frac{1}{2}$ is optimal if it has to be a constant. The factor can be replaced with other variable values. Two usual replacements are **Pegasus** method and **Anderson-Bjorck** method.
+The choice of decay factor $\frac{1}{2}$ is optimal if it has to be a constant (explain later). The factor can be replaced with other variable values. A usual replacement is the **Pegasus** method.
 
-The essential changes in the algorithm are:
+Essentially, the **Pegasus** method replaces $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}$ and replaces $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}$.
 
-- **Pegasus**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}$.
-- **Anderson-Bjorck**: replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b m_b$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a m_a$, where 
+<!-- - **Anderson-Bjorck**: it is slightly different, instead of detecting two consecutive false position iterations on the same side, it will try to prevent two consecutive false position iterations on the same side by interchanging endpoints. Otherwise, it replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b m_b$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a m_a$, where 
 
     $$m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
 
     $$m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
+-->
 ```
 
 ```{prf:algorithm} Illinois Method
@@ -422,6 +422,35 @@ The latter one is correct because of the relation $\epsilon_{i+1} \simeq C \epsi
 
 Therefore, if the inequality does not hold, one can use the current cycle as the starting point to perform the same analysis.
 ```
+
+In Pegasus method, we performed two standard false position steps in a full cycle followed by two adjustment steps. Although the decay over a full cycle is significant, such advantage will be gone if the cycle is long. In order to make the cycle short, the second standard false position step seems unnecessary (because it does not help to make the cycle shorter). 
+
+
+In the Anderson-Bjorck method, the idea is to avoid consecutive usages of standard false position steps. In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that 
+
+$$\epsilon_{i+1}\simeq C \epsilon_i \epsilon_{i-1} + D \epsilon_i \epsilon_{i-1}(\epsilon_{i} + \epsilon_{i-1}) < 0.$$
+
+For the second iteration, although $x_{i+1}$ and $x_{i}$ are on different sides, but a false position step has been performed in the previous step, thus it will perform adjustment step with $\lambda = \frac{f(x_{i}) - f(x_{i+1})}{f(x_{i})}$, then 
+
+$$\epsilon_{i+2} \simeq -D \epsilon_{i+1}\epsilon_{i}\epsilon_{i-1},$$
+
+note the leading term is different from the Pegasus method. There are two options. 
+
+- If $D < 0$, then $\epsilon_{i+2} > 0$ which completes a cycle with two iterations, which is very compact. In this case, we find 
+
+    $$\epsilon_{i+4} \simeq C^{2}  \epsilon_{i+2}^3,$$
+
+    which implies an order of convergence at $\sqrt{3}$.
+
+- If $D > 0$, then it will perform another adjustment step, 
+
+    $$\epsilon_{i+3} =  \frac{\epsilon_{i+2}\lambda f(x_i) - \epsilon_i f(x_{i+2})}{\lambda f(x_{i}) - f(x_{i+2})},\quad \lambda = \frac{f(x_{i+1})-f(x_{i+2})}{f(x_{i+1})}\frac{f(x_{i})-f(x_{i+1}) }{ f(x_{i})}$$
+
+    which will make $\epsilon_{i+3} \simeq -C^3 D \epsilon_{i-1}^3 \epsilon_i^3 > 0$, which completes a cycle with three iterations. In this case, we find 
+
+    $$\epsilon_{i+6} \simeq D^{2}  \epsilon_{i+3}^5,$$
+
+    which implies an order of convergence at $\sqrt[3]{5}$.
 
 ## Iterative Methods
 
