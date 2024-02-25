@@ -380,8 +380,13 @@ document.write(`
 <p>The false position method is also guaranteed to converge to a root if <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span> and the implementation is quite similar to the bisection method. It usually converges faster than the bisection method, but sometimes exceptions occur.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When <span class="math notranslate nohighlight">\(f''\)</span> keeps the same sign over <span class="math notranslate nohighlight">\([a, b]\)</span>, it is not hard to show that only one side of the bracket is updating. The bracket size will never decrease to zero, which is different from the bisection method. In the following, we use an example to illustrate this. The function <span class="math notranslate nohighlight">\(f(x) = x^2 - 1\)</span> over the initial bracket <span class="math notranslate nohighlight">\([0, 2]\)</span>. The left endpoint is updating to the root while the right endpoint is fixed at <span class="math notranslate nohighlight">\(2\)</span>.</p>
-<img alt="false position method" class="align-center" id="root-finding-false-img" src="_images/root_finding_img_0.png" />
+<p>When <span class="math notranslate nohighlight">\(f''\)</span> keeps the same sign over <span class="math notranslate nohighlight">\([a, b]\)</span>, it is not hard to show that only one side of the bracket is updating. The bracket size will never decrease to zero, which is different from the bisection method. In the following, we use an example to illustrate this, see <a class="reference internal" href="#root-finding-false-img"><span class="std std-numref">Fig. 1</span></a>. The function <span class="math notranslate nohighlight">\(f(x) = x^2 - 1\)</span> over the initial bracket <span class="math notranslate nohighlight">\([0, 2]\)</span>. The left endpoint is updating to the root while the right endpoint is fixed at <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<figure class="align-center" id="root-finding-false-img">
+<a class="reference internal image-reference" href="_images/root_finding_img_0.png"><img alt="_images/root_finding_img_0.png" src="_images/root_finding_img_0.png" style="width: 427.20000000000005px; height: 330.40000000000003px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">False position method</span><a class="headerlink" href="#root-finding-false-img" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </div>
 <p>It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the <strong>Illinois method</strong>. Once the same side has updated in two consecutive iterations, the Illinois method will adjust <span class="math notranslate nohighlight">\(c\)</span> using a slightly different formula.</p>
 <div class="math notranslate nohighlight">
@@ -430,8 +435,13 @@ document.write(`
 </section>
 </div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint <span class="math notranslate nohighlight">\(f(b)\)</span> into <span class="math notranslate nohighlight">\(\frac{1}{2} f(b)\)</span> to compute the new <span class="math notranslate nohighlight">\(c\)</span>, which makes the selected point <span class="math notranslate nohighlight">\({c}\)</span> closer to the right endpoint than the false position method.</p>
-<img alt="Illinois method" class="align-center" id="root-finding-illinois-img" src="_images/root_finding_img_1.png" />
+<p>We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint <span class="math notranslate nohighlight">\(f(b)\)</span> into <span class="math notranslate nohighlight">\(\frac{1}{2} f(b)\)</span> to compute the new <span class="math notranslate nohighlight">\(c\)</span>, which makes the selected point <span class="math notranslate nohighlight">\({c}\)</span> closer to the right endpoint than the false position method, see <a class="reference internal" href="#root-finding-illinois-img"><span class="std std-numref">Fig. 2</span></a>.</p>
+<figure class="align-center" id="root-finding-illinois-img">
+<a class="reference internal image-reference" href="_images/root_finding_img_1.png"><img alt="_images/root_finding_img_1.png" src="_images/root_finding_img_1.png" style="width: 427.20000000000005px; height: 330.40000000000003px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Illinois method</span><a class="headerlink" href="#root-finding-illinois-img" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </div>
 <aside class="margin sidebar">
 <p class="sidebar-title">Stopping Criteria</p>
@@ -719,7 +729,8 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 </section>
 </div><p>In the Pegasus method, two consecutive standard false position steps and two adjustment steps are performed in a full cycle. Although the decay over a full cycle is significant, such advantage will be gone if the cycle is long.</p>
 <p>In order to make the cycle shorter, we need to drop at least one step. According to the previous analysis (see Illinois method), the standard false position step does not change the sign of the error asymptotically, thus it is preferred to drop one of the standard false position steps.</p>
-<p>Let us finish this section with a brief discussion on the <strong>Anderson-Bjorck</strong> method, which uses a interchanging strategy to avoid consecutive standard false position steps.</p>
+<p>Let us finish this section with a brief discussion on the <strong>Anderson-Bjorck</strong> method, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps.</p>
+<!-- add algorithm here -->
 <div class="proof remark admonition" id="remark-9">
 <p class="admonition-title"><span class="caption-number">Remark 5 </span></p>
 <section class="remark-content" id="proof-content">
