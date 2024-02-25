@@ -353,7 +353,7 @@ Now, we need an adjustment step, which gives $\epsilon_{i+3} = -C^2 \epsilon_i^2
 Therefore, the order of convergence is $\sqrt[3]{3}$.
 ```
 
-Let us finish this section with a brief discussion about the Pegasus method, which is a variant of the Illinois method. It is interesting that the Pegasus method was initially discovered in a subroutine for the **Ferranti Pegasus** computer, but no author information is included. The convergence analysis was given after {cite}`dowell1972pegasus`.
+By taking the decay factor as a constant, the order of convergence is at most $\sqrt[3]{3}$. However, if the decay factor can be chosen as a variable one, the order of convergence can be improved. Next, we apply the same technique to analyze the Pegasus method, which is a variant of the Illinois method. It is interesting that the Pegasus method was initially discovered in a subroutine for the **Ferranti Pegasus** computer, but no author information is included. The convergence analysis was given by {cite}`dowell1972pegasus` after its discovery.
 
 ```{prf:theorem} Pegasus Method
 :label: thm-pegasus-convergence
@@ -423,34 +423,41 @@ The latter one is correct because of the relation $\epsilon_{i+1} \simeq C \epsi
 Therefore, if the inequality does not hold, one can use the current cycle as the starting point to perform the same analysis.
 ```
 
-In Pegasus method, we performed two standard false position steps in a full cycle followed by two adjustment steps. Although the decay over a full cycle is significant, such advantage will be gone if the cycle is long. In order to make the cycle short, the second standard false position step seems unnecessary (because it does not help to make the cycle shorter). 
+In the Pegasus method, two consecutive standard false position steps and two adjustment steps are performed in a full cycle. Although the decay over a full cycle is significant, such advantage will be gone if the cycle is long.
 
+In order to make the cycle shorter, we need to drop at least one step. According to the previous analysis (see Illinois method), the standard false position step does not change the sign of the error asymptotically, thus it is preferred to drop one of the standard false position steps.
 
-In the Anderson-Bjorck method, the idea is to avoid consecutive usages of standard false position steps. In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that 
+Let us finish this section with a brief discussion on the **Anderson-Bjorck** method, which uses a interchanging strategy to avoid consecutive standard false position steps.
+
+```{prf:remark}
+
+In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that
 
 $$\epsilon_{i+1}\simeq C \epsilon_i \epsilon_{i-1} + D \epsilon_i \epsilon_{i-1}(\epsilon_{i} + \epsilon_{i-1}) < 0.$$
 
-For the second iteration, although $x_{i+1}$ and $x_{i}$ are on different sides, but a false position step has been performed in the previous step, thus it will perform adjustment step with $\lambda = \frac{f(x_{i}) - f(x_{i+1})}{f(x_{i})}$, then 
+For the second iteration, although $x_{i+1}$ and $x_{i}$ are on different sides, but a false position step has been performed in the previous step, thus it will perform adjustment step with $\lambda = \frac{f(x_{i}) - f(x_{i+1})}{f(x_{i})}$, then
 
 $$\epsilon_{i+2} \simeq -D \epsilon_{i+1}\epsilon_{i}\epsilon_{i-1},$$
 
-note the leading term is different from the Pegasus method. There are two options. 
+note the leading term is different from the Pegasus method. There are two options.
 
-- If $D < 0$, then $\epsilon_{i+2} > 0$ which completes a cycle with two iterations, which is very compact. In this case, we find 
+- If $D < 0$, then $\epsilon_{i+2} > 0$ which completes a cycle with two iterations, which is very compact. In this case, we find
 
     $$\epsilon_{i+4} \simeq C^{2}  \epsilon_{i+2}^3,$$
 
     which implies an order of convergence at $\sqrt{3}$.
 
-- If $D > 0$, then it will perform another adjustment step, 
+- If $D > 0$, then it will perform another adjustment step,
 
     $$\epsilon_{i+3} =  \frac{\epsilon_{i+2}\lambda f(x_i) - \epsilon_i f(x_{i+2})}{\lambda f(x_{i}) - f(x_{i+2})},\quad \lambda = \frac{f(x_{i+1})-f(x_{i+2})}{f(x_{i+1})}\frac{f(x_{i})-f(x_{i+1}) }{ f(x_{i})}$$
 
-    which will make $\epsilon_{i+3} \simeq -C^3 D \epsilon_{i-1}^3 \epsilon_i^3 > 0$, which completes a cycle with three iterations. In this case, we find 
+    which will make $\epsilon_{i+3} \simeq -C^3 D \epsilon_{i-1}^3 \epsilon_i^3 > 0$, which completes a cycle with three iterations. In this case, we find
 
     $$\epsilon_{i+6} \simeq D^{2}  \epsilon_{i+3}^5,$$
 
     which implies an order of convergence at $\sqrt[3]{5}$.
+
+```
 
 ## Iterative Methods
 

@@ -658,7 +658,7 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 <p>Now, we need an adjustment step, which gives <span class="math notranslate nohighlight">\(\epsilon_{i+3} = -C^2 \epsilon_i^2 \epsilon_{i-1} &gt; 0\)</span>, which completes a cycle. Every three iterations make a cycle, to derive the order of convergence, we continue to derive <span class="math notranslate nohighlight">\(\epsilon_{i+6}\)</span>, which equals to <span class="math notranslate nohighlight">\(-C^8\epsilon_{i}^6\epsilon_{i-1}^3 = C^2\epsilon_{i+3}^3\)</span>.</p>
 <p>Therefore, the order of convergence is <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>.</p>
 </section>
-</div><p>Let us finish this section with a brief discussion about the Pegasus method, which is a variant of the Illinois method. It is interesting that the Pegasus method was initially discovered in a subroutine for the <strong>Ferranti Pegasus</strong> computer, but no author information is included. The convergence analysis was given after <span id="id1">[<a class="reference internal" href="#id6" title="M Dowell and P Jarratt. The “pegasus” method for computing the root of an equation. BIT Numerical Mathematics, 12:503–508, 1972.">Dowell and Jarratt, 1972</a>]</span>.</p>
+</div><p>By taking the decay factor as a constant, the order of convergence is at most <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>. However, if the decay factor can be chosen as a variable one, the order of convergence can be improved. Next, we apply the same technique to analyze the Pegasus method, which is a variant of the Illinois method. It is interesting that the Pegasus method was initially discovered in a subroutine for the <strong>Ferranti Pegasus</strong> computer, but no author information is included. The convergence analysis was given by <span id="id1">[<a class="reference internal" href="#id6" title="M Dowell and P Jarratt. The “pegasus” method for computing the root of an equation. BIT Numerical Mathematics, 12:503–508, 1972.">Dowell and Jarratt, 1972</a>]</span> after its discovery.</p>
 <div class="proof theorem admonition" id="thm-pegasus-convergence">
 <p class="admonition-title"><span class="caption-number">Theorem 6 </span> (Pegasus Method)</p>
 <section class="theorem-content" id="proof-content">
@@ -717,8 +717,13 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 <p>The latter one is correct because of the relation <span class="math notranslate nohighlight">\(\epsilon_{i+1} \simeq C \epsilon_{i}\epsilon_{i-1} \ll \epsilon_i\)</span> once the iterations are close to the root. The former one is equivalent to <span class="math notranslate nohighlight">\(\epsilon_{i}^2 \ll \epsilon_{i-1}\)</span>. This can be made into an assumption because <span class="math notranslate nohighlight">\(\epsilon_{i-1}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i}\)</span> are the last two iterations in the previous cycle, which correspond to <span class="math notranslate nohighlight">\(\epsilon_{i+3}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i+4}\)</span> in the current cycle, we can use the above asymptotic estimate to find <span class="math notranslate nohighlight">\(\epsilon_{i+3}^3 \approx C^6 \epsilon_{i}^9 \epsilon_{i+1}^3 \ll \epsilon_{i+4}\)</span>.</p>
 <p>Therefore, if the inequality does not hold, one can use the current cycle as the starting point to perform the same analysis.</p>
 </section>
-</div><p>In Pegasus method, we performed two standard false position steps in a full cycle followed by two adjustment steps. Although the decay over a full cycle is significant, such advantage will be gone if the cycle is long. In order to make the cycle short, the second standard false position step seems unnecessary (because it does not help to make the cycle shorter).</p>
-<p>In the Anderson-Bjorck method, the idea is to avoid consecutive usages of standard false position steps. In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that</p>
+</div><p>In the Pegasus method, two consecutive standard false position steps and two adjustment steps are performed in a full cycle. Although the decay over a full cycle is significant, such advantage will be gone if the cycle is long.</p>
+<p>In order to make the cycle shorter, we need to drop at least one step. According to the previous analysis (see Illinois method), the standard false position step does not change the sign of the error asymptotically, thus it is preferred to drop one of the standard false position steps.</p>
+<p>Let us finish this section with a brief discussion on the <strong>Anderson-Bjorck</strong> method, which uses a interchanging strategy to avoid consecutive standard false position steps.</p>
+<div class="proof remark admonition" id="remark-9">
+<p class="admonition-title"><span class="caption-number">Remark 5 </span></p>
+<section class="remark-content" id="proof-content">
+<p>In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that</p>
 <div class="math notranslate nohighlight">
 \[\epsilon_{i+1}\simeq C \epsilon_i \epsilon_{i-1} + D \epsilon_i \epsilon_{i-1}(\epsilon_{i} + \epsilon_{i-1}) &lt; 0.\]</div>
 <p>For the second iteration, although <span class="math notranslate nohighlight">\(x_{i+1}\)</span> and <span class="math notranslate nohighlight">\(x_{i}\)</span> are on different sides, but a false position step has been performed in the previous step, thus it will perform adjustment step with <span class="math notranslate nohighlight">\(\lambda = \frac{f(x_{i}) - f(x_{i+1})}{f(x_{i})}\)</span>, then</p>
@@ -741,6 +746,7 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 </li>
 </ul>
 </section>
+</div></section>
 </section>
 <section id="iterative-methods">
 <h2>Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
