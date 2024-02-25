@@ -45,13 +45,17 @@ $$c = \frac{f(b)}{f(b) - f(a)} a + \frac{-f(a)}{f(b) - f(a)} b = \frac{f(b) a - 
 The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$ and the implementation is quite similar to the bisection method. It usually converges faster than the bisection method, but sometimes exceptions occur.
 
 ````{note}
-When $f''$ keeps the same sign over $[a, b]$, it is not hard to show that only one side of the bracket is updating. The bracket size will never decrease to zero, which is different from the bisection method. In the following, we use an example to illustrate this. The function $f(x) = x^2 - 1$ over the initial bracket $[0, 2]$. The left endpoint is updating to the root while the right endpoint is fixed at $2$.
+When $f''$ keeps the same sign over $[a, b]$, it is not hard to show that only one side of the bracket is updating. The bracket size will never decrease to zero, which is different from the bisection method. In the following, we use an example to illustrate this, see {numref}`root-finding-false-img`. The function $f(x) = x^2 - 1$ over the initial bracket $[0, 2]$. The left endpoint is updating to the root while the right endpoint is fixed at $2$.
 
-```{image} images/doc/root_finding_img_0.png
-:name: root-finding-false-img
-:alt: false position method
-:align: center
+```{figure} images/doc/root_finding_img_0.png
+---
+name: root-finding-false-img
+scale: 80%
+align: center
+---
+False position method
 ```
+
 ````
 
 It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the **Illinois method**. Once the same side has updated in two consecutive iterations, the Illinois method will adjust $c$ using a slightly different formula.
@@ -98,12 +102,15 @@ Essentially, the **Pegasus** method replaces $\lambda_b \gets \lambda_b/2$ with 
 ```
 
 ````{note}
-We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint $f(b)$ into $\frac{1}{2} f(b)$ to compute the new $c$, which makes the selected point ${c}$ closer to the right endpoint than the false position method.
+We use the previous example to illustrate the difference between the false position method and the Illinois method. At the second iteration, the Illinois method finds the updating is still on left side, so it modifies right endpoint $f(b)$ into $\frac{1}{2} f(b)$ to compute the new $c$, which makes the selected point ${c}$ closer to the right endpoint than the false position method, see {numref}`root-finding-illinois-img`.
 
-```{image} images/doc/root_finding_img_1.png
-:name: root-finding-illinois-img
-:alt: Illinois method
-:align: center
+```{figure} images/doc/root_finding_img_1.png
+---
+name: root-finding-illinois-img
+scale: 80%
+align: center
+---
+Illinois method
 ```
 ````
 
@@ -427,8 +434,9 @@ In the Pegasus method, two consecutive standard false position steps and two adj
 
 In order to make the cycle shorter, we need to drop at least one step. According to the previous analysis (see Illinois method), the standard false position step does not change the sign of the error asymptotically, thus it is preferred to drop one of the standard false position steps.
 
-Let us finish this section with a brief discussion on the **Anderson-Bjorck** method, which uses a interchanging strategy to avoid consecutive standard false position steps.
+Let us finish this section with a brief discussion on the **Anderson-Bjorck** method, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps.
 
+<!-- add algorithm here -->
 ```{prf:remark}
 
 In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that
