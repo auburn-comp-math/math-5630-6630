@@ -388,20 +388,17 @@ document.write(`
 \[
 {c} = \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}.
 \]</div>
-<p>where the weights <span class="math notranslate nohighlight">\(\lambda_a\)</span> and <span class="math notranslate nohighlight">\(\lambda_b\)</span> are the weights. The weights are initially set to <span class="math notranslate nohighlight">\(1\)</span>. If the same side updates twice, the weight of the other side will be halved. If the side changes, the weight on the new bracket point will be reset to <span class="math notranslate nohighlight">\(1\)</span>. See <a class="reference internal" href="#AL-ILLINOIS">Algorithm 2</a>.</p>
+<p>where the weights <span class="math notranslate nohighlight">\(\lambda_a\)</span> and <span class="math notranslate nohighlight">\(\lambda_b\)</span> are the weights. The weights are initially set to <span class="math notranslate nohighlight">\(1\)</span>. If the same side is about to update twice, the weight of the other side will be halved. If not, the weight on the new bracket point will be reset to <span class="math notranslate nohighlight">\(1\)</span>. See <a class="reference internal" href="#AL-ILLINOIS">Algorithm 2</a>.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
-<p>The choice of decay factor <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> is optimal if it has to be a constant. The factor can be replaced with other variable values. Two usual replacements are <strong>Pegasus</strong> method and <strong>Anderson-Bjorck</strong> method.</p>
-<p>The essential changes in the algorithm are:</p>
-<ul>
-<li><p><strong>Pegasus</strong>: replace <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}\)</span> and replace <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}\)</span>.</p></li>
-<li><p><strong>Anderson-Bjorck</strong>: replace <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b m_b\)</span> and replace <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a m_a\)</span>, where</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &amp;\text{if positive}\\ \frac{1}{2} &amp;\text{otherwise}\end{cases}\end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[\begin{split}m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &amp;\text{if positive}\\ \frac{1}{2} &amp;\text{otherwise}\end{cases}\end{split}\]</div>
-</li>
-</ul>
+<p>The choice of decay factor <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> is optimal if it has to be a constant (explain later). The factor can be replaced with other variable values. A usual replacement is the <strong>Pegasus</strong> method.</p>
+<p>Essentially, the <strong>Pegasus</strong> method replaces <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}\)</span> and replaces <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}\)</span>.</p>
+<!-- - **Anderson-Bjorck**: it is slightly different, instead of detecting two consecutive false position iterations on the same side, it will try to prevent two consecutive false position iterations on the same side by interchanging endpoints. Otherwise, it replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b m_b$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a m_a$, where 
+
+    $$m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
+
+    $$m_b = \begin{cases}1 - \frac{f(c)}{f(a)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
+-->
 </aside>
 <div class="proof algorithm admonition" id="AL-ILLINOIS">
 <p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Illinois Method)</p>
@@ -720,7 +717,30 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 <p>The latter one is correct because of the relation <span class="math notranslate nohighlight">\(\epsilon_{i+1} \simeq C \epsilon_{i}\epsilon_{i-1} \ll \epsilon_i\)</span> once the iterations are close to the root. The former one is equivalent to <span class="math notranslate nohighlight">\(\epsilon_{i}^2 \ll \epsilon_{i-1}\)</span>. This can be made into an assumption because <span class="math notranslate nohighlight">\(\epsilon_{i-1}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i}\)</span> are the last two iterations in the previous cycle, which correspond to <span class="math notranslate nohighlight">\(\epsilon_{i+3}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i+4}\)</span> in the current cycle, we can use the above asymptotic estimate to find <span class="math notranslate nohighlight">\(\epsilon_{i+3}^3 \approx C^6 \epsilon_{i}^9 \epsilon_{i+1}^3 \ll \epsilon_{i+4}\)</span>.</p>
 <p>Therefore, if the inequality does not hold, one can use the current cycle as the starting point to perform the same analysis.</p>
 </section>
-</div></section>
+</div><p>In Pegasus method, we performed two standard false position steps in a full cycle followed by two adjustment steps. Although the decay over a full cycle is significant, such advantage will be gone if the cycle is long. In order to make the cycle short, the second standard false position step seems unnecessary (because it does not help to make the cycle shorter).</p>
+<p>In the Anderson-Bjorck method, the idea is to avoid consecutive usages of standard false position steps. In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{i+1}\simeq C \epsilon_i \epsilon_{i-1} + D \epsilon_i \epsilon_{i-1}(\epsilon_{i} + \epsilon_{i-1}) &lt; 0.\]</div>
+<p>For the second iteration, although <span class="math notranslate nohighlight">\(x_{i+1}\)</span> and <span class="math notranslate nohighlight">\(x_{i}\)</span> are on different sides, but a false position step has been performed in the previous step, thus it will perform adjustment step with <span class="math notranslate nohighlight">\(\lambda = \frac{f(x_{i}) - f(x_{i+1})}{f(x_{i})}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{i+2} \simeq -D \epsilon_{i+1}\epsilon_{i}\epsilon_{i-1},\]</div>
+<p>note the leading term is different from the Pegasus method. There are two options.</p>
+<ul>
+<li><p>If <span class="math notranslate nohighlight">\(D &lt; 0\)</span>, then <span class="math notranslate nohighlight">\(\epsilon_{i+2} &gt; 0\)</span> which completes a cycle with two iterations, which is very compact. In this case, we find</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{i+4} \simeq C^{2}  \epsilon_{i+2}^3,\]</div>
+<p>which implies an order of convergence at <span class="math notranslate nohighlight">\(\sqrt{3}\)</span>.</p>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(D &gt; 0\)</span>, then it will perform another adjustment step,</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{i+3} =  \frac{\epsilon_{i+2}\lambda f(x_i) - \epsilon_i f(x_{i+2})}{\lambda f(x_{i}) - f(x_{i+2})},\quad \lambda = \frac{f(x_{i+1})-f(x_{i+2})}{f(x_{i+1})}\frac{f(x_{i})-f(x_{i+1}) }{ f(x_{i})}\]</div>
+<p>which will make <span class="math notranslate nohighlight">\(\epsilon_{i+3} \simeq -C^3 D \epsilon_{i-1}^3 \epsilon_i^3 &gt; 0\)</span>, which completes a cycle with three iterations. In this case, we find</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{i+6} \simeq D^{2}  \epsilon_{i+3}^5,\]</div>
+<p>which implies an order of convergence at <span class="math notranslate nohighlight">\(\sqrt[3]{5}\)</span>.</p>
+</li>
+</ul>
+</section>
 </section>
 <section id="iterative-methods">
 <h2>Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
