@@ -671,7 +671,7 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 <p>Now, we need an adjustment step, which gives <span class="math notranslate nohighlight">\(\epsilon_{i+3} = -C^2 \epsilon_i^2 \epsilon_{i-1} &gt; 0\)</span>, which completes a cycle. Every three iterations make a cycle, to derive the order of convergence, we continue to derive <span class="math notranslate nohighlight">\(\epsilon_{i+6}\)</span>, which equals to <span class="math notranslate nohighlight">\(-C^8\epsilon_{i}^6\epsilon_{i-1}^3 = C^2\epsilon_{i+3}^3\)</span>.</p>
 <p>Therefore, the order of convergence is <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>.</p>
 </section>
-</div><p>By taking the decay factor as a constant, the order of convergence is at most <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>. However, if the decay factor can be chosen as a variable one, the order of convergence can be improved. Next, we apply the same technique to analyze the Pegasus method, which is a variant of the Illinois method. It is interesting that the Pegasus method was initially discovered in a subroutine for the <strong>Ferranti Pegasus</strong> computer, but no author information is included. The convergence analysis was given by <span id="id1">[<a class="reference internal" href="#id6" title="M Dowell and P Jarratt. The “pegasus” method for computing the root of an equation. BIT Numerical Mathematics, 12:503–508, 1972.">Dowell and Jarratt, 1972</a>]</span> after its discovery.</p>
+</div><p>By taking the decay factor as a constant, the order of convergence is at most <span class="math notranslate nohighlight">\(\sqrt[3]{3}\)</span>. However, if the decay factor can be chosen as a variable one, the order of convergence can be improved. Next, we apply the same technique to analyze the Pegasus method, which is a variant of the Illinois method. It is interesting that the Pegasus method was initially discovered in a subroutine for the <strong>Ferranti Pegasus</strong> computer, but no author information is included. The convergence analysis was given by <span id="id1">[<a class="reference internal" href="#id8" title="M Dowell and P Jarratt. The “pegasus” method for computing the root of an equation. BIT Numerical Mathematics, 12:503–508, 1972.">Dowell and Jarratt, 1972</a>]</span> after its discovery.</p>
 <div class="proof theorem admonition" id="thm-pegasus-convergence">
 <p class="admonition-title"><span class="caption-number">Theorem 6 </span> (Pegasus Method)</p>
 <section class="theorem-content" id="proof-content">
@@ -729,17 +729,17 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 </section>
 </div><p>In the Pegasus method, two consecutive standard false position steps and two adjustment steps are performed in a full cycle. Although the decay over a full cycle is significant, such advantage will be gone if the cycle is long.</p>
 <p>In order to make the cycle shorter, we need to drop at least one step. According to the previous analysis (see Illinois method), the standard false position step does not change the sign of the error asymptotically, thus it is preferred to drop one of the standard false position steps.</p>
-<p>Let us finish this section with a brief discussion on the <strong>Anderson-Bjorck</strong> method, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps.</p>
+<p>Let us finish this section with a brief discussion on the <strong>Improved Pegasus</strong> method <span id="id2">[<a class="reference internal" href="#id9" title="Richard F King. An improved pegasus method for root finding. BIT Numerical Mathematics, 13:423–427, 1973.">King, 1973</a>]</span>, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps. The similar technique can be also applied to other methods such as <strong>Anderson-Bjorck</strong> method <span id="id3">[<a class="reference internal" href="#id10" title="Ned Anderson and Åke Björck. A new high order method of regula falsi type for computing a root of an equation. BIT Numerical Mathematics, 13(3):253–264, 1973.">Anderson and Björck, 1973</a>]</span>.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
-<p>The Anderson-Bjorck method also has a version with decay factor as</p>
+<p>The <strong>Improved Pegasus</strong> method can also use the decay factor of <strong>Anderson-Bjorck</strong> method as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\lambda = \begin{cases} 1 - \frac{f_2}{f_1}&amp;\text{ if positive},\\
         \frac{1}{2}&amp;\text{ otherwise}.\end{cases}
 \end{split}\]</div>
 </aside>
-<div class="proof algorithm admonition" id="AL-ANDERSON-BJORCK">
-<p class="admonition-title"><span class="caption-number">Algorithm 3 </span> (Anderson-Bjorck Method)</p>
+<div class="proof algorithm admonition" id="AL-IMPROVED-PEGASUS">
+<p class="admonition-title"><span class="caption-number">Algorithm 3 </span> (Improved Pegasus Method)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inputs</strong> <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a, b\)</span>, <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
 <p><strong>Outputs</strong> <span class="math notranslate nohighlight">\(c\)</span></p>
@@ -765,10 +765,10 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 </li>
 </ol>
 </section>
-</div><div class="proof theorem admonition" id="thm-anderson-bjorck-convergence">
+</div><div class="proof theorem admonition" id="thm-improved-pegasus-convergence">
 <p class="admonition-title"><span class="caption-number">Theorem 7 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>The Anderson-Bjorck method has an order of convergence at least <span class="math notranslate nohighlight">\(\sqrt[3]{5}\)</span>.</p>
+<p>The <strong>Improved Pegasus</strong> method has an order of convergence at least <span class="math notranslate nohighlight">\(\sqrt[3]{5}\)</span>.</p>
 </section>
 </div><div class="proof admonition" id="proof">
 <p>Proof. In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that</p>
@@ -814,7 +814,7 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 <h3>Theoretical Part<a class="headerlink" href="#theoretical-part" title="Link to this heading">#</a></h3>
 <div class="admonition-problem-1 admonition">
 <p class="admonition-title">Problem 1</p>
-<p>The only difference between <a class="reference internal" href="#AL-ANDERSON-BJORCK">Algorithm 3</a> and the Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.</p>
+<p>The only difference between <a class="reference internal" href="#AL-IMPROVED-PEGASUS">Algorithm 3</a> and the usual Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.</p>
 <p>Explain why the Illnois method <span class="math notranslate nohighlight">\(\lambda = \frac{1}{2}\)</span> cannot be faster by the same technique.</p>
 </div>
 </section>
@@ -824,11 +824,19 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 </section>
 <section id="extended-reading">
 <h2>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h2>
-<div class="docutils container" id="id2">
+<div class="docutils container" id="id4">
 <div role="list" class="citation-list">
-<div class="citation" id="id6" role="doc-biblioentry">
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">ABjorck73</a><span class="fn-bracket">]</span></span>
+<p>Ned Anderson and Åke Björck. A new high order method of regula falsi type for computing a root of an equation. <em>BIT Numerical Mathematics</em>, 13(3):253–264, 1973.</p>
+</div>
+<div class="citation" id="id8" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">DJ72</a><span class="fn-bracket">]</span></span>
 <p>M Dowell and P Jarratt. The “pegasus” method for computing the root of an equation. <em>BIT Numerical Mathematics</em>, 12:503–508, 1972.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">Kin73</a><span class="fn-bracket">]</span></span>
+<p>Richard F King. An improved pegasus method for root finding. <em>BIT Numerical Mathematics</em>, 13:423–427, 1973.</p>
 </div>
 </div>
 </div>
