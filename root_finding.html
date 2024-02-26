@@ -367,7 +367,7 @@ document.write(`
 <aside class="margin sidebar">
 <p class="sidebar-title">Iterative vs Recursive</p>
 <p>The bisection method can be implemented either iteratively or recursively. The recursive program usually is more compact, but may suffer from inefficiency (more instructions) and the risk of stack overflow.</p>
-<p>For a variety of programming languages, recursive implementation can be made more efficient by using the so called <strong>tail recusion optimization</strong>. This is a compiler feature that allows the recursive program to be executed with the same efficiency as the iterative one. However, neither <code class="docutils literal notranslate"><span class="pre">Python</span></code> nor <code class="docutils literal notranslate"><span class="pre">MATLAB</span></code> natively supports tail recursion optimization. : )</p>
+<p>For a variety of programming languages, recursive implementation can be made more efficient by using the so called <strong>tail recursion optimization</strong>. This is a compiler feature that allows the recursive program to be executed with the same efficiency as the iterative one. However, neither <code class="docutils literal notranslate"><span class="pre">Python</span></code> nor <code class="docutils literal notranslate"><span class="pre">MATLAB</span></code> natively supports tail recursion optimization. : )</p>
 </aside>
 <p>For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is <span class="math notranslate nohighlight">\(\lceil\log_2\left(\frac{b - a}{\epsilon}\right)\rceil\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> is the desired tolerance.</p>
 <p>Once the function <span class="math notranslate nohighlight">\(f\)</span> has a sign change over the bracket <span class="math notranslate nohighlight">\([a, b]\)</span>, the bisection method is guaranteed to converge to a root, but it is not very efficient. It is usually used to obtain a rough estimate of the root, which is then taken as an initial guess for a more efficient method.</p>
@@ -815,7 +815,7 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 <div class="admonition-problem-1 admonition">
 <p class="admonition-title">Problem 1</p>
 <p>The only difference between <a class="reference internal" href="#AL-IMPROVED-PEGASUS">Algorithm 3</a> and the usual Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.</p>
-<p>Explain why the Illnois method <span class="math notranslate nohighlight">\(\lambda = \frac{1}{2}\)</span> cannot be faster by the same technique.</p>
+<p>Explain why the Illinois method <span class="math notranslate nohighlight">\(\lambda = \frac{1}{2}\)</span> cannot be faster by the same technique.</p>
 </div>
 </section>
 <section id="computational-part">
