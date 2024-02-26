@@ -677,11 +677,8 @@ c' - x^{\ast} &amp;= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\
 <section class="theorem-content" id="proof-content">
 <p>The Pegasus method is a variant of Illinois method, whose updating scheme for the decay factors is replaced by</p>
 <div class="math notranslate nohighlight">
-\[\lambda_b\gets \lambda_b\frac{f(a)}{f(a)+f(c)}\]</div>
-<p>and</p>
-<div class="math notranslate nohighlight">
-\[\lambda_a\gets \lambda_a \frac{f(b)}{f(b)+f(c)}.\]</div>
-<p>Then the order of convergence is <span class="math notranslate nohighlight">\(\sqrt[4]{\frac{7+\sqrt{57}}{2}}\)</span>.</p>
+\[\lambda=\frac{f_1}{f_1+f_2}\]</div>
+<p>in <a class="reference internal" href="#AL-ILLINOIS">Algorithm 2</a>. Then the order of convergence is <span class="math notranslate nohighlight">\(\sqrt[4]{\frac{7+\sqrt{57}}{2}}\)</span>.</p>
 </section>
 </div><div class="proof admonition" id="proof">
 <p>Proof. Similar to the previous <a class="reference internal" href="#rmk-illinois-convergence">Remark 3</a>, we assume <span class="math notranslate nohighlight">\(\epsilon_{i-1} &lt; 0\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{i} &gt; 0\)</span> such that <span class="math notranslate nohighlight">\(|\epsilon_i|\ll |\epsilon_{i-1}|\)</span>, the constant <span class="math notranslate nohighlight">\(C = \frac{f''}{2f'}|_{x=x^{\ast}} &gt; 0\)</span>.
