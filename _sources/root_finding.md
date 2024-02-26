@@ -313,7 +313,7 @@ $$
 -\ell(x^{\ast}) + \ell(c) = -(x^{\ast} - c) f'(\zeta) =  \frac{f''(\xi)}{2}(x^{\ast} - a)(x^{\ast} - b),
 $$
 
-which imples $(x^{\ast} - c) = -\frac{f''(\xi)}{2 f'(\zeta)} (x^{\ast} - a)(x^{\ast} - b)$. When $a$ and $b$ are already near the root, the right-hand side has a fixed sign, which implies that using the unadjusted false position method, the new point $c$ will always fall into a fixed side of the root.
+which implies $(x^{\ast} - c) = -\frac{f''(\xi)}{2 f'(\zeta)} (x^{\ast} - a)(x^{\ast} - b)$. When $a$ and $b$ are already near the root, the right-hand side has a fixed sign, which implies that using the unadjusted false position method, the new point $c$ will always fall into a fixed side of the root.
 
 Now, we consider the adjustment of the Illinois method. Without loss of generality, we assume that $c$ falls into the left side of the root. Then the next iteration will be using the bracket $[c, b]$ with adjusted weight for $b$. The new point $c'$ satisfies 
 
@@ -433,7 +433,7 @@ In the Pegasus method, two consecutive standard false position steps and two adj
 
 In order to make the cycle shorter, we need to drop at least one step. According to the previous analysis (see Illinois method), the standard false position step does not change the sign of the error asymptotically, thus it is preferred to drop one of the standard false position steps.
 
-Let us finish this section with a brief discussion on the **Improved Pegasus** method {cite}`king1973improved`, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps. The similar technique can be also applied to other methods such as **Anderson-Bjorck** method {cite}`anderson1973new`.
+Let us finish this section with a brief discussion on the **improved Pegasus** method {cite}`king1973improved`, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps. The similar technique can be also applied to other methods such as **Anderson-Bjorck** method {cite}`anderson1973new`.
 
 ```{margin}
 The **Improved Pegasus** method can also use the decay factor of **Anderson-Bjorck** method as
@@ -465,7 +465,7 @@ $$
 
 ```{prf:theorem}
 :label: thm-improved-pegasus-convergence
-The **Improved Pegasus** method has an order of convergence at least $\sqrt[3]{5}$.
+The **improved Pegasus** method has an order of convergence at least $\sqrt[3]{5}$.
 ```
 
 ```{prf:proof}
