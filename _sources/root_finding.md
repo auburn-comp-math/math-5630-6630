@@ -470,7 +470,7 @@ The **Improved Pegasus** method has an order of convergence at least $\sqrt[3]{5
 
 ```{prf:proof}
 
-In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that
+In the same setting as the previous theorem, we will find the first iteration is the same as the Pegasus method (false position) that
 
 $$\epsilon_{i+1}\simeq C \epsilon_i \epsilon_{i-1} + D \epsilon_i \epsilon_{i-1}(\epsilon_{i} + \epsilon_{i-1}) < 0.$$
 
