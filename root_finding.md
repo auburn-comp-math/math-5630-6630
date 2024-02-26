@@ -433,18 +433,18 @@ In the Pegasus method, two consecutive standard false position steps and two adj
 
 In order to make the cycle shorter, we need to drop at least one step. According to the previous analysis (see Illinois method), the standard false position step does not change the sign of the error asymptotically, thus it is preferred to drop one of the standard false position steps.
 
-Let us finish this section with a brief discussion on the **Anderson-Bjorck** method, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps.
+Let us finish this section with a brief discussion on the **Improved Pegasus** method {cite}`king1973improved`, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps. The similar technique can be also applied to other methods such as **Anderson-Bjorck** method {cite}`anderson1973new`.
 
 ```{margin}
-The Anderson-Bjorck method also has a version with decay factor as
+The **Improved Pegasus** method can also use the decay factor of **Anderson-Bjorck** method as
 
 $$\lambda = \begin{cases} 1 - \frac{f_2}{f_1}&\text{ if positive},\\
         \frac{1}{2}&\text{ otherwise}.\end{cases}
 $$
 ```
 
-```{prf:algorithm} Anderson-Bjorck Method
-:label: AL-ANDERSON-BJORCK
+```{prf:algorithm} Improved Pegasus Method
+:label: AL-IMPROVED-PEGASUS
 
 **Inputs** $f$, $a, b$, $\epsilon$ 
 
@@ -464,8 +464,8 @@ $$
 ```
 
 ```{prf:theorem}
-:label: thm-anderson-bjorck-convergence
-The Anderson-Bjorck method has an order of convergence at least $\sqrt[3]{5}$.
+:label: thm-improved-pegasus-convergence
+The **Improved Pegasus** method has an order of convergence at least $\sqrt[3]{5}$.
 ```
 
 ```{prf:proof}
@@ -511,7 +511,7 @@ note the leading term is different from the Pegasus method. There are two option
 ### Theoretical Part
 
 ```{admonition} Problem 1
-The only difference between {prf:ref}`AL-ANDERSON-BJORCK` and the Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.
+The only difference between {prf:ref}`AL-IMPROVED-PEGASUS` and the usual Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.
 
 Explain why the Illnois method $\lambda = \frac{1}{2}$ cannot be faster by the same technique.
 ```
