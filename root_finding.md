@@ -29,7 +29,7 @@ The simplest bracket method is the **bisection method**. Once $f(a)f(b) < 0$, on
 ```{margin} Iterative vs Recursive
 The bisection method can be implemented either iteratively or recursively. The recursive program usually is more compact, but may suffer from inefficiency (more instructions) and the risk of stack overflow.
 
-For a variety of programming languages, recursive implementation can be made more efficient by using the so called **tail recusion optimization**. This is a compiler feature that allows the recursive program to be executed with the same efficiency as the iterative one. However, neither ``Python`` nor ``MATLAB`` natively supports tail recursion optimization. : )
+For a variety of programming languages, recursive implementation can be made more efficient by using the so called **tail recursion optimization**. This is a compiler feature that allows the recursive program to be executed with the same efficiency as the iterative one. However, neither ``Python`` nor ``MATLAB`` natively supports tail recursion optimization. : )
 ```
 
 For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is $\lceil\log_2\left(\frac{b - a}{\epsilon}\right)\rceil$, where $\epsilon$ is the desired tolerance.
@@ -513,7 +513,7 @@ note the leading term is different from the Pegasus method. There are two option
 ```{admonition} Problem 1
 The only difference between {prf:ref}`AL-IMPROVED-PEGASUS` and the usual Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.
 
-Explain why the Illnois method $\lambda = \frac{1}{2}$ cannot be faster by the same technique.
+Explain why the Illinois method $\lambda = \frac{1}{2}$ cannot be faster by the same technique.
 ```
 
 ### Computational Part
