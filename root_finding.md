@@ -61,15 +61,21 @@ False position method
 It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the **Illinois method**. Once the same side has updated in two consecutive iterations, the Illinois method will adjust $c$ using a slightly different formula.
 
 $$
-{c} = \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}.
+{c} = \frac{\lambda f(b) a -  f(a) b}{\lambda f(b) - f(a)}
 $$
 
-where the weights $\lambda_a$ and $\lambda_b$ are the weights. The weights are initially set to $1$. If the same side is about to update twice, the weight of the other side will be halved. If not, the weight on the new bracket point will be reset to $1$. See {prf:ref}``AL-ILLINOIS``.
+or
+
+$$
+{c} = \frac{ f(b) a - \lambda f(a) b}{f(b) - \lambda f(a)},
+$$
+
+where the weight $\lambda$ controls the position of $c$. The weight is initially set to $1$ which corresponds to the standard false position method. If the same side is about to update twice, the weight of the other side will be halved. If not, the weight on the new bracket point will be reset to $1$. See {prf:ref}``AL-ILLINOIS``.
 
 ```{margin}
 The choice of decay factor $\frac{1}{2}$ is optimal if it has to be a constant (explain later). The factor can be replaced with other variable values. A usual replacement is the **Pegasus** method.
 
-Essentially, the **Pegasus** method replaces $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}$ and replaces $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}$.
+Essentially, the **Pegasus** method replaces $\lambda = 1/2$ with $\lambda=\frac{f_1}{f_1 + f_2}$.
 
 <!-- - **Anderson-Bjorck**: it is slightly different, instead of detecting two consecutive false position iterations on the same side, it will try to prevent two consecutive false position iterations on the same side by interchanging endpoints. Otherwise, it replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b m_b$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a m_a$, where 
 
@@ -86,18 +92,15 @@ Essentially, the **Pegasus** method replaces $\lambda_b \gets \lambda_b/2$ with 
 
 **Outputs** $c$ 
 
-1. $\lambda_a \gets 1$, $\lambda_b \gets 1$ and $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$.  $s \gets 0$. //initialization
+1. $x_0\gets a$, $x_1\gets b$, $f_0\gets f(x_0)$, $f_1\gets f(x_1)$.  //initialization.
 2. While True do:
-    1. If $f(a)f(c) < 0$, then 
-        - If $s \le 0$, $\lambda_a \gets 
-    \lambda_a/2$; Else $\lambda_b \gets 1$.
-        -  $b \gets c$, $s\gets -1$.
-    2. Else If $f(a)f(c) > 0$, then 
-        - If $s \ge 0$, $\lambda_b \gets \lambda_b/2$; Else $\lambda_a\gets 1$. 
-        - $a \gets c$, $s\gets 1$.
-
-    3. $c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}$; //compute $c$
-    4. If $ |f(c)| < \epsilon$, then return $c$; //check stopping criteria
+    1. $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
+    2. If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria
+    3. While $f_1 f_2 > 0$, then // adjust until the sign changes
+        - $(x_0, f_0)\gets (x_0, \lambda f_0)$, where $\lambda = \frac{1}{2}$
+        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$
+    4. If $f_1 f_2 < 0$, then // perform a false position step
+        - $(x_0, f_0)\gets (x_1, f_1)$ and $(x_1, f_1)\gets (x_2, f_2)$. 
 
 ```
 
@@ -436,8 +439,40 @@ In order to make the cycle shorter, we need to drop at least one step. According
 
 Let us finish this section with a brief discussion on the **Anderson-Bjorck** method, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps.
 
-<!-- add algorithm here -->
-```{prf:remark}
+```{margin}
+The Anderson-Bjorck method also has a version with decay factor as
+
+$$\lambda = \begin{cases} 1 - \frac{f_2}{f_1}&\text{ if positive},\\
+        \frac{1}{2}&\text{ otherwise}.\end{cases}
+$$
+```
+
+```{prf:algorithm} Anderson-Bjorck Method
+:label: AL-ANDERSON-BJORCK
+
+**Inputs** $f$, $a, b$, $\epsilon$ 
+
+**Outputs** $c$ 
+
+1. $x_0\gets a$, $x_1\gets b$, $f_0\gets f(x_0)$, $f_1\gets f(x_1)$.  //initialization.
+2. While True do:
+    1. $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
+    2. If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria
+    3. If $f_1 f_2 < 0$, then swap $(x_0, f_0)$ and $(x_1, f_1)$. // avoid false position step
+    4. While $f_1 f_2 > 0$, then // adjust until the sign changes
+        - $(x_0, f_0)\gets (x_0, \lambda f_0)$, where $\lambda =\frac{f_1}{f_1 + f_2}$.
+        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$
+    5. If $f_1 f_2 < 0$, then // perform a false position step
+        - $(x_0, f_0)\gets (x_1, f_1)$ and $(x_1, f_1)\gets (x_2, f_2)$. 
+
+```
+
+```{prf:theorem}
+:label: thm-anderson-bjorck-convergence
+The Anderson-Bjorck method has an order of convergence at least $\sqrt[3]{5}$.
+```
+
+```{prf:proof}
 
 In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that
 
@@ -478,6 +513,12 @@ note the leading term is different from the Pegasus method. There are two option
 ## Exercises
 
 ### Theoretical Part
+
+```{admonition} Problem 1
+The only difference between {prf:ref}`AL-ANDERSON-BJORCK` and the Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.
+
+Explain why the Illnois method $\lambda = \frac{1}{2}$ cannot be faster by the same technique.
+```
 
 ### Computational Part
 
