@@ -369,13 +369,9 @@ By taking the decay factor as a constant, the order of convergence is at most $\
 :label: thm-pegasus-convergence
 The Pegasus method is a variant of Illinois method, whose updating scheme for the decay factors is replaced by 
 
-$$\lambda_b\gets \lambda_b\frac{f(a)}{f(a)+f(c)}$$ 
+$$\lambda=\frac{f_1}{f_1+f_2}$$ 
 
-and
-
-$$\lambda_a\gets \lambda_a \frac{f(b)}{f(b)+f(c)}.$$ 
-
-Then the order of convergence is $\sqrt[4]{\frac{7+\sqrt{57}}{2}}$.
+in {prf:ref}`AL-ILLINOIS`. Then the order of convergence is $\sqrt[4]{\frac{7+\sqrt{57}}{2}}$.
 ```
 
 ```{prf:proof}
