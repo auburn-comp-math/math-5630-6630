@@ -391,13 +391,18 @@ document.write(`
 <p>It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the <strong>Illinois method</strong>. Once the same side has updated in two consecutive iterations, the Illinois method will adjust <span class="math notranslate nohighlight">\(c\)</span> using a slightly different formula.</p>
 <div class="math notranslate nohighlight">
 \[
-{c} = \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}.
+{c} = \frac{\lambda f(b) a -  f(a) b}{\lambda f(b) - f(a)}
 \]</div>
-<p>where the weights <span class="math notranslate nohighlight">\(\lambda_a\)</span> and <span class="math notranslate nohighlight">\(\lambda_b\)</span> are the weights. The weights are initially set to <span class="math notranslate nohighlight">\(1\)</span>. If the same side is about to update twice, the weight of the other side will be halved. If not, the weight on the new bracket point will be reset to <span class="math notranslate nohighlight">\(1\)</span>. See <a class="reference internal" href="#AL-ILLINOIS">Algorithm 2</a>.</p>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[
+{c} = \frac{ f(b) a - \lambda f(a) b}{f(b) - \lambda f(a)},
+\]</div>
+<p>where the weight <span class="math notranslate nohighlight">\(\lambda\)</span> controls the position of <span class="math notranslate nohighlight">\(c\)</span>. The weight is initially set to <span class="math notranslate nohighlight">\(1\)</span> which corresponds to the standard false position method. If the same side is about to update twice, the weight of the other side will be halved. If not, the weight on the new bracket point will be reset to <span class="math notranslate nohighlight">\(1\)</span>. See <a class="reference internal" href="#AL-ILLINOIS">Algorithm 2</a>.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>The choice of decay factor <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> is optimal if it has to be a constant (explain later). The factor can be replaced with other variable values. A usual replacement is the <strong>Pegasus</strong> method.</p>
-<p>Essentially, the <strong>Pegasus</strong> method replaces <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_b\gets \lambda_b\frac{f(a)}{f(a) + f(c)}\)</span> and replaces <span class="math notranslate nohighlight">\(\lambda_a \gets \lambda_a/2\)</span> with <span class="math notranslate nohighlight">\(\lambda_a\gets\lambda_a\frac{f(b)}{f(b) + f(c)}\)</span>.</p>
+<p>Essentially, the <strong>Pegasus</strong> method replaces <span class="math notranslate nohighlight">\(\lambda = 1/2\)</span> with <span class="math notranslate nohighlight">\(\lambda=\frac{f_1}{f_1 + f_2}\)</span>.</p>
 <!-- - **Anderson-Bjorck**: it is slightly different, instead of detecting two consecutive false position iterations on the same side, it will try to prevent two consecutive false position iterations on the same side by interchanging endpoints. Otherwise, it replace $\lambda_b \gets \lambda_b/2$ with $\lambda_b\gets \lambda_b m_b$ and replace $\lambda_a \gets \lambda_a/2$ with $\lambda_a\gets\lambda_a m_a$, where 
 
     $$m_a = \begin{cases}1 - \frac{f(c)}{f(b)} &\text{if positive}\\ \frac{1}{2} &\text{otherwise}\end{cases}$$
@@ -411,24 +416,22 @@ document.write(`
 <p><strong>Inputs</strong> <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a, b\)</span>, <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
 <p><strong>Outputs</strong> <span class="math notranslate nohighlight">\(c\)</span></p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\lambda_a \gets 1\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span> and <span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>.  <span class="math notranslate nohighlight">\(s \gets 0\)</span>. //initialization</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_0\gets a\)</span>, <span class="math notranslate nohighlight">\(x_1\gets b\)</span>, <span class="math notranslate nohighlight">\(f_0\gets f(x_0)\)</span>, <span class="math notranslate nohighlight">\(f_1\gets f(x_1)\)</span>.  //initialization.</p></li>
 <li><p>While True do:</p>
 <ol class="arabic simple">
-<li><p>If <span class="math notranslate nohighlight">\(f(a)f(c) &lt; 0\)</span>, then</p>
+<li><p><span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
+<li><p>While <span class="math notranslate nohighlight">\(f_1 f_2 &gt; 0\)</span>, then // adjust until the sign changes</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(s \le 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_a \gets 
-\lambda_a/2\)</span>; Else <span class="math notranslate nohighlight">\(\lambda_b \gets 1\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(b \gets c\)</span>, <span class="math notranslate nohighlight">\(s\gets -1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((x_0, f_0)\gets (x_0, \lambda f_0)\)</span>, where <span class="math notranslate nohighlight">\(\lambda = \frac{1}{2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span></p></li>
 </ul>
 </li>
-<li><p>Else If <span class="math notranslate nohighlight">\(f(a)f(c) &gt; 0\)</span>, then</p>
+<li><p>If <span class="math notranslate nohighlight">\(f_1 f_2 &lt; 0\)</span>, then // perform a false position step</p>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(s \ge 0\)</span>, <span class="math notranslate nohighlight">\(\lambda_b \gets \lambda_b/2\)</span>; Else <span class="math notranslate nohighlight">\(\lambda_a\gets 1\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(a \gets c\)</span>, <span class="math notranslate nohighlight">\(s\gets 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((x_0, f_0)\gets (x_1, f_1)\)</span> and <span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span>.</p></li>
 </ul>
 </li>
-<li><p><span class="math notranslate nohighlight">\(c \gets \frac{\lambda_b f(b) a - \lambda_a f(a) b}{\lambda_b f(b) - \lambda_a f(a)}\)</span>; //compute <span class="math notranslate nohighlight">\(c\)</span></p></li>
-<li><p>If <span class="math notranslate nohighlight">\( |f(c)| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(c\)</span>; //check stopping criteria</p></li>
 </ol>
 </li>
 </ol>
@@ -730,11 +733,48 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 </div><p>In the Pegasus method, two consecutive standard false position steps and two adjustment steps are performed in a full cycle. Although the decay over a full cycle is significant, such advantage will be gone if the cycle is long.</p>
 <p>In order to make the cycle shorter, we need to drop at least one step. According to the previous analysis (see Illinois method), the standard false position step does not change the sign of the error asymptotically, thus it is preferred to drop one of the standard false position steps.</p>
 <p>Let us finish this section with a brief discussion on the <strong>Anderson-Bjorck</strong> method, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps.</p>
-<!-- add algorithm here -->
-<div class="proof remark admonition" id="remark-9">
-<p class="admonition-title"><span class="caption-number">Remark 5 </span></p>
-<section class="remark-content" id="proof-content">
-<p>In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The Anderson-Bjorck method also has a version with decay factor as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lambda = \begin{cases} 1 - \frac{f_2}{f_1}&amp;\text{ if positive},\\
+        \frac{1}{2}&amp;\text{ otherwise}.\end{cases}
+\end{split}\]</div>
+</aside>
+<div class="proof algorithm admonition" id="AL-ANDERSON-BJORCK">
+<p class="admonition-title"><span class="caption-number">Algorithm 3 </span> (Anderson-Bjorck Method)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Inputs</strong> <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a, b\)</span>, <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
+<p><strong>Outputs</strong> <span class="math notranslate nohighlight">\(c\)</span></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(x_0\gets a\)</span>, <span class="math notranslate nohighlight">\(x_1\gets b\)</span>, <span class="math notranslate nohighlight">\(f_0\gets f(x_0)\)</span>, <span class="math notranslate nohighlight">\(f_1\gets f(x_1)\)</span>.  //initialization.</p></li>
+<li><p>While True do:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(f_1 f_2 &lt; 0\)</span>, then swap <span class="math notranslate nohighlight">\((x_0, f_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, f_1)\)</span>. // avoid false position step</p></li>
+<li><p>While <span class="math notranslate nohighlight">\(f_1 f_2 &gt; 0\)</span>, then // adjust until the sign changes</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((x_0, f_0)\gets (x_0, \lambda f_0)\)</span>, where <span class="math notranslate nohighlight">\(\lambda =\frac{f_1}{f_1 + f_2}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span></p></li>
+</ul>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(f_1 f_2 &lt; 0\)</span>, then // perform a false position step</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((x_0, f_0)\gets (x_1, f_1)\)</span> and <span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span>.</p></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</section>
+</div><div class="proof theorem admonition" id="thm-anderson-bjorck-convergence">
+<p class="admonition-title"><span class="caption-number">Theorem 7 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>The Anderson-Bjorck method has an order of convergence at least <span class="math notranslate nohighlight">\(\sqrt[3]{5}\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that</p>
 <div class="math notranslate nohighlight">
 \[\epsilon_{i+1}\simeq C \epsilon_i \epsilon_{i-1} + D \epsilon_i \epsilon_{i-1}(\epsilon_{i} + \epsilon_{i-1}) &lt; 0.\]</div>
 <p>For the second iteration, although <span class="math notranslate nohighlight">\(x_{i+1}\)</span> and <span class="math notranslate nohighlight">\(x_{i}\)</span> are on different sides, but a false position step has been performed in the previous step, thus it will perform adjustment step with <span class="math notranslate nohighlight">\(\lambda = \frac{f(x_{i}) - f(x_{i+1})}{f(x_{i})}\)</span>, then</p>
@@ -756,8 +796,8 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 <p>which implies an order of convergence at <span class="math notranslate nohighlight">\(\sqrt[3]{5}\)</span>.</p>
 </li>
 </ul>
+</div>
 </section>
-</div></section>
 </section>
 <section id="iterative-methods">
 <h2>Iterative Methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h2>
@@ -775,6 +815,11 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="theoretical-part">
 <h3>Theoretical Part<a class="headerlink" href="#theoretical-part" title="Link to this heading">#</a></h3>
+<div class="admonition-problem-1 admonition">
+<p class="admonition-title">Problem 1</p>
+<p>The only difference between <a class="reference internal" href="#AL-ANDERSON-BJORCK">Algorithm 3</a> and the Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.</p>
+<p>Explain why the Illnois method <span class="math notranslate nohighlight">\(\lambda = \frac{1}{2}\)</span> cannot be faster by the same technique.</p>
+</div>
 </section>
 <section id="computational-part">
 <h3>Computational Part<a class="headerlink" href="#computational-part" title="Link to this heading">#</a></h3>
