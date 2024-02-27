@@ -516,6 +516,15 @@ $$
 
 Geometrically, $x_{n+1}$ is the $x$-intercept of the tangent line of $f$ at $(x_n, f(x_n))$. Asymptotically, the Newton-Raphson method has a quadratic convergence rate if the root is simple.
 
+```{figure} images/doc/root_finding_img_2.png
+---
+name: root-finding-img-newton-raphson
+scale: 80%
+align: center
+---
+Newton-Raphson method
+```
+
 ```{margin} Limitation
 The analysis can only provide convergence for the initial guess close to the root. If the initial guess is far from the root, then it is possible that the sequence diverges.
 ```
