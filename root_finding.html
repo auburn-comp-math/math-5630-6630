@@ -416,15 +416,16 @@ document.write(`
 <p><strong>Inputs</strong> <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a, b\)</span>, <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
 <p><strong>Outputs</strong> <span class="math notranslate nohighlight">\(c\)</span></p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(x_0\gets a\)</span>, <span class="math notranslate nohighlight">\(x_1\gets b\)</span>, <span class="math notranslate nohighlight">\(f_0\gets f(x_0)\)</span>, <span class="math notranslate nohighlight">\(f_1\gets f(x_1)\)</span>.  //initialization.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_0\gets a\)</span>, <span class="math notranslate nohighlight">\(x_1\gets b\)</span>, <span class="math notranslate nohighlight">\(f_0\gets f(x_0)\)</span>, <span class="math notranslate nohighlight">\(f_1\gets f(x_1)\)</span>. <span class="math notranslate nohighlight">\(iter = 0\)</span> //initialization.</p></li>
 <li><p>While True do:</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>, <span class="math notranslate nohighlight">\(iter \gets iter + 1\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
 <li><p>While <span class="math notranslate nohighlight">\(f_1 f_2 &gt; 0\)</span>, then // adjust until the sign changes</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\((x_0, f_0)\gets (x_0, \lambda f_0)\)</span>, where <span class="math notranslate nohighlight">\(\lambda = \frac{1}{2}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>,  <span class="math notranslate nohighlight">\(iter \gets iter + 1\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
 </ul>
 </li>
 <li><p>If <span class="math notranslate nohighlight">\(f_1 f_2 &lt; 0\)</span>, then // perform a false position step</p>
@@ -744,16 +745,17 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 <p><strong>Inputs</strong> <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a, b\)</span>, <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
 <p><strong>Outputs</strong> <span class="math notranslate nohighlight">\(c\)</span></p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(x_0\gets a\)</span>, <span class="math notranslate nohighlight">\(x_1\gets b\)</span>, <span class="math notranslate nohighlight">\(f_0\gets f(x_0)\)</span>, <span class="math notranslate nohighlight">\(f_1\gets f(x_1)\)</span>.  //initialization.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_0\gets a\)</span>, <span class="math notranslate nohighlight">\(x_1\gets b\)</span>, <span class="math notranslate nohighlight">\(f_0\gets f(x_0)\)</span>, <span class="math notranslate nohighlight">\(f_1\gets f(x_1)\)</span>, <span class="math notranslate nohighlight">\(iter = 0\)</span>.  //initialization.</p></li>
 <li><p>While True do:</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>, <span class="math notranslate nohighlight">\(iter \gets iter + 1\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(f_1 f_2 &lt; 0\)</span>, then swap <span class="math notranslate nohighlight">\((x_0, f_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, f_1)\)</span>. // avoid false position step</p></li>
 <li><p>While <span class="math notranslate nohighlight">\(f_1 f_2 &gt; 0\)</span>, then // adjust until the sign changes</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\((x_0, f_0)\gets (x_0, \lambda f_0)\)</span>, where <span class="math notranslate nohighlight">\(\lambda =\frac{f_1}{f_1 + f_2}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>, <span class="math notranslate nohighlight">\(iter\gets iter + 1\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
 </ul>
 </li>
 <li><p>If <span class="math notranslate nohighlight">\(f_1 f_2 &lt; 0\)</span>, then // perform a false position step</p>
