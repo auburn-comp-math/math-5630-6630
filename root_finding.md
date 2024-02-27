@@ -92,13 +92,14 @@ Essentially, the **Pegasus** method replaces $\lambda = 1/2$ with $\lambda=\frac
 
 **Outputs** $c$ 
 
-1. $x_0\gets a$, $x_1\gets b$, $f_0\gets f(x_0)$, $f_1\gets f(x_1)$.  //initialization.
+1. $x_0\gets a$, $x_1\gets b$, $f_0\gets f(x_0)$, $f_1\gets f(x_1)$. $iter = 0$ //initialization.
 2. While True do:
-    1. $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
+    1. $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$, $iter \gets iter + 1$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
     2. If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria
     3. While $f_1 f_2 > 0$, then // adjust until the sign changes
         - $(x_0, f_0)\gets (x_0, \lambda f_0)$, where $\lambda = \frac{1}{2}$
-        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$
+        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$,  $iter \gets iter + 1$.
+        - If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria    
     4. If $f_1 f_2 < 0$, then // perform a false position step
         - $(x_0, f_0)\gets (x_1, f_1)$ and $(x_1, f_1)\gets (x_2, f_2)$. 
 
@@ -450,14 +451,15 @@ $$
 
 **Outputs** $c$ 
 
-1. $x_0\gets a$, $x_1\gets b$, $f_0\gets f(x_0)$, $f_1\gets f(x_1)$.  //initialization.
+1. $x_0\gets a$, $x_1\gets b$, $f_0\gets f(x_0)$, $f_1\gets f(x_1)$, $iter = 0$.  //initialization.
 2. While True do:
-    1. $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
+    1. $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$, $iter \gets iter + 1$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
     2. If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria
     3. If $f_1 f_2 < 0$, then swap $(x_0, f_0)$ and $(x_1, f_1)$. // avoid false position step
     4. While $f_1 f_2 > 0$, then // adjust until the sign changes
         - $(x_0, f_0)\gets (x_0, \lambda f_0)$, where $\lambda =\frac{f_1}{f_1 + f_2}$.
-        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$
+        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$, $iter\gets iter + 1$
+        - If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria
     5. If $f_1 f_2 < 0$, then // perform a false position step
         - $(x_0, f_0)\gets (x_1, f_1)$ and $(x_1, f_1)\gets (x_2, f_2)$. 
 
