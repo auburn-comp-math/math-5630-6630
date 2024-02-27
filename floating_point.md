@@ -200,7 +200,7 @@ $$x \,\boxed{\circ}\, y := \textrm{fl}(x\circ y),$$
 
 then for any $x, y\in\mathbb{F}$, if $x\circ y\in \overline{\mathbb{F}}$, then $x \,\boxed{\circ}\, y = (x\circ y)(1 + \delta)$ with $|\delta| \le \mathrm{u}$ from the {prf:ref}``COR-REL-ERR``.
 
-```{prf:remark} Cancellation Error
+````{prf:remark} Catastrophic Cancellation
 If $x, y\in\mathbb{R}$, then the relative error from the following binary operation $\textrm{fl}(x)\,\boxed{+}\,\textrm{fl}(y)$ can be estimated by
 
 $$
@@ -210,8 +210,57 @@ $$
 \end{aligned}
 $$
 
-When $x$ and $y$ are close in magnitude but with opposite signs, the cancellation error will be significant. Similar cancellation error can be derived for multiplication/division.
+When $x$ and $y$ are close in magnitude but with opposite signs, the cancellation error will be significant. Sometimes the catastrophic cancellation can be avoided in computation.
+````
+
+```{margin}
+It should be noticed that the catastrophic cancellation may not occur if both $x$ and $y$ are floating point numbers. The **Sterbenz** lemma guarantees that the subtraction $x - y$ is exact if the floating point numbers $x$ and $y$ are close.
 ```
+
+```{prf:example}
+:label: ex-catastrophic-cancellation-1
+The subtraction of two square numbers $x^2 - y^2$, where $x\approx y\in \mathbb{F}$, since 
+
+$$\textrm{fl}(x^2) - \textrm{fl}(y^2) = x^2 - y^2 + (x^2 + y^2)\delta, \quad |\delta|\le \textrm{u}, $$
+
+it will possibly lead to catastrophic cancellation when there is a rounding error in calculating $x^2$ or $y^2$. However, if we write 
+
+$$ 
+x^2 - y^2 = (x - y)(x + y), 
+$$ 
+
+then the catastrophic cancellation can be avoided. Because 
+
+$$
+\textrm{fl}(x - y) \boxed{\ast} \textrm{fl}(x + y) =(x - y)(1 + \delta) \boxed{\ast} (x + y)(1 + \delta) = (x^2 - y^2)(1 + \delta)^3,
+$$
+
+where $|\delta|\le \mathrm{u}$. Therefore the relative error is bounded by $3\mathrm{u}$.
+```
+
+<!-- ```{prf:example}
+:label: ex-catastrophic-cancellation-2
+The evaluation of the logarithmic function $\log(1 + x)$ for tiny $x \in \mathbb{F}$ will lose digits since $\textrm{fl}(1 + x) = 1 + x + O(\textrm{u})$. However, if we write 
+
+$$
+\log(1 + x) = x \frac{\log(1 + x)}{(1 + x) - 1}, 
+$$
+
+which seems to suffer from catastrophic cancellation in the quotient.  Numerically, the right-hand side becomes
+
+$$
+x \boxed{\ast} \left(\log(\textrm{fl}(1 + x))\boxed{/} y \right) = x (1 + O(y)) (1 + \delta) = x (1 + O(\textrm{u})),
+$$
+
+where $y = \textrm{fl}(1 + x) \boxed{-} 1$ and the logarithmic function is evaluated by series for $x$ near zero, 
+
+$$
+\log(\textrm{fl}(1 + x)) = y + O(y^2).
+$$
+
+Therefore, the catastrophic cancellation in the division does not occur.
+``` 
+-->
 
 ### Error Accumulation: Multiplication
 
