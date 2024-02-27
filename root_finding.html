@@ -376,7 +376,7 @@ document.write(`
 <h3>False Position Method<a class="headerlink" href="#false-position-method" title="Link to this heading">#</a></h3>
 <p>The bisection method only uses <span class="math notranslate nohighlight">\(\text{sgn}(f(a))\)</span> and <span class="math notranslate nohighlight">\(\text{sgn}(f(b))\)</span> instead of the function values. The <strong>false position method</strong> (<em>Regula falsi</em> in Latin) improves the bisection method by taking the function values into account. Instead of selecting the midpoint <span class="math notranslate nohighlight">\(c = \frac{a + b}{2}\)</span>, the false position method selects the point <span class="math notranslate nohighlight">\(c\in[a, b]\)</span> that lies on the line connecting <span class="math notranslate nohighlight">\((a, f(a))\)</span> and <span class="math notranslate nohighlight">\((b, f(b))\)</span>, that is</p>
 <div class="math notranslate nohighlight">
-\[c = \frac{f(b)}{f(b) - f(a)} a + \frac{-f(a)}{f(b) - f(a)} b = \frac{f(b) a -  f(a) b}{f(b) - f(a)}.\]</div>
+\[c = \frac{f(b) a - f(a) b}{f(b) - f(a)} = a - f(a)\frac{b - a}{f(b) - f(a)}.\]</div>
 <p>The false position method is also guaranteed to converge to a root if <span class="math notranslate nohighlight">\(f(a)f(b) &lt; 0\)</span> and the implementation is quite similar to the bisection method. It usually converges faster than the bisection method, but sometimes exceptions occur.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -391,12 +391,12 @@ document.write(`
 <p>It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the <strong>Illinois method</strong>. Once the same side has updated in two consecutive iterations, the Illinois method will adjust <span class="math notranslate nohighlight">\(c\)</span> using a slightly different formula.</p>
 <div class="math notranslate nohighlight">
 \[
-{c} = \frac{\lambda f(b) a -  f(a) b}{\lambda f(b) - f(a)}
+{c} = a - f(a)\frac{ b - a }{\lambda f(b) - f(a)}
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight">
 \[
-{c} = \frac{ f(b) a - \lambda f(a) b}{f(b) - \lambda f(a)},
+{c} =  b -  f(b) \frac{a - b}{\lambda f(a) - f(b)},
 \]</div>
 <p>where the weight <span class="math notranslate nohighlight">\(\lambda\)</span> controls the position of <span class="math notranslate nohighlight">\(c\)</span>. The weight is initially set to <span class="math notranslate nohighlight">\(1\)</span> which corresponds to the standard false position method. If the same side is about to update twice, the weight of the other side will be halved. If not, the weight on the new bracket point will be reset to <span class="math notranslate nohighlight">\(1\)</span>. See <a class="reference internal" href="#AL-ILLINOIS">Algorithm 2</a>.</p>
 <aside class="margin sidebar">
@@ -419,12 +419,12 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(x_0\gets a\)</span>, <span class="math notranslate nohighlight">\(x_1\gets b\)</span>, <span class="math notranslate nohighlight">\(f_0\gets f(x_0)\)</span>, <span class="math notranslate nohighlight">\(f_1\gets f(x_1)\)</span>. <span class="math notranslate nohighlight">\(iter = 0\)</span> //initialization.</p></li>
 <li><p>While True do:</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>, <span class="math notranslate nohighlight">\(iter \gets iter + 1\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2 \gets x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>, <span class="math notranslate nohighlight">\(iter \gets iter + 1\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
 <li><p>While <span class="math notranslate nohighlight">\(f_1 f_2 &gt; 0\)</span>, then // adjust until the sign changes</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\((x_0, f_0)\gets (x_0, \lambda f_0)\)</span>, where <span class="math notranslate nohighlight">\(\lambda = \frac{1}{2}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>,  <span class="math notranslate nohighlight">\(iter \gets iter + 1\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>,  <span class="math notranslate nohighlight">\(iter \gets iter + 1\)</span>.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
 </ul>
 </li>
@@ -748,13 +748,13 @@ Similar to the previous analysis, we can derive more terms in the asymptotic for
 <li><p><span class="math notranslate nohighlight">\(x_0\gets a\)</span>, <span class="math notranslate nohighlight">\(x_1\gets b\)</span>, <span class="math notranslate nohighlight">\(f_0\gets f(x_0)\)</span>, <span class="math notranslate nohighlight">\(f_1\gets f(x_1)\)</span>, <span class="math notranslate nohighlight">\(iter = 0\)</span>.  //initialization.</p></li>
 <li><p>While True do:</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>, <span class="math notranslate nohighlight">\(iter \gets iter + 1\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2 \gets x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>, <span class="math notranslate nohighlight">\(iter \gets iter + 1\)</span>. //standard false position step, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are two latest iterations.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(f_1 f_2 &lt; 0\)</span>, then swap <span class="math notranslate nohighlight">\((x_0, f_0)\)</span> and <span class="math notranslate nohighlight">\((x_1, f_1)\)</span>. // avoid false position step</p></li>
 <li><p>While <span class="math notranslate nohighlight">\(f_1 f_2 &gt; 0\)</span>, then // adjust until the sign changes</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\((x_0, f_0)\gets (x_0, \lambda f_0)\)</span>, where <span class="math notranslate nohighlight">\(\lambda =\frac{f_1}{f_1 + f_2}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>, <span class="math notranslate nohighlight">\(iter\gets iter + 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((x_1, f_1)\gets (x_2, f_2)\)</span> and  <span class="math notranslate nohighlight">\(x_2 \gets x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}\)</span>, <span class="math notranslate nohighlight">\(f_2 \gets f(x_2)\)</span>, <span class="math notranslate nohighlight">\(iter\gets iter + 1\)</span></p></li>
 <li><p>If <span class="math notranslate nohighlight">\( |f_2| &lt; \epsilon\)</span>, then return <span class="math notranslate nohighlight">\(x_2\)</span>; //check stopping criteria</p></li>
 </ul>
 </li>
@@ -853,7 +853,7 @@ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}.
 <h3>Theoretical Part<a class="headerlink" href="#theoretical-part" title="Link to this heading">#</a></h3>
 <div class="admonition-problem-1 admonition">
 <p class="admonition-title">Problem 1</p>
-<p>Briefly explain why the quotient <span class="math notranslate nohighlight">\(\frac{f(b)a - f(a) b}{f(b) - f(a)}\)</span> in bracket methods will not suffer from cancellation error under the floating point arithmetic.</p>
+<p>Briefly explain why the formula <span class="math notranslate nohighlight">\(x_2 = x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}\)</span> in bracket methods will not suffer from catastrophic cancellation.</p>
 </div>
 <div class="admonition-problem-2 admonition">
 <p class="admonition-title">Problem 2</p>

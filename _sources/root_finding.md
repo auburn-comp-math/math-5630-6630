@@ -40,7 +40,7 @@ Once the function $f$ has a sign change over the bracket $[a, b]$, the bisection
 
 The bisection method only uses $\text{sgn}(f(a))$ and $\text{sgn}(f(b))$ instead of the function values. The **false position method** (*Regula falsi* in Latin) improves the bisection method by taking the function values into account. Instead of selecting the midpoint $c = \frac{a + b}{2}$, the false position method selects the point $c\in[a, b]$ that lies on the line connecting $(a, f(a))$ and $(b, f(b))$, that is
 
-$$c = \frac{f(b)}{f(b) - f(a)} a + \frac{-f(a)}{f(b) - f(a)} b = \frac{f(b) a -  f(a) b}{f(b) - f(a)}.$$
+$$c = \frac{f(b) a - f(a) b}{f(b) - f(a)} = a - f(a)\frac{b - a}{f(b) - f(a)}.$$
 
 The false position method is also guaranteed to converge to a root if $f(a)f(b) < 0$ and the implementation is quite similar to the bisection method. It usually converges faster than the bisection method, but sometimes exceptions occur.
 
@@ -61,13 +61,13 @@ False position method
 It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the **Illinois method**. Once the same side has updated in two consecutive iterations, the Illinois method will adjust $c$ using a slightly different formula.
 
 $$
-{c} = \frac{\lambda f(b) a -  f(a) b}{\lambda f(b) - f(a)}
+{c} = a - f(a)\frac{ b - a }{\lambda f(b) - f(a)}
 $$
 
 or
 
 $$
-{c} = \frac{ f(b) a - \lambda f(a) b}{f(b) - \lambda f(a)},
+{c} =  b -  f(b) \frac{a - b}{\lambda f(a) - f(b)},
 $$
 
 where the weight $\lambda$ controls the position of $c$. The weight is initially set to $1$ which corresponds to the standard false position method. If the same side is about to update twice, the weight of the other side will be halved. If not, the weight on the new bracket point will be reset to $1$. See {prf:ref}``AL-ILLINOIS``.
@@ -94,11 +94,11 @@ Essentially, the **Pegasus** method replaces $\lambda = 1/2$ with $\lambda=\frac
 
 1. $x_0\gets a$, $x_1\gets b$, $f_0\gets f(x_0)$, $f_1\gets f(x_1)$. $iter = 0$ //initialization.
 2. While True do:
-    1. $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$, $iter \gets iter + 1$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
+    1. $x_2 \gets x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}$, $f_2 \gets f(x_2)$, $iter \gets iter + 1$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
     2. If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria
     3. While $f_1 f_2 > 0$, then // adjust until the sign changes
         - $(x_0, f_0)\gets (x_0, \lambda f_0)$, where $\lambda = \frac{1}{2}$
-        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$,  $iter \gets iter + 1$.
+        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}$, $f_2 \gets f(x_2)$,  $iter \gets iter + 1$.
         - If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria    
     4. If $f_1 f_2 < 0$, then // perform a false position step
         - $(x_0, f_0)\gets (x_1, f_1)$ and $(x_1, f_1)\gets (x_2, f_2)$. 
@@ -453,12 +453,12 @@ $$
 
 1. $x_0\gets a$, $x_1\gets b$, $f_0\gets f(x_0)$, $f_1\gets f(x_1)$, $iter = 0$.  //initialization.
 2. While True do:
-    1. $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$, $iter \gets iter + 1$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
+    1. $x_2 \gets x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}$, $f_2 \gets f(x_2)$, $iter \gets iter + 1$. //standard false position step, $x_1$ and $x_2$ are two latest iterations.
     2. If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria
     3. If $f_1 f_2 < 0$, then swap $(x_0, f_0)$ and $(x_1, f_1)$. // avoid false position step
     4. While $f_1 f_2 > 0$, then // adjust until the sign changes
         - $(x_0, f_0)\gets (x_0, \lambda f_0)$, where $\lambda =\frac{f_1}{f_1 + f_2}$.
-        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets \frac{f_1 x_0 - f_0 x_1}{f_1 - f_0}$, $f_2 \gets f(x_2)$, $iter\gets iter + 1$
+        - $(x_1, f_1)\gets (x_2, f_2)$ and  $x_2 \gets x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}$, $f_2 \gets f(x_2)$, $iter\gets iter + 1$
         - If $ |f_2| < \epsilon$, then return $x_2$; //check stopping criteria
     5. If $f_1 f_2 < 0$, then // perform a false position step
         - $(x_0, f_0)\gets (x_1, f_1)$ and $(x_1, f_1)\gets (x_2, f_2)$. 
@@ -561,7 +561,7 @@ If we denote the error $\epsilon_{n} = x_n - x^{\ast}$, then $\epsilon_{n+1} = \
 ### Theoretical Part
 
 ```{admonition} Problem 1
-Briefly explain why the quotient $\frac{f(b)a - f(a) b}{f(b) - f(a)}$ in bracket methods will not suffer from cancellation error under the floating point arithmetic. 
+Briefly explain why the formula $x_2 = x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}$ in bracket methods will not suffer from catastrophic cancellation.
 ```
 
 ```{admonition} Problem 2
