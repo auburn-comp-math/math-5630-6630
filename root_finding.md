@@ -29,7 +29,7 @@ The simplest bracket method is the **bisection method**. Once $f(a)f(b) < 0$, on
 ```{margin} Iterative vs Recursive
 The bisection method can be implemented either iteratively or recursively. The recursive program usually is more compact, but may suffer from inefficiency (more instructions) and the risk of stack overflow.
 
-For a variety of programming languages, recursive implementation can be made more efficient by using the so called **tail recusion optimization**. This is a compiler feature that allows the recursive program to be executed with the same efficiency as the iterative one. However, neither ``Python`` nor ``MATLAB`` natively supports tail recursion optimization. : )
+For a variety of programming languages, recursive implementation can be made more efficient by using the so called **tail recursion optimization**. This is a compiler feature that allows the recursive program to be executed with the same efficiency as the iterative one. However, neither ``Python`` nor ``MATLAB`` natively supports tail recursion optimization. : )
 ```
 
 For the first two cases, we can repeat the process with the new interval until certain stop criteria are met. Each iteration reduces the size of the interval by half (gaining one bit each iteration), the total number of iterations required to reduce the interval to a certain size is $\lceil\log_2\left(\frac{b - a}{\epsilon}\right)\rceil$, where $\epsilon$ is the desired tolerance.
@@ -314,7 +314,7 @@ $$
 -\ell(x^{\ast}) + \ell(c) = -(x^{\ast} - c) f'(\zeta) =  \frac{f''(\xi)}{2}(x^{\ast} - a)(x^{\ast} - b),
 $$
 
-which imples $(x^{\ast} - c) = -\frac{f''(\xi)}{2 f'(\zeta)} (x^{\ast} - a)(x^{\ast} - b)$. When $a$ and $b$ are already near the root, the right-hand side has a fixed sign, which implies that using the unadjusted false position method, the new point $c$ will always fall into a fixed side of the root.
+which implies $(x^{\ast} - c) = -\frac{f''(\xi)}{2 f'(\zeta)} (x^{\ast} - a)(x^{\ast} - b)$. When $a$ and $b$ are already near the root, the right-hand side has a fixed sign, which implies that using the unadjusted false position method, the new point $c$ will always fall into a fixed side of the root.
 
 Now, we consider the adjustment of the Illinois method. Without loss of generality, we assume that $c$ falls into the left side of the root. Then the next iteration will be using the bracket $[c, b]$ with adjusted weight for $b$. The new point $c'$ satisfies 
 
@@ -434,7 +434,7 @@ In the Pegasus method, two consecutive standard false position steps and two adj
 
 In order to make the cycle shorter, we need to drop at least one step. According to the previous analysis (see Illinois method), the standard false position step does not change the sign of the error asymptotically, thus it is preferred to drop one of the standard false position steps.
 
-Let us finish this section with a brief discussion on the **Improved Pegasus** method {cite}`king1973improved`, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps. The similar technique can be also applied to other methods such as **Anderson-Bjorck** method {cite}`anderson1973new`.
+Let us finish this section with a brief discussion on the **improved Pegasus** method {cite}`king1973improved`, which takes the advantage of the symmetry in the false position method to avoid consecutive standard false position steps. The similar technique can be also applied to other methods such as **Anderson-Bjorck** method {cite}`anderson1973new`.
 
 ```{margin}
 The **Improved Pegasus** method can also use the decay factor of **Anderson-Bjorck** method as
@@ -467,12 +467,12 @@ $$
 
 ```{prf:theorem}
 :label: thm-improved-pegasus-convergence
-The **Improved Pegasus** method has an order of convergence at least $\sqrt[3]{5}$.
+The **improved Pegasus** method has an order of convergence at least $\sqrt[3]{5}$.
 ```
 
 ```{prf:proof}
 
-In the same setting as the previous step, we will find the first iteration is the same as the Pegasus method (false position) that
+In the same setting as the previous theorem, we will find the first iteration is the same as the Pegasus method (false position) that
 
 $$\epsilon_{i+1}\simeq C \epsilon_i \epsilon_{i-1} + D \epsilon_i \epsilon_{i-1}(\epsilon_{i} + \epsilon_{i-1}) < 0.$$
 
@@ -515,7 +515,7 @@ note the leading term is different from the Pegasus method. There are two option
 ```{admonition} Problem 1
 The only difference between {prf:ref}`AL-IMPROVED-PEGASUS` and the usual Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.
 
-Explain why the Illnois method $\lambda = \frac{1}{2}$ cannot be faster by the same technique.
+Explain why the Illinois method $\lambda = \frac{1}{2}$ cannot be faster by the same technique.
 ```
 
 ### Computational Part
