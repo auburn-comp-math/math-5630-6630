@@ -539,7 +539,7 @@ h^{(n+1)}(x) = \frac{(-1)^{n+1}}{2^{n+1}} (2n+1)!! x^{-(2n+3)/2}.
 \[  \|h  - f\|_{\infty} \le  \frac{\sup_{x\in[a,b]}|h^{(n+1)}(x)|}{4(n+1)} \frac{(b-a)^{n+1}}{n^{n+1}}.\]</div>
 <p>Such an estimate is useful to derive uniform convergence.</p>
 <div class="proof example admonition" id="example-6">
-<p class="admonition-title"><span class="caption-number">Example 2 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 3 </span></p>
 <section class="example-content" id="proof-content">
 <p>Consider <span class="math notranslate nohighlight">\(h(x) = 1/x\)</span> on <span class="math notranslate nohighlight">\([\frac{1}{2}, \frac{3}{2}]\)</span>. Then <span class="math notranslate nohighlight">\(h^{(n+1)}(x) = \frac{(n+1)!(-1)^{n+1}}{x^{n+2}}\)</span>, hence</p>
 <div class="math notranslate nohighlight">
@@ -660,7 +660,7 @@ h^{(n+1)}(x) = \frac{(-1)^{n+1}}{2^{n+1}} (2n+1)!! x^{-(2n+3)/2}.
 <p>The Chebyshev interpolation aims to minimize the bound of the interpolation error. The bound of <span class="math notranslate nohighlight">\(\omega(x)\)</span> only depends on the choice of the nodes, so a natural question is: what kind of interpolation nodes will minimize
 <span class="math notranslate nohighlight">\(\max_{x\in [a, b]} \prod_{j=0}^n |x-x_j|\)</span>. We first restrict our analysis to the interval <span class="math notranslate nohighlight">\([a, b] = [-1,1]\)</span> for simplicity, the general case will be discussed later.</p>
 <div class="proof example admonition" id="example-9">
-<p class="admonition-title"><span class="caption-number">Example 3 </span></p>
+<p class="admonition-title"><span class="caption-number">Example 4 </span></p>
 <section class="example-content" id="proof-content">
 <p>When <span class="math notranslate nohighlight">\(n = 1\)</span>, <span class="math notranslate nohighlight">\(\omega(x) = (x - x_0)(x - x_1)\)</span>, this function changes sign over the sub-intervals <span class="math notranslate nohighlight">\([-1, x_0)\)</span>, <span class="math notranslate nohighlight">\((x_0, x_1)\)</span>, <span class="math notranslate nohighlight">\((x_1, 1]\)</span>, then we can compute the maximum of <span class="math notranslate nohighlight">\(|\omega(x)|\)</span> on these sub-intervals. Therefore we need to solve</p>
 <div class="math notranslate nohighlight">

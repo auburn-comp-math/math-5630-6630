@@ -506,7 +506,7 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 \[x \,\boxed{\circ}\, y := \textrm{fl}(x\circ y),\]</div>
 <p>then for any <span class="math notranslate nohighlight">\(x, y\in\mathbb{F}\)</span>, if <span class="math notranslate nohighlight">\(x\circ y\in \overline{\mathbb{F}}\)</span>, then <span class="math notranslate nohighlight">\(x \,\boxed{\circ}\, y = (x\circ y)(1 + \delta)\)</span> with <span class="math notranslate nohighlight">\(|\delta| \le \mathrm{u}\)</span> from the <a class="reference internal" href="#COR-REL-ERR">Corollary 1</a>.</p>
 <div class="proof remark admonition" id="remark-4">
-<p class="admonition-title"><span class="caption-number">Remark 1 </span> (Cancellation Error)</p>
+<p class="admonition-title"><span class="caption-number">Remark 1 </span> (Catastrophic Cancellation)</p>
 <section class="remark-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(x, y\in\mathbb{R}\)</span>, then the relative error from the following binary operation <span class="math notranslate nohighlight">\(\textrm{fl}(x)\,\boxed{+}\,\textrm{fl}(y)\)</span> can be estimated by</p>
 <div class="math notranslate nohighlight">
@@ -516,9 +516,54 @@ x = \pm (0.d_1 d_2 d_3\dots d_{t-1} d_t d_{t+1}\dots) \times 2^e,
 &amp;\le\mathrm{u} + (\mathrm{u} +\mathrm{u}^2) \frac{|x|+|y|}{|x+y|}.
 \end{aligned}
 \end{split}\]</div>
-<p>When <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are close in magnitude but with opposite signs, the cancellation error will be significant. Similar cancellation error can be derived for multiplication/division.</p>
+<p>When <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are close in magnitude but with opposite signs, the cancellation error will be significant. Sometimes the catastrophic cancellation can be avoided in computation.</p>
 </section>
-</div><section id="error-accumulation-multiplication">
+</div><aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>It should be noticed that the catastrophic cancellation may not occur if both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are floating point numbers. The <strong>Sterbenz</strong> lemma guarantees that the subtraction <span class="math notranslate nohighlight">\(x - y\)</span> is exact if the floating point numbers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are close.</p>
+</aside>
+<div class="proof example admonition" id="ex-catastrophic-cancellation-1">
+<p class="admonition-title"><span class="caption-number">Example 1 </span></p>
+<section class="example-content" id="proof-content">
+<p>The subtraction of two square numbers <span class="math notranslate nohighlight">\(x^2 - y^2\)</span>, where <span class="math notranslate nohighlight">\(x\approx y\in \mathbb{F}\)</span>, since</p>
+<div class="math notranslate nohighlight">
+\[\textrm{fl}(x^2) - \textrm{fl}(y^2) = x^2 - y^2 + (x^2 + y^2)\delta, \quad |\delta|\le \textrm{u}, \]</div>
+<p>it will possibly lead to catastrophic cancellation when there is a rounding error in calculating <span class="math notranslate nohighlight">\(x^2\)</span> or <span class="math notranslate nohighlight">\(y^2\)</span>. However, if we write</p>
+<div class="math notranslate nohighlight">
+\[ 
+x^2 - y^2 = (x - y)(x + y), 
+\]</div>
+<p>then the catastrophic cancellation can be avoided. Because</p>
+<div class="math notranslate nohighlight">
+\[
+\textrm{fl}(x - y) \boxed{\ast} \textrm{fl}(x + y) =(x - y)(1 + \delta) \boxed{\ast} (x + y)(1 + \delta) = (x^2 - y^2)(1 + \delta)^3,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(|\delta|\le \mathrm{u}\)</span>. Therefore the relative error is bounded by <span class="math notranslate nohighlight">\(3\mathrm{u}\)</span>.</p>
+</section>
+</div><!-- ```{prf:example}
+:label: ex-catastrophic-cancellation-2
+The evaluation of the logarithmic function $\log(1 + x)$ for tiny $x \in \mathbb{F}$ will lose digits since $\textrm{fl}(1 + x) = 1 + x + O(\textrm{u})$. However, if we write 
+
+$$
+\log(1 + x) = x \frac{\log(1 + x)}{(1 + x) - 1}, 
+$$
+
+which seems to suffer from catastrophic cancellation in the quotient.  Numerically, the right-hand side becomes
+
+$$
+x \boxed{\ast} \left(\log(\textrm{fl}(1 + x))\boxed{/} y \right) = x (1 + O(y)) (1 + \delta) = x (1 + O(\textrm{u})),
+$$
+
+where $y = \textrm{fl}(1 + x) \boxed{-} 1$ and the logarithmic function is evaluated by series for $x$ near zero, 
+
+$$
+\log(\textrm{fl}(1 + x)) = y + O(y^2).
+$$
+
+Therefore, the catastrophic cancellation in the division does not occur.
+``` 
+-->
+<section id="error-accumulation-multiplication">
 <h3>Error Accumulation: Multiplication<a class="headerlink" href="#error-accumulation-multiplication" title="Link to this heading">#</a></h3>
 <p>For complicated computations on modern computers, the errors from arithmetic operations will accumulate towards the final result (we do not consider techniques such as fused multiply-add (FMA) here). To quantify the accumulation effect, we will need the following lemma.</p>
 <div class="proof lemma admonition" id="LEM-ACC">
@@ -607,7 +652,7 @@ P_n = P_{n-1}~\boxed{\ast}~ \fl{x_n} = \fl{\fl{P_{n-1}}\fl{x_n}} = \fl{P_{n-1}}\
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>Assume <span class="math notranslate nohighlight">\(n\in \mathbb{N}\)</span> and <span class="math notranslate nohighlight">\(n\textrm{u} &lt; 1\)</span>, let <span class="math notranslate nohighlight">\(\{x_j\}_{j=1}^n\)</span> be a sequence of real numbers, <span class="math notranslate nohighlight">\(\textrm{fl}:\overline{\mathbb{F}}\mapsto \mathbb{F}\)</span> is the rounding operation, <span class="math notranslate nohighlight">\(\textrm{u}\)</span> is the machine epsilon. In the following, we briefly discuss the rounding error for floating point summation (sum reduction).</p>
-<div class="proof definition admonition" id="definition-6">
+<div class="proof definition admonition" id="definition-7">
 <p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
 <section class="definition-content" id="proof-content">
 <p>A reduction <span class="math notranslate nohighlight">\(\Pi\)</span> of the floating point summation</p>
