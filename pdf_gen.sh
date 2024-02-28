@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Generate the PDF
-cd _build/latex && make clean && cd ../..
+jb clean .
 
 jb build . --builder latex
 
@@ -23,4 +23,4 @@ else
     echo "String not found in the file."
 fi
 
-cd _build/latex && make && cd ../..
+cd _build/latex && make clean && make 

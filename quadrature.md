@@ -1,0 +1,21 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+# Numerical Quadrature
+
+## Newton-Cotes Quadrature
+
+## Romberg Integration
+
+## Gaussian Quadrature
+
+## Monte Carlo Integration
