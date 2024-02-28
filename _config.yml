@@ -98,6 +98,7 @@ sphinx:
     mathjax3_config:
       tex:
         macros:
+          "eps": "\\varepsilon"
           "cO": "\\mathcal{O}"
           "fl": ["\\textrm{fl}(#1)", 1]
           "N": "\\mathbb{N}"
