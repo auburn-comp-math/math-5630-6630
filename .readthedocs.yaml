@@ -12,6 +12,7 @@ build:
     python: "3.9"
   jobs:
     pre_build:
+      - "sudo apt-get install libmpfr-dev"
       - "jupyter-book config sphinx ."
     # You can also specify other tool versions:
     # nodejs: "19"
