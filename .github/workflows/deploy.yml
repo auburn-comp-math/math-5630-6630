@@ -24,6 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install libmpfr-dev
+        pip install Cython
         pip install git+https://github.com/yohanchatelain/bigfloat/
         pip install -r requirements.txt
     # Build the book
