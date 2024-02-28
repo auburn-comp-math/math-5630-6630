@@ -22,7 +22,7 @@ for certain function $f(x)\in C^k([a, b])$. Accurate evaluations would sometimes
 
 ## Extrapolation
 
-From the previous discussion, we already know that interpolation provides an estimate \emph{within} the original observation range. The extrapolation is similar but aims to produce estimates outside the observation range. However, extrapolation may be subject to a greater uncertainty, see {numref}`extrapolation`, one should use it only when an overestimate is hardly occurring.
+From the previous discussion, we already know that interpolation provides an estimate **within** the original observation range. The extrapolation is similar but aims to produce estimates outside the observation range. However, extrapolation may be subject to a greater uncertainty, see {numref}`extrapolation`, one should use it only when an overestimate is hardly occurring.
 
 ```{figure} images/doc/extrapolate.png
 ---
