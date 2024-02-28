@@ -1,5 +1,4 @@
 jupyter-book==1.0.0
-bigfloat @ git+https://github.com/yohanchatelain/bigfloat
 matplotlib
 numpy
 ghp-import
