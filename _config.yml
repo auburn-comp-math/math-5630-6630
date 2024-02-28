@@ -84,6 +84,8 @@ sphinx:
     language: en
     latex_elements:
         preamble: |
+          \usepackage[makeroom]{cancel}
+          \usepackage{imakeidx}
           \newcommand{\eps}{\varepsilon}
           \newcommand{\cO}{\mathcal{O}}
           \newcommand{\fl}[1]{\textrm{fl}(#1)}
