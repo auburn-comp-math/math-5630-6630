@@ -10,7 +10,7 @@ kernelspec:
   name: python3
 ---
 
-# Numerical Quadrature
+# Differentiation and Quadrature
 
 ## Newton-Cotes Quadrature
 
