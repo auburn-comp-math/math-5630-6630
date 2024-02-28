@@ -330,6 +330,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#romberg-integration">Romberg Integration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-integration">Monte Carlo Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
             </nav>
         </div>
@@ -351,9 +352,9 @@ document.write(`
 <p>for certain function <span class="math notranslate nohighlight">\(f(x)\in C^k([a, b])\)</span>. Accurate evaluations would sometimes be difficult if an analytic expression is absent. Especially when the function values of <span class="math notranslate nohighlight">\(f\)</span> are only accessible at a finite number of nodes. Therefore, it is important to find simple yet effective methods to approximate the derivatives and integrals.</p>
 <section id="extrapolation">
 <h2>Extrapolation<a class="headerlink" href="#extrapolation" title="Link to this heading">#</a></h2>
-<p>From the previous discussion, we already know that interpolation provides an estimate <strong>within</strong> the original observation range. The extrapolation is similar but aims to produce estimates outside the observation range. However, extrapolation may be subject to a greater uncertainty, see <a class="reference internal" href="#id1"><span class="std std-numref">Fig. 7</span></a>, one should use it only when an overestimate is hardly occurring.</p>
+<p>From the previous discussion, we already know that interpolation provides an estimate <strong>within</strong> the original observation range. The extrapolation is similar but aims to produce estimates outside the observation range. However, sometimes extrapolation may be subject to a greater uncertainty, see <a class="reference internal" href="#id1"><span class="std std-numref">Fig. 7</span></a>, one should use it only when an overestimate is hardly occurring.</p>
 <figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="_images/extrapolate.png"><img alt="_images/extrapolate.png" src="_images/extrapolate.png" style="width: 400.0px; height: 262.0px;" /></a>
+<a class="reference internal image-reference" href="_images/extrapolate.png"><img alt="_images/extrapolate.png" src="_images/extrapolate.png" style="width: 480.0px; height: 314.4px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7 </span><span class="caption-text">Extrapolation behavior for Chebyshev interpolation with <span class="math notranslate nohighlight">\(15\)</span> nodes.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
@@ -438,8 +439,54 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 </section>
 <section id="wynn-s-epsilon-method">
 <h3>Wynn’s Epsilon Method<a class="headerlink" href="#wynn-s-epsilon-method" title="Link to this heading">#</a></h3>
-<p>Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method is another kind of extrapolation algorithm that is recommended as the best all-purpose acceleration method. It has a strong connection with Padé approximation and continued fractions. We will not cover the detailed derivation of the theory in this section. However, Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method still has its limitations if the sequence converges to the desired value too slowly.</p>
+<p>Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method <span id="id2">[<a class="reference internal" href="#id10" title="Peter Wynn. On the convergence and stability of the epsilon algorithm. SIAM Journal on Numerical Analysis, 3(1):91–122, 1966.">Wynn, 1966</a>]</span> is another kind of extrapolation algorithm that is recommended as the best all-purpose acceleration method. It has a strong connection with Padé approximation and continued fractions. We will not cover the detailed derivation of the theory in this section. However, Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method still has its limitations if the sequence converges to the desired value too slowly.</p>
+<p>The algorithm is stated as follows.</p>
+<div class="proof algorithm admonition" id="AL-WYNN-EPS">
+<p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> Method)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Input</strong>: <span class="math notranslate nohighlight">\(s_0, s_1, \dots, s_n,\dots\)</span>, which is a sequence converging to the desired quantity.</p>
+<p><strong>Output</strong>: <span class="math notranslate nohighlight">\(\eps_{2l}^{(j)}\)</span>, <span class="math notranslate nohighlight">\(j, l=0,1, \dots\)</span>.</p>
+<ol class="arabic simple">
+<li><p>For <span class="math notranslate nohighlight">\(j = 0, 1, 2,\dots\)</span>, set</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+  \eps_{-1}^{(j)} = 0 \text{ (guarding elements)}, \quad \eps_{0}^{(j)} = s_j.
+  \]</div>
+<ol class="arabic simple" start="2">
+<li><p>For <span class="math notranslate nohighlight">\(j,k = 0,1,2,\dots\)</span>,</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+  \eps_{k+1}^{(j)} = \eps_{k-1}^{(j+1)} + [\eps_{k}^{(j+1)} - \eps_{k}^{j}]^{-1}.
+  \]</div>
 </section>
+</div><div class="proof example admonition" id="example-2">
+<p class="admonition-title"><span class="caption-number">Example 5 </span></p>
+<section class="example-content" id="proof-content">
+<p>It is known that <span class="math notranslate nohighlight">\(\frac{\pi}{4}\)</span> can be calculated by the asymptotic expansion:</p>
+<div class="math notranslate nohighlight">
+\[
+    \arctan z = z - \frac{z^3}{3} + \frac{z^5}{5} - \dots 
+\]</div>
+<p>at <span class="math notranslate nohighlight">\(z = 1\)</span>. Define the function <span class="math notranslate nohighlight">\(A(h)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    A(h)= \sum_{j=0}^{1/h} \frac{(-1)^j}{2 j + 1} = \frac{\pi}{4} + a_1 h + a_3 h^3 + \dots
+\]</div>
+<p>Then the approximation error is <span class="math notranslate nohighlight">\(\cO(h)\)</span>, which is very slow. Taking <span class="math notranslate nohighlight">\(h=10^{-3}\)</span> has around <span class="math notranslate nohighlight">\(2\times 10^{-4}\)</span> error.  We test with two extrapolation algorithms.</p>
+<ul>
+<li><p>Richardson Extrapolation. We take <span class="math notranslate nohighlight">\(1/h = 250, 500, 1000, 2000\)</span> and calculate that the Richardson extrapolation three times would result in almost machine precision.</p></li>
+<li><p>Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method. We take the sequence</p>
+<div class="math notranslate nohighlight">
+\[
+  s_k = \sum_{j=0}^k \frac{(-1)^j}{2 j + 1}
+  \]</div>
+<p>as the truncated series at <span class="math notranslate nohighlight">\(z = 1\)</span>. With about 20 terms, we already reached machine precision.</p>
+</li>
+</ul>
+</section>
+</div></section>
 </section>
 <section id="newton-cotes-quadrature">
 <h2>Newton-Cotes Quadrature<a class="headerlink" href="#newton-cotes-quadrature" title="Link to this heading">#</a></h2>
@@ -452,6 +499,17 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 </section>
 <section id="monte-carlo-integration">
 <h2>Monte Carlo Integration<a class="headerlink" href="#monte-carlo-integration" title="Link to this heading">#</a></h2>
+</section>
+<section id="extended-reading">
+<h2>Extended Reading<a class="headerlink" href="#extended-reading" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id3">
+<div role="list" class="citation-list">
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">Wyn66</a><span class="fn-bracket">]</span></span>
+<p>Peter Wynn. On the convergence and stability of the epsilon algorithm. <em>SIAM Journal on Numerical Analysis</em>, 3(1):91–122, 1966.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -519,6 +577,7 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#romberg-integration">Romberg Integration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-integration">Monte Carlo Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-reading">Extended Reading</a></li>
 </ul>
   </nav></div>
 
