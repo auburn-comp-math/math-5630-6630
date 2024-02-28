@@ -22,12 +22,12 @@ for certain function $f(x)\in C^k([a, b])$. Accurate evaluations would sometimes
 
 ## Extrapolation
 
-From the previous discussion, we already know that interpolation provides an estimate **within** the original observation range. The extrapolation is similar but aims to produce estimates outside the observation range. However, extrapolation may be subject to a greater uncertainty, see {numref}`extrapolation`, one should use it only when an overestimate is hardly occurring.
+From the previous discussion, we already know that interpolation provides an estimate **within** the original observation range. The extrapolation is similar but aims to produce estimates outside the observation range. However, sometimes extrapolation may be subject to a greater uncertainty, see {numref}`extrapolation`, one should use it only when an overestimate is hardly occurring.
 
 ```{figure} images/doc/extrapolate.png
 ---
 name: extrapolation
-scale: 100%
+scale: 120%
 align: center
 ---
 Extrapolation behavior for Chebyshev interpolation with $15$ nodes.
@@ -129,7 +129,54 @@ However, such a process can constantly refine the approximation due to the poten
 
 ### Wynn's Epsilon Method
 
-Wynn's $\eps$ method is another kind of extrapolation algorithm that is recommended as the best all-purpose acceleration method. It has a strong connection with Padé approximation and continued fractions. We will not cover the detailed derivation of the theory in this section. However, Wynn's $\eps$ method still has its limitations if the sequence converges to the desired value too slowly.
+Wynn's $\eps$ method {cite}`wynn1966convergence` is another kind of extrapolation algorithm that is recommended as the best all-purpose acceleration method. It has a strong connection with Padé approximation and continued fractions. We will not cover the detailed derivation of the theory in this section. However, Wynn's $\eps$ method still has its limitations if the sequence converges to the desired value too slowly.
+
+The algorithm is stated as follows.
+
+```{prf:algorithm} Wynn's $\eps$ Method
+:label: AL-WYNN-EPS
+**Input**: $s_0, s_1, \dots, s_n,\dots$, which is a sequence converging to the desired quantity.
+
+**Output**: $\eps_{2l}^{(j)}$, $j, l=0,1, \dots$.
+
+1. For $j = 0, 1, 2,\dots$, set 
+  
+  $$
+  \eps_{-1}^{(j)} = 0 \text{ (guarding elements)}, \quad \eps_{0}^{(j)} = s_j.
+  $$ 
+
+2. For $j,k = 0,1,2,\dots$, 
+
+  $$
+  \eps_{k+1}^{(j)} = \eps_{k-1}^{(j+1)} + [\eps_{k}^{(j+1)} - \eps_{k}^{j}]^{-1}.
+  $$
+
+```
+
+```{prf:example}
+It is known that $\frac{\pi}{4}$ can be calculated by the asymptotic expansion:
+
+$$
+    \arctan z = z - \frac{z^3}{3} + \frac{z^5}{5} - \dots 
+$$
+
+at $z = 1$. Define the function $A(h)$ such that 
+
+$$
+    A(h)= \sum_{j=0}^{1/h} \frac{(-1)^j}{2 j + 1} = \frac{\pi}{4} + a_1 h + a_3 h^3 + \dots
+$$
+
+Then the approximation error is $\cO(h)$, which is very slow. Taking $h=10^{-3}$ has around $2\times 10^{-4}$ error.  We test with two extrapolation algorithms.
+
+- Richardson Extrapolation. We take $1/h = 250, 500, 1000, 2000$ and calculate that the Richardson extrapolation three times would result in almost machine precision.
+- Wynn's $\eps$ method. We take the sequence 
+
+  $$
+  s_k = \sum_{j=0}^k \frac{(-1)^j}{2 j + 1}
+  $$
+  
+  as the truncated series at $z = 1$. With about 20 terms, we already reached machine precision.
+```
 
 ## Newton-Cotes Quadrature
 
@@ -138,3 +185,9 @@ Wynn's $\eps$ method is another kind of extrapolation algorithm that is recommen
 ## Gaussian Quadrature
 
 ## Monte Carlo Integration
+
+## Extended Reading
+
+```{bibliography}
+:filter: docname in docnames
+```
