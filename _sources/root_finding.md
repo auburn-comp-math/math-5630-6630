@@ -554,6 +554,25 @@ If we denote the error $\epsilon_{n} = x_n - x^{\ast}$, then $\epsilon_{n+1} = \
 
 ### Secant Method
 
+The secant method is similar to the false position method, but it always uses the latest two iterations to perform the next iteration. The secant method computes the next iteration $x_{n+1}$ by
+
+$$
+x_{n+1} = x_n - f(x_n)\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}.
+$$
+
+Using the same derivation for the Illinois method, the error $\epsilon_{n} = x_n - x^{\ast}$ satisfies $\epsilon_{n+1} \simeq C \epsilon_{n}\epsilon_{n-1}$, see {numref}`root-finding-img-secant`.
+
+```{figure} images/doc/root_finding_img_3.png
+---
+name: root-finding-img-secant
+scale: 80%
+align: center
+---
+Secant method
+```
+
+The order of convergence $p$ solves the equation $p^2 - p - 1 = 0$, which gives $p = \frac{1 + \sqrt{5}}{2}$.
+
 ## Applications in Optimization
 
 ## Exercises
@@ -568,6 +587,16 @@ Briefly explain why the formula $x_2 = x_0 - f_0 \frac{x_1 - x_0}{f_1 - f_0}$ in
 The only difference between {prf:ref}`AL-IMPROVED-PEGASUS` and the usual Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.
 
 Explain why the Illinois method $\lambda = \frac{1}{2}$ cannot be faster by the same technique.
+```
+
+```{admonition} Problem 3
+Suppose $f\in C^2$ and the root $x^{\ast}$ has a multiplicity of $m>1$, then the order of convergence for the Newton-Raphson method is $1$. The modified Newton-Raphson method
+
+$$
+x_{n+1} = x_n - m\frac{f(x_n)}{f'(x_n)}
+$$
+
+has an order of convergence $2$.
 ```
 
 ### Computational Part

@@ -842,6 +842,19 @@ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}.
 </section>
 <section id="secant-method">
 <h3>Secant Method<a class="headerlink" href="#secant-method" title="Link to this heading">#</a></h3>
+<p>The secant method is similar to the false position method, but it always uses the latest two iterations to perform the next iteration. The secant method computes the next iteration <span class="math notranslate nohighlight">\(x_{n+1}\)</span> by</p>
+<div class="math notranslate nohighlight">
+\[
+x_{n+1} = x_n - f(x_n)\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}.
+\]</div>
+<p>Using the same derivation for the Illinois method, the error <span class="math notranslate nohighlight">\(\epsilon_{n} = x_n - x^{\ast}\)</span> satisfies <span class="math notranslate nohighlight">\(\epsilon_{n+1} \simeq C \epsilon_{n}\epsilon_{n-1}\)</span>, see <a class="reference internal" href="#root-finding-img-secant"><span class="std std-numref">Fig. 4</span></a>.</p>
+<figure class="align-center" id="root-finding-img-secant">
+<a class="reference internal image-reference" href="_images/root_finding_img_3.png"><img alt="_images/root_finding_img_3.png" src="_images/root_finding_img_3.png" style="width: 427.20000000000005px; height: 330.40000000000003px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Secant method</span><a class="headerlink" href="#root-finding-img-secant" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The order of convergence <span class="math notranslate nohighlight">\(p\)</span> solves the equation <span class="math notranslate nohighlight">\(p^2 - p - 1 = 0\)</span>, which gives <span class="math notranslate nohighlight">\(p = \frac{1 + \sqrt{5}}{2}\)</span>.</p>
 </section>
 </section>
 <section id="applications-in-optimization">
@@ -859,6 +872,15 @@ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}.
 <p class="admonition-title">Problem 2</p>
 <p>The only difference between <a class="reference internal" href="#AL-IMPROVED-PEGASUS">Algorithm 3</a> and the usual Pegasus method is at the 3rd step in the while loop, which eliminates consecutive false position steps. This change is very simple, but it leads to an improvement in the order of convergence.</p>
 <p>Explain why the Illinois method <span class="math notranslate nohighlight">\(\lambda = \frac{1}{2}\)</span> cannot be faster by the same technique.</p>
+</div>
+<div class="admonition-problem-3 admonition">
+<p class="admonition-title">Problem 3</p>
+<p>Suppose <span class="math notranslate nohighlight">\(f\in C^2\)</span> and the root <span class="math notranslate nohighlight">\(x^{\ast}\)</span> has a multiplicity of <span class="math notranslate nohighlight">\(m&gt;1\)</span>, then the order of convergence for the Newton-Raphson method is <span class="math notranslate nohighlight">\(1\)</span>. The modified Newton-Raphson method</p>
+<div class="math notranslate nohighlight">
+\[
+x_{n+1} = x_n - m\frac{f(x_n)}{f'(x_n)}
+\]</div>
+<p>has an order of convergence <span class="math notranslate nohighlight">\(2\)</span>.</p>
 </div>
 </section>
 <section id="computational-part">
