@@ -292,7 +292,7 @@ The order of convergence of the Illinois method is $\sqrt[3]{3}$.
 
 ```{margin} Big $O$ Notation
 
-The big $O$ notation is used to describe the upper bound of a function. For instance, $f(x) = O(g(x))$ means that there exists a constant $C$ such that $|f(x)| \le C|g(x)|$ for sufficiently large $x$. 
+The big $O$ notation is used to describe the upper bound of a function. For instance, $f(x) = \cO(g(x))$ means that there exists a constant $C$ such that $|f(x)| \le C|g(x)|$ for sufficiently large $x$. 
 
 Another notation is the big $\Theta$ notation, which is used to describe the upper and lower bounds of a function. For instance, $f(x) = \Theta(g(x))$ means that there exists constants $C_1$ and $C_2$ such that $C_1|g(x)| \le |f(x)| \le C_2|g(x)|$ for sufficiently large $x$.
 ```
@@ -330,7 +330,7 @@ Using Taylor expansion at $x^{\ast}$, since $f'$ is bounded from below near the 
 
  $$
  \begin{aligned}
- \frac{f(c)}{f(b)} &= \frac{(c - x^{\ast}) + O(|c - x^{\ast}|^2)}{(b - x^{\ast}) + O(|b - x^{\ast}|^2)} = \frac{(c - x^{\ast})}{(b - x^{\ast})}\left(1 + \frac{O(|b-x^{\ast}|) + O(|c - x^{\ast}|)}{1 + O(|b-x^{\ast}|)}\right) \\&= \frac{(c - x^{\ast})}{(b - x^{\ast})}\left(1 + O(|b-x^{\ast}|)\right) = \frac{f''(\xi)}{2 f'(\zeta)} (a - x^{\ast}) \left(1 + O(|b-x^{\ast}|)\right)  .
+ \frac{f(c)}{f(b)} &= \frac{(c - x^{\ast}) + \cO(|c - x^{\ast}|^2)}{(b - x^{\ast}) + \cO(|b - x^{\ast}|^2)} = \frac{(c - x^{\ast})}{(b - x^{\ast})}\left(1 + \frac{\cO(|b-x^{\ast}|) + \cO(|c - x^{\ast}|)}{1 + \cO(|b-x^{\ast}|)}\right) \\&= \frac{(c - x^{\ast})}{(b - x^{\ast})}\left(1 + \cO(|b-x^{\ast}|)\right) = \frac{f''(\xi)}{2 f'(\zeta)} (a - x^{\ast}) \left(1 + \cO(|b-x^{\ast}|)\right)  .
  \end{aligned}
  $$ 
 
@@ -338,8 +338,8 @@ Therefore, we obtain
 
 $$
 \begin{aligned}
-c' - x^{\ast} &= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + O(|a - x^{\ast}|)\right) + O(|a - x^{\ast}||c - x^{\ast}|) \\
-&= (x^{\ast} - c)(1 + O(|a - x^{\ast}|)),
+c' - x^{\ast} &= (c- x^{\ast}) + 2(x^{\ast} - c)\left(1 + \cO(|a - x^{\ast}|)\right) + \cO(|a - x^{\ast}||c - x^{\ast}|) \\
+&= (x^{\ast} - c)(1 + \cO(|a - x^{\ast}|)),
 \end{aligned}
 $$
 which moves the new point to the other side of the root by almost reflection. The next bracket becomes $[c, c']$ such that $|c - x^{\ast}|\approx |c' - x^{\ast}|$. Therefore, if denote the last two points as $c = x_{n}$ and $c'=x_{n+1}$, then $|x_{n} - x^{\ast}|\approx |x_{n+1} - x^{\ast}|$, currently $c'$ is on the right side of the root. The next three iterations satisfy
@@ -419,7 +419,7 @@ Actually, the asymptotic expansion of $\epsilon_{i+4}$ is (expanded in $\epsilon
 
 $$
 \epsilon_{i+4} = C^5 \epsilon_{i}^4\epsilon_{i+1}^2 + C^7 \epsilon_i^7\epsilon_{i+1}
-+ O(\epsilon_{i}^8 \epsilon_{i+1} + \epsilon_{i}^5 \epsilon_{i+1}^2 + \epsilon_{i}^3 \epsilon_{i+1}^3)$$
++ \cO(\epsilon_{i}^8 \epsilon_{i+1} + \epsilon_{i}^5 \epsilon_{i+1}^2 + \epsilon_{i}^3 \epsilon_{i+1}^3)$$
 
 It is at first not clear why we can retain the first term and drop the rest, because it requires the following inequalities to hold
 

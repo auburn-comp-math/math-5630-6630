@@ -60,6 +60,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"eps": "\\varepsilon", "cO": "\\mathcal{O}", "fl": ["\\textrm{fl}(#1)", 1], "N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'differentiation_quadrature';</script>
     <link rel="icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -319,6 +321,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extrapolation">Extrapolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#richardson-extrapolation">Richardson Extrapolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wynn-s-epsilon-method">Wynn’s Epsilon Method</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-cotes-quadrature">Newton-Cotes Quadrature</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#romberg-integration">Romberg Integration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
@@ -336,6 +343,104 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="differentiation-and-quadrature">
 <h1>Differentiation and Quadrature<a class="headerlink" href="#differentiation-and-quadrature" title="Link to this heading">#</a></h1>
+<p>A vast number of applications such as the calculation of tangent vectors or areas lead to the problem of computing</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{D}(f) := \frac{d}{dx} f(x),\quad \mathcal{I}(f) := \int_a^b f(x) dx,
+\]</div>
+<p>for certain function <span class="math notranslate nohighlight">\(f(x)\in C^k([a, b])\)</span>. Accurate evaluations would sometimes be difficult if an analytic expression is absent. Especially when the function values of <span class="math notranslate nohighlight">\(f\)</span> are only accessible at a finite number of nodes. Therefore, it is important to find simple yet effective methods to approximate the derivatives and integrals.</p>
+<section id="extrapolation">
+<h2>Extrapolation<a class="headerlink" href="#extrapolation" title="Link to this heading">#</a></h2>
+<p>From the previous discussion, we already know that interpolation provides an estimate \emph{within} the original observation range. The extrapolation is similar but aims to produce estimates outside the observation range. However, extrapolation may be subject to a greater uncertainty, see <a class="reference internal" href="#id1"><span class="std std-numref">Fig. 7</span></a>, one should use it only when an overestimate is hardly occurring.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/extrapolate.png"><img alt="_images/extrapolate.png" src="_images/extrapolate.png" style="width: 400.0px; height: 262.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Extrapolation behavior for Chebyshev interpolation with <span class="math notranslate nohighlight">\(15\)</span> nodes.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="richardson-extrapolation">
+<h3>Richardson Extrapolation<a class="headerlink" href="#richardson-extrapolation" title="Link to this heading">#</a></h3>
+<p>Suppose there is a sequence of estimates <span class="math notranslate nohighlight">\(A(h)\)</span> depending on the parameter <span class="math notranslate nohighlight">\(h\)</span> smoothly, the limit <span class="math notranslate nohighlight">\(A^{\ast} = \lim_{h\to 0^{+}} A(h)\)</span> is the quantity to be computed. In practice, we only have access to <span class="math notranslate nohighlight">\(A(h)\)</span> for a few values of <span class="math notranslate nohighlight">\(h\)</span>. Using these values to estimate <span class="math notranslate nohighlight">\(A^{\ast}\)</span> is a typical problem in extrapolation.</p>
+<p>The basic idea behind \emph{Richardson extrapolation} is to use polynomial interpolation with a sequence of nodes <span class="math notranslate nohighlight">\(h_j\to 0\)</span>. Suppose that the function <span class="math notranslate nohighlight">\(A(h)\)</span> admits the following asymptotic expansion:</p>
+<div class="math notranslate nohighlight">
+\[
+    A(h) = a_0 + a_1 h^{\gamma} + a_2 h^{2\gamma} + \dots + a_k h^{k\gamma} + \cO(h^{(k+1)\gamma})
+\]</div>
+<p>for any <span class="math notranslate nohighlight">\(h &gt; 0\)</span> and <span class="math notranslate nohighlight">\(k\ge 0\)</span>. Then <span class="math notranslate nohighlight">\(A^{\ast} = a_0\)</span> and <span class="math notranslate nohighlight">\(A(h) = A^{\ast} + \cO(h^{\gamma})\)</span>. Suppose we have access to the values <span class="math notranslate nohighlight">\(A(h_0),\dots, A(h_n)\)</span>, then this uniquely determines a polynomial <span class="math notranslate nohighlight">\(f_n\in\Pi_n\)</span> and
+<span class="math notranslate nohighlight">\(f_n(h_j^{\gamma}) = A(h_j)\)</span>. We will approximate <span class="math notranslate nohighlight">\(A(0)\approx f_n(0)\)</span>. The computation of <span class="math notranslate nohighlight">\(f_n\)</span> follows the construction of the Newton form.</p>
+<div class="proof lemma admonition" id="lem-richardson">
+<p class="admonition-title"><span class="caption-number">Lemma 5 </span> (Richardson Extrapolation)</p>
+<section class="lemma-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(h_j\)</span> can be represented as</p>
+<div class="math notranslate nohighlight">
+\[
+h_j = \frac{\hbar}{t_j}
+\]</div>
+<p>for some adjustable parameter <span class="math notranslate nohighlight">\(\hbar\)</span> and scaling constants <span class="math notranslate nohighlight">\( 1 &lt; t_0 &lt; t_1&lt;\dots &lt; t_{n-1}\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+1)\gamma} + \cO(\hbar^{(n+2)\gamma}),\quad \text{as }\hbar\to 0.\]</div>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. We view <span class="math notranslate nohighlight">\(A(h)\)</span> as a polynomial with respect to <span class="math notranslate nohighlight">\(h^{\gamma}\)</span> of degree <span class="math notranslate nohighlight">\((n+1)\)</span> with an addition perturbation <span class="math notranslate nohighlight">\(\cO(h^{(n+2)\gamma})\)</span>. Then we have the following.</p>
+<div class="math notranslate nohighlight">
+\[
+      A(h) = p_{n+1}(h^{\gamma}) + \cO(h^{(n+2)\gamma}).
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\tilde{f}_n\)</span> be the interpolation polynomial of degree <span class="math notranslate nohighlight">\(n\)</span> to <span class="math notranslate nohighlight">\(p_{n+1}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+    p_{n+1}(x) \equiv \tilde{f}_n(x) + p[x, x_0, x_1, \dots, x_n] \prod_{j=0}(x - h_j^{\gamma}), 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p[x, x_0, x_1, \dots, x_n]\)</span> is the coefficient of the leading power in <span class="math notranslate nohighlight">\(p_{n+1}\)</span>, <span class="math notranslate nohighlight">\(a_{n+1}\)</span>. Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+    A^{\ast} = p_{n+1}(0) = \tilde{f}_n(0) +a_{n+1} \prod_{j=0}(0 - h_j^{\gamma}). 
+\]</div>
+<p>Here we use the result for the stability of polynomial interpolation in earlier chapters. Therefore,</p>
+<div class="math notranslate nohighlight">
+\[
+    |\tilde{f}_n(0) - f_n(0)|\le \lambda_n(0) \cdot \cO(\hbar^{(n+2)\gamma}).
+\]</div>
+<p>Here the Lebesgue function at zero <span class="math notranslate nohighlight">\(\lambda_n(0)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+    \lambda_n(0) = \sum_{j=0}^n \prod_{k=0, k\neq j}^n \left|\frac{h_k^{\gamma}}{h_k^{\gamma} - h_j^{\gamma}}\right| =  \sum_{j=0}^n \prod_{k=0, k\neq j}^n \left|\frac{1}{1 - (\frac{t_k}{t_j})^{\gamma}}\right|,
+\]</div>
+<p>which is independent of <span class="math notranslate nohighlight">\(\hbar\)</span>.</p>
+</div>
+<p>The Richardson extrapolation considers the special choice of <span class="math notranslate nohighlight">\(t_j = t^j\)</span> for some <span class="math notranslate nohighlight">\(t &gt; 1\)</span>. The error estimate then is</p>
+<div class="math notranslate nohighlight">
+\[
+    f_n(0) = A^{\ast} + \left(\frac{(-1)^n}{t^{n(n+1)\gamma/2}} a_{n+1}\right) \hbar^{(n+1)\gamma} + \cO(\hbar^{(n+2)\gamma}).
+\]</div>
+<p>There are easier ways to calculate the Richardson extrapolation using the following expansion.</p>
+<div class="math notranslate nohighlight">
+\[
+    A(h) - t^{\gamma} A\left(\frac{h}{t}\right) = (1 - t^{\gamma}) A^{\ast} + \cancel{a_1 \left(h^{\gamma} - t^{\gamma} \left(\frac{h}{t}\right)^{\gamma}\right)} + a_2\left(h^{2\gamma} - t^{\gamma}\left(\frac{h}{t}\right)^{2\gamma}\right) +\dots.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(A_1(h) = \frac{A(h) - t^{\gamma} A(\frac{h}{t}) }{1 - t^{\gamma}} \)</span>, we obtain the first iteration result as</p>
+<div class="math notranslate nohighlight">
+\[
+    A^{\ast} \approx A_1(h) + \cO(h^{2\gamma}),
+\]</div>
+<p>then follow the same idea, we cancel the <span class="math notranslate nohighlight">\(\cO(h^{2\gamma})\)</span> term by</p>
+<div class="math notranslate nohighlight">
+\[
+    A_1(h) - t^{2\gamma} A_1\left(\frac{h}{t^2}\right) = (1 - t^{2\gamma}) A^{\ast} + \cO(h^{3\gamma}).
+\]</div>
+<p>Therefore by taking <span class="math notranslate nohighlight">\(A_2(h) = \frac{A_1(h)- t^{2\gamma} A_1(\frac{h}{t^{2\gamma}})}{1 - t^{2\gamma}}\)</span>, the second iteration satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+    A^{\ast}\approx A_2(h) + \cO(h^{3\gamma}).
+\]</div>
+<p>However, such a process can constantly refine the approximation due to the potentially fast-growing constant in the <span class="math notranslate nohighlight">\(\cO\)</span> notation.</p>
+</section>
+<section id="wynn-s-epsilon-method">
+<h3>Wynn’s Epsilon Method<a class="headerlink" href="#wynn-s-epsilon-method" title="Link to this heading">#</a></h3>
+<p>Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method is another kind of extrapolation algorithm that is recommended as the best all-purpose acceleration method. It has a strong connection with Padé approximation and continued fractions. We will not cover the detailed derivation of the theory in this section. However, Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method still has its limitations if the sequence converges to the desired value too slowly.</p>
+</section>
+</section>
 <section id="newton-cotes-quadrature">
 <h2>Newton-Cotes Quadrature<a class="headerlink" href="#newton-cotes-quadrature" title="Link to this heading">#</a></h2>
 </section>
@@ -405,6 +510,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extrapolation">Extrapolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#richardson-extrapolation">Richardson Extrapolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wynn-s-epsilon-method">Wynn’s Epsilon Method</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-cotes-quadrature">Newton-Cotes Quadrature</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#romberg-integration">Romberg Integration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
