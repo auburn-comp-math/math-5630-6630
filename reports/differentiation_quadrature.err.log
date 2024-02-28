@@ -1,0 +1,75 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+from bigfloat import *
+
+prec = 900
+
+def wynn(s):
+    with precision(prec):
+        n = (len(s) - 1) // 2
+        N = 2 * n + 1
+        e = [ [BigFloat('0', precision(prec))] * (N+1) for _ in range(N+1)]# 2 * (n + 2)
+
+
+        for j in range(1, N + 1):
+            e[j][1] = s[j - 1]
+
+        for k in range(3, N + 2):
+            for j in range(3, k + 1):
+                e[k-1][j-1] = e[k- 2][j - 3] + BigFloat('1', precision(prec))/(e[k - 1][j - 2] - e[k - 2][j - 2])
+        return e
+
+with precision(prec):
+    s = []
+    ret = 0
+    for i in range(20):
+        ret = ret + (-1)**i * (BigFloat('1', precision(prec))) / (2 * i + 1)
+        s.append(ret)
+
+    t = wynn(s)
+    v = const_pi()/4 
+
+    for i in range(len(t)):
+        for j in range(len(t[0])):
+            t[i][j] =  t[i][j] -  v
+
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+
+    for m in range(6):
+        plt.loglog(range(2 * m + 1, len(t)), [(abs(t[j][2 * m + 1])) for j in range(2 * m + 1, len(t))], "-o", label="error at iter {}".format(m))
+
+    plt.legend()
+    plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 3[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[0;32m----> 3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mbigfloat[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
+[1;32m      5[0m prec [38;5;241m=[39m [38;5;241m900[39m
+[1;32m      7[0m [38;5;28;01mdef[39;00m [38;5;21mwynn[39m(s):
+
+[0;31mModuleNotFoundError[0m: No module named 'bigfloat'
+

@@ -174,8 +174,62 @@ Then the approximation error is $\cO(h)$, which is very slow. Taking $h=10^{-3}$
   $$
   s_k = \sum_{j=0}^k \frac{(-1)^j}{2 j + 1}
   $$
-  
+
   as the truncated series at $z = 1$. With about 20 terms, we already reached machine precision.
+```
+
+```{code-cell} ipython3
+:tags: [remove-input]
+:mystnb:
+:   image:
+:       align: "center"
+:   figure:
+:       caption: Absolute error of $\eps_{2l}^{(j)}$ for Wynn's $\eps$ method, $0\le l\le 5$.
+
+import numpy as np
+import matplotlib.pyplot as plt
+from bigfloat import *
+
+prec = 900
+
+def wynn(s):
+    with precision(prec):
+        n = (len(s) - 1) // 2
+        N = 2 * n + 1
+        e = [ [BigFloat('0', precision(prec))] * (N+1) for _ in range(N+1)]# 2 * (n + 2)
+
+
+        for j in range(1, N + 1):
+            e[j][1] = s[j - 1]
+
+        for k in range(3, N + 2):
+            for j in range(3, k + 1):
+                e[k-1][j-1] = e[k- 2][j - 3] + BigFloat('1', precision(prec))/(e[k - 1][j - 2] - e[k - 2][j - 2])
+        return e
+
+with precision(prec):
+    s = []
+    ret = 0
+    for i in range(20):
+        ret = ret + (-1)**i * (BigFloat('1', precision(prec))) / (2 * i + 1)
+        s.append(ret)
+
+    t = wynn(s)
+    v = const_pi()/4 
+
+    for i in range(len(t)):
+        for j in range(len(t[0])):
+            t[i][j] =  t[i][j] -  v
+
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+
+    for m in range(6):
+        plt.loglog(range(2 * m + 1, len(t)), [(abs(t[j][2 * m + 1])) for j in range(2 * m + 1, len(t))], "-o", label="error at iter {}".format(m))
+
+    plt.legend()
+    plt.show()
 ```
 
 ## Newton-Cotes Quadrature
