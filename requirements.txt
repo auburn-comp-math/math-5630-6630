@@ -6,3 +6,4 @@ scipy
 sphinx-proof
 sphinx-inline-tabs
 Cython
+bigfloat @ git+https://github.com/yohanchatelain/bigfloat
