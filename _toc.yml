@@ -11,4 +11,4 @@ parts:
     - file: floating_point
     - file: root_finding
     - file: interpolation
-    - file: quadrature
+    - file: differentiation_quadrature
