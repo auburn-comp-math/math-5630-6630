@@ -366,7 +366,7 @@ document.write(`
 <section id="richardson-extrapolation">
 <h3>Richardson Extrapolation<a class="headerlink" href="#richardson-extrapolation" title="Link to this heading">#</a></h3>
 <p>Suppose there is a sequence of estimates <span class="math notranslate nohighlight">\(A(h)\)</span> depending on the parameter <span class="math notranslate nohighlight">\(h\)</span> smoothly, the limit <span class="math notranslate nohighlight">\(A^{\ast} = \lim_{h\to 0^{+}} A(h)\)</span> is the quantity to be computed. In practice, we only have access to <span class="math notranslate nohighlight">\(A(h)\)</span> for a few values of <span class="math notranslate nohighlight">\(h\)</span>. Using these values to estimate <span class="math notranslate nohighlight">\(A^{\ast}\)</span> is a typical problem in extrapolation.</p>
-<p>The basic idea behind \emph{Richardson extrapolation} is to use polynomial interpolation with a sequence of nodes <span class="math notranslate nohighlight">\(h_j\to 0\)</span>. Suppose that the function <span class="math notranslate nohighlight">\(A(h)\)</span> admits the following asymptotic expansion:</p>
+<p>The basic idea behind <strong>Richardson extrapolation</strong> is to use polynomial interpolation with a sequence of nodes <span class="math notranslate nohighlight">\(h_j\to 0\)</span>. Suppose that the function <span class="math notranslate nohighlight">\(A(h)\)</span> admits the following asymptotic expansion:</p>
 <div class="math notranslate nohighlight">
 \[
     A(h) = a_0 + a_1 h^{\gamma} + a_2 h^{2\gamma} + \dots + a_k h^{k\gamma} + \cO(h^{(k+1)\gamma})
@@ -395,9 +395,9 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 <p>Let <span class="math notranslate nohighlight">\(\tilde{f}_n\)</span> be the interpolation polynomial of degree <span class="math notranslate nohighlight">\(n\)</span> to <span class="math notranslate nohighlight">\(p_{n+1}\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-    p_{n+1}(x) \equiv \tilde{f}_n(x) + p[x, x_0, x_1, \dots, x_n] \prod_{j=0}(x - h_j^{\gamma}), 
+    p_{n+1}(x) \equiv \tilde{f}_n(x) + p[x, h_0, h_1, \dots, h_n] \prod_{j=0}(x - h_j^{\gamma}), 
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(p[x, x_0, x_1, \dots, x_n]\)</span> is the coefficient of the leading power in <span class="math notranslate nohighlight">\(p_{n+1}\)</span>, <span class="math notranslate nohighlight">\(a_{n+1}\)</span>. Thus,</p>
+<p>where <span class="math notranslate nohighlight">\(p[x, h_0, h_1, \dots, h_n]\)</span> is the coefficient of the leading power in <span class="math notranslate nohighlight">\(p_{n+1}\)</span>, <span class="math notranslate nohighlight">\(a_{n+1}\)</span>. Thus,</p>
 <div class="math notranslate nohighlight">
 \[
     A^{\ast} = p_{n+1}(0) = \tilde{f}_n(0) +a_{n+1} \prod_{j=0}(0 - h_j^{\gamma}). 
@@ -439,7 +439,7 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 \[
     A^{\ast}\approx A_2(h) + \cO(h^{3\gamma}).
 \]</div>
-<p>However, such a process can constantly refine the approximation due to the potentially fast-growing constant in the <span class="math notranslate nohighlight">\(\cO\)</span> notation.</p>
+<p>However, such a process may not constantly refine the approximation due to the potentially fast-growing constant in the <span class="math notranslate nohighlight">\(\cO\)</span> notation.</p>
 </section>
 <section id="wynn-s-epsilon-method">
 <h3>Wynn’s Epsilon Method<a class="headerlink" href="#wynn-s-epsilon-method" title="Link to this heading">#</a></h3>
