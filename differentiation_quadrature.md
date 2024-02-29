@@ -76,7 +76,7 @@ overlay_plot_fit(runge,runge_fit, x, y, -5.2,5.2)
 
 Suppose there is a sequence of estimates $A(h)$ depending on the parameter $h$ smoothly, the limit $A^{\ast} = \lim_{h\to 0^{+}} A(h)$ is the quantity to be computed. In practice, we only have access to $A(h)$ for a few values of $h$. Using these values to estimate $A^{\ast}$ is a typical problem in extrapolation.
 
-The basic idea behind \emph{Richardson extrapolation} is to use polynomial interpolation with a sequence of nodes $h_j\to 0$. Suppose that the function $A(h)$ admits the following asymptotic expansion:
+The basic idea behind **Richardson extrapolation** is to use polynomial interpolation with a sequence of nodes $h_j\to 0$. Suppose that the function $A(h)$ admits the following asymptotic expansion:
 
 $$
     A(h) = a_0 + a_1 h^{\gamma} + a_2 h^{2\gamma} + \dots + a_k h^{k\gamma} + \cO(h^{(k+1)\gamma})
@@ -110,10 +110,10 @@ $$
 Let $\tilde{f}_n$ be the interpolation polynomial of degree $n$ to $p_{n+1}$, 
 
 $$
-    p_{n+1}(x) \equiv \tilde{f}_n(x) + p[x, x_0, x_1, \dots, x_n] \prod_{j=0}(x - h_j^{\gamma}), 
+    p_{n+1}(x) \equiv \tilde{f}_n(x) + p[x, h_0, h_1, \dots, h_n] \prod_{j=0}(x - h_j^{\gamma}), 
 $$
 
-where $p[x, x_0, x_1, \dots, x_n]$ is the coefficient of the leading power in $p_{n+1}$, $a_{n+1}$. Thus, 
+where $p[x, h_0, h_1, \dots, h_n]$ is the coefficient of the leading power in $p_{n+1}$, $a_{n+1}$. Thus, 
 
 $$
     A^{\ast} = p_{n+1}(0) = \tilde{f}_n(0) +a_{n+1} \prod_{j=0}(0 - h_j^{\gamma}). 
@@ -164,7 +164,7 @@ $$
     A^{\ast}\approx A_2(h) + \cO(h^{3\gamma}).
 $$
 
-However, such a process can constantly refine the approximation due to the potentially fast-growing constant in the $\cO$ notation.
+However, such a process may not constantly refine the approximation due to the potentially fast-growing constant in the $\cO$ notation.
 
 ### Wynn's Epsilon Method
 
