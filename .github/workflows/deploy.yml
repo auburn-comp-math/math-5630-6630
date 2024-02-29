@@ -32,7 +32,7 @@ jobs:
         jupyter-book build .
     - name: Build the PDF
       uses: yegor256/latexmk-action@0.10.9
-      with: |
+      with: 
         cmd: bash pdf_gen.sh && cp ./_build/latex/book.pdf ./_build/html
         
 
