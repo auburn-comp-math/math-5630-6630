@@ -22,15 +22,54 @@ for certain function $f(x)\in C^k([a, b])$. Accurate evaluations would sometimes
 
 ## Extrapolation
 
-From the previous discussion, we already know that interpolation provides an estimate **within** the original observation range. The extrapolation is similar but aims to produce estimates outside the observation range. However, sometimes extrapolation may be subject to a greater uncertainty, see {numref}`extrapolation`, one should use it only when an overestimate is hardly occurring.
+From the previous discussion, we already know that interpolation provides an estimate **within** the original observation range. The extrapolation is similar but aims to produce estimates outside the observation range. However, sometimes extrapolation may be subject to a greater uncertainty (see following example), one should use it only when an overestimate is hardly occurring.
 
-```{figure} images/doc/extrapolate.png
----
-name: extrapolation
-scale: 120%
-align: center
----
-Extrapolation behavior for Chebyshev interpolation with $15$ nodes.
+```{code-cell} ipython3
+:tags: [remove-input]
+:mystnb:
+:   image:
+:       align: "center"
+:   figure:
+:       caption: Extrapolation behavior of polynomial fitting on Chebyshev nodes.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+def runge(x):
+  return 1 / (1 + x ** 2)
+
+def polyfit(x, y):
+  return np.poly1d(np.polyfit(x, y, x.size -1))
+
+def overlay_plot_fit(f, f_fit, x, y, x0=-1, x1=1):
+    _x = np.linspace(x0, x1, 500)
+    plt.plot(_x, f_fit(_x), label='fitted function')
+    plt.plot(_x, f(_x), label='actual function')
+    plt.plot(x, y, 'k.')
+    # plt.title('Polynomial fitting for Runge function')
+    plt.legend(loc='lower center', fontsize=9)
+
+# x = np.linspace(-5, 5, 11) # use chebyshev nodes todo
+x = 5 * np.cos(-np.linspace(0, np.pi, 15))
+y = runge(x)
+runge_fit = polyfit(x, y)
+
+plt.figure(figsize=(6, 4))
+
+SMALL_SIZE = 8
+MEDIUM_SIZE = 10
+BIGGER_SIZE = 12
+
+plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
+plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
+plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
+
+overlay_plot_fit(runge,runge_fit, x, y, -5.2,5.2)
 ```
 
 ### Richardson Extrapolation
