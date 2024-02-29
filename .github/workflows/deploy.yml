@@ -30,6 +30,8 @@ jobs:
     - name: Build the book
       run: |
         jupyter-book build .
+        bash pdf_gen.sh
+        cp ./_build/latex/book.pdf ./_build/html
 
     # Deploy the book's HTML to gh-pages branch
     - name: GitHub Pages action
