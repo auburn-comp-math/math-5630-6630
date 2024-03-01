@@ -558,10 +558,10 @@ h^{(n+1)}(x) = \frac{(-1)^{n+1}}{2^{n+1}} (2n+1)!! x^{-(2n+3)/2}.
 <span class="eqno">(1)<a class="headerlink" href="#equation-eq-runge-example" title="Link to this equation">#</a></span>\[h(x) = \frac{1}{1+x^2},\quad x\in [-5, 5].\]</div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<figure class="align-default" id="id1">
+<figure class="align-default" id="id2">
 <img alt="_images/a6ae6c71b63ce596543dfc4fd27e1957e16bfc4da50a585a774f253036bace86.png" class="align-center" src="_images/a6ae6c71b63ce596543dfc4fd27e1957e16bfc4da50a585a774f253036bace86.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Runge phenomenon with 11 equally spaced nodes</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Runge phenomenon with 11 equally spaced nodes</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -647,10 +647,10 @@ h^{(n+1)}(x) = \frac{(-1)^{n+1}}{2^{n+1}} (2n+1)!! x^{-(2n+3)/2}.
 <p>In Runge’s example <a class="reference internal" href="#equation-eq-runge-example">(1)</a>, the simple poles <span class="math notranslate nohighlight">\(\pm i\)</span> are on the contour <span class="math notranslate nohighlight">\(C_{\rho}\)</span> which intersects the real line at <span class="math notranslate nohighlight">\(x_c\approx 3.6334\)</span>. Therefore, for <span class="math notranslate nohighlight">\(|x| &lt; x_c\)</span>, the interpolation <span class="math notranslate nohighlight">\(f_n\)</span> uniformly converges to <span class="math notranslate nohighlight">\(h\)</span> and diverges once <span class="math notranslate nohighlight">\(|x| &gt; x_c\)</span>.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<figure class="align-default" id="id2">
+<figure class="align-default" id="id3">
 <img alt="_images/322d862b17b1e0738f72ccbdeedb1e20ac4d5153be8cc0c98d2fdb57530ec243.png" class="align-center" src="_images/322d862b17b1e0738f72ccbdeedb1e20ac4d5153be8cc0c98d2fdb57530ec243.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Contour curve passing through the poles at <span class="math notranslate nohighlight">\(\pm i\)</span>.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Contour curve passing through the poles at <span class="math notranslate nohighlight">\(\pm i\)</span>.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -737,33 +737,116 @@ T_k(x) = \cos (k\arccos x),\quad x\in[-1,1].
 </div></section>
 <section id="stability-of-polynomial-interpolation">
 <h3>Stability of Polynomial Interpolation<a class="headerlink" href="#stability-of-polynomial-interpolation" title="Link to this heading">#</a></h3>
-<p>Suppose there is some perturbation of the data <span class="math notranslate nohighlight">\(\tilde{y}_j = y_j + \eps_j\)</span> at the interpolation node <span class="math notranslate nohighlight">\(x_j\)</span>. Let <span class="math notranslate nohighlight">\(\tilde{f}_n(x)\)</span> and <span class="math notranslate nohighlight">\(f_n(x)\)</span> be the interpolating polynomials on perturbed data and original data. Then with Lagrange polynomials,</p>
+<p>Suppose there is some perturbation of the data <span class="math notranslate nohighlight">\(\tilde{y}_j = y_j + \eps_j\)</span> at the interpolation node <span class="math notranslate nohighlight">\(x_j\)</span>. Let <span class="math notranslate nohighlight">\(\tilde{f}_n(x)\)</span> and <span class="math notranslate nohighlight">\(f_n(x)\)</span> be the interpolating polynomials on perturbed data and original data. Then, with Lagrange polynomials,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+        |f_n(x) - \tilde{f_n}(x)| &amp;= |\sum_{j=0}^n (y_j - \tilde{y}_j) L_j(x)| \\
+        &amp;\le \left(\max_{j} |\eps_j|\right) \sum_{j=0}^n |L_j(x)|.
+    \end{aligned}
+\end{split}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\lambda_n(x) := \sum_{j=0}^n |L_j(x)|\)</span> is the Lebesgue function. It is a piecewise polynomial. Its maximum <span class="math notranslate nohighlight">\(\Lambda_n\)</span> is the <strong>Lebesgue constant</strong> and only depends on the choice of interpolation nodes.</p>
+<p>For the equally spaced nodes, this Lebesgue constant grows exponentially. In fact,<span id="id1">[]</span> proved the following sharp result.</p>
+<div class="proof lemma admonition" id="lemma-15">
+<p class="admonition-title"><span class="caption-number">Lemma 4 </span></p>
+<section class="lemma-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{x_j\}_{j=0}^n\)</span> be equispaced nodes on <span class="math notranslate nohighlight">\([0, 1]\)</span>, then the Lebesgue constant</p>
+<div class="math notranslate nohighlight">
+\[
+\Lambda_n  =  \frac{2^{n+1}}{e n \log n} \left(1 + o(1)\right), \quad n\to\infty. 
+\]</div>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Assume <span class="math notranslate nohighlight">\(n\ge 3\)</span>, we prove the lower bound by construction. Let <span class="math notranslate nohighlight">\(f(x) = e^{i n\pi x}\)</span> and define <span class="math notranslate nohighlight">\(p_n(x) = \sum_{j=0}^{n} f(x_j) L_j(x)\)</span> as the interpolation polynomial at nodes <span class="math notranslate nohighlight">\(x_j = j \Delta\)</span>, <span class="math notranslate nohighlight">\(\Delta = \frac{1}{n}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+|p_n(x)| = \left| \sum_{j=0}^{n} (-1)^j L_j(x) \right| \le \Lambda_n.\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\delta_{+}\)</span> be the forward difference operator</p>
+<div class="math notranslate nohighlight">
+\[
+    \delta_{+} p_n(x) := p_n(x+\frac{1}{n}) - p_n(x),
+\]</div>
+<p>then <span class="math notranslate nohighlight">\( p_n(x_j) =  (1+\delta_{+})^j p_n(0)\)</span> for <span class="math notranslate nohighlight">\(j=0,1,\cdots, n\)</span>, which means the interpolation polynomial is</p>
+<div class="math notranslate nohighlight">
+\[
+    p_n(x) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k p_n(0) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k f(0),
+\]</div>
+<p>which is exactly the Newton form at the equispaced nodes.Because <span class="math notranslate nohighlight">\(\delta_+ f(x) = (e^{i\pi} - 1)f(x) = -2 f(x)\)</span> acts as a multiplicative operator, therefore</p>
+<div class="math notranslate nohighlight">
+\[
+    p_n(x) = \sum_{k=0}^n \binom{nx}{k}  (-2)^k.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(x_{\ast} = \frac{1}{n \log n}\)</span> and set <span class="math notranslate nohighlight">\(\mu = n x_{\ast}\in(0, \frac{1}{\log(3)})\)</span>. Then, for <span class="math notranslate nohighlight">\(k\ge 1\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{ \binom{\mu}{k}  (-2)^k  }{ \binom{\mu}{k + 1}  (-2)^{k + 1} } = \frac{k+1}{2(k - \mu)} &gt; \frac{1}{2}.
+\]</div>
+<p>Therefore,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
-|f_n(x) - \tilde{f_n}(x)| &amp;= |\sum_{j=0}^n (y_j - \tilde{y}_j) L_j(x)| \\
-&amp;\le \left(\max_{j} |\eps_j|\right) \sum_{j=0}^n |L_j(x)|.
+        \Lambda_n &amp;\ge  |p_n(x_{\ast})| \ge \binom{\mu}{n}  (-2)^n \left(2 - \frac{1}{2^n}\right) - 1 \\
+        &amp;=\exp\left( \log\mu - \log n + \sum_{k=1}^{n-1} \log\left(1 - \frac{\mu}{k}\right) \right) (2^{n+1} - 1) - 1.
 \end{aligned}
 \end{split}\]</div>
-<p>Here <span class="math notranslate nohighlight">\(\lambda_n(x) := \sum_{j=0}^n |L_j(x)|\)</span> is the <strong>Lebesgue function</strong>. It is a piecewise defined polynomial. Its maximum <span class="math notranslate nohighlight">\(\Lambda_n\)</span> is the <strong>Lebesgue constant</strong> and it only depends on the choice of interpolation nodes. For the equally spaced nodes, this Lebesgue constant grows exponentially,</p>
+<p>Denote the positive constant <span class="math notranslate nohighlight">\(C = 2(1 - \frac{1}{\log(3)})\)</span> and notice <span class="math notranslate nohighlight">\(\log(1 - x) \ge -x - \frac{x^2}{C}\)</span> for all <span class="math notranslate nohighlight">\(x\in (0, \frac{1}{\log(3)})\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    \Lambda_n &amp;\ge \frac{\mu}{n} \exp\left(- \mu\sum_{k=1}^{n-1}\frac{1}{k}\right) \exp\left(-\frac{\mu^2}{C} \sum_{k=1}^{n-1}\frac{1}{k^2}\right)(2^{n+1} - 1) - 1 \\
+    &amp; \ge \frac{\mu}{n} \exp(-\mu (\log n + \gamma))\exp\left(-\frac{\pi^2\mu^2}{6C}\right)(2^{n+1} - 1) - 1 \\
+    &amp; =\frac{2^{n+1}}{e n \log n} \left(1 + o(1)\right).
+\end{aligned}
+\end{split}\]</div>
+<p>We notice that if <span class="math notranslate nohighlight">\(\|f\|_{\infty}\le 1\)</span>,  then <span class="math notranslate nohighlight">\(\|\delta_{+} f\|_{\infty}\le 2\)</span>, using~\eqref{EQ: NEWTON-FORM-EQUI}, the upper bound of <span class="math notranslate nohighlight">\(\Lambda_n\)</span> can be estimated by</p>
 <div class="math notranslate nohighlight">
 \[
-\Lambda_{n, equal} \sim \frac{2^{n+1}}{en \log n}.
+    \Lambda_n \le \sup_{x\in (0, 1)}\sum_{k=0}^n \left|\binom{nx}{k}\right| 2^k.
 \]</div>
-<p>For the general case, it has been proved by Paul Erdös (1964) that there exists a constant <span class="math notranslate nohighlight">\(C &gt; 0\)</span></p>
+<p>By symmetry, it is sufficient to consider <span class="math notranslate nohighlight">\(x\le \frac{1}{2}\)</span>, otherwise, a similar bound can be derived with the backward difference operator <span class="math notranslate nohighlight">\(\delta_{-}\)</span>. Hence,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    \Lambda_n &amp;\le \sum_{k=0}^{\lceil \frac{n}{2} \rceil} \binom{\lceil \frac{n}{2} \rceil}{k} 2^k + \sup_{z\in (0, \frac{n}{2})}  \sum_{k=\lceil \frac{n}{2} \rceil + 1}^{n} \binom{z}{k} 2^k \\
+    &amp;= 3^{ \lceil \frac{n}{2} \rceil } + \sum_{k = \lceil\frac{n}{2} \rceil + 1}^n  \frac{2^k}{e k \log k}\left(1 + o(1)\right),
+\end{aligned}
+\end{split}\]</div>
+<p>where the following inequalities are applied:</p>
 <div class="math notranslate nohighlight">
 \[
-    \Lambda_n &gt; \frac{2}{\pi}\log(n+1) - C,\quad  n\ge 0,
+    \begin{aligned}
+        &amp;\left|\binom{z}{k}\right|\le \binom{\lceil \frac{n}{2} \rceil}{k},\quad \forall z,k\le \lceil \frac{n}{2} \rceil
+    \end{aligned}
 \]</div>
-<p>As the number of nodes <span class="math notranslate nohighlight">\(n\to \infty\)</span>, <span class="math notranslate nohighlight">\(\Lambda_n \to \infty\)</span>. This leads to the result of Faber that for any choice of nodes, there exists a continuous function not able to be approximated by the interpolating polynomial. The Chebyshev nodes are almost optimal in the sense that</p>
+<p>and <span class="math notranslate nohighlight">\(\forall k \ge \lceil\frac{n}{2} \rceil + 1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+        \sup_{z\in (0, \frac{n}{2})}\left|\binom{z}{k}\right| &amp;=  \sup_{z\in (0, \frac{n}{2})} \frac{\sin(\pi(z - l))}{\pi k!} \Gamma(z+1)\Gamma(k - z) \\
+        &amp;=\sup_{z\in (0, 1)} \frac{\sin(\pi(z - l))}{\pi k!} \Gamma(z+1)\Gamma(k - z) \quad (\text{by comparison})\\&amp;\le \sup_{z\in (0, 1)}\frac{z}{k}\left(\frac{z+1}{k - z}\right)^z \quad (\text{by Gautschi's inequality})\\
+        &amp;= \frac{1}{e k \log k}\left(1 + o(1)\right).
+    \end{aligned}
+\end{split}\]</div>
+<p>Therefore,</p>
 <div class="math notranslate nohighlight">
 \[
-\Lambda_{n, Chebyshev} &lt; \frac{2}{\pi}\log(n+1) + 1.
+    \Lambda_n \le 3^{\lceil \frac{n}{2}\rceil}+  \frac{1}{e \log n} \left( \sum_{k=\lceil \frac{n}{2}\rceil+1}^n \frac{2^k}{k}\right) (1 + o(1)) =  \frac{2^{n+1}}{e n \log n}  (1 + o(1)).
 \]</div>
-<p>The set of nodes that minimize <span class="math notranslate nohighlight">\(\Lambda_n\)</span> is difficult to compute. A slightly better set of nodes than Chebyshev nodes is the <strong>extended Chebyshev nodes</strong>:</p>
+</div>
+<p>For the general case, it has been proved by Paul Erdös (1964) that for any set of interpolation nodes,</p>
 <div class="math notranslate nohighlight">
 \[
-\tilde{x}_j = \frac{\cos\left(\frac{2j+1}{2(n+1)\pi}\right)}{\cos\left(\frac{\pi}{2(n+1)}\right)}.
+    \Lambda_n &gt; \frac{2}{\pi}\log(n+1) + \frac{1}{2},\quad  n\ge 0.
+\]</div>
+<p>As the number of nodes <span class="math notranslate nohighlight">\(n\to \infty\)</span>, <span class="math notranslate nohighlight">\(\Lambda_n \to \infty\)</span>. This leads to the result of Faber that, for any choice of nodes, there exists a continuous function not able to be approximated by the interpolating polynomial. The Chebyshev nodes are almost optimal, in the sense that</p>
+<div class="math notranslate nohighlight">
+\[
+    \Lambda_{n, \textrm{Chebyshev}} &lt; \frac{2}{\pi}\log(n+1) + 1.
+\]</div>
+<p>The set of nodes that minimizes <span class="math notranslate nohighlight">\(\Lambda_n\)</span> is difficult to compute. A slightly better set of nodes than Chebyshev nodes are the <strong>extended Chebyshev nodes</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \tilde{x}_j = \frac{\cos\left(\frac{2j+1}{2(n+1)\pi}\right)}{\cos\left(\frac{\pi}{2(n+1)}\right)}.
 \]</div>
 </section>
 <section id="newton-form">
@@ -783,12 +866,12 @@ f_{k+1}(x) = f_k(x) + c_{k+1} (x - x_0)(x - x_1)\dots (x - x_{k}),
 <div class="math notranslate nohighlight" id="equation-eq-horner">
 <span class="eqno">(5)<a class="headerlink" href="#equation-eq-horner" title="Link to this equation">#</a></span>\[    f_n(x) = c_0 + (x-x_0)(c_1 + (x-x_1)(c_2 + (x-x_2)(c_3 + \dots))),\]</div>
 <p>the evaluation order starts from the innermost part <span class="math notranslate nohighlight">\(c_n (x -x_{n-1})\)</span>. This formulation has a complexity of <span class="math notranslate nohighlight">\(3n\)</span> flops.</p>
-<div class="proof remark admonition" id="remark-15">
+<div class="proof remark admonition" id="remark-16">
 <p class="admonition-title"><span class="caption-number">Remark 6 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The computation of <span class="math notranslate nohighlight">\(c_k\)</span> is not cheap from <a class="reference internal" href="#equation-eq-ck">(3)</a>. A naive algorithm with Horner’s scheme roughly takes <span class="math notranslate nohighlight">\(5n^2/2+\cO(n)\)</span> flops to compute all coefficients. The <strong>divided differences</strong> is a better way to compute <span class="math notranslate nohighlight">\(c_k\)</span>.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-16">
+</div><div class="proof definition admonition" id="definition-17">
 <p class="admonition-title"><span class="caption-number">Definition 6 </span></p>
 <section class="definition-content" id="proof-content">
 <p>Let the interpolation nodes be <span class="math notranslate nohighlight">\(\{x_0, x_1, \dots, x_n\}\)</span>, the <strong>divided differences</strong> are defined recursively as follows (the square bracket is used to distinguish from the usual bracket):</p>
@@ -815,7 +898,7 @@ f_{k+1}(x) = f_k(x) + c_{k+1} (x - x_0)(x - x_1)\dots (x - x_{k}),
     f[x_4] &amp; \to f[x_3, x_4]&amp;\to&amp; f[x_2, x_3, x_4] &amp;\to &amp; f[x_1, x_2, x_3, x_4] &amp;\to&amp;  f[x_0, x_1, x_2, x_3, x_4] 
 \end{aligned}\end{split}\]</div>
 <p>It is clear that computing all of the divided differences requires <span class="math notranslate nohighlight">\(\frac{3n^2}{2} +\cO(n)\)</span> flops. The following theorem is the main statement for the Newton form.</p>
-<div class="proof theorem admonition" id="theorem-17">
+<div class="proof theorem admonition" id="theorem-18">
 <p class="admonition-title"><span class="caption-number">Theorem 14 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>The interpolation polynomial <span class="math notranslate nohighlight">\(f_n\)</span> in Newton form is given by</p>
@@ -843,7 +926,7 @@ f_{n+1}(x) = \frac{g_n(x)(x - x_0) - f_n(x)(x - x_{n+1})}{x_{n+1} - x_0}
     \frac{f[x_1, \dots, x_{n+1}] - f[x_0, \dots, x_n]}{x_{n+1} - x_0} = f[x_0, x_1,\dots, x_{n+1}].
 \]</div>
 </div>
-<div class="proof remark admonition" id="remark-18">
+<div class="proof remark admonition" id="remark-19">
 <p class="admonition-title"><span class="caption-number">Remark 7 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The divided difference <span class="math notranslate nohighlight">\(f[x_j, \dots, x_{j+k}]\)</span> is the coefficient of leading power of the interpolating polynomial through <span class="math notranslate nohighlight">\((x_j, f[x_j]), \dots, (x_{j+k}, f[x_{j+k}])\)</span>. It can be shown that</p>
@@ -853,7 +936,7 @@ f[x_j, \dots, x_{j+k}] = \frac{1}{k!}f^{(k)}(\xi)
 \]</div>
 <p>for some <span class="math notranslate nohighlight">\(\xi\in [a, b]\)</span>. See exercise.</p>
 </section>
-</div><div class="proof remark admonition" id="remark-19">
+</div><div class="proof remark admonition" id="remark-20">
 <p class="admonition-title"><span class="caption-number">Remark 8 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The error estimate can be derived as</p>
@@ -862,7 +945,7 @@ f[x_j, \dots, x_{j+k}] = \frac{1}{k!}f^{(k)}(\xi)
     f(x) - f_n(x) = f[x_0, x_1, \dots, x_n, x] (x-x_0)\dots (x - x_n).
 \]</div>
 </section>
-</div><div class="proof remark admonition" id="remark-20">
+</div><div class="proof remark admonition" id="remark-21">
 <p class="admonition-title"><span class="caption-number">Remark 9 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The Newton form <a class="reference internal" href="#equation-eq-newton-form">(7)</a> actually does not require distinct nodes. The divided difference can be defined as a limit for repeated nodes:</p>
@@ -872,7 +955,7 @@ f[x_j, \dots, x_{j+k}] = \frac{1}{k!}f^{(k)}(\xi)
 \]</div>
 <p>Moreover, using Taylor expansion, <span class="math notranslate nohighlight">\(f[\underbrace{x_0,\dots, x_0}_{(k+1)\,\text{times}}] = \frac{1}{k!}f^{(k)}(x_0)\)</span>. However, in such case the divided differences are not possible to be computed if the derivative values are not provided. We will discuss this scenario later in Hermite interpolation polynomial.</p>
 </section>
-</div><div class="proof remark admonition" id="remark-21">
+</div><div class="proof remark admonition" id="remark-22">
 <p class="admonition-title"><span class="caption-number">Remark 10 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The algorithm to compute the divided difference can be made more efficient with a single column to store the diagonal elements. <span class="math notranslate nohighlight">\(\leadsto\)</span> is representing the number is not changing.</p>
@@ -915,7 +998,7 @@ H_{N-1}^{(k)}(x_j) = y_j^k:= h^{(k)}(x_j),\quad j=0,\dots, n,\quad 0\le k\le m_j
 \underbrace{x_0,\dots, x_0}_{(m_0+1)\,\text{times}}, \quad \underbrace{x_1,\dots, x_1}_{(m_1+1)\,\text{times}}, \quad \dots,\quad  \underbrace{x_n,\dots, x_n}_{(m_n+1)\,\text{times}}
 \]</div>
 <p>In this way, all of the necessary divided differences can be computed. See exercise.</p>
-<div class="proof remark admonition" id="remark-22">
+<div class="proof remark admonition" id="remark-23">
 <p class="admonition-title"><span class="caption-number">Remark 11 </span></p>
 <section class="remark-content" id="proof-content">
 <p>The error estimate for Hermite polynomial interpolation will be the same as the Newton form case.</p>
@@ -927,7 +1010,7 @@ H_{N-1}^{(k)}(x_j) = y_j^k:= h^{(k)}(x_j),\quad j=0,\dots, n,\quad 0\le k\le m_j
 <p>Periodic functions occur in many applications, that is, <span class="math notranslate nohighlight">\(f(x + T) = f(x)\)</span>, <span class="math notranslate nohighlight">\(x\in \mathbb{R}\)</span> for some <span class="math notranslate nohighlight">\(T &gt; 0\)</span>. For example, a closed planar curve can be parameterized as a periodic function naturally. The polynomial interpolation does not suit periodic functions, this is because polynomials will eventually go to infinity as <span class="math notranslate nohighlight">\(x\to\infty\)</span>. The most used interpolation for the periodic function is the \emph{trigonometric polynomial interpolation}. In the following, we assume the period <span class="math notranslate nohighlight">\(T = 2\pi\)</span> without loss of generality.</p>
 <section id="fourier-series">
 <h3>Fourier Series<a class="headerlink" href="#fourier-series" title="Link to this heading">#</a></h3>
-<div class="proof definition admonition" id="definition-23">
+<div class="proof definition admonition" id="definition-24">
 <p class="admonition-title"><span class="caption-number">Definition 7 </span></p>
 <section class="definition-content" id="proof-content">
 <p>For <span class="math notranslate nohighlight">\(n\ge 0\)</span>, we defined <span class="math notranslate nohighlight">\(F_n\)</span> the space of trigonometric polynomials</p>
@@ -938,8 +1021,8 @@ H_{N-1}^{(k)}(x_j) = y_j^k:= h^{(k)}(x_j),\quad j=0,\dots, n,\quad 0\le k\le m_j
 <p>The coefficients <span class="math notranslate nohighlight">\(a_0,\dots, a_n\)</span>, <span class="math notranslate nohighlight">\(b_1,\dots, b_n\)</span> can be also chosen as complex numbers. <span class="math notranslate nohighlight">\(f\in F_n\)</span> is said to be of degree <span class="math notranslate nohighlight">\(n\)</span> if <span class="math notranslate nohighlight">\(|a_n| + |b_n| &gt; 0\)</span>.</p>
 </section>
 </div><p>The concept of <strong>degree</strong> here can be validated by the addition theorem of trigonometric functions. For instance, if <span class="math notranslate nohighlight">\(f_1\in F_k\)</span>, <span class="math notranslate nohighlight">\(f_2\in F_l\)</span>, then <span class="math notranslate nohighlight">\(f_1 f_2 \in F_{k+l}\)</span>. In the next, we discuss the uniqueness of the interpolation with the trigonometric polynomial.</p>
-<div class="proof lemma admonition" id="lemma-24">
-<p class="admonition-title"><span class="caption-number">Lemma 4 </span></p>
+<div class="proof lemma admonition" id="lemma-25">
+<p class="admonition-title"><span class="caption-number">Lemma 5 </span></p>
 <section class="lemma-content" id="proof-content">
 <p>A trigonometric polynomial <span class="math notranslate nohighlight">\(f\in F_n\)</span> that has more than <span class="math notranslate nohighlight">\(2n\)</span> zeros in <span class="math notranslate nohighlight">\([0, 2\pi)\)</span> must vanish identically.</p>
 </section>
@@ -954,13 +1037,13 @@ H_{N-1}^{(k)}(x_j) = y_j^k:= h^{(k)}(x_j),\quad j=0,\dots, n,\quad 0\le k\le m_j
 \]</div>
 <p>one can rewrite <span class="math notranslate nohighlight">\(f_n(x) = z^{-n} p(z)\)</span>. If <span class="math notranslate nohighlight">\(f_n(x)\)</span> has more than <span class="math notranslate nohighlight">\(2n\)</span> zeros, then <span class="math notranslate nohighlight">\(p(z)\)</span> has more than <span class="math notranslate nohighlight">\(2n\)</span> zeros, which is a contradiction since <span class="math notranslate nohighlight">\(p(z)\)</span> is a polynomial of degree <span class="math notranslate nohighlight">\(2n\)</span>.</p>
 </div>
-<div class="proof remark admonition" id="remark-25">
+<div class="proof remark admonition" id="remark-26">
 <p class="admonition-title"><span class="caption-number">Remark 12 </span></p>
 <section class="remark-content" id="proof-content">
 <p>Since <span class="math notranslate nohighlight">\(\sin nx\in F_n\)</span> has <span class="math notranslate nohighlight">\(2n\)</span> zeros <span class="math notranslate nohighlight">\(\frac{\pi j}{n}\)</span>, <span class="math notranslate nohighlight">\(j=0,\dots, 2n-1\)</span>, it means to uniquely determine a trigonometric polynomial in <span class="math notranslate nohighlight">\(F_n\)</span>, exactly <span class="math notranslate nohighlight">\(2n+1\)</span> values are needed. This is also known as the Nyquist sampling theorem.</p>
 </section>
 </div><p>A direct corollary is the linear independence of the functions <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(\cos k x\)</span> and <span class="math notranslate nohighlight">\(\sin k x\)</span>, <span class="math notranslate nohighlight">\(k = 1, \dots n\)</span>, these <span class="math notranslate nohighlight">\((2n+1)\)</span> functions form a natural basis for the trigonometric polynomial space <span class="math notranslate nohighlight">\(F_n\)</span>.</p>
-<div class="proof corollary admonition" id="corollary-26">
+<div class="proof corollary admonition" id="corollary-27">
 <p class="admonition-title"><span class="caption-number">Corollary 4 </span></p>
 <section class="corollary-content" id="proof-content">
 <p>The functions <span class="math notranslate nohighlight">\(1, \cos kx, \sin kx\)</span>, <span class="math notranslate nohighlight">\(k=1,\dots, n\)</span> are linearly independent on <span class="math notranslate nohighlight">\(C([0, 2\pi])\)</span>, hence <span class="math notranslate nohighlight">\(F_n\)</span> is a <span class="math notranslate nohighlight">\((2n+1)\)</span> dimensional space.</p>
@@ -973,7 +1056,7 @@ l_k(x_j) = \begin{cases}
     0,&amp;\text{otherwise}.
 \end{cases}
 \end{split}\]</div>
-<div class="proof remark admonition" id="remark-27">
+<div class="proof remark admonition" id="remark-28">
 <p class="admonition-title"><span class="caption-number">Remark 13 </span></p>
 <section class="remark-content" id="proof-content">
 <p>A natural idea is replace <span class="math notranslate nohighlight">\(x - x_j\)</span> in the Lagrange basis by <span class="math notranslate nohighlight">\(\sin(x - x_j)\)</span> and produce something like</p>
@@ -1073,7 +1156,7 @@ The fast Fourier transform exploits the symmetry in <span class="math notranslat
 <section id="interpolation-error-of-trigonometric-polynomial">
 <h3>Interpolation Error of Trigonometric Polynomial<a class="headerlink" href="#interpolation-error-of-trigonometric-polynomial" title="Link to this heading">#</a></h3>
 <p>The <span class="math notranslate nohighlight">\(L^2\)</span> error estimate will be discussed at a later point. In this part, we only focus on the <span class="math notranslate nohighlight">\(L^{\infty}\)</span> error estimate.</p>
-<div class="proof theorem admonition" id="theorem-29">
+<div class="proof theorem admonition" id="theorem-30">
 <p class="admonition-title"><span class="caption-number">Theorem 16 </span></p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(f\in C^2(\mathbb{R})\)</span> is a <span class="math notranslate nohighlight">\(2\pi\)</span>-period function, then the trigonometric interpolation polynomial with <span class="math notranslate nohighlight">\(2n+1\)</span> equally spaced nodes converges uniformly as the number of nodes tends to infinity.</p>
@@ -1125,7 +1208,7 @@ f(x) = \sum_{s = -\infty}^{\infty} \gamma_s e^{is x},\quad g(x) = \sum_{s = -n}^
 <section id="spline-interpolation">
 <h2>Spline Interpolation<a class="headerlink" href="#spline-interpolation" title="Link to this heading">#</a></h2>
 <p>It has been seen that increasing the number of interpolation nodes will not always help to improve the approximation. The spline interpolation is to conquer this issue by using the piecewise low-degree polynomials.</p>
-<div class="proof definition admonition" id="definition-30">
+<div class="proof definition admonition" id="definition-31">
 <p class="admonition-title"><span class="caption-number">Definition 8 </span></p>
 <section class="definition-content" id="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(x_0, \dots, x_n\)</span> be the distinct nodes on <span class="math notranslate nohighlight">\([a, b]\)</span> such that <span class="math notranslate nohighlight">\(a = x_0 &lt;\dots &lt; x_n = b\)</span>. The piecewise defined function <span class="math notranslate nohighlight">\(s_k(x)\)</span> on the interval <span class="math notranslate nohighlight">\([a, b]\)</span> is a spline of degree <span class="math notranslate nohighlight">\(k\)</span> to the nodes if</p>
