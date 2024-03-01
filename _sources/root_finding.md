@@ -58,7 +58,7 @@ False position method
 
 ````
 
-It is actually easy to improve the false position method by forcing more weight towards the other endpoint. This is called the **Illinois method**. Once the same side has updated in two consecutive iterations, the Illinois method will adjust $c$ using a slightly different formula.
+It is easy to improve the false position method by forcing more weight toward the other endpoint. This is called the **Illinois method**. Once the same side has updated in two consecutive iterations, the Illinois method will adjust $c$ using a slightly different formula.
 
 $$
 {c} = a - f(a)\frac{ b - a }{\lambda f(b) - f(a)}
