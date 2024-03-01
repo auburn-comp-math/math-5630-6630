@@ -549,7 +549,7 @@ This bound is much smaller than the bound for equally spaced nodes.
 
 ### Stability of Polynomial Interpolation
 
-Suppose there is some perturbation of the data $\tilde{y}_j = y_j + \eps_j$ at the interpolation node $x_j$. Let $\tilde{f}_n(x)$ and $f_n(x)$ be the interpolating polynomials on perturbed data and original data. Then, with Lagrange polynomials, 
+Suppose there is some perturbation of the data $\tilde{y}_j = y_j + \eps_j$ at the interpolation node $x_j$. Let $\tilde{f}_n(x)$ and $f_n(x)$ be the interpolating polynomials on perturbed data and original data. Then, with Lagrange polynomials,
 
 $$
     \begin{aligned}
@@ -558,9 +558,9 @@ $$
     \end{aligned}
 $$
 
-Here $\lambda_n(x) := \sum_{j=0}^n |L_j(x)|$ is the Lebesgue function. It is a piecewise polynomial. Its maximum $\Lambda_n$ is the **Lebesgue constant** and only depends on the choice of interpolation nodes. 
+Here $\lambda_n(x) := \sum_{j=0}^n |L_j(x)|$ is the Lebesgue function. It is a piecewise polynomial. Its maximum $\Lambda_n$ is the **Lebesgue constant** and only depends on the choice of interpolation nodes.
 
-For the equally spaced nodes, this Lebesgue constant grows exponentially. In fact,{cite}`turetskii1940bounding` proved the following sharp result. 
+For the equally spaced nodes, this Lebesgue constant grows exponentially. In fact,{cite}`turetskii1940bounding` proved the following sharp result.
 
 ```{prf:lemma}
 Let $\{x_j\}_{j=0}^n$ be equispaced nodes on $[0, 1]$, then the Lebesgue constant 
@@ -660,13 +660,13 @@ $$
 $$
 ```
 
-For the general case, it has been proved by Paul Erdös (1964) that for any set of interpolation nodes, 
+For the general case, it has been proved by Paul Erdös (1964) that for any set of interpolation nodes,
 
 $$
     \Lambda_n > \frac{2}{\pi}\log(n+1) + \frac{1}{2},\quad  n\ge 0.
 $$
 
-As the number of nodes $n\to \infty$, $\Lambda_n \to \infty$. This leads to the result of Faber that, for any choice of nodes, there exists a continuous function not able to be approximated by the interpolating polynomial. The Chebyshev nodes are almost optimal, in the sense that 
+As the number of nodes $n\to \infty$, $\Lambda_n \to \infty$. This leads to the result of Faber that, for any choice of nodes, there exists a continuous function not able to be approximated by the interpolating polynomial. The Chebyshev nodes are almost optimal, in the sense that
 
 $$
     \Lambda_{n, \textrm{Chebyshev}} < \frac{2}{\pi}\log(n+1) + 1.
@@ -677,7 +677,6 @@ The set of nodes that minimizes $\Lambda_n$ is difficult to compute. A slightly 
 $$
     \tilde{x}_j = \frac{\cos\left(\frac{2j+1}{2(n+1)\pi}\right)}{\cos\left(\frac{\pi}{2(n+1)}\right)}.
 $$
-
 
 ### Newton Form
 
