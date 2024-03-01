@@ -549,38 +549,135 @@ This bound is much smaller than the bound for equally spaced nodes.
 
 ### Stability of Polynomial Interpolation
 
-Suppose there is some perturbation of the data $\tilde{y}_j = y_j + \eps_j$ at the interpolation node $x_j$. Let $\tilde{f}_n(x)$ and $f_n(x)$ be the interpolating polynomials on perturbed data and original data. Then with Lagrange polynomials,
+Suppose there is some perturbation of the data $\tilde{y}_j = y_j + \eps_j$ at the interpolation node $x_j$. Let $\tilde{f}_n(x)$ and $f_n(x)$ be the interpolating polynomials on perturbed data and original data. Then, with Lagrange polynomials, 
+
+$$
+    \begin{aligned}
+        |f_n(x) - \tilde{f_n}(x)| &= |\sum_{j=0}^n (y_j - \tilde{y}_j) L_j(x)| \\
+        &\le \left(\max_{j} |\eps_j|\right) \sum_{j=0}^n |L_j(x)|.
+    \end{aligned}
+$$
+
+Here $\lambda_n(x) := \sum_{j=0}^n |L_j(x)|$ is the Lebesgue function. It is a piecewise polynomial. Its maximum $\Lambda_n$ is the **Lebesgue constant** and only depends on the choice of interpolation nodes. 
+
+For the equally spaced nodes, this Lebesgue constant grows exponentially. In fact,{cite}`turetskii1940bounding` proved the following sharp result. 
+
+```{prf:lemma}
+Let $\{x_j\}_{j=0}^n$ be equispaced nodes on $[0, 1]$, then the Lebesgue constant 
+
+$$
+\Lambda_n  =  \frac{2^{n+1}}{e n \log n} \left(1 + o(1)\right), \quad n\to\infty. 
+$$
+```
+
+```{prf:proof}
+Assume $n\ge 3$, we prove the lower bound by construction. Let $f(x) = e^{i n\pi x}$ and define $p_n(x) = \sum_{j=0}^{n} f(x_j) L_j(x)$ as the interpolation polynomial at nodes $x_j = j \Delta$, $\Delta = \frac{1}{n}$, then 
+
+$$
+|p_n(x)| = \left| \sum_{j=0}^{n} (-1)^j L_j(x) \right| \le \Lambda_n.
+
+$$
+Let $\delta_{+}$ be the forward difference operator
+
+$$
+    \delta_{+} p_n(x) := p_n(x+\frac{1}{n}) - p_n(x),
+$$
+
+then $ p_n(x_j) =  (1+\delta_{+})^j p_n(0)$ for $j=0,1,\cdots, n$, which means the interpolation polynomial is
+
+$$
+    p_n(x) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k p_n(0) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k f(0),
+$$
+
+which is exactly the Newton form at the equispaced nodes.Because $\delta_+ f(x) = (e^{i\pi} - 1)f(x) = -2 f(x)$ acts as a multiplicative operator, therefore 
+
+$$
+    p_n(x) = \sum_{k=0}^n \binom{nx}{k}  (-2)^k.
+$$
+
+Let $x_{\ast} = \frac{1}{n \log n}$ and set $\mu = n x_{\ast}\in(0, \frac{1}{\log(3)})$. Then, for $k\ge 1$, we have 
+
+$$
+    \frac{ \binom{\mu}{k}  (-2)^k  }{ \binom{\mu}{k + 1}  (-2)^{k + 1} } = \frac{k+1}{2(k - \mu)} > \frac{1}{2}.
+$$
+
+Therefore, 
 
 $$
 \begin{aligned}
-|f_n(x) - \tilde{f_n}(x)| &= |\sum_{j=0}^n (y_j - \tilde{y}_j) L_j(x)| \\
-&\le \left(\max_{j} |\eps_j|\right) \sum_{j=0}^n |L_j(x)|.
+        \Lambda_n &\ge  |p_n(x_{\ast})| \ge \binom{\mu}{n}  (-2)^n \left(2 - \frac{1}{2^n}\right) - 1 \\
+        &=\exp\left( \log\mu - \log n + \sum_{k=1}^{n-1} \log\left(1 - \frac{\mu}{k}\right) \right) (2^{n+1} - 1) - 1.
 \end{aligned}
 $$
 
-Here $\lambda_n(x) := \sum_{j=0}^n |L_j(x)|$ is the **Lebesgue function**. It is a piecewise defined polynomial. Its maximum $\Lambda_n$ is the **Lebesgue constant** and it only depends on the choice of interpolation nodes. For the equally spaced nodes, this Lebesgue constant grows exponentially,
+Denote the positive constant $C = 2(1 - \frac{1}{\log(3)})$ and notice $\log(1 - x) \ge -x - \frac{x^2}{C}$ for all $x\in (0, \frac{1}{\log(3)})$, then 
 
 $$
-\Lambda_{n, equal} \sim \frac{2^{n+1}}{en \log n}.
+\begin{aligned}
+    \Lambda_n &\ge \frac{\mu}{n} \exp\left(- \mu\sum_{k=1}^{n-1}\frac{1}{k}\right) \exp\left(-\frac{\mu^2}{C} \sum_{k=1}^{n-1}\frac{1}{k^2}\right)(2^{n+1} - 1) - 1 \\
+    & \ge \frac{\mu}{n} \exp(-\mu (\log n + \gamma))\exp\left(-\frac{\pi^2\mu^2}{6C}\right)(2^{n+1} - 1) - 1 \\
+    & =\frac{2^{n+1}}{e n \log n} \left(1 + o(1)\right).
+\end{aligned}
 $$
 
-For the general case, it has been proved by Paul Erdös (1964) that there exists a constant $C > 0$
+We notice that if $\|f\|_{\infty}\le 1$,  then $\|\delta_{+} f\|_{\infty}\le 2$, using~\eqref{EQ: NEWTON-FORM-EQUI}, the upper bound of $\Lambda_n$ can be estimated by
 
 $$
-    \Lambda_n > \frac{2}{\pi}\log(n+1) - C,\quad  n\ge 0,
+    \Lambda_n \le \sup_{x\in (0, 1)}\sum_{k=0}^n \left|\binom{nx}{k}\right| 2^k.
 $$
 
-As the number of nodes $n\to \infty$, $\Lambda_n \to \infty$. This leads to the result of Faber that for any choice of nodes, there exists a continuous function not able to be approximated by the interpolating polynomial. The Chebyshev nodes are almost optimal in the sense that
+By symmetry, it is sufficient to consider $x\le \frac{1}{2}$, otherwise, a similar bound can be derived with the backward difference operator $\delta_{-}$. Hence, 
 
 $$
-\Lambda_{n, Chebyshev} < \frac{2}{\pi}\log(n+1) + 1.
+\begin{aligned}
+    \Lambda_n &\le \sum_{k=0}^{\lceil \frac{n}{2} \rceil} \binom{\lceil \frac{n}{2} \rceil}{k} 2^k + \sup_{z\in (0, \frac{n}{2})}  \sum_{k=\lceil \frac{n}{2} \rceil + 1}^{n} \binom{z}{k} 2^k \\
+    &= 3^{ \lceil \frac{n}{2} \rceil } + \sum_{k = \lceil\frac{n}{2} \rceil + 1}^n  \frac{2^k}{e k \log k}\left(1 + o(1)\right),
+\end{aligned}
 $$
 
-The set of nodes that minimize $\Lambda_n$ is difficult to compute. A slightly better set of nodes than Chebyshev nodes is the **extended Chebyshev nodes**:
+where the following inequalities are applied:  
 
 $$
-\tilde{x}_j = \frac{\cos\left(\frac{2j+1}{2(n+1)\pi}\right)}{\cos\left(\frac{\pi}{2(n+1)}\right)}.
+    \begin{aligned}
+        &\left|\binom{z}{k}\right|\le \binom{\lceil \frac{n}{2} \rceil}{k},\quad \forall z,k\le \lceil \frac{n}{2} \rceil
+    \end{aligned}
 $$
+
+and $\forall k \ge \lceil\frac{n}{2} \rceil + 1$, 
+
+$$
+    \begin{aligned}
+        \sup_{z\in (0, \frac{n}{2})}\left|\binom{z}{k}\right| &=  \sup_{z\in (0, \frac{n}{2})} \frac{\sin(\pi(z - l))}{\pi k!} \Gamma(z+1)\Gamma(k - z) \\
+        &=\sup_{z\in (0, 1)} \frac{\sin(\pi(z - l))}{\pi k!} \Gamma(z+1)\Gamma(k - z) \quad (\text{by comparison})\\&\le \sup_{z\in (0, 1)}\frac{z}{k}\left(\frac{z+1}{k - z}\right)^z \quad (\text{by Gautschi's inequality})\\
+        &= \frac{1}{e k \log k}\left(1 + o(1)\right).
+    \end{aligned}
+$$
+
+Therefore,  
+
+$$
+    \Lambda_n \le 3^{\lceil \frac{n}{2}\rceil}+  \frac{1}{e \log n} \left( \sum_{k=\lceil \frac{n}{2}\rceil+1}^n \frac{2^k}{k}\right) (1 + o(1)) =  \frac{2^{n+1}}{e n \log n}  (1 + o(1)).
+$$
+```
+
+For the general case, it has been proved by Paul Erdös (1964) that for any set of interpolation nodes, 
+
+$$
+    \Lambda_n > \frac{2}{\pi}\log(n+1) + \frac{1}{2},\quad  n\ge 0.
+$$
+
+As the number of nodes $n\to \infty$, $\Lambda_n \to \infty$. This leads to the result of Faber that, for any choice of nodes, there exists a continuous function not able to be approximated by the interpolating polynomial. The Chebyshev nodes are almost optimal, in the sense that 
+
+$$
+    \Lambda_{n, \textrm{Chebyshev}} < \frac{2}{\pi}\log(n+1) + 1.
+$$
+
+The set of nodes that minimizes $\Lambda_n$ is difficult to compute. A slightly better set of nodes than Chebyshev nodes are the **extended Chebyshev nodes**:
+
+$$
+    \tilde{x}_j = \frac{\cos\left(\frac{2j+1}{2(n+1)\pi}\right)}{\cos\left(\frac{\pi}{2(n+1)}\right)}.
+$$
+
 
 ### Newton Form
 
