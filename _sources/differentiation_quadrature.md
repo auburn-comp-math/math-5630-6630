@@ -227,6 +227,9 @@ Then the approximation error is $\cO(h)$, which is very slow. Taking $h=10^{-3}$
 
 import numpy as np
 import matplotlib.pyplot as plt
+
+import matplotlib
+matplotlib.set_loglevel("critical")
 from bigfloat import *
 
 prec = 900
