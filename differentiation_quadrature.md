@@ -168,7 +168,7 @@ However, such a process may not constantly refine the approximation due to the p
 
 ### Wynn's Epsilon Method
 
-Wynn's $\eps$ method {cite}`wynn1966convergence` is another kind of extrapolation algorithm that is recommended as the best all-purpose acceleration method. It has a strong connection with Padé approximation and continued fractions. We will not cover the detailed derivation of the theory in this section. However, Wynn's $\eps$ method still has its limitations if the sequence converges to the desired value too slowly.
+Wynn's $\eps$ method {cite}`wynn1966convergence,wynn1956device` is another kind of extrapolation algorithm that is recommended as the best all-purpose acceleration method. It has a strong connection with Padé approximation and continued fractions. We will not cover the detailed derivation of the theory in this section. However, Wynn's $\eps$ method still has its limitations if the sequence converges to the desired value too slowly.
 
 The algorithm is stated as follows.
 
