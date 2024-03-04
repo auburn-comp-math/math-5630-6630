@@ -290,7 +290,7 @@ with precision(prec):
 ### Theoretical Part
 
 ```{admonition} Problem 1
-Let $f(x)$ be a real-valued smooth function with a simple root $x^{\ast}\in[0, 1]$. Suppose the bisection method produces a sequence of approximation $\{x_k\}_{k=1}^n$ with a finite length $n$, show that 
+Let $f(x)$ be a real-valued smooth function with a simple root $x^{\ast}\in [a, b]$. Suppose the bisection method produces a sequence of approximation $\{x_k\}_{k=1}^{\infty}$, show that 
 
 - The Wynn's $\eps$ method applied to $\{x_k\}_{k=1}^n$ in general cannot accelerate the convergence of the sequence to $x^{\ast}$. 
 
