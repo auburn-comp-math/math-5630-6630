@@ -35,6 +35,9 @@ From the previous discussion, we already know that interpolation provides an est
 import numpy as np
 import matplotlib.pyplot as plt
 
+import matplotlib
+matplotlib.set_loglevel("critical")
+
 %matplotlib inline
 def runge(x):
   return 1 / (1 + x ** 2)
