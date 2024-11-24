@@ -325,6 +325,7 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-interpolation">Spline Interpolation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-spline">Linear Spline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cubic-spline">Cubic Spline</a></li>
 </ul>
 </li>
 </ul>
@@ -751,15 +752,11 @@ T_k(x) = \cos (k\arccos x),\quad x\in[-1,1].
     \delta_{+} p_n(x) := p_n(x+\frac{1}{n}) - p_n(x),
 \]</div>
 <p>then <span class="math notranslate nohighlight">\( p_n(x_j) =  (1+\delta_{+})^j p_n(0)\)</span> for <span class="math notranslate nohighlight">\(j=0,1,\cdots, n\)</span>, which means the interpolation polynomial is</p>
-<div class="math notranslate nohighlight">
-\[
-    p_n(x) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k p_n(0) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k f(0),
-\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-pn">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-pn" title="Link to this equation">#</a></span>\[p_n(x) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k p_n(0) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k f(0),\]</div>
 <p>which is exactly the Newton form at the equispaced nodes.Because <span class="math notranslate nohighlight">\(\delta_+ f(x) = (e^{i\pi} - 1)f(x) = -2 f(x)\)</span> acts as a multiplicative operator, therefore</p>
 <div class="math notranslate nohighlight">
-\[
-    p_n(x) = \sum_{k=0}^n \binom{nx}{k}  (-2)^k.
-\]</div>
+\[p_n(x) = \sum_{k=0}^n \binom{nx}{k}  (-2)^k.\]</div>
 <p>Let <span class="math notranslate nohighlight">\(x_{\ast} = \frac{1}{n \log n}\)</span> and set <span class="math notranslate nohighlight">\(\mu = n x_{\ast}\in(0, \frac{1}{\log(3)})\)</span>. Then, for <span class="math notranslate nohighlight">\(k\ge 1\)</span>, we have</p>
 <div class="math notranslate nohighlight">
 \[
@@ -782,7 +779,7 @@ T_k(x) = \cos (k\arccos x),\quad x\in[-1,1].
     &amp; =\frac{2^{n+1}}{e n \log n} \left(1 + o(1)\right).
 \end{aligned}
 \end{split}\]</div>
-<p>We notice that if <span class="math notranslate nohighlight">\(\|f\|_{\infty}\le 1\)</span>,  then <span class="math notranslate nohighlight">\(\|\delta_{+} f\|_{\infty}\le 2\)</span>, using~\eqref{EQ: NEWTON-FORM-EQUI}, the upper bound of <span class="math notranslate nohighlight">\(\Lambda_n\)</span> can be estimated by</p>
+<p>We notice that if <span class="math notranslate nohighlight">\(\|f\|_{\infty}\le 1\)</span>,  then <span class="math notranslate nohighlight">\(\|\delta_{+} f\|_{\infty}\le 2\)</span>, using <a class="reference internal" href="#equation-eq-pn">(3)</a>, the upper bound of <span class="math notranslate nohighlight">\(\Lambda_n\)</span> can be estimated by</p>
 <div class="math notranslate nohighlight">
 \[
     \Lambda_n \le \sup_{x\in (0, 1)}\sum_{k=0}^n \left|\binom{nx}{k}\right| 2^k.
@@ -842,18 +839,18 @@ f_{k+1}(x) = f_k(x) + c_{k+1} (x - x_0)(x - x_1)\dots (x - x_{k}),
 \]</div>
 <p>then <span class="math notranslate nohighlight">\(f_{k+1}(x_j) = f_k(x_j)\)</span>, <span class="math notranslate nohighlight">\(j = 0, 1,\dots, k\)</span>, automatically. Therefore we only need to take care of <span class="math notranslate nohighlight">\(f_{k+1}(x_{k+1}) = y_{k+1}\)</span>, which means</p>
 <div class="math notranslate nohighlight" id="equation-eq-ck">
-<span class="eqno">(3)<a class="headerlink" href="#equation-eq-ck" title="Link to this equation">#</a></span>\[c_{k+1} = \frac{y_{k+1} - f_k(x_{k+1})}{\prod_{j=0}^k (x_{k+1} - x_j)}.\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-ck" title="Link to this equation">#</a></span>\[c_{k+1} = \frac{y_{k+1} - f_k(x_{k+1})}{\prod_{j=0}^k (x_{k+1} - x_j)}.\]</div>
 <p>Such an inductive procedure produces the Newton form:</p>
 <div class="math notranslate nohighlight" id="equation-eq-newton">
-<span class="eqno">(4)<a class="headerlink" href="#equation-eq-newton" title="Link to this equation">#</a></span>\[f_n(x) = c_0 + c_1 ( x - x_0) + c_2 (x - x_0)(x - x_1)+\dots+c_{n}(x-x_0)\dots (x - x_{n-1}).\]</div>
-<p>where the constant <span class="math notranslate nohighlight">\(c_j\)</span> depends on <span class="math notranslate nohighlight">\(x_0, x_1, \dots, x_{j}\)</span> only. The polynomials <span class="math notranslate nohighlight">\(\prod_{j=0}^k (x - x_j)\)</span> are called <strong>Newton polynomials</strong>. When the coefficients <span class="math notranslate nohighlight">\(c_k\)</span> are known, the Newton form <a class="reference internal" href="#equation-eq-newton">(4)</a> can be evaluated by the famous <strong>Horner’s scheme</strong>, which is</p>
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-newton" title="Link to this equation">#</a></span>\[f_n(x) = c_0 + c_1 ( x - x_0) + c_2 (x - x_0)(x - x_1)+\dots+c_{n}(x-x_0)\dots (x - x_{n-1}).\]</div>
+<p>where the constant <span class="math notranslate nohighlight">\(c_j\)</span> depends on <span class="math notranslate nohighlight">\(x_0, x_1, \dots, x_{j}\)</span> only. The polynomials <span class="math notranslate nohighlight">\(\prod_{j=0}^k (x - x_j)\)</span> are called <strong>Newton polynomials</strong>. When the coefficients <span class="math notranslate nohighlight">\(c_k\)</span> are known, the Newton form <a class="reference internal" href="#equation-eq-newton">(5)</a> can be evaluated by the famous <strong>Horner’s scheme</strong>, which is</p>
 <div class="math notranslate nohighlight" id="equation-eq-horner">
-<span class="eqno">(5)<a class="headerlink" href="#equation-eq-horner" title="Link to this equation">#</a></span>\[    f_n(x) = c_0 + (x-x_0)(c_1 + (x-x_1)(c_2 + (x-x_2)(c_3 + \dots))),\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-horner" title="Link to this equation">#</a></span>\[    f_n(x) = c_0 + (x-x_0)(c_1 + (x-x_1)(c_2 + (x-x_2)(c_3 + \dots))),\]</div>
 <p>the evaluation order starts from the innermost part <span class="math notranslate nohighlight">\(c_n (x -x_{n-1})\)</span>. This formulation has a complexity of <span class="math notranslate nohighlight">\(3n\)</span> flops.</p>
 <div class="proof remark admonition" id="remark-16">
 <p class="admonition-title"><span class="caption-number">Remark 6 </span></p>
 <section class="remark-content" id="proof-content">
-<p>The computation of <span class="math notranslate nohighlight">\(c_k\)</span> is not cheap from <a class="reference internal" href="#equation-eq-ck">(3)</a>. A naive algorithm with Horner’s scheme roughly takes <span class="math notranslate nohighlight">\(5n^2/2+\cO(n)\)</span> flops to compute all coefficients. The <strong>divided differences</strong> is a better way to compute <span class="math notranslate nohighlight">\(c_k\)</span>.</p>
+<p>The computation of <span class="math notranslate nohighlight">\(c_k\)</span> is not cheap from <a class="reference internal" href="#equation-eq-ck">(4)</a>. A naive algorithm with Horner’s scheme roughly takes <span class="math notranslate nohighlight">\(5n^2/2+\cO(n)\)</span> flops to compute all coefficients. The <strong>divided differences</strong> is a better way to compute <span class="math notranslate nohighlight">\(c_k\)</span>.</p>
 </section>
 </div><div class="proof definition admonition" id="definition-17">
 <p class="admonition-title"><span class="caption-number">Definition 6 </span></p>
@@ -870,7 +867,7 @@ f_{k+1}(x) = f_k(x) + c_{k+1} (x - x_0)(x - x_1)\dots (x - x_{k}),
 </section>
 </div><p>The following example graph is helpful to understand the relationships among the divided differences.</p>
 <div class="math notranslate nohighlight" id="equation-eq-alg-newton">
-<span class="eqno">(6)<a class="headerlink" href="#equation-eq-alg-newton" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-alg-newton" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     f[x_0] &amp;               &amp;\\ 
             &amp;\searrow       &amp;\\ 
     f[x_1] &amp;\to f[x_0, x_1]&amp; \\
@@ -887,14 +884,14 @@ f_{k+1}(x) = f_k(x) + c_{k+1} (x - x_0)(x - x_1)\dots (x - x_{k}),
 <section class="theorem-content" id="proof-content">
 <p>The interpolation polynomial <span class="math notranslate nohighlight">\(f_n\)</span> in Newton form is given by</p>
 <div class="math notranslate nohighlight" id="equation-eq-newton-form">
-<span class="eqno">(7)<a class="headerlink" href="#equation-eq-newton-form" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-newton-form" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     f_n(x) =\; &amp;f[x_0] + f[x_0, x_1](x-x_0) + \dots +\\
              &amp; f[x_0, \dots, x_n](x - x_0)(x - x_1)\dots (x - x_{n-1}).
 \end{aligned}\end{split}\]</div>
 <p>In other words, <span class="math notranslate nohighlight">\(c_k = f[x_0, \dots, x_k]\)</span>.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof. We prove this by induction. Assume the statement is true for <span class="math notranslate nohighlight">\(n\)</span> and interpolation node and corresponding values <span class="math notranslate nohighlight">\((x_0, f[x_0]), (x_1, f[x_1]), \dots, (x_n, f[x_n])\)</span>. For a new node and value <span class="math notranslate nohighlight">\((x_{n+1}, f[x_{n+1}])\)</span>, it is known from <a class="reference internal" href="#equation-eq-ck">(3)</a> that <span class="math notranslate nohighlight">\(c_{n+1}\)</span> is the coefficient of leading power. Let <span class="math notranslate nohighlight">\(g_n\)</span> be the interpolation polynomial in Newton form through nodes <span class="math notranslate nohighlight">\((x_1, f[x_1]), \dots, (x_{n+1}, f[x_{n+1}])\)</span>, then</p>
+<p>Proof. We prove this by induction. Assume the statement is true for <span class="math notranslate nohighlight">\(n\)</span> and interpolation node and corresponding values <span class="math notranslate nohighlight">\((x_0, f[x_0]), (x_1, f[x_1]), \dots, (x_n, f[x_n])\)</span>. For a new node and value <span class="math notranslate nohighlight">\((x_{n+1}, f[x_{n+1}])\)</span>, it is known from <a class="reference internal" href="#equation-eq-ck">(4)</a> that <span class="math notranslate nohighlight">\(c_{n+1}\)</span> is the coefficient of leading power. Let <span class="math notranslate nohighlight">\(g_n\)</span> be the interpolation polynomial in Newton form through nodes <span class="math notranslate nohighlight">\((x_1, f[x_1]), \dots, (x_{n+1}, f[x_{n+1}])\)</span>, then</p>
 <div class="math notranslate nohighlight">
 \[
 \psi(x)  := g_n(x)(x - x_0) - f_n(x)(x - x_{n+1})
@@ -932,7 +929,7 @@ f[x_j, \dots, x_{j+k}] = \frac{1}{k!}f^{(k)}(\xi)
 </div><div class="proof remark admonition" id="remark-21">
 <p class="admonition-title"><span class="caption-number">Remark 9 </span></p>
 <section class="remark-content" id="proof-content">
-<p>The Newton form <a class="reference internal" href="#equation-eq-newton-form">(7)</a> actually does not require distinct nodes. The divided difference can be defined as a limit for repeated nodes:</p>
+<p>The Newton form <a class="reference internal" href="#equation-eq-newton-form">(8)</a> actually does not require distinct nodes. The divided difference can be defined as a limit for repeated nodes:</p>
 <div class="math notranslate nohighlight">
 \[
     f[x_0, x_0] = \lim_{x_1 \to x_0} \frac{f[x_1] - f[x_0]}{x_1 - x_0} = f'(x_0).
@@ -969,14 +966,14 @@ H_{N-1}^{(k)}(x_j) = y_j^k:= h^{(k)}(x_j),\quad j=0,\dots, n,\quad 0\le k\le m_j
 \]</div>
 <p>This polynomial is called <strong>Hermite interpolation polynomial</strong>. The idea to construct the Hermite interpolation polynomial borrows from the Lagrange polynomials, which is to find basis <span class="math notranslate nohighlight">\(L_{jk}\)</span> such that</p>
 <div class="math notranslate nohighlight" id="equation-eq-hermite-construction">
-<span class="eqno">(8)<a class="headerlink" href="#equation-eq-hermite-construction" title="Link to this equation">#</a></span>\[\begin{split}    \frac{d^p}{d x^p}L_{jk}(x_l) = \begin{cases}
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-hermite-construction" title="Link to this equation">#</a></span>\[\begin{split}    \frac{d^p}{d x^p}L_{jk}(x_l) = \begin{cases}
         1, &amp; l = j, k = p\\
         0, &amp; \text{otherwise}.
     \end{cases}\end{split}\]</div>
 <p>Once these polynomials are obtained, the Hermite interpolation is straightforward:</p>
 <div class="math notranslate nohighlight">
 \[H_{N-1}(x) = \sum_{j=0}^n \sum_{k=0}^{m_j} y_j^k L_{jk}(x).\]</div>
-<p>Its uniqueness can be concluded from the linearly independence of the basis <span class="math notranslate nohighlight">\(L_{jk}\)</span>. However, the construction method in <a class="reference internal" href="#equation-eq-hermite-construction">(8)</a> is not the simplest. It is known that the Newton form <a class="reference internal" href="#equation-eq-newton-form">(7)</a> works for repeated nodes as long as the diagram’s diagonal <a class="reference internal" href="#equation-eq-alg-newton">(6)</a> can be filled. Therefore, we can arrange the nodes</p>
+<p>Its uniqueness can be concluded from the linearly independence of the basis <span class="math notranslate nohighlight">\(L_{jk}\)</span>. However, the construction method in <a class="reference internal" href="#equation-eq-hermite-construction">(9)</a> is not the simplest. It is known that the Newton form <a class="reference internal" href="#equation-eq-newton-form">(8)</a> works for repeated nodes as long as the diagram’s diagonal <a class="reference internal" href="#equation-eq-alg-newton">(7)</a> can be filled. Therefore, we can arrange the nodes</p>
 <div class="math notranslate nohighlight">
 \[
 \underbrace{x_0,\dots, x_0}_{(m_0+1)\,\text{times}}, \quad \underbrace{x_1,\dots, x_1}_{(m_1+1)\,\text{times}}, \quad \dots,\quad  \underbrace{x_n,\dots, x_n}_{(m_n+1)\,\text{times}}
@@ -1013,7 +1010,7 @@ H_{N-1}^{(k)}(x_j) = y_j^k:= h^{(k)}(x_j),\quad j=0,\dots, n,\quad 0\le k\le m_j
 </div><div class="proof admonition" id="proof">
 <p>Proof. Rewrite the trigonometric function in the form of</p>
 <div class="math notranslate nohighlight" id="equation-eq-complex">
-<span class="eqno">(9)<a class="headerlink" href="#equation-eq-complex" title="Link to this equation">#</a></span>\[    f_n(x) = \sum_{k=-n}^{n} \gamma_k e^{ik x}. \]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-complex" title="Link to this equation">#</a></span>\[    f_n(x) = \sum_{k=-n}^{n} \gamma_k e^{ik x}. \]</div>
 <p>where <span class="math notranslate nohighlight">\(\gamma_0 = \frac{1}{2}a_0\)</span> and <span class="math notranslate nohighlight">\(\gamma_{k} = \frac{1}{2}(a_k - ib_k)\)</span> and <span class="math notranslate nohighlight">\(\gamma_{-k} = \frac{1}{2}(a_k + i b_k)\)</span>, <span class="math notranslate nohighlight">\(k=1,\dots, n\)</span>. Then substitute <span class="math notranslate nohighlight">\(z = e^{ix}\)</span> and set</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1076,7 +1073,7 @@ f_n(x) = \sum_{k=0}^{2n} y_k l_k(x).
 \[
     x_j = \frac{2\pi j}{2n + 1}, \quad j = 0, \dots, 2n.
 \]</div>
-<p>We will try to locate the coefficients <span class="math notranslate nohighlight">\(\gamma_k\)</span> in the complex form (see <a class="reference internal" href="#equation-eq-complex">(9)</a>) from the interpolation conditions.</p>
+<p>We will try to locate the coefficients <span class="math notranslate nohighlight">\(\gamma_k\)</span> in the complex form (see <a class="reference internal" href="#equation-eq-complex">(10)</a>) from the interpolation conditions.</p>
 <div class="math notranslate nohighlight">
 \[
     f_n(x_j) = y_j = \sum_{k=-n}^n \gamma_k e^{i k x_j}.
@@ -1096,7 +1093,7 @@ f_n(x) = \sum_{k=0}^{2n} y_k l_k(x).
 \]</div>
 <p>Therefore, we can compute</p>
 <div class="math notranslate nohighlight" id="equation-eq-gamma">
-<span class="eqno">(10)<a class="headerlink" href="#equation-eq-gamma" title="Link to this equation">#</a></span>\[    \gamma_m = \frac{1}{2n+1}  \sum_{j = 0}^{2n} y_j e^{-im x_j}.\]</div>
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-gamma" title="Link to this equation">#</a></span>\[    \gamma_m = \frac{1}{2n+1}  \sum_{j = 0}^{2n} y_j e^{-im x_j}.\]</div>
 <p>When the coefficients <span class="math notranslate nohighlight">\(\gamma_m\)</span> are known, a Horner’s scheme can be employed to evaluate the trigonometric polynomial in <span class="math notranslate nohighlight">\(\cO(n)\)</span> time complexity.  However, naive computing of all of the coefficients <span class="math notranslate nohighlight">\(\gamma_k\)</span> will cost <span class="math notranslate nohighlight">\(\cO(n^2)\)</span> flops. The fast Fourier transform can reduce the time complexity to <span class="math notranslate nohighlight">\(\cO(n\log n)\)</span>.</p>
 </section>
 <section id="fast-fourier-transform">
@@ -1114,10 +1111,10 @@ The fast Fourier transform exploits the symmetry in <span class="math notranslat
 \]</div>
 <p>Let <span class="math notranslate nohighlight">\(m = n/2\in \mathbb{N}\)</span>, then <span class="math notranslate nohighlight">\(\omega^n = 1\)</span>, <span class="math notranslate nohighlight">\(\omega^m = -1\)</span>. We can separate <span class="math notranslate nohighlight">\(c_k\)</span> into two parts with even <span class="math notranslate nohighlight">\(j\)</span> and odd <span class="math notranslate nohighlight">\(j\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-eq-ck2">
-<span class="eqno">(11)<a class="headerlink" href="#equation-eq-ck2" title="Link to this equation">#</a></span>\[    c_k = \frac{1}{2} A_k + \frac{1}{2} B_k \omega^k,\quad c_{k+m} = \frac{1}{2} A_k - \frac{1}{2} B_k \omega^k \]</div>
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-ck2" title="Link to this equation">#</a></span>\[    c_k = \frac{1}{2} A_k + \frac{1}{2} B_k \omega^k,\quad c_{k+m} = \frac{1}{2} A_k - \frac{1}{2} B_k \omega^k \]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-eq-ak-bk">
-<span class="eqno">(12)<a class="headerlink" href="#equation-eq-ak-bk" title="Link to this equation">#</a></span>\[\begin{aligned}
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-ak-bk" title="Link to this equation">#</a></span>\[\begin{aligned}
     A_k = \frac{1}{m} \sum_{j=0}^{m-1} y_{2j} (\omega^2)^{jk},\quad B_k = \frac{1}{m} \sum_{j=0}^{m-1} y_{2j+1} (\omega^2)^{jk},
 \end{aligned}\]</div>
 <p>both <span class="math notranslate nohighlight">\(A_k\)</span> and <span class="math notranslate nohighlight">\(B_k\)</span> are in the same form and similar to <span class="math notranslate nohighlight">\(c_k\)</span>, but with only half of the terms in summation. This implies a recursive algorithm. Suppose <span class="math notranslate nohighlight">\(A_k\)</span> and <span class="math notranslate nohighlight">\(B_k\)</span>, <span class="math notranslate nohighlight">\(0\le k\le m-1\)</span> can be computed with <span class="math notranslate nohighlight">\(f(m)\)</span> operations each, then</p>
@@ -1125,7 +1122,7 @@ The fast Fourier transform exploits the symmetry in <span class="math notranslat
 \[
    f(n) =  f(2m) = 2 f(m) + 4m
 \]</div>
-<p>The second term includes <span class="math notranslate nohighlight">\(2m\)</span> multiplications and <span class="math notranslate nohighlight">\(2m\)</span> additions in <a class="reference internal" href="#equation-eq-ck2">(11)</a>. Therefore</p>
+<p>The second term includes <span class="math notranslate nohighlight">\(2m\)</span> multiplications and <span class="math notranslate nohighlight">\(2m\)</span> additions in <a class="reference internal" href="#equation-eq-ck2">(12)</a>. Therefore</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     \begin{aligned}
@@ -1169,7 +1166,7 @@ f(x) = \sum_{s = -\infty}^{\infty} \gamma_s e^{is x},\quad g(x) = \sum_{s = -n}^
 \end{split}\]</div>
 <p>Therefore</p>
 <div class="math notranslate nohighlight" id="equation-eq-diff">
-<span class="eqno">(13)<a class="headerlink" href="#equation-eq-diff" title="Link to this equation">#</a></span>\[        |f - f_n| \le \|h\|_{\infty} + \|h\|_{\infty}  \frac{1}{2n+1} \sum_{j=0}^{2n} \left|\frac{\sin((2n+1)(x-x_j)/2)}{\sin((x-x_j)/2)}\right|.\]</div>
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-diff" title="Link to this equation">#</a></span>\[        |f - f_n| \le \|h\|_{\infty} + \|h\|_{\infty}  \frac{1}{2n+1} \sum_{j=0}^{2n} \left|\frac{\sin((2n+1)(x-x_j)/2)}{\sin((x-x_j)/2)}\right|.\]</div>
 <p>It is simple to derive <span class="math notranslate nohighlight">\(\|h\|_{\infty} \le \sum_{|s|&gt;n}|\gamma_s| \le \frac{1}{n\pi}\|f''\|_{\infty}\)</span>. We only need to estimate</p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -1180,7 +1177,7 @@ f(x) = \sum_{s = -\infty}^{\infty} \gamma_s e^{is x},\quad g(x) = \sum_{s = -n}^
 \[
 \left|\frac{\sin((2n+1)(x-x_j)/2)}{\sin((x-x_j)/2)}\right| \le \frac{\pi}{|x - x_j|}
 \]</div>
-<p>where the inequality <span class="math notranslate nohighlight">\(\sin x \ge \frac{2}{\pi}x\)</span> for <span class="math notranslate nohighlight">\(0\le x\le \frac{\pi}{2}\)</span>, then this part will be at most <span class="math notranslate nohighlight">\(\cO(n\log n)\)</span>, the total contribution is bounded by <span class="math notranslate nohighlight">\(\cO(n\log n)\)</span>. Then <a class="reference internal" href="#equation-eq-diff">(13)</a> can be bounded by</p>
+<p>where the inequality <span class="math notranslate nohighlight">\(\sin x \ge \frac{2}{\pi}x\)</span> for <span class="math notranslate nohighlight">\(0\le x\le \frac{\pi}{2}\)</span>, then this part will be at most <span class="math notranslate nohighlight">\(\cO(n\log n)\)</span>, the total contribution is bounded by <span class="math notranslate nohighlight">\(\cO(n\log n)\)</span>. Then <a class="reference internal" href="#equation-eq-diff">(14)</a> can be bounded by</p>
 <div class="math notranslate nohighlight">
 \[
     |f - f_n|\le \|f''\|_{\infty} \cO\left(\frac{\log n}{n}\right)\to 0,\quad \text{as } n\to \infty.
@@ -1241,6 +1238,147 @@ f(x) = \sum_{s = -\infty}^{\infty} \gamma_s e^{is x},\quad g(x) = \sum_{s = -n}^
 \end{aligned}
 \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\omega(f;\tau)\)</span> is the modulus of continuity of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</section>
+<section id="cubic-spline">
+<h3>Cubic Spline<a class="headerlink" href="#cubic-spline" title="Link to this heading">#</a></h3>
+<p>The cubic splines are particularly important in practice. Let <span class="math notranslate nohighlight">\(a = x_0 &lt; x_1 &lt;\dots &lt; x_n = b\)</span>, and the corresponding values are <span class="math notranslate nohighlight">\(y_j\)</span>, <span class="math notranslate nohighlight">\(j = 0, \dots, n\)</span>. The constraints for cubic splines are: piecewise polynomial of degree 3 and continuous second derivative.</p>
+<p>Denote the interpolation spline as <span class="math notranslate nohighlight">\(s_3\)</span>, then <span class="math notranslate nohighlight">\({s_3}''\)</span> is a piecewise linear function. On the sub-interval <span class="math notranslate nohighlight">\([x_{j-1}, x_j]\)</span>, it can be represented by</p>
+<div class="math notranslate nohighlight">
+\[
+    {s_3}''(x) = M_{j-1} \frac{x_j - x}{h_j} + M_j \frac{x - x_{j-1}}{h_j},\quad j = 1,\dots, n,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(h_j = x_j - x_{j-1}\)</span>, <span class="math notranslate nohighlight">\(M_j = {s_3}''(x_j)\)</span>. Integrating the above formula twice,</p>
+<div class="math notranslate nohighlight">
+\[
+    s_3(x) = M_{j-1} \frac{(x_j - x)^3}{6 h_j} + M_j \frac{(x - x_{j-1})^3}{6h_j} + A_j (x - x_{j-1}) + B_j
+\]</div>
+<p>The additional constants <span class="math notranslate nohighlight">\(A_j, B_j\)</span> can be determined by imposing <span class="math notranslate nohighlight">\(f(x_{j-1}) = y_{j-1}\)</span> and <span class="math notranslate nohighlight">\(f(x_j) = y_j\)</span>. That is</p>
+<div class="math notranslate nohighlight">
+\[
+    A_j = \frac{y_j - y_{j-1}}{h_j} - \frac{h_j}{6}(M_j - M_{j-1}),\quad 
+    B_j = y_{j-1}-  M_{j-1} \frac{h_j^2}{6}.
+\]</div>
+<p>Now we will determine the constants <span class="math notranslate nohighlight">\(M_j\)</span> using the first derivative’s continuity.</p>
+<div class="math notranslate nohighlight">
+\[
+    s_3'(x_{j}^{-})  = s_3'(x_j^{+}), \quad j = 1,\dots, n-1.
+\]</div>
+<p>That is equivalent to <span class="math notranslate nohighlight">\(j=1,\dots, n-1\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-cubic-eq-1">
+<span class="eqno">(15)<a class="headerlink" href="#equation-cubic-eq-1" title="Link to this equation">#</a></span>\[\begin{split}    \begin{aligned}
+        s_3'(x_{j}^{-})  &amp;= M_j\frac{h_j}{3} + M_{j-1}\frac{h_{j}}{6} + \frac{y_j - y_{j-1}}{h_j}  \\
+        &amp;= -M_j \frac{h_{j+1}}{3}  - M_{j+1}\frac{h_{j+1}}{6} + \frac{y_{j+1} - y_j}{h_{j+1}} = s_3'(x_j^{+}). 
+    \end{aligned}\end{split}\]</div>
+<p>We can write the corresponding equations into a tridiagonal linear system</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{pmatrix}
+        \frac{h_1}{6} &amp; \frac{h_1 + h_{2}}{3} &amp; \frac{h_{2}}{6} &amp; \\\\
+        &amp;\frac{h_2}{6} &amp; \frac{h_2 + h_{3}}{3} &amp; \frac{h_{3}}{6} &amp; \\\\
+        &amp;&amp;\ddots &amp;  \ddots &amp; \ddots &amp; \\ \\
+        &amp;&amp;&amp; \frac{h_{n-1}}{6} &amp; \frac{h_{n-1} + h_{n}}{3} &amp; \frac{h_{n}}{6} &amp;
+    \end{pmatrix} \begin{pmatrix}
+        M_0 \\\\M_1\\\\ \vdots\\\\ M_n
+    \end{pmatrix} 
+    = \begin{pmatrix}
+        \frac{y_{2} - y_{1}}{h_{2}} - \frac{y_{1} - y_{0}}{h_1} \\\\
+        \frac{y_{3} - y_{2}}{h_{3}} - \frac{y_{2} - y_{1}}{h_2} \\\\
+        \vdots \\\\
+        \frac{y_{n} - y_{n-1}}{h_{n}} - \frac{y_{n-1} - y_{n-2}}{h_{n-1}} 
+    \end{pmatrix}
+\end{split}\]</div>
+<p>In practice, the system will be rescaled for numerical stability.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{pmatrix}
+        \frac{h_1}{2(h_1 + h_{2})} &amp; 1 &amp; \frac{h_{2}}{2(h_1 + h_{2})} &amp; \\\\
+        &amp;\frac{h_2}{2(h_2 + h_{3})} &amp; 1 &amp; \frac{h_{3}}{2(h_2 + h_{3})} &amp; \\\\
+        &amp;&amp;\ddots &amp;  \ddots &amp; \ddots &amp; \\ \\
+        &amp;&amp;&amp; \frac{h_{n-1}}{2(h_{n-1} + h_{n})} &amp; 1 &amp; \frac{h_{n}}{2(h_{n-1} + h_{n})} &amp;
+    \end{pmatrix} \begin{pmatrix}
+        M_0 \\\\M_1\\\\ \vdots\\\\ M_n
+    \end{pmatrix} 
+    = \begin{pmatrix}
+       d_1 \\\\
+        d_2 \\\\
+        \vdots \\\\
+       d_{n-1}
+    \end{pmatrix}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_j = \frac{3}{h_{j-1} + h_{j}}\left[ \frac{y_{j} - y_{j-1}}{h_{j}} - \frac{y_{j-1} - y_{j-2}}{h_{j-1}}\right]\)</span>.</p>
+<p>The above system still lacks 2 more constraints, since the matrix is of size <span class="math notranslate nohighlight">\((n-1)\times (n+1)\)</span>. Then we can apply the periodic spline or natural spline conditions. For example, if the natural constraint is applied: <span class="math notranslate nohighlight">\({s_3}''(a) = {s_3}''(b) = 0\)</span>. We should have two more equations:</p>
+<div class="math notranslate nohighlight">
+\[
+    M_{0} = M_{n} = 0.
+\]</div>
+<p>Then we can simply ignore the first and last columns of the matrix (also <span class="math notranslate nohighlight">\(M_0\)</span> and <span class="math notranslate nohighlight">\(M_n\)</span>).
+If the periodic constraint is imposed, then we can add two more constraints: <span class="math notranslate nohighlight">\(M_0 = M_{n}\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[-M_0 \frac{h_{1}}{3} - M_1 \frac{h_1}{6} + \frac{y_1 - y_0}{h_1} = M_n \frac{h_n}{3} + M_{n-1} \frac{h_n}{6} + \frac{y_n - y_{n-1}}{h_n}.\]</div>
+<p>In both cases, the resulting linear system is still tridiagonal and the solution takes <span class="math notranslate nohighlight">\(\cO(n)\)</span> time complexity with the Thomas algorithm.</p>
+<p>Another popular choice to complete the matrix is to impose the constraints in the similar form on <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(x_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    2M_0 + \frac{h_1}{h_0 + h_1} M_1 = d_0,\quad  \frac{h_n}{h_{n} + h_{n+1}} M_{n-1} + 2M_n = d_n,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(h_0 = h_{n+1} = 0\)</span> and <span class="math notranslate nohighlight">\(d_0 = d_1\)</span>, <span class="math notranslate nohighlight">\(d_{n} = d_{n-1}\)</span> are assumed.</p>
+<p>The error estimate for the cubic spline can be derived in a way similar to the Lagrange polynomial interpolation. The following result is attributed to Charles Hall (1968).</p>
+<div class="proof theorem admonition" id="THM-ERROR-CUBIC-SPLINE">
+<p class="admonition-title"><span class="caption-number">Theorem 17 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(f\in C^4([a, b])\)</span> and <span class="math notranslate nohighlight">\(a = x_0 &lt; \dots &lt; x_n = b\)</span> be a set of nodes. Then the natural cubic spline <span class="math notranslate nohighlight">\(s_3\)</span> interpolating <span class="math notranslate nohighlight">\(f\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+    \|f - s_3\|_{\infty} \le \frac{5}{384}\|f^{(4)}\|_{\infty} h^4,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(h = \max_j |x_j - x_{j-1}|\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Here we only state the rough idea to prove the error bound. Let <span class="math notranslate nohighlight">\(u(x)\)</span> be the piecewise Hermite interpolation polynomial that</p>
+<div class="math notranslate nohighlight">
+\[
+    u(x_j)=f(x_j), \quad u'(x_j) = f'(x_j),
+\]</div>
+<p>then one can estimate</p>
+<div class="math notranslate nohighlight">
+\[
+    \max_{x\in [x_j, x_{j+1}]} |u-f|\le  \frac{1}{24}\|f^{(4)}\|_{\infty} (x - x_j)^2 (x - x_{j+1})^2 \le \frac{1}{384}\|f^{(4)}\|_{\infty} h^4.
+\]</div>
+<p>On the subinterval <span class="math notranslate nohighlight">\([x_i, x_{i+1}]\)</span>, <span class="math notranslate nohighlight">\(s_3\)</span> and <span class="math notranslate nohighlight">\(u\)</span> are both cubic polynomial interpolations, thus</p>
+<div class="math notranslate nohighlight">
+\[
+        u(x) - s_3(x) = \frac{(x - x_i)(x_{i+1} - x)}{(x_{i+1} - x_i)} \left( e'(x_i) \frac{x_{i+1} - x}{x_{i+1} - x_i}  - e'(x_{i+1})\frac{x - x_i}{x_{i+1} - x_i}\right), 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(e(x) = f(x) - s_3(x)\)</span>.
+Therefore,</p>
+<div class="math notranslate nohighlight" id="equation-eq-error-bound-hermite">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-error-bound-hermite" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
+    \|f - s_3\|_{\infty} &amp;\le  \|u - s_3\|_{\infty}  +  \|f - u\|_{\infty} \\
+    &amp;\le \frac{h}{4} \max_{0\le i\le n} |e'(x_i)| + \frac{1}{384}\|f^{(4)}\|_{\infty} h^4. 
+\end{aligned}\end{split}\]</div>
+<p>Using <a class="reference internal" href="#equation-eq-error-bound-hermite">(16)</a>, we find that</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{h_j}\left[ 2 s'_3(x_j) + s'_3(x_{j-1}) \right] + \frac{1}{h_{j+1}}\left[2 s'_3(x_j) + s'_3(x_{j+1})\right] =\frac{3(y_j - y_{j-1})}{h_j^2} + \frac{3(y_{j+1} - y_j)}{h_{j+1}^2}, 
+\]</div>
+<p>Using Taylor expansion locally at <span class="math notranslate nohighlight">\(x_j\)</span>, there exist <span class="math notranslate nohighlight">\(\zeta\in (x_{j-1}, x_j)\)</span> and <span class="math notranslate nohighlight">\(\xi\in (x_j, x_{j+1})\)</span> that</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{2 e'(x_j) + e'(x_{j-1})}{h_j} + \frac{2 e'(x_j) + e'(x_{j+1})}{h_{j+1}}= \frac{1}{24}\left[-h_j^2 f^{(4)}(\zeta)+ h_{j+1}^2 f^{(4)}(\xi)\right].
+\]</div>
+<p>Suppose
+<span class="math notranslate nohighlight">\(\max_{0 \le i\le n}|e'(x_i)|\)</span> attains its maximum at node <span class="math notranslate nohighlight">\(x_{k}\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\left| \frac{2 e'(x_k) + e'(x_{k-1})}{h_j} + \frac{2 e'(x_k) + e'(x_{k+1})}{h_{k+1}} \right| \ge \frac{h_j+h_{j+1}}{h_j h_{j+1}} |e'(x_k)|.
+\]</div>
+<p>Therefore, by AM-GM inequality,</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{0 \le i\le n}|e'(x_i)| \le \frac{h_{j}h_{j+1}}{24 (h_j + h_{j+1}) } (h_j^2 + h_{j+1}^2) \|f^{(4)}\|_{\infty} \le \frac{1}{24}h^3 \|f^{(4)}\|_{\infty}. 
+\]</div>
+<p>Finally, combined with the estimate <a class="reference internal" href="#equation-eq-error-bound-hermite">(16)</a> will arrive at the desired bound.</p>
+</div>
 <div class="docutils container" id="id2">
 <div role="list" class="citation-list">
 <div class="citation" id="id17" role="doc-biblioentry">
@@ -1337,6 +1475,7 @@ f(x) = \sum_{s = -\infty}^{\infty} \gamma_s e^{is x},\quad g(x) = \sum_{s = -n}^
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-interpolation">Spline Interpolation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-spline">Linear Spline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cubic-spline">Cubic Spline</a></li>
 </ul>
 </li>
 </ul>
