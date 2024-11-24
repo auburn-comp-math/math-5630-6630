@@ -9,6 +9,7 @@ The following books are also recommended for this course:
 - *Numerical Methods for Ordinary Differential Equations: Initial Value Problems* by D Griffith, D. Higham, 2010
 - *Concise Numerical Mathematics* by R. Plato, 2003
 - *Numerical computing with IEEE floating point arithmetic* by M. Overturn, 2001
+- *Numerical methods for ordinary differential equations* by J. C. Butcher, 2016
 
 The course will cover the following topics:
 

@@ -1158,3 +1158,7 @@ $$
 $$
 
 where $\omega(f;\tau)$ is the modulus of continuity of $f$.
+
+```{bibliography}
+:filter: docname in docnames
+```

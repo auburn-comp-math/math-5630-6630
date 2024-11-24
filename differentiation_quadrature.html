@@ -14,48 +14,51 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=7f8ff830"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="_static/tabs.js?v=3ee01567"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -69,6 +72,7 @@
     <link rel="prev" title="Interpolation" href="interpolation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -76,31 +80,16 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -108,7 +97,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -116,10 +104,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -128,7 +121,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -143,6 +137,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="index.html">
   
@@ -156,15 +152,11 @@
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lecture notes</span></p>
@@ -188,7 +180,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -197,14 +189,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -280,27 +272,19 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -323,13 +307,18 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extrapolation">Extrapolation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#richardson-extrapolation">Richardson Extrapolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aitken-extrapolation">Aitken Extrapolation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wynn-s-epsilon-method">Wynn’s Epsilon Method</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-cotes-quadrature">Newton-Cotes Quadrature</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#romberg-integration">Romberg Integration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-integration">Monte Carlo Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadrature">Quadrature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolation-based-quadrature">Interpolation Based Quadrature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-cotes-quadrature">Newton-Cotes Quadrature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#romberg-integration">Romberg Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-integration">Monte Carlo Integration</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-part">Theoretical Part</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
@@ -361,7 +350,7 @@ document.write(`
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <figure class="align-default" id="id22">
-<img alt="_images/89f29a10176e56647191b12ef1b4c3110794631d45f5973ba5bd88864f30bec6.png" class="align-center" src="_images/89f29a10176e56647191b12ef1b4c3110794631d45f5973ba5bd88864f30bec6.png" />
+<img alt="_images/63ae000c97961d39ef21094c052457f2d2adb1c717e9a00b664e6dd712839358.png" class="align-center" src="_images/63ae000c97961d39ef21094c052457f2d2adb1c717e9a00b664e6dd712839358.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 7 </span><span class="caption-text">Extrapolation behavior of polynomial fitting on Chebyshev nodes.</span><a class="headerlink" href="#id22" title="Link to this image">#</a></p>
 </figcaption>
@@ -402,7 +391,7 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 \[
     p_{n+1}(x) \equiv \tilde{f}_n(x) + p[x, h_0, h_1, \dots, h_n] \prod_{j=0}(x - h_j^{\gamma}), 
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(p[x, h_0, h_1, \dots, h_n]\)</span> is the coefficient of the leading power in <span class="math notranslate nohighlight">\(p_{n+1}\)</span>, <span class="math notranslate nohighlight">\(a_{n+1}\)</span>. Thus,</p>
+<p>where <span class="math notranslate nohighlight">\(p[x, h_0, h_1, \dots, h_n]\)</span> is the coeffimathcal{I}ent of the leading power in <span class="math notranslate nohighlight">\(p_{n+1}\)</span>, <span class="math notranslate nohighlight">\(a_{n+1}\)</span>. Thus,</p>
 <div class="math notranslate nohighlight">
 \[
     A^{\ast} = p_{n+1}(0) = \tilde{f}_n(0) +a_{n+1} \prod_{j=0}(0 - h_j^{\gamma}). 
@@ -446,6 +435,90 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 \]</div>
 <p>However, such a process may not constantly refine the approximation due to the potentially fast-growing constant in the <span class="math notranslate nohighlight">\(\cO\)</span> notation.</p>
 </section>
+<section id="aitken-extrapolation">
+<h3>Aitken Extrapolation<a class="headerlink" href="#aitken-extrapolation" title="Link to this heading">#</a></h3>
+<p>Alexander Aitken rediscovered Aitken extrapolation, which has been used to accelerate a sequence’s convergence.</p>
+<p>Given a sequence <span class="math notranslate nohighlight">\(S = \{s_n\}_{n\ge 0}\)</span>, the Aitken extrapolation generates a new sequence</p>
+<div class="math notranslate nohighlight">
+\[AS = \left\{\frac{s_n s_{n+2} - s_{n+1}^2}{s_n + s_{n+2} - 2 s_{n+1}}\right\}_{n\ge 0}. \]</div>
+<p>A more stable formulation (why?) is written as</p>
+<div class="math notranslate nohighlight">
+\[(AS)_n  = s_n - \frac{(\Delta s_n)^2}{\Delta^2 s_n},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta\)</span> is the forward difference operator that <span class="math notranslate nohighlight">\(\Delta s_n = s_{n+1} - s_n\)</span>. It is not difficult to see that Aitken extrapolation can accelerate linearly convergent sequences.</p>
+<div class="proof theorem admonition" id="aitken_extrapolation">
+<p class="admonition-title"><span class="caption-number">Theorem 17 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Assume that the sequence <span class="math notranslate nohighlight">\(S = \{s_n\}_{n\ge 0}\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+    \lim_{n\to\infty} \frac{|s_{n+1} - \mu|}{|s_n - \mu|} = \rho \in (0, 1).
+\]</div>
+<p>Then the accelerated sequence <span class="math notranslate nohighlight">\(AS\)</span> converges faster than <span class="math notranslate nohighlight">\(S\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(\rho_n := \frac{s_{n+1} - \mu}{s_n - \mu}\)</span>, without loss of generality, we assume <span class="math notranslate nohighlight">\(\lim_{n\to\infty} \rho_n = \rho\)</span>.<br />
+By the definition of the acceleration formula, we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{ (AS)_{n} - \mu}{ s_{n} - \mu } =  1 - \frac{(\Delta s_{n})^2}{\Delta^2 s_{n}} \frac{1}{s_n -\mu}.
+\]</div>
+<p>For sufficiently large <span class="math notranslate nohighlight">\(n\)</span>, we have <span class="math notranslate nohighlight">\(\rho_n \approx \rho\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    \Delta s_n &amp;= s_{n+1} - \mu - (s_n -\mu) = (\rho_n - 1) (s_n -\mu)    \\
+    \Delta^2 s_n &amp;= s_{n+2} - \mu + s_n -\mu - 2(s_{n+1} -\mu) = (\rho_{n+1}\rho_n-2\rho_{n}+1)(s_n -\mu)
+\end{aligned}
+\end{split}\]</div>
+<p>Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{ (AS)_{n} - \mu}{ s_{n} - \mu } = 1 - \frac{(\rho_n-1)^2}{(\rho_{n+1}\rho_n - 2\rho_{n} + 1)}=\frac{\rho_n(\rho_{n+1} - \rho_n)}{(\rho_{n+1}\rho_n - 2\rho_{n} + 1)}  \to 0. 
+\]</div>
+</div>
+<div class="proof remark admonition" id="remark-2">
+<p class="admonition-title"><span class="caption-number">Remark 14 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\( \eps_n := s_n - \mu\)</span>. If the error satisfies the following relation (common in most fixed-point iterations) $<span class="math notranslate nohighlight">\(\eps_{n+1} = \eps_n (\rho + c_1 \eps_n + o(\eps_n)),\)</span>$ then</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{ (AS)_{n} - \mu}{ s_{n} - \mu }  = \frac{\rho_n(\rho_{n+1} - \rho_n)}{(\rho_{n+1}\rho_n - 2\rho_{n} + 1)} \approx \frac{c_1 \rho}{(1-\rho)^2} \left((\rho - 1)\eps_n + o(\eps_n) \right).
+\]</div>
+<p>That is, <span class="math notranslate nohighlight">\(| (AS)_{n} - \mu| = \cO( |s_{n} - \mu |^2 )\)</span>.</p>
+</section>
+</div><p>The Aitken extrapolation can be used to accelerate fixed-point iteration solving the root <span class="math notranslate nohighlight">\(x^{\ast}\)</span> for <span class="math notranslate nohighlight">\(f(x)\)</span>. Steffensen’s method is a root-finding algorithm based on such an acceleration technique, the iteration is given by</p>
+<div class="math notranslate nohighlight">
+\[
+        x_{n+1} = x_n - \frac{f(x_n)}{g(x_n)} ,\quad 
+        g(x)= \frac{f(x + f(x))}{f(x)} - 1.
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is twice differentiable, then clearly the function <span class="math notranslate nohighlight">\(g(x)\approx f'(x)\)</span>, which recovers the Newton-Raphson method asymptotically if <span class="math notranslate nohighlight">\(f(x)\approx 0\)</span>.</p>
+<div class="proof theorem admonition" id="theorem-3">
+<p class="admonition-title"><span class="caption-number">Theorem 18 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(f'(x^{\ast})\in (-1, 0)\)</span>, then the order of convergence is 2 for Steffensen’s method.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let us first point out the connection between Aitken extrapolation and Steffensen’s method. Denote <span class="math notranslate nohighlight">\(x_0\)</span> as the starting point, the intermediate values <span class="math notranslate nohighlight">\(z_1 = x_0 +f (x_0)\)</span> and <span class="math notranslate nohighlight">\(z_2 =z_1 +f(z_1)\)</span>. The Aitken extrapolation finds</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+A x_0 &amp;= x_0 - \frac{(z_1 - x_0)^2}{z_2 + x_0 - 2 z_1 } = x_0 - \frac{|f(x_0)|^2}{z_1 + f(z_1) + x_0 - 2 (x_0 + f(x_0)) }     \\
+&amp;=x_0 - \frac{|f(x_0)|^2}{f(z_1) - f(x_0)} = x_0 - \frac{f(x_0)}{g(x_0)} = x_1.
+\end{aligned}
+\end{split}\]</div>
+<p>The convergence is linear when the iterates <span class="math notranslate nohighlight">\(x_0, z_1, z_2\)</span> are close to the root <span class="math notranslate nohighlight">\(x^{\ast}\)</span>. Therefore, using the same derivation, we find</p>
+<div class="math notranslate nohighlight">
+\[
+    x_1 - x^{\ast} = A x_0 - x^{\ast} = \cO( | x_0 - x^{\ast}|^2 ).
+\]</div>
+</div>
+<div class="proof remark admonition" id="remark-4">
+<p class="admonition-title"><span class="caption-number">Remark 15 </span></p>
+<section class="remark-content" id="proof-content">
+<p>It should be noticed that Steffensen’s method evaluates <span class="math notranslate nohighlight">\(f\)</span> twice during each iteration, the same as Newton’s method (one for <span class="math notranslate nohighlight">\(f\)</span> and one for <span class="math notranslate nohighlight">\(f'\)</span>, although the evaluation of <span class="math notranslate nohighlight">\(f'\)</span> is more expensive in practice). Each evaluation brings an order of <span class="math notranslate nohighlight">\(1\)</span> of convergence on average. From the viewpoint of efficiency, the secant method is preferred, since it only evaluates <span class="math notranslate nohighlight">\(f\)</span> once each iteration with an order of <span class="math notranslate nohighlight">\(\frac{1+\sqrt{5}}{2}\)</span> of convergence.</p>
+</section>
+</div></section>
 <section id="wynn-s-epsilon-method">
 <h3>Wynn’s Epsilon Method<a class="headerlink" href="#wynn-s-epsilon-method" title="Link to this heading">#</a></h3>
 <p>Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method <span id="id1">[<a class="reference internal" href="#id10" title="Peter Wynn. On a device for computing the e m (s n) transformation. Mathematical Tables and Other Aids to Computation, pages 91–96, 1956.">Wynn, 1956</a>, <a class="reference internal" href="#id9" title="Peter Wynn. On the convergence and stability of the epsilon algorithm. SIAM Journal on Numerical Analysis, 3(1):91–122, 1966.">Wynn, 1966</a>]</span> is another kind of extrapolation algorithm that is recommended as the best all-purpose acceleration method. It has a strong connection with Padé approximation and continued fractions. We will not cover the detailed derivation of the theory in this section. However, Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method still has its limitations if the sequence converges to the desired value too slowly.</p>
@@ -470,7 +543,7 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
   \eps_{k+1}^{(j)} = \eps_{k-1}^{(j+1)} + [\eps_{k}^{(j+1)} - \eps_{k}^{j}]^{-1}.
   \]</div>
 </section>
-</div><div class="proof example admonition" id="example-2">
+</div><div class="proof example admonition" id="example-6">
 <p class="admonition-title"><span class="caption-number">Example 5 </span></p>
 <section class="example-content" id="proof-content">
 <p>It is known that <span class="math notranslate nohighlight">\(\frac{\pi}{4}\)</span> can be calculated by the asymptotic expansion:</p>
@@ -485,7 +558,7 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 \]</div>
 <p>Then the approximation error is <span class="math notranslate nohighlight">\(\cO(h)\)</span>, which is very slow. Taking <span class="math notranslate nohighlight">\(h=10^{-3}\)</span> has around <span class="math notranslate nohighlight">\(2\times 10^{-4}\)</span> error.  We test with two extrapolation algorithms.</p>
 <ul>
-<li><p>Richardson Extrapolation. We take <span class="math notranslate nohighlight">\(1/h = 250, 500, 1000, 2000\)</span> and calculate that the Richardson extrapolation three times would result in almost machine precision.</p></li>
+<li><p>Richardson Extrapolation. We take <span class="math notranslate nohighlight">\(1/h = 250, 500, 1000, 2000\)</span> and calculate that the Richardson extrapolation three times would result in almost machine premathcal{I}sion.</p></li>
 <li><p>Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method. We take the sequence</p>
 <div class="math notranslate nohighlight">
 \[
@@ -498,7 +571,7 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 </div><div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <figure class="align-default" id="id23">
-<img alt="_images/017dd4c84166e36b17d7ab5301b03bcb9f87eab596d223e40913a5ee9589f852.png" class="align-center" src="_images/017dd4c84166e36b17d7ab5301b03bcb9f87eab596d223e40913a5ee9589f852.png" />
+<img alt="_images/b6135c51f9a13de978674643368967311aee98dde77220ebf9b270bf1117ac23.png" class="align-center" src="_images/b6135c51f9a13de978674643368967311aee98dde77220ebf9b270bf1117ac23.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 8 </span><span class="caption-text">Absolute error of <span class="math notranslate nohighlight">\(\eps_{2l}^{(j)}\)</span> for Wynn’s <span class="math notranslate nohighlight">\(\eps\)</span> method, <span class="math notranslate nohighlight">\(0\le l\le 5\)</span>.</span><a class="headerlink" href="#id23" title="Link to this image">#</a></p>
 </figcaption>
@@ -507,17 +580,87 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
 </div>
 </section>
 </section>
+<section id="quadrature">
+<h2>Quadrature<a class="headerlink" href="#quadrature" title="Link to this heading">#</a></h2>
+<p>The numerical quadrature finds the value of an integral</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{I}(f) = \int_a^b f(x) dx \]</div>
+<p>from the function values at a finite number of points. We are mostly interested in the following quadrature formula</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{I}_n(f) = (b - a) \sum_{j=0}^n w_j f(x_j)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_j\)</span> are the <strong>nodes</strong>and <span class="math notranslate nohighlight">\(w_j\)</span> are the <strong>weights</strong>. Similar to the numerical derivatives, we also define some terminologies. The formula <span class="math notranslate nohighlight">\(\mathcal{I}_n\)</span> is said to have <strong>degree <span class="math notranslate nohighlight">\(k\)</span> accuracy</strong> if <span class="math notranslate nohighlight">\(\mathcal{I}_n\)</span> is exact for all polynomials <span class="math notranslate nohighlight">\(f\in\Pi_k\)</span>. Since the integration formula is linear, the exactness can be rephrased as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{aligned}
+        \mathcal{I}(x^p) &amp;= \mathcal{I}_n(x^p),\quad 0\le p \le k, \\
+        \mathcal{I}(x^{k+1}) &amp;\neq \mathcal{I}_n(x^{k+1}).
+    \end{aligned}
+\end{split}\]</div>
+<section id="interpolation-based-quadrature">
+<h3>Interpolation Based Quadrature<a class="headerlink" href="#interpolation-based-quadrature" title="Link to this heading">#</a></h3>
+<p>The interpolation-based idea is intuitive. Let <span class="math notranslate nohighlight">\(q_n(x)\)</span> be the interpolation polynomial on the nodes <span class="math notranslate nohighlight">\(x_j\)</span> with values <span class="math notranslate nohighlight">\(f(x_j)\)</span>, <span class="math notranslate nohighlight">\(j=0,1,\dots, n\)</span>, respectively. We define the quadrature by interpolation formula as</p>
+<div class="math notranslate nohighlight">
+\[
+   \mathcal{I}_n(f):= \int_a^b q_n(x) dx.
+\]</div>
+<p>The above quadrature formula is exact for all degree <span class="math notranslate nohighlight">\(n\)</span> polynomials <span class="math notranslate nohighlight">\(f\)</span>, therefore it has at least degree <span class="math notranslate nohighlight">\(n\)</span> accuracy.</p>
+<div class="proof remark admonition" id="rem-runge-quad">
+<p class="admonition-title"><span class="caption-number">Remark 16 </span></p>
+<section class="remark-content" id="proof-content">
+<p>We have seen that the <span class="math notranslate nohighlight">\(L^{\infty}\)</span> error between <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(q_n\)</span> could be large (e.g. Runge phenomenon) as <span class="math notranslate nohighlight">\(n\to \infty\)</span>. So the nodes would be important as well for quadratures.</p>
+</section>
+</div><p>Using the Lagrange polynomials, we can represent</p>
+<div class="math notranslate nohighlight">
+\[
+q_n(x) = \sum_{j=0}^n f(x_j) L_j(x),\quad L_j(x) = \prod_{k=0, k\neq j}^n \frac{x - x_k}{x_j - x_k}.
+\]</div>
+<p>Then it is not difficult to derive</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    \mathcal{I}_n(f)&amp; = \sum_{j=0}^n f(x_j) \int_a^b L_j(x) dx  \\ &amp;=(b-a) \sum_{j=0}^n f(x_j) \int_0^1 \prod_{k=0, k\neq j }^n \frac{t - t_k}{t_j - t_k} dt, \quad t_j = \frac{x_j - a}{b-a}.
+\end{aligned}
+\end{split}\]</div>
+<p>therefore the weights <span class="math notranslate nohighlight">\(w_j =  \int_0^1 \prod_{k=0, k\neq j }^n \frac{t - t_k}{t_j - t_k} dt\)</span>.</p>
+<div class="proof example admonition" id="quad-rec-rule">
+<p class="admonition-title"><span class="caption-number">Example 6 </span></p>
+<section class="example-content" id="proof-content">
+<p>The rectangle rule is the simplest, where we choose <span class="math notranslate nohighlight">\(x_0 = \frac{a+b}{2}\)</span> as the middle point. Then the quadrature rule writes</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{I}_{0, rectangle}(f)  = (b-a) f(x_0). \]</div>
+<p>Such a rule is exact for any linear function, so it has a degree of accuracy of one. We can see that the degree of exactness could exceed <span class="math notranslate nohighlight">\(n\)</span>. In the next chapter, we will see that the maximum degree of exactness for such a form is <span class="math notranslate nohighlight">\(2n+1\)</span>.</p>
+</section>
+</div><div class="proof example admonition" id="quad-trap-rule">
+<p class="admonition-title"><span class="caption-number">Example 7 </span></p>
+<section class="example-content" id="proof-content">
+<p>The trapezoid rule takes <span class="math notranslate nohighlight">\(x_0 = a\)</span> and <span class="math notranslate nohighlight">\(x_1= b\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{I}_{1,trapezoid} (f) = (b-a)\left( \frac{1}{2} f(x_0) + \frac{1}{2} f(x_1) \right).\]</div>
+<p>One can check that this rule is exact for <span class="math notranslate nohighlight">\(f(x) = 1, x\)</span>. Its degree of accuracy is one. It has a slightly larger constant in error estimate than the rectangle rule.</p>
+</section>
+</div><div class="proof example admonition" id="quad-simp-rule">
+<p class="admonition-title"><span class="caption-number">Example 8 </span></p>
+<section class="example-content" id="proof-content">
+<p>The Simpson’s rule takes <span class="math notranslate nohighlight">\(x_0 = a\)</span>, <span class="math notranslate nohighlight">\(x_1 = \frac{a+b}{2}\)</span>, and <span class="math notranslate nohighlight">\(x_2 = b\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{I}_{2, Simpson}(f) = (b-a) \left(\frac{1}{6}f(x_0) + \frac{2}{3}f(x_1) + \frac{1}{6} f(x_2) \right).\]</div>
+<p>This rule is exact for <span class="math notranslate nohighlight">\(f(x) = 1, x, x^2, x^3\)</span>, thus the degree of accuracy is three.</p>
+</section>
+</div></section>
 <section id="newton-cotes-quadrature">
-<h2>Newton-Cotes Quadrature<a class="headerlink" href="#newton-cotes-quadrature" title="Link to this heading">#</a></h2>
+<h3>Newton-Cotes Quadrature<a class="headerlink" href="#newton-cotes-quadrature" title="Link to this heading">#</a></h3>
 </section>
 <section id="romberg-integration">
-<h2>Romberg Integration<a class="headerlink" href="#romberg-integration" title="Link to this heading">#</a></h2>
+<h3>Romberg Integration<a class="headerlink" href="#romberg-integration" title="Link to this heading">#</a></h3>
 </section>
 <section id="gaussian-quadrature">
-<h2>Gaussian Quadrature<a class="headerlink" href="#gaussian-quadrature" title="Link to this heading">#</a></h2>
+<h3>Gaussian Quadrature<a class="headerlink" href="#gaussian-quadrature" title="Link to this heading">#</a></h3>
 </section>
 <section id="monte-carlo-integration">
-<h2>Monte Carlo Integration<a class="headerlink" href="#monte-carlo-integration" title="Link to this heading">#</a></h2>
+<h3>Monte Carlo Integration<a class="headerlink" href="#monte-carlo-integration" title="Link to this heading">#</a></h3>
+</section>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
@@ -580,7 +723,7 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -599,7 +742,8 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -610,13 +754,18 @@ f_n(0) = A^{\ast} + (-1)^n \frac{a_{n+1}}{\prod_{j=0}^n t_j^{\gamma}} \hbar^{(n+
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extrapolation">Extrapolation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#richardson-extrapolation">Richardson Extrapolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aitken-extrapolation">Aitken Extrapolation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wynn-s-epsilon-method">Wynn’s Epsilon Method</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-cotes-quadrature">Newton-Cotes Quadrature</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#romberg-integration">Romberg Integration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-integration">Monte Carlo Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadrature">Quadrature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolation-based-quadrature">Interpolation Based Quadrature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-cotes-quadrature">Newton-Cotes Quadrature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#romberg-integration">Romberg Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quadrature">Gaussian Quadrature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-integration">Monte Carlo Integration</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-part">Theoretical Part</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-part">Computational Part</a></li>
@@ -671,8 +820,8 @@ By Yimin Zhong
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
