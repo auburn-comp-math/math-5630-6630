@@ -570,7 +570,7 @@ $$
 $$
 ```
 
-```{prf:proof}
+````{prf:proof}
 Assume $n\ge 3$, we prove the lower bound by construction. Let $f(x) = e^{i n\pi x}$ and define $p_n(x) = \sum_{j=0}^{n} f(x_j) L_j(x)$ as the interpolation polynomial at nodes $x_j = j \Delta$, $\Delta = \frac{1}{n}$, then 
 
 $$
@@ -585,15 +585,17 @@ $$
 
 then $ p_n(x_j) =  (1+\delta_{+})^j p_n(0)$ for $j=0,1,\cdots, n$, which means the interpolation polynomial is
 
-$$
-    p_n(x) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k p_n(0) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k f(0),
-$$
+```{math}
+:label: EQ-PN
+p_n(x) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k p_n(0) = \sum_{k=0}^n \binom{nx}{k} \delta_+^k f(0),
+```
 
 which is exactly the Newton form at the equispaced nodes.Because $\delta_+ f(x) = (e^{i\pi} - 1)f(x) = -2 f(x)$ acts as a multiplicative operator, therefore 
 
-$$
-    p_n(x) = \sum_{k=0}^n \binom{nx}{k}  (-2)^k.
-$$
+```{math}
+p_n(x) = \sum_{k=0}^n \binom{nx}{k}  (-2)^k.
+```
+
 
 Let $x_{\ast} = \frac{1}{n \log n}$ and set $\mu = n x_{\ast}\in(0, \frac{1}{\log(3)})$. Then, for $k\ge 1$, we have 
 
@@ -601,7 +603,7 @@ $$
     \frac{ \binom{\mu}{k}  (-2)^k  }{ \binom{\mu}{k + 1}  (-2)^{k + 1} } = \frac{k+1}{2(k - \mu)} > \frac{1}{2}.
 $$
 
-Therefore, 
+Therefore,
 
 $$
 \begin{aligned}
@@ -620,7 +622,7 @@ $$
 \end{aligned}
 $$
 
-We notice that if $\|f\|_{\infty}\le 1$,  then $\|\delta_{+} f\|_{\infty}\le 2$, using~\eqref{EQ: NEWTON-FORM-EQUI}, the upper bound of $\Lambda_n$ can be estimated by
+We notice that if $\|f\|_{\infty}\le 1$,  then $\|\delta_{+} f\|_{\infty}\le 2$, using {eq}``EQ-PN``, the upper bound of $\Lambda_n$ can be estimated by
 
 $$
     \Lambda_n \le \sup_{x\in (0, 1)}\sum_{k=0}^n \left|\binom{nx}{k}\right| 2^k.
@@ -658,7 +660,7 @@ Therefore,
 $$
     \Lambda_n \le 3^{\lceil \frac{n}{2}\rceil}+  \frac{1}{e \log n} \left( \sum_{k=\lceil \frac{n}{2}\rceil+1}^n \frac{2^k}{k}\right) (1 + o(1)) =  \frac{2^{n+1}}{e n \log n}  (1 + o(1)).
 $$
-```
+````
 
 For the general case, it has been proved by Paul Erdös (1964) that for any set of interpolation nodes,
 
@@ -1158,6 +1160,177 @@ $$
 $$
 
 where $\omega(f;\tau)$ is the modulus of continuity of $f$.
+
+### Cubic Spline
+
+The cubic splines are particularly important in practice. Let $a = x_0 < x_1 <\dots < x_n = b$, and the corresponding values are $y_j$, $j = 0, \dots, n$. The constraints for cubic splines are: piecewise polynomial of degree 3 and continuous second derivative. 
+
+Denote the interpolation spline as $s_3$, then ${s_3}''$ is a piecewise linear function. On the sub-interval $[x_{j-1}, x_j]$, it can be represented by 
+
+$$
+    {s_3}''(x) = M_{j-1} \frac{x_j - x}{h_j} + M_j \frac{x - x_{j-1}}{h_j},\quad j = 1,\dots, n,
+$$
+
+where $h_j = x_j - x_{j-1}$, $M_j = {s_3}''(x_j)$. Integrating the above formula twice, 
+
+$$
+    s_3(x) = M_{j-1} \frac{(x_j - x)^3}{6 h_j} + M_j \frac{(x - x_{j-1})^3}{6h_j} + A_j (x - x_{j-1}) + B_j
+$$
+
+The additional constants $A_j, B_j$ can be determined by imposing $f(x_{j-1}) = y_{j-1}$ and $f(x_j) = y_j$. That is 
+
+$$
+    A_j = \frac{y_j - y_{j-1}}{h_j} - \frac{h_j}{6}(M_j - M_{j-1}),\quad 
+    B_j = y_{j-1}-  M_{j-1} \frac{h_j^2}{6}.
+$$
+
+Now we will determine the constants $M_j$ using the first derivative's continuity.
+
+$$
+    s_3'(x_{j}^{-})  = s_3'(x_j^{+}), \quad j = 1,\dots, n-1.
+$$
+
+That is equivalent to $j=1,\dots, n-1$, 
+
+```{math}
+:label: cubic-eq-1
+    \begin{aligned}
+        s_3'(x_{j}^{-})  &= M_j\frac{h_j}{3} + M_{j-1}\frac{h_{j}}{6} + \frac{y_j - y_{j-1}}{h_j}  \\
+        &= -M_j \frac{h_{j+1}}{3}  - M_{j+1}\frac{h_{j+1}}{6} + \frac{y_{j+1} - y_j}{h_{j+1}} = s_3'(x_j^{+}). 
+    \end{aligned}
+```
+
+We can write the corresponding equations into a tridiagonal linear system 
+
+$$
+    \begin{pmatrix}
+        \frac{h_1}{6} & \frac{h_1 + h_{2}}{3} & \frac{h_{2}}{6} & \\\\
+        &\frac{h_2}{6} & \frac{h_2 + h_{3}}{3} & \frac{h_{3}}{6} & \\\\
+        &&\ddots &  \ddots & \ddots & \\ \\
+        &&& \frac{h_{n-1}}{6} & \frac{h_{n-1} + h_{n}}{3} & \frac{h_{n}}{6} &
+    \end{pmatrix} \begin{pmatrix}
+        M_0 \\\\M_1\\\\ \vdots\\\\ M_n
+    \end{pmatrix} 
+    = \begin{pmatrix}
+        \frac{y_{2} - y_{1}}{h_{2}} - \frac{y_{1} - y_{0}}{h_1} \\\\
+        \frac{y_{3} - y_{2}}{h_{3}} - \frac{y_{2} - y_{1}}{h_2} \\\\
+        \vdots \\\\
+        \frac{y_{n} - y_{n-1}}{h_{n}} - \frac{y_{n-1} - y_{n-2}}{h_{n-1}} 
+    \end{pmatrix}
+$$
+
+In practice, the system will be rescaled for numerical stability. 
+
+$$
+    \begin{pmatrix}
+        \frac{h_1}{2(h_1 + h_{2})} & 1 & \frac{h_{2}}{2(h_1 + h_{2})} & \\\\
+        &\frac{h_2}{2(h_2 + h_{3})} & 1 & \frac{h_{3}}{2(h_2 + h_{3})} & \\\\
+        &&\ddots &  \ddots & \ddots & \\ \\
+        &&& \frac{h_{n-1}}{2(h_{n-1} + h_{n})} & 1 & \frac{h_{n}}{2(h_{n-1} + h_{n})} &
+    \end{pmatrix} \begin{pmatrix}
+        M_0 \\\\M_1\\\\ \vdots\\\\ M_n
+    \end{pmatrix} 
+    = \begin{pmatrix}
+       d_1 \\\\
+        d_2 \\\\
+        \vdots \\\\
+       d_{n-1}
+    \end{pmatrix}
+$$
+
+where $d_j = \frac{3}{h_{j-1} + h_{j}}\left[ \frac{y_{j} - y_{j-1}}{h_{j}} - \frac{y_{j-1} - y_{j-2}}{h_{j-1}}\right]$. 
+
+The above system still lacks 2 more constraints, since the matrix is of size $(n-1)\times (n+1)$. Then we can apply the periodic spline or natural spline conditions. For example, if the natural constraint is applied: ${s_3}''(a) = {s_3}''(b) = 0$. We should have two more equations: 
+
+$$
+    M_{0} = M_{n} = 0.
+$$
+
+Then we can simply ignore the first and last columns of the matrix (also $M_0$ and $M_n$). 
+If the periodic constraint is imposed, then we can add two more constraints: $M_0 = M_{n}$ and 
+
+$$-M_0 \frac{h_{1}}{3} - M_1 \frac{h_1}{6} + \frac{y_1 - y_0}{h_1} = M_n \frac{h_n}{3} + M_{n-1} \frac{h_n}{6} + \frac{y_n - y_{n-1}}{h_n}.$$
+
+In both cases, the resulting linear system is still tridiagonal and the solution takes $\cO(n)$ time complexity with the Thomas algorithm. 
+
+Another popular choice to complete the matrix is to impose the constraints in the similar form on $x_0$ and $x_n$: 
+
+$$
+    2M_0 + \frac{h_1}{h_0 + h_1} M_1 = d_0,\quad  \frac{h_n}{h_{n} + h_{n+1}} M_{n-1} + 2M_n = d_n,
+$$
+
+where $h_0 = h_{n+1} = 0$ and $d_0 = d_1$, $d_{n} = d_{n-1}$ are assumed. 
+
+The error estimate for the cubic spline can be derived in a way similar to the Lagrange polynomial interpolation. The following result is attributed to Charles Hall (1968).
+
+```{prf:theorem}
+:label: THM-ERROR-CUBIC-SPLINE
+Let $f\in C^4([a, b])$ and $a = x_0 < \dots < x_n = b$ be a set of nodes. Then the natural cubic spline $s_3$ interpolating $f$ satisfies 
+
+$$
+    \|f - s_3\|_{\infty} \le \frac{5}{384}\|f^{(4)}\|_{\infty} h^4,
+$$
+where $h = \max_j |x_j - x_{j-1}|$.
+```
+
+````{prf:proof}
+Here we only state the rough idea to prove the error bound. Let $u(x)$ be the piecewise Hermite interpolation polynomial that 
+
+$$
+    u(x_j)=f(x_j), \quad u'(x_j) = f'(x_j),
+$$
+
+then one can estimate 
+
+$$
+    \max_{x\in [x_j, x_{j+1}]} |u-f|\le  \frac{1}{24}\|f^{(4)}\|_{\infty} (x - x_j)^2 (x - x_{j+1})^2 \le \frac{1}{384}\|f^{(4)}\|_{\infty} h^4.
+$$
+
+On the subinterval $[x_i, x_{i+1}]$, $s_3$ and $u$ are both cubic polynomial interpolations, thus 
+
+$$
+        u(x) - s_3(x) = \frac{(x - x_i)(x_{i+1} - x)}{(x_{i+1} - x_i)} \left( e'(x_i) \frac{x_{i+1} - x}{x_{i+1} - x_i}  - e'(x_{i+1})\frac{x - x_i}{x_{i+1} - x_i}\right), 
+$$
+
+where $e(x) = f(x) - s_3(x)$. 
+Therefore, 
+
+```{math}
+:label: eq_error_bound_hermite
+\begin{aligned}
+    \|f - s_3\|_{\infty} &\le  \|u - s_3\|_{\infty}  +  \|f - u\|_{\infty} \\
+    &\le \frac{h}{4} \max_{0\le i\le n} |e'(x_i)| + \frac{1}{384}\|f^{(4)}\|_{\infty} h^4. 
+\end{aligned}
+```
+
+Using {eq}``eq_error_bound_hermite``, we find that
+
+$$
+\frac{1}{h_j}\left[ 2 s'_3(x_j) + s'_3(x_{j-1}) \right] + \frac{1}{h_{j+1}}\left[2 s'_3(x_j) + s'_3(x_{j+1})\right] =\frac{3(y_j - y_{j-1})}{h_j^2} + \frac{3(y_{j+1} - y_j)}{h_{j+1}^2}, 
+$$
+
+Using Taylor expansion locally at $x_j$, there exist $\zeta\in (x_{j-1}, x_j)$ and $\xi\in (x_j, x_{j+1})$ that
+
+$$
+\frac{2 e'(x_j) + e'(x_{j-1})}{h_j} + \frac{2 e'(x_j) + e'(x_{j+1})}{h_{j+1}}= \frac{1}{24}\left[-h_j^2 f^{(4)}(\zeta)+ h_{j+1}^2 f^{(4)}(\xi)\right].
+$$
+
+Suppose 
+$\max_{0 \le i\le n}|e'(x_i)|$ attains its maximum at node $x_{k}$, then 
+
+$$
+\left| \frac{2 e'(x_k) + e'(x_{k-1})}{h_j} + \frac{2 e'(x_k) + e'(x_{k+1})}{h_{k+1}} \right| \ge \frac{h_j+h_{j+1}}{h_j h_{j+1}} |e'(x_k)|.
+$$
+
+Therefore, by AM-GM inequality,
+
+$$
+\max_{0 \le i\le n}|e'(x_i)| \le \frac{h_{j}h_{j+1}}{24 (h_j + h_{j+1}) } (h_j^2 + h_{j+1}^2) \|f^{(4)}\|_{\infty} \le \frac{1}{24}h^3 \|f^{(4)}\|_{\infty}. 
+$$
+
+Finally, combined with the estimate {eq}``eq_error_bound_hermite`` will arrive at the desired bound.
+````
+
 
 ```{bibliography}
 :filter: docname in docnames
